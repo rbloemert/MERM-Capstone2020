@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "dmBLUcnqt/tkAwXpjzwPuyPQGBkNrdWSXkQFwDkfFj3qQD5hyfndCfaN+J1/zrRXq4Hqdex6MVWhWFfNYpfNWw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Chremnomicat\\Desktop\\Github\\MERM-Capstone2020\\Project-Creator\\ClassLibrary1\\ClassLibrary1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
