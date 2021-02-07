@@ -76,7 +76,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database.cs" />
+    <Compile Include="Classes\Database.cs" />
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -91,7 +91,7 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Project.cs" />
+    <Compile Include="Classes\Project.cs" />
     <Compile Include="ProjectManagement\ProjectTimeline.aspx.cs">
       <DependentUpon>ProjectTimeline.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -114,8 +114,8 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
-    <Compile Include="Update.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Classes\Update.cs" />
+    <Compile Include="Classes\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
