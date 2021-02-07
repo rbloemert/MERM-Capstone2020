@@ -179,23 +179,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Chremnomicat\\.nuget\\packages\\": {},
+    "C:\\Users\\User\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Chremnomicat\\Desktop\\Github\\MERM-Capstone2020\\Project-Creator\\ClassLibrary1\\ClassLibrary1.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\MERM-Capstone2020\\Project-Creator\\ClassLibrary1\\ClassLibrary1.csproj",
       "projectName": "ClassLibrary1",
-      "projectPath": "C:\\Users\\Chremnomicat\\Desktop\\Github\\MERM-Capstone2020\\Project-Creator\\ClassLibrary1\\ClassLibrary1.csproj",
-      "packagesPath": "C:\\Users\\Chremnomicat\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Chremnomicat\\Desktop\\Github\\MERM-Capstone2020\\Project-Creator\\ClassLibrary1\\obj\\",
+      "projectPath": "C:\\Users\\User\\Documents\\GitHub\\MERM-Capstone2020\\Project-Creator\\ClassLibrary1\\ClassLibrary1.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Documents\\GitHub\\MERM-Capstone2020\\Project-Creator\\ClassLibrary1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Chremnomicat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
