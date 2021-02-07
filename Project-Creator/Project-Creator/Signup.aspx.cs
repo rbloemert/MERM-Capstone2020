@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Project_Creator.Classes;
 
 namespace Project_Creator
 {
@@ -27,7 +28,9 @@ namespace Project_Creator
             signupUser.lastname = TextBoxLastName.Text;
             signupUser.email = TextBoxEmail.Text;
 
-
+            //Signs the user up in the database.
+            Database db = new Database();
+            db.Signup(signupUser);
 
         }
     }
