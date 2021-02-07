@@ -13,5 +13,6 @@ namespace Project_Creator
         public string firstname;
         public string lastname;
         public string email;
+        public bool isCreator;
     }
 }
