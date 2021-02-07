@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Signup.aspx.cs" Inherits="Project_Creator.Login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Signup.aspx.cs" Inherits="Project_Creator.Signup" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
 </asp:Content>
@@ -16,6 +16,6 @@
     <br />
     Email<asp:TextBox ID="TextBoxEmail" runat="server"></asp:TextBox>
     <br />
-    <asp:Button runat="server" Text="Submit" OnClick="Signup" />
+    <asp:Button runat="server" Text="Submit" OnClick="Register" />
 
 </asp:Content>

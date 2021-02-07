@@ -18,19 +18,21 @@ namespace Project_Creator
         protected void Register(object sender, EventArgs e)
         {
 
-            //Defines the signup user object.
-            User signupUser = new User();
+            ////Defines the signup user object.
+            //User signupUser = new User();
 
-            //Sets the values of the user from the signup page.
-            signupUser.username = TextBoxUsername.Text;
-            signupUser.password = TextBoxPassword.Text;
-            signupUser.firstname = TextBoxFirstName.Text;
-            signupUser.lastname = TextBoxLastName.Text;
-            signupUser.email = TextBoxEmail.Text;
+            ////Sets the values of the user from the signup page.
+            //signupUser.username = TextBoxUsername.Text;
+            //signupUser.password = TextBoxPassword.Text;
+            //signupUser.firstname = TextBoxFirstName.Text;
+            //signupUser.lastname = TextBoxLastName.Text;
+            //signupUser.email = TextBoxEmail.Text;
 
-            //Signs the user up in the database.
-            Database db = new Database();
-            db.Register(signupUser);
+            ////Signs the user up in the database.
+            //Database db = new Database();
+            //db.Register(signupUser);
+
+            myLabel.Text = "Test Text";
 
         }
     }
