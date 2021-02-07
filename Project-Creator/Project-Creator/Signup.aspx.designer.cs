@@ -11,7 +11,7 @@ namespace Project_Creator
 {
 
 
-    public partial class Login
+    public partial class Signup
     {
 
         /// <summary>

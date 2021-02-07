@@ -37,7 +37,7 @@ namespace Project_Creator.Classes
 
         }
 
-        public bool Signup(User signupUser)
+        public bool Register(User signupUser)
         {
 
             //Prepares the sql query.

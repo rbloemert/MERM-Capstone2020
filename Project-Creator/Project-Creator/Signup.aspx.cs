@@ -8,14 +8,14 @@ using Project_Creator.Classes;
 
 namespace Project_Creator
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class Signup : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        protected void Signup(object sender, EventArgs e)
+        protected void Register(object sender, EventArgs e)
         {
 
             //Defines the signup user object.
@@ -30,7 +30,7 @@ namespace Project_Creator
 
             //Signs the user up in the database.
             Database db = new Database();
-            db.Signup(signupUser);
+            db.Register(signupUser);
 
         }
     }
