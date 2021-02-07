@@ -70,6 +70,8 @@
   <ItemGroup>
     <Content Include="Home.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="ProjectManagement\page.css" />
+    <Content Include="ProjectManagement\ProjectTimeline.aspx" />
     <Content Include="Signup.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -88,6 +90,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectManagement\ProjectTimeline.aspx.cs">
+      <DependentUpon>ProjectTimeline.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectManagement\ProjectTimeline.aspx.designer.cs">
+      <DependentUpon>ProjectTimeline.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Signup.aspx.cs">
