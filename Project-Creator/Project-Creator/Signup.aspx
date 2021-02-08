@@ -6,7 +6,7 @@
 
     Username<asp:TextBox ID="TextBoxUsername" runat="server"></asp:TextBox>
     <br />
-    Password<asp:TextBox ID="TextBoxPassword" runat="server"></asp:TextBox>
+    Password<asp:TextBox ID="TextBoxPassword" TextMode="Password" runat="server"></asp:TextBox>
     <br />
     Confirm<asp:TextBox ID="TextBoxPasswordConfirm" runat="server"></asp:TextBox>
     <br />

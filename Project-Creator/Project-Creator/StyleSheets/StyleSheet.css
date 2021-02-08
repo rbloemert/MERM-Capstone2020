@@ -1,0 +1,8 @@
+﻿
+/* Default style. */
+* {
+    margin: 0;
+    padding: 0;
+    color: darkslateblue;
+    font-family: 'Roboto', sans-serif;
+}
