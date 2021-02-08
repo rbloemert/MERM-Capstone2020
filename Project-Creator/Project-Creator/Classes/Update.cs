@@ -39,9 +39,9 @@ namespace Project_Creator {
         *	none
         *	A update object is created
         */
-        public Update(string iconUrl, string pageUrl, string t, string desc, DateTime d) {
+        public Update(string iconUrl, string pageID, string t, string desc, DateTime d) {
             iconURL = iconUrl;
-            updatePage = pageUrl;
+            updatePage = pageID;
             title = t;
             description = desc;
             date = d;
