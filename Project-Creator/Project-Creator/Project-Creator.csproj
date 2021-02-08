@@ -72,6 +72,7 @@
     <Content Include="Login.aspx" />
     <Content Include="ProjectManagement\page.css" />
     <Content Include="ProjectManagement\ProjectTimeline.aspx" />
+    <Content Include="ProjectManagement\ViewUpdate.aspx" />
     <Content Include="Signup.aspx" />
     <Content Include="StyleSheets\StyleSheet.css" />
     <Content Include="StyleSheets\StyleSheetForm.css" />
@@ -100,6 +101,13 @@
     </Compile>
     <Compile Include="ProjectManagement\ProjectTimeline.aspx.designer.cs">
       <DependentUpon>ProjectTimeline.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectManagement\ViewUpdate.aspx.cs">
+      <DependentUpon>ViewUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectManagement\ViewUpdate.aspx.designer.cs">
+      <DependentUpon>ViewUpdate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Signup.aspx.cs">

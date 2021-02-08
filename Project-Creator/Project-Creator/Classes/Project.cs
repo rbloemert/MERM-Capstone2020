@@ -21,7 +21,7 @@ namespace Project_Creator {
         public string title { get; set; }       /*the name of the project*/
         public string author { get; set; }      /*who the project belongs to*/
         public string icon { get; set; }        /*an image describing the project*/
-        public string url { get; set; }         /*the navigation url for the project. currently used when a project is in the recommended section*/
+        public string id { get; set; }          /*the id of the project in the database*/
         public ArrayList updates;               /*a list containing all of the Update objects associated with the project*/
 
 
@@ -39,12 +39,12 @@ namespace Project_Creator {
         *	none
         *	A project object is created
         */
-        public Project(string t, string a, string i, string URL, ArrayList u) {
+        public Project(string t, string a, string i, string pID, ArrayList u) {
             title = t;
             author = a;
             icon = i;
             updates = u;
-            url = URL;
+            id = pID;
         }
 
 
@@ -62,11 +62,11 @@ namespace Project_Creator {
         *	none
         *	A project object is created
         */
-        public Project(string t, string a, string i, string URL) {
+        public Project(string t, string a, string i, string pID) {
             title = t;
             author = a;
             icon = i;
-            url = URL;
+            id = pID;
 
             /*create a list for the updates and get them from the db*/
             updates = new ArrayList();
@@ -96,7 +96,13 @@ namespace Project_Creator {
 
             /*temp data for now*/
             for (int i = 0; i < 10; i++) {
-                Update u = new Update("https://cdn.escapistmagazine.com/media/global/images/library/deriv/1400/1400821.jpg", "https://google.com", "<h3>Project Update Title</h3>", "<p>a description about the update which summarises the complete description that is displayed upon clicking on the card for more information.</p><br />", DateTime.Today);
+                string img = "";
+                if(id == "002") {
+                    img = "https://pbs.twimg.com/profile_images/656441231560585216/NWOReGD5_400x400.jpg";
+                } else {
+                    img = "https://cdn.escapistmagazine.com/media/global/images/library/deriv/1400/1400821.jpg";
+                }
+                Update u = new Update(img, "https://google.com", "<h3>Project Update Title</h3>", "<p>a description about the update which summarises the complete description that is displayed upon clicking on the card for more information.</p><br />", DateTime.Today);
                 updates.Add(u);
             }
             success = true;
