@@ -1,19 +1,16 @@
 ﻿
 /* Input style. */
 input {
-    margin: 6px;
     padding: 8px;
+    color: dimgray;
 }
 
 /* Textbox style. */
 input[type=text], input[type=password] {
-    margin: 6px;
-    padding: 6px;
     border-style: solid;
-    border-radius: 4px;
-    border-width: 2px;
-    border-color: darkslateblue;
-    box-shadow: darkslateblue 0px 1px 3px;
+    border-radius: 0px;
+    border-width: 0px;
+    box-shadow: black 0px 1px 3px;
     outline-width: 0;
 }
 
@@ -21,14 +18,14 @@ input[type=text], input[type=password] {
 input[type=button], input[type=submit] {
     color: white;
     font-size: 16px;
-    background-color: darkslateblue;
+    background-color: dimgray;
     border-style: none;
     border-radius: 6px;
-    box-shadow: darkslateblue 0px 1px 3px;
+    box-shadow: black 0px 1px 3px;
     outline-width: 0;
 }
 input[type=button]:hover, input[type=submit]:hover {
     color: white;
     cursor: pointer;
-    background-color: slateblue;
+    background-color: darkgray;
 }

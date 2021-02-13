@@ -7,6 +7,7 @@
     <title></title>
     <link rel="stylesheet" href="StyleSheets/StyleSheet.css" />
     <link rel="stylesheet" href="StyleSheets/StyleSheetForm.css" />
+    <link rel="stylesheet" href="StyleSheets/StyleSheetHeader.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -14,37 +15,32 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <script>
-        // Script to open and close sidebar
-        function w3_open() {
-            document.getElementById("mySidebar").style.display = "block";
-        }
-
-        function w3_close() {
-            document.getElementById("mySidebar").style.display = "none";
-        }
-    </script>
     <form id="form" runat="server">
-        <!-- Sidebar (hidden by default) -->
-        <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-            <a href="javascript:void(0)" onclick="w3_close()"
-            class="w3-bar-item w3-button">Close Menu</a>
-            <a href="/Home.aspx" onclick="w3_close()" class="w3-bar-item w3-button">Home</a>
-            <a href="/Login.aspx" onclick="w3_close()" class="w3-bar-item w3-button">Login</a>
-            <a href="/ProjectManagement/ProjectTimeline.aspx" onclick="w3_close()" class="w3-bar-item w3-button">ProjectTimeline **TEMP**</a>
-        </nav>
-        <div class="w3-top">
-                <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
-                <a href="/Home.aspx" class="w3-padding-16 w3-left w3-bar-item w3-button">Project creator</a>
-                <div class="w3-button w3-right w3-padding-16" onclick="w3_open()">☰</div>
-                    <div class="w3-center w3-padding-16"><input type="search" id="txtSearch" /></div>
-                    </div>
-            </div>
-        <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
-
-            </asp:ContentPlaceHolder>
+        <div class="Navigation">
+            <table class="Navigation">
+                <tr class="Navigation">
+                    <td class="Navigation" style="width:25%">
+                        Project Creator
+                    </td>
+                    <td class="Navigation" style="width:50%">
+                        <asp:TextBox CssClass="Search" runat="server"></asp:TextBox>
+                    </td>
+                    <td class="Navigation" style="width:25%">
+                        <table class="Link">
+                            <tr class="Link">
+                                <td class="Link"><asp:LinkButton CssClass="Link" runat="server">Home</asp:LinkButton></td>
+                                <td class="Link"><asp:LinkButton CssClass="Link" runat="server">Projects</asp:LinkButton></td>
+                                <td class="Link"><asp:LinkButton CssClass="Link" runat="server">Login</asp:LinkButton></td>
+                                <td class="Link"><asp:LinkButton CssClass="Link" runat="server">Signup</asp:LinkButton></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
         </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
+
+        </asp:ContentPlaceHolder>
     </form>
 </body>
 </html>

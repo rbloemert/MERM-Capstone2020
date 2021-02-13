@@ -1,0 +1,42 @@
+﻿
+/* Navigation Style. */
+div.Navigation {
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: dimgray;
+    box-shadow: black 0px 1px 3px;
+}
+table.Navigation{
+    width: 100%;
+}
+tr.Navigation{
+
+}
+td.Navigation{
+    text-align: center;
+}
+
+/* Searchbar Style. */
+input[type=text].Search{
+    width: 100%;
+}
+
+/* Link Style. */
+table.Link {
+    width: 100%;
+    min-width: 240px;
+    table-layout: fixed;
+}
+tr.Link{
+
+}
+td.Link{
+    text-align: center;
+}
+a.Link{
+    text-decoration: none;
+}
+a.Link:hover{
+    color: skyblue;
+}
