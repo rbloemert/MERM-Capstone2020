@@ -130,3 +130,17 @@ C:\Users\Chremnomicat\Desktop\Github\MERM-Capstone2020\Project-Creator\Project-C
 C:\Users\Chremnomicat\Desktop\Github\MERM-Capstone2020\Project-Creator\Project-Creator\bin\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\Chremnomicat\Desktop\Github\MERM-Capstone2020\Project-Creator\Project-Creator\bin\System.Numerics.Vectors.dll
 C:\Users\Chremnomicat\Desktop\Github\MERM-Capstone2020\Project-Creator\Project-Creator\bin\MySql.Data.xml
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\MySql.Data.dll
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\Google.Protobuf.dll
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\Zstandard.Net.dll
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\K4os.Compression.LZ4.Streams.dll
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\BouncyCastle.Crypto.dll
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\Ubiety.Dns.Core.dll
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\Renci.SshNet.dll
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\System.Memory.dll
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\System.Buffers.dll
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\K4os.Compression.LZ4.dll
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\K4os.Hash.xxHash.dll
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\System.Numerics.Vectors.dll
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\User\Documents\GitHub\MERM-Capstone2020\Project-Creator\Project-Creator\bin\MySql.Data.xml
