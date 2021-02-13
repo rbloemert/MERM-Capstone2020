@@ -14,7 +14,22 @@ namespace Project_Creator
 
         }
 
-        protected void Unnamed_Click(object sender, EventArgs e)
+        protected void Link_Home(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Link_Projects(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Link_Signup(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Link_Login(object sender, EventArgs e)
         {
 
         }

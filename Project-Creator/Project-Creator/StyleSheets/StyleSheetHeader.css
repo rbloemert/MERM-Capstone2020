@@ -2,9 +2,8 @@
 /* Navigation Style. */
 div.Navigation {
     width: 100%;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    background-color: dimgray;
+    padding-top: 4px;
+    padding-bottom: 4px;
     box-shadow: black 0px 1px 3px;
 }
 table.Navigation{
@@ -14,17 +13,27 @@ tr.Navigation{
 
 }
 td.Navigation{
-    text-align: center;
+    
 }
 
 /* Searchbar Style. */
+table.Search{
+    width: 100%;
+}
+tr.Search{
+
+}
+td.Search{
+
+}
 input[type=text].Search{
     width: 100%;
 }
 
 /* Link Style. */
 table.Link {
-    width: 100%;
+    width: 60%;
+    margin-left: auto;
     min-width: 240px;
     table-layout: fixed;
 }

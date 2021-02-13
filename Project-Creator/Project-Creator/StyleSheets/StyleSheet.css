@@ -6,3 +6,17 @@
     color: white;
     font-family: 'Roboto', sans-serif;
 }
+body {
+    background-color: #0f0f0f;
+}
+
+/* Constant Colors. */
+.Primary {
+    background-color: #0f0f0f;
+}
+.Secondary {
+    background-color: #242424;
+}
+.Tertiary {
+    background-color: #3b3b3b;
+}

@@ -16,22 +16,31 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <div class="Navigation">
+        <div class="Navigation Secondary">
             <table class="Navigation">
                 <tr class="Navigation">
-                    <td class="Navigation" style="width:25%">
+                    <td class="Navigation" style="width:33%; text-align:left;">
                         Project Creator
                     </td>
-                    <td class="Navigation" style="width:50%">
-                        <asp:TextBox CssClass="Search" runat="server"></asp:TextBox>
+                    <td class="Navigation" style="width:33%; text-align:center;">
+                        <table class="Search">
+                            <tr class="Search">
+                                <td class="Search">
+                                    <asp:TextBox CssClass="Search Primary" runat="server"></asp:TextBox>
+                                </td>
+                                <td class="Search" style="text-align:left">
+                                    <asp:ImageButton runat="server" ImageAlign="Middle" ImageUrl="Icons/Search.png"/>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
-                    <td class="Navigation" style="width:25%">
+                    <td class="Navigation" style="width:33%; text-align:right;">
                         <table class="Link">
                             <tr class="Link">
-                                <td class="Link"><asp:LinkButton CssClass="Link" runat="server">Home</asp:LinkButton></td>
-                                <td class="Link"><asp:LinkButton CssClass="Link" runat="server">Projects</asp:LinkButton></td>
-                                <td class="Link"><asp:LinkButton CssClass="Link" runat="server">Login</asp:LinkButton></td>
-                                <td class="Link"><asp:LinkButton CssClass="Link" runat="server">Signup</asp:LinkButton></td>
+                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Home" runat="server">Home</asp:LinkButton></td>
+                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Projects" runat="server">Projects</asp:LinkButton></td>
+                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Login" runat="server">Login</asp:LinkButton></td>
+                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Signup" runat="server">Signup</asp:LinkButton></td>
                             </tr>
                         </table>
                     </td>

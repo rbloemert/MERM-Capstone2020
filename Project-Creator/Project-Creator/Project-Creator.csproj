@@ -70,6 +70,7 @@
   <ItemGroup>
     <Content Include="Creator.aspx" />
     <Content Include="Home.aspx" />
+    <Content Include="Icons\icon_search.png" />
     <Content Include="Login.aspx" />
     <Content Include="ProjectManagement\page.css" />
     <Content Include="ProjectManagement\ProjectTimeline.aspx" />
