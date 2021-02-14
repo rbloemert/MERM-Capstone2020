@@ -20,3 +20,16 @@ body {
 .Tertiary {
     background-color: #3b3b3b;
 }
+.Highlight {
+    background-color: #a142f5;
+}
+
+/* Basic Floating Divider. */
+div.Basic {
+    margin-left: auto;
+    margin-right: auto;
+    width: 480px;
+    padding: 8px;
+    text-align: center;
+    background-color: #242424;
+}

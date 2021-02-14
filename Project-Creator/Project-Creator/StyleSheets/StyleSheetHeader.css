@@ -46,6 +46,6 @@ td.Link{
 a.Link{
     text-decoration: none;
 }
-a.Link:hover{
-    color: skyblue;
+a.Link:hover {
+    color: #cf99ff;
 }

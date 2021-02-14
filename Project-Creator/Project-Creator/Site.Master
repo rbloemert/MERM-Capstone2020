@@ -38,7 +38,7 @@
                         <table class="Link">
                             <tr class="Link">
                                 <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Home" runat="server">Home</asp:LinkButton></td>
-                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Projects" runat="server">Projects</asp:LinkButton></td>
+                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Projects" runat="server">Browse</asp:LinkButton></td>
                                 <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Login" runat="server">Login</asp:LinkButton></td>
                                 <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Signup" runat="server">Signup</asp:LinkButton></td>
                             </tr>
