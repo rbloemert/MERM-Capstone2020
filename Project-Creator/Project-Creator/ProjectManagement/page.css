@@ -236,3 +236,11 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .w3-border-pale-yellow,.w3-hover-border-pale-yellow:hover{border-color:#ffffcc!important}.w3-border-pale-blue,.w3-hover-border-pale-blue:hover{border-color:#e7ffff!important}
 .update-img{height : 256px;width : 256px;}
 .related-img{height: 128px;width:128px;}
+.bgimg {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('https://cdn.escapistmagazine.com/media/global/images/library/deriv/1400/1400821.jpg');
+    min-height: 100%;
+}
+.w3-sidebar{}

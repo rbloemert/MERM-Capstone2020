@@ -19,7 +19,7 @@
                 </td>
             </tr>
         </table>
-        <div class="w3-row-padding w3-padding-16 w3-center " >
+        <div class="w3-panel w3-center">
             <asp:Panel ID="UpdatePanel" runat="server"></asp:Panel>
         </div>
         <div class="w3-panel w3-center">
