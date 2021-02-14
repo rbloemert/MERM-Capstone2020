@@ -102,7 +102,7 @@ namespace Project_Creator {
                 } else {
                     img = "https://cdn.escapistmagazine.com/media/global/images/library/deriv/1400/1400821.jpg";
                 }
-                Update u = new Update(img, "https://google.com", "<h3>Project Update Title</h3>", "<p>a description about the update which summarises the complete description that is displayed upon clicking on the card for more information.</p><br />", DateTime.Today);
+                Update u = new Update(img, "Update-" + i, "<h3>Project Update Title</h3>", "<p>a description about the update which summarises the complete description that is displayed upon clicking on the card for more information.</p><br />", DateTime.Today);
                 updates.Add(u);
             }
             success = true;

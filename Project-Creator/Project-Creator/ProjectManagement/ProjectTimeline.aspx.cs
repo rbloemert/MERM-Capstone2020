@@ -27,7 +27,7 @@ namespace Project_Creator.ProjectManagement {
 
         /*this is the project that we are viewing. currently has place holder info. should be gotten from the previous screen*/
         /*may be pass as a string. if that is the case we need to reteieve from the database. we will see*/
-        private static Project[] sampleProjects = { new Project("Test Project", "Mark", "https://64.media.tumblr.com/avatar_4f1f4a829fdd_128.pnj", "001"), new Project("Second Project", "Mark", "https://ih1.redbubble.net/image.173786715.7034/flat,128x,075,f-pad,128x128,f8f8f8.u4.jpg", "002") };
+        private static readonly Project[] sampleProjects = { new Project("Test Project", "Mark", "https://64.media.tumblr.com/avatar_4f1f4a829fdd_128.pnj", "001"), new Project("Second Project", "Mark", "https://ih1.redbubble.net/image.173786715.7034/flat,128x,075,f-pad,128x128,f8f8f8.u4.jpg", "002") };
         public Project project = sampleProjects[0];
         public ArrayList otherProjects = new ArrayList();
 
@@ -43,68 +43,70 @@ namespace Project_Creator.ProjectManagement {
         *	none
         */
         protected void Page_Load(object sender, EventArgs e) {
-            string id = Request.QueryString["id"];
+            string id = Session["Project"] as string;
 
-            if(id != null) {
+            if (id != null) {
                 /*read project data from db*/
                 /*then populate*/
 
                 if (id == "002") {
                     project = sampleProjects[1];
                 }
+
+                /*this next section needs to be moved inside the above if statement when we start linking the pages together*/
+                Session["Project"] = project.id;
+                projectIcon.ImageUrl = project.icon;    /*set the icon to be the icon stored within the project*/
+                lblTitle.Text = project.title;          /*update the title label to the project name*/
+                lblAuthor.Text = project.author;        /*update the author label with data from the project object*/
+
+                /*for each of the updates within the project*/
+                foreach (Update u in project.updates) {
+                    /*create a div using createUpdatePanel and add it to the UpdatePanel section of the screen*/
+                    Panel div = createUpdatePanel(u);
+                    UpdatePanel.Controls.Add(div);
+                }
+
+                /*there are some additional options if the user is the owner of the project, in that case, they can create a new post*/
+                /*we need to figure out how the user is logged in.*/
+                if (user == "owner") {
+                    /*create a new update object with a + logo and add it to the screen*/
+                    Update newUpdate = new Update("https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=6&m=688550958&s=612x612&w=0&h=nVa-a5Fb79Dgmqk3F00kop9kF4CXFpF4kh7vr91ERGk=", "000", " < h3>New Update</h3> <br />", "<p />", DateTime.Today);
+                    Panel p = createUpdatePanel(newUpdate);
+                    UpdatePanel.Controls.Add(p);
+                }
+
+
+
+                /*generate related projects this will come from the db later*/
+                /*create 4 projects to show at the bottom of the page*/
+                /*they are all just the test project currently*/
+                /*format the title to fit nicely on the screen. should probably be done differently. more research is needed*/
+                for (int i = 0; i < 4; i++) {
+                    Project currentProject;
+                    if (i == 1) {
+                        currentProject = sampleProjects[1];
+                    } else {
+                        currentProject = sampleProjects[0];
+                    }
+                    Project n = new Project("<h3>" + currentProject.title + "</h3>", "<p>" + currentProject.author + "</p>", currentProject.icon, "00" + (i + 1));
+                    otherProjects.Add(n);
+                }
+
+                //RelatedPanel.Controls.Add
+                /*for each of the projects in the related projects list*/
+                int panelNum = 1;
+                foreach (Project p in otherProjects) {
+                    /*create a div using createUpdatePanel and add it to the related panel of the screen*/
+                    Panel div = createRelatedPanel(p);
+                    div.ID = "related" + panelNum;
+                    RelatedPanel.Controls.Add(div);
+                    panelNum++;
+                }
             } else {
                 /*404*/
+                Session["Project"] = "001";
+                Response.Redirect("ProjectTimeline.aspx");
             }
-
-            /*this next section needs to be moved inside the above if statement when we start linking the pages together*/
-
-            projectIcon.ImageUrl = project.icon;    /*set the icon to be the icon stored within the project*/
-            lblTitle.Text = project.title;          /*update the title label to the project name*/
-            lblAuthor.Text = project.author;        /*update the author label with data from the project object*/
-
-            /*for each of the updates within the project*/
-            foreach (Update u in project.updates) {
-                /*create a div using createUpdatePanel and add it to the UpdatePanel section of the screen*/
-                Panel div = createUpdatePanel(u);
-                UpdatePanel.Controls.Add(div);
-            }
-
-            /*there are some additional options if the user is the owner of the project, in that case, they can create a new post*/
-            /*we need to figure out how the user is logged in.*/
-            if (user == "owner") {
-                /*create a new update object with a + logo and add it to the screen*/
-                Update newUpdate = new Update("https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=6&m=688550958&s=612x612&w=0&h=nVa-a5Fb79Dgmqk3F00kop9kF4CXFpF4kh7vr91ERGk=", "000", " < h3>New Update</h3> <br />", "<p />", DateTime.Today);
-                Panel p = createUpdatePanel(newUpdate);
-                UpdatePanel.Controls.Add(p);
-            }
-
-
-
-            /*generate related projects this will come from the db later*/
-            /*create 4 projects to show at the bottom of the page*/
-            /*they are all just the test project currently*/
-            /*format the title to fit nicely on the screen. should probably be done differently. more research is needed*/
-            for (int i = 0; i < 4; i++) {
-                Project currentProject;
-                if(i == 1) {
-                    currentProject = sampleProjects[1];
-                } else {
-                    currentProject = sampleProjects[0];
-                }
-                Project n = new Project("<h3>" + currentProject.title + "</h3>", "<p>" + currentProject.author + "</p>", currentProject.icon, "00" + (i + 1));
-                otherProjects.Add(n);
-            }
-
-            /*for each of the projects in the related projects list*/
-            int panelNum = 1;
-            foreach (Project p in otherProjects) {
-                /*create a div using createUpdatePanel and add it to the related panel of the screen*/
-                Panel div = createRelatedPanel(p);
-                div.ID = "related" + panelNum;
-                RelatedPanel.Controls.Add(div);
-                panelNum++;
-            }
-
 
         }
 
@@ -122,15 +124,16 @@ namespace Project_Creator.ProjectManagement {
         */
         public Panel createRelatedPanel(Project project) {
             Panel div = new Panel();                /*the div we are building*/
-            //ImageButton image = new ImageButton();  /*this is the image that is used to diplay the project as well as navigate to that project*/
-            HyperLink image = new HyperLink();
+            ImageButton image = new ImageButton();  /*this is the image that is used to diplay the project as well as navigate to that project*/
+            //HyperLink image = new HyperLink();
             Label title = new Label();              /*the label that will hold the title of the project*/
             Label author = new Label();             /*the label that will hold the author of the project*/
 
             div.CssClass = "w3-quarter";        /*the styling that is used for formatting the div*/
 
+            image.Click += relatedClick;
             //image.Click += new System.Web.UI.ImageClickEventHandler(relatedClick);
-            image.NavigateUrl = "?id=" + project.id;    /*set the location we want the image to take us. it is stored within the Project object*/
+            image.ID = project.id;
             image.ImageUrl = project.icon;      /*set the image we want to use for the hyperlink. it is stored within the Project object*/
             image.CssClass = "related-img";     /*the styling that is used for formatting the image*/
 
@@ -142,6 +145,13 @@ namespace Project_Creator.ProjectManagement {
             div.Controls.Add(title);
             div.Controls.Add(author);
             return (div);
+        }
+
+
+
+        protected void relatedClick(object sender, EventArgs e) {
+            Session["Project"] = ((ImageButton)sender).ID;
+            Response.Redirect("ProjectTimeline.aspx");
         }
 
 
@@ -158,14 +168,17 @@ namespace Project_Creator.ProjectManagement {
         */
         public Panel createUpdatePanel(Update update) {
             Panel div = new Panel();                /*the div we are building*/
-            HyperLink image = new HyperLink();      /*this is the image that is used to diplay the project as well as navigate to that update*/
+            ImageButton image = new ImageButton();      /*this is the image that is used to diplay the project as well as navigate to that update*/
+            //HyperLink image = new HyperLink();
             Label updateTitle = new Label();        /*the label that will hold the title of the update*/
             Label updateDescription = new Label();  /*the label that will hold the description of the update*/
             Label updateDate = new Label();         /*the label that will hold the date of the update*/
 
             div.CssClass = "w3-quarter";             /*the styling that is used for formatting the div*/
-
-            image.NavigateUrl = update.updatePage;  /*set the location we want the image to take us. it is stored within the Update object*/
+            image.Click += updateClick;
+            //image.Click += new System.Web.UI.ImageClickEventHandler(relatedClick);
+            //image.NavigateUrl = "ViewUpdate.aspx";
+            image.ID = update.updatePage;
             image.ImageUrl = update.iconURL;        /*set the image we want to use for the hyperlink. it is stored within the Update object*/
             image.CssClass = "update-img";          /*the styling that is used for formatting the image*/
 
@@ -180,6 +193,13 @@ namespace Project_Creator.ProjectManagement {
             div.Controls.Add(updateDate);
 
             return (div);
+        }
+
+
+
+        protected void updateClick(object sender, EventArgs e) {
+            Session["Update"] = ((ImageButton)sender).ID;
+            Response.Redirect("ViewUpdate.aspx");
         }
 
     }
