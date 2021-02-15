@@ -42,22 +42,13 @@ namespace Project_Creator
         protected global::System.Web.UI.WebControls.TextBox TextBoxPasswordConfirm;
 
         /// <summary>
-        /// TextBoxFirstName control.
+        /// TextBoxFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxFirstName;
-
-        /// <summary>
-        /// TextBoxLastName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxLastName;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxFullName;
 
         /// <summary>
         /// TextBoxEmail control.
