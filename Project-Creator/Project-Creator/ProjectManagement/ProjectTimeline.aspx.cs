@@ -125,14 +125,12 @@ namespace Project_Creator.ProjectManagement {
         public Panel createRelatedPanel(Project project) {
             Panel div = new Panel();                /*the div we are building*/
             ImageButton image = new ImageButton();  /*this is the image that is used to diplay the project as well as navigate to that project*/
-            //HyperLink image = new HyperLink();
             Label title = new Label();              /*the label that will hold the title of the project*/
             Label author = new Label();             /*the label that will hold the author of the project*/
 
-            div.CssClass = "w3-quarter";        /*the styling that is used for formatting the div*/
+            div.CssClass = "timeline-content";        /*the styling that is used for formatting the div*/
 
             image.Click += relatedClick;
-            //image.Click += new System.Web.UI.ImageClickEventHandler(relatedClick);
             image.ID = project.id;
             image.ImageUrl = project.icon;      /*set the image we want to use for the hyperlink. it is stored within the Project object*/
             image.CssClass = "related-img";     /*the styling that is used for formatting the image*/
@@ -149,6 +147,17 @@ namespace Project_Creator.ProjectManagement {
 
 
 
+        /*
+        * METHOD : relatedClick
+        * DESCRIPTION :
+        *	when a related project is clicked, navigate to that page
+        * PARAMETERS :
+        *	object sender : the object that invoked the method
+        *   EventArgs e : addional arguments thata may be useful
+        * RETURNS :
+        *	none
+        *	we are navigated to another page
+        */
         protected void relatedClick(object sender, EventArgs e) {
             Session["Project"] = ((ImageButton)sender).ID;
             Response.Redirect("ProjectTimeline.aspx");
@@ -169,15 +178,12 @@ namespace Project_Creator.ProjectManagement {
         public Panel createUpdatePanel(Update update) {
             Panel div = new Panel();                /*the div we are building*/
             ImageButton image = new ImageButton();      /*this is the image that is used to diplay the project as well as navigate to that update*/
-            //HyperLink image = new HyperLink();
             Label updateTitle = new Label();        /*the label that will hold the title of the update*/
             Label updateDescription = new Label();  /*the label that will hold the description of the update*/
             Label updateDate = new Label();         /*the label that will hold the date of the update*/
 
-            div.CssClass = "w3-quarter";             /*the styling that is used for formatting the div*/
+            div.CssClass = "timeline-content";             /*the styling that is used for formatting the div*/
             image.Click += updateClick;
-            //image.Click += new System.Web.UI.ImageClickEventHandler(relatedClick);
-            //image.NavigateUrl = "ViewUpdate.aspx";
             image.ID = update.updatePage;
             image.ImageUrl = update.iconURL;        /*set the image we want to use for the hyperlink. it is stored within the Update object*/
             image.CssClass = "update-img";          /*the styling that is used for formatting the image*/
@@ -197,6 +203,17 @@ namespace Project_Creator.ProjectManagement {
 
 
 
+        /*
+        * METHOD : updateClick
+        * DESCRIPTION :
+        *	when an update icon is clicked on, navigate to that updates page
+        * PARAMETERS :
+        *	object sender : the object that invoked the method
+        *   EventArgs e : addional arguments thata may be useful
+        * RETURNS :
+        *	none
+        *	we are navigated to another page
+        */
         protected void updateClick(object sender, EventArgs e) {
             Session["Update"] = ((ImageButton)sender).ID;
             Response.Redirect("ViewUpdate.aspx");

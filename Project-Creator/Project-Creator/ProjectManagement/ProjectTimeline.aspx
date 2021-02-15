@@ -4,12 +4,12 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-    <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+    <div class="timeline-body" style="max-width:1200px;">
         <table>
             <tr>
                 <td><asp:Image ID="projectIcon" runat="server" /> </td>
                 <td>
-                    <div class="w3-panel">
+                    <div class="timeline-info">
                         <h1>
                             <asp:Label ID="lblTitle" runat="server" Text="Project Title"></asp:Label>
                             &nbsp;<asp:Label ID="Label2" runat="server" Text=" | "></asp:Label>
@@ -19,10 +19,10 @@
                 </td>
             </tr>
         </table>
-        <div class="w3-panel w3-center">
+        <div class="timeline-updates timeline-centre">
             <asp:Panel ID="UpdatePanel" runat="server"></asp:Panel>
         </div>
-        <div class="w3-panel w3-center">
+        <div class="timeline-related timeline-centre">
             <h3>Related Projects</h3>
             <asp:Panel ID="RelatedPanel" runat="server"></asp:Panel>
         </div>

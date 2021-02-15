@@ -1,10 +1,10 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Project_Creator.Site" %>
 
 <!DOCTYPE html>
-<link rel="stylesheet" href="/ProjectManagement/page.css">
 <html>
 <head runat="server">
     <title></title>
+    <link rel="stylesheet" href="StyleSheets/StyleSheet_ProjectManagement.css" />
     <link rel="stylesheet" href="StyleSheets/StyleSheet.css" />
     <link rel="stylesheet" href="StyleSheets/StyleSheetForm.css" />
     <link rel="stylesheet" href="StyleSheets/StyleSheetHeader.css" />
@@ -29,7 +29,7 @@
                                     <asp:TextBox CssClass="Search Primary" runat="server"></asp:TextBox>
                                 </td>
                                 <td class="Search" style="text-align:left">
-                                    <asp:ImageButton CssClass="search_button" runat="server" ImageAlign="Middle" ImageUrl="Icons/Search.png"/>
+                                    <asp:ImageButton CssClass="Icon" runat="server" ImageAlign="Middle" ImageUrl="Icons/Search.png"/>
                                 </td>
                             </tr>
                         </table>
@@ -37,17 +37,17 @@
                     <td class="Navigation" style="width:33%; text-align:right;">
                         <table class="Link">
                             <tr class="Link">
-                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Home" runat="server">Home</asp:LinkButton></td>
-                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Projects" runat="server">Projects</asp:LinkButton></td>
-                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Login" runat="server">Login</asp:LinkButton></td>
-                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Signup" runat="server">Signup</asp:LinkButton></td>
+                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Home" CausesValidation="false" runat="server">Home</asp:LinkButton></td>
+                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Projects" CausesValidation="false" runat="server">Browse</asp:LinkButton></td>
+                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Login" CausesValidation="false" runat="server">Login</asp:LinkButton></td>
+                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Signup" CausesValidation="false" runat="server">Signup</asp:LinkButton></td>
                             </tr>
                         </table>
                     </td>
                 </tr>
             </table>
         </div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
+        <asp:ContentPlaceHolder ID="ContentPlaceholder" runat="server">
 
         </asp:ContentPlaceHolder>
     </form>

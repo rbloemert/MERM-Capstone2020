@@ -10,6 +10,13 @@ input {
     outline-width: 0px;
     background-color: #0f0f0f;
 }
+div.Error{
+    height: 24px;
+    text-align: left;
+}
+.Label{
+    text-align: right;
+}
 
 /* Textbox style. */
 input[type=text], input[type=password] {
@@ -26,6 +33,6 @@ input[type=button]:hover, input[type=submit]:hover, input[type=image]:hover {
     background-color: #3b3b3b;
 }
 
-.search_button {
+input[type=image].Icon {
     height: 32px;
 }

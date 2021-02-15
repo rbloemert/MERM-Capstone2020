@@ -41,12 +41,11 @@ namespace Project_Creator.Classes
         {
 
             //Prepares the sql query.
-            var sql = "INSERT INTO users(username, password, firstname, lastname, email) VALUES(@username, @password, @firstname, @lastname, @email)";
+            var sql = "INSERT INTO users(username, password, fullname, email) VALUES(@username, @password, @fullname, @email)";
             var cmd = new MySqlCommand(sql, connection);
             cmd.Parameters.AddWithValue("@username", signupUser.username);
             cmd.Parameters.AddWithValue("@password", Encrypt(signupUser.password));
-            cmd.Parameters.AddWithValue("@firstname", signupUser.firstname);
-            cmd.Parameters.AddWithValue("@lastname", signupUser.lastname);
+            cmd.Parameters.AddWithValue("@fullname", signupUser.fullname);
             cmd.Parameters.AddWithValue("@email", signupUser.email);
             cmd.Prepare();
 
