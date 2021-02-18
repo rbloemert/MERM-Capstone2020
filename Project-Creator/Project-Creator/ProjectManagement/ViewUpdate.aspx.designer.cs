@@ -13,6 +13,24 @@ namespace Project_Creator.ProjectManagement {
     public partial class ViewUpdate {
 
         /// <summary>
+        /// sidebarImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel sidebarImage;
+
+        /// <summary>
+        /// updateData control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel updateData;
+
+        /// <summary>
         /// RelatedPanel control.
         /// </summary>
         /// <remarks>

@@ -1,10 +1,10 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Project_Creator.Site" %>
 
 <!DOCTYPE html>
-<link rel="stylesheet" href="/ProjectManagement/page.css">
 <html>
 <head runat="server">
     <title></title>
+    <link rel="stylesheet" href="StyleSheets/StyleSheet_ProjectManagement.css" />
     <link rel="stylesheet" href="StyleSheets/StyleSheet.css" />
     <link rel="stylesheet" href="StyleSheets/StyleSheetForm.css" />
     <link rel="stylesheet" href="StyleSheets/StyleSheetHeader.css" />

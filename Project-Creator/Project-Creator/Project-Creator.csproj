@@ -129,6 +129,7 @@
     <Content Include="StyleSheets\StyleSheet.css" />
     <Content Include="StyleSheets\StyleSheetForm.css" />
     <Content Include="StyleSheets\StyleSheetHeader.css" />
+    <Content Include="StyleSheets\StyleSheet_ProjectManagement.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

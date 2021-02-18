@@ -16,22 +16,22 @@ namespace Project_Creator
 
         protected void Link_Home(object sender, EventArgs e)
         {
-            Response.Redirect("Home.aspx");
+            Response.Redirect("/Home.aspx");
         }
 
         protected void Link_Projects(object sender, EventArgs e)
         {
-            Response.Redirect("Projects.aspx");
+            Response.Redirect("/Projects.aspx");
         }
 
         protected void Link_Signup(object sender, EventArgs e)
         {
-            Response.Redirect("Signup.aspx");
+            Response.Redirect("/Signup.aspx");
         }
 
         protected void Link_Login(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("/Login.aspx");
         }
     }
 }
