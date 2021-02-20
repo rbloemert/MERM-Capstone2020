@@ -26,6 +26,17 @@ namespace Project_Creator
 
         }
 
+        protected void ValidateEmail(object source, ServerValidateEventArgs args)
+        {
+
+            //Creates the database object.
+            Database db = new Database();
+
+            //Sets the validation value to whether the username exists.
+            args.IsValid = !db.EmailExists(args.Value);
+
+        }
+
         protected void Register(object sender, EventArgs e)
         {
 

@@ -20,14 +20,10 @@ namespace Project_Creator
         {
             // work in progress
             // TODO: implement proper error handling using QueryResult, handle ID correctly...
-            using (var db = new Database())
-            {
-                db.CreateProject(new_project);
-                db.CreateProjectLink(new_project.projectID, project_owner.accountID);
-                return Database.QueryResult.Successful;
-            }
-
-            return Database.QueryResult.FailedNoChanges;
+            Database db = new Database();
+            db.CreateProject(new_project);
+            db.CreateProjectLink(new_project.projectID, project_owner.accountID);
+            return Database.QueryResult.Successful;
         }
     }
 }

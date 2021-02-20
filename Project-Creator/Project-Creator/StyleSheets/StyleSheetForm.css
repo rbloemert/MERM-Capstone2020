@@ -12,7 +12,7 @@ input {
 }
 div.Error{
     height: 24px;
-    text-align: left;
+    text-align: center;
 }
 .Label{
     text-align: right;
@@ -20,7 +20,7 @@ div.Error{
 
 /* Textbox style. */
 input[type=text], input[type=password] {
-    
+    width: 200px;
 }
 
 /* Button style. */

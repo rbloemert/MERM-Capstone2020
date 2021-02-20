@@ -87,6 +87,7 @@
                     <div class="Error">
                         <asp:RequiredFieldValidator ValidationGroup="SignupForm" ControlToValidate="TextBoxEmail"  Display="Dynamic" runat="server" ErrorMessage="Email is required." ForeColor="Red"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ValidationGroup="SignupForm" ControlToValidate="TextBoxEmail" Display="Dynamic" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"  ErrorMessage="Email is not valid." ForeColor="Red"></asp:RegularExpressionValidator>
+                        <asp:CustomValidator ValidationGroup="SignupForm" ControlToValidate="TextBoxEmail" OnServerValidate="ValidateEmail" Display="Dynamic" runat="server" ErrorMessage="Email already in use." ForeColor="Red"></asp:CustomValidator>
                     </div>
                 </td>
             </tr>
