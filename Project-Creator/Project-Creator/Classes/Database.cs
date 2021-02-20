@@ -9,6 +9,8 @@ using System.Security.Cryptography;
 
 namespace Project_Creator.Classes
 {
+    // I haven't had a chance to try these out yet
+
     public class Database
     {
         public enum QueryResult
@@ -372,7 +374,34 @@ namespace Project_Creator.Classes
 
         public List<Project2> GetProjectList(int accountID) // return projects belonging to a user
         {
-            return new List<Project2>();
+            List<Project2> projects = new List<Project2>();
+            if (!IsConnectionOpen()) return projects;
+
+            var sql = "SELECT * " +
+                      "FROM project" +
+                      "LEFT JOIN project_link ON (project.projectID = project_link.projectID)" +
+                      "WHERE project_link.project_owner_accountID = @accountID";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@accountID", accountID);
+
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows)
+                {
+                    projects.Add(new Project2()
+                    {
+                        projectID = Convert.ToInt32(row["projectID"]),
+                        project_creation = Convert.ToDateTime(row["project_creation"]),
+                        project_name = row["project_name"].ToString(),
+                        project_desc = row["project_desc"].ToString(),
+                    });
+                }
+            }
+
+            return projects;
         }
 
         public QueryResult CreateProject(Project2 project)
@@ -485,15 +514,72 @@ namespace Project_Creator.Classes
             return QueryResult.FailedNoChanges;
         }
 
-        public QueryResult AddFollower(object project, Account account)
+        public QueryResult AddFollower(int projectID, Account account)
         {
-            // not yet implemented
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Prepares the sql query.
+            var sql = "INSERT INTO follower_link(projectID, follower_accountID, follow_date) VALUES(@projectID, @follower_accountID, @follow_date)";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@projectID", projectID);
+                cmd.Parameters.AddWithValue("@follower_accountID", account.accountID);
+                cmd.Parameters.AddWithValue("@follow_date", new SqlDateTime(DateTime.Now));
+                cmd.Prepare();
+
+                //Executes the insert command.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
             return QueryResult.FailedNoChanges;
         }
 
-        public QueryResult RemoveFollower(object project, Account account)
+        public QueryResult RemoveFollower(int projectID, Account account)
         {
-            // not yet implemented
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Prepares the sql query.
+            var sql = "DELETE FROM follower_link WHERE projectID=@projectID AND follower_accountID=@follower_accountID";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@projectID", projectID);
+                cmd.Parameters.AddWithValue("@follower_accountID", account.accountID);
+                cmd.Prepare();
+
+                //Executes the insert command.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
             return QueryResult.FailedNoChanges;
         }
 
@@ -506,7 +592,7 @@ namespace Project_Creator.Classes
             List<Timeline> timelines = new List<Timeline>();
             if (!IsConnectionOpen()) return timelines;
 
-            var sql = "SELECT * FROM project";
+            var sql = "SELECT * FROM timeline";
             using (var cmd = new SqlCommand(sql, connection))
             {
                 var adapter = new SqlDataAdapter(cmd);
@@ -530,7 +616,34 @@ namespace Project_Creator.Classes
 
         public List<Timeline> GetTimelineList(int projectID) // return timelines belonging to a project
         {
-            return new List<Timeline>();
+            List<Timeline> timelines = new List<Timeline>();
+            if (!IsConnectionOpen()) return timelines;
+
+            var sql = "SELECT * " +
+                      "FROM timeline" +
+                      "LEFT JOIN timeline_link ON (timeline.timelineID = timeline_link.timelineID)" +
+                      "WHERE timeline_link.project_owner_projectID = @projectID";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@projectID", projectID);
+
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows)
+                {
+                    timelines.Add(new Timeline()
+                    {
+                        timelineID = Convert.ToInt32(row["timelineID"]),
+                        timeline_creation = Convert.ToDateTime(row["timeline_creation"]),
+                        timeline_name = row["timeline_name"].ToString(),
+                        timeline_desc = row["timeline_desc"].ToString(),
+                    });
+                }
+            }
+
+            return timelines;
         }
 
         public QueryResult CreateTimeline(Timeline timeline)
@@ -652,7 +765,7 @@ namespace Project_Creator.Classes
             List<Comment> comments = new List<Comment>();
             if (!IsConnectionOpen()) return comments;
 
-            var sql = "SELECT * FROM project";
+            var sql = "SELECT * FROM comment";
             using (var cmd = new SqlCommand(sql, connection))
             {
                 var adapter = new SqlDataAdapter(cmd);
@@ -675,7 +788,33 @@ namespace Project_Creator.Classes
 
         public List<Comment> GetCommentList(int timelineID) // return comments belonging to a timeline
         {
-            return new List<Comment>();
+            List<Comment> comments = new List<Comment>();
+            if (!IsConnectionOpen()) return comments;
+
+            var sql = "SELECT * " +
+                      "FROM comment" +
+                      "LEFT JOIN comment_link ON (comment.commentID = comment_link.commentID)" +
+                      "WHERE comment_link.timeline_owner_timelineID = @timelineID";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@timelineID", timelineID);
+
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows)
+                {
+                    comments.Add(new Comment()
+                    {
+                        commentID = Convert.ToInt32(row["commentID"]),
+                        comment_creation = Convert.ToDateTime(row["comment_creation"]),
+                        comment_text = row["comment_text"].ToString(),
+                    });
+                }
+            }
+
+            return comments;
         }
 
         public QueryResult CreateComment(Comment comment)
