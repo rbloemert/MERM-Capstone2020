@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
@@ -12,7 +13,7 @@ namespace Project_Creator
     // I haven't had a chance to try these out yet
     // Note: Methods in the DB class are for internal use; I will provide funcs within the individual classes to offer functionality
 
-    public class Database
+    public class Database : IDisposable
     {
         public enum QueryResult
         {
@@ -24,20 +25,42 @@ namespace Project_Creator
         }
 
         //Defines the database connection variables.
+        private bool disposed = false;
         private string lastErr = "";
         private string key = "EVAO9NR3R920";
         private byte[] salt = { 0x14, 0x64, 0x98, 0x65, 0x24, 0x75, 0x45, 0x12, 0x15, 0x13, 0x18, 0x19, 0x14 };
         private SqlConnection connection;
 
+        // IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposed) return;
+
+            if (disposing)
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+
+            disposed = true;
+        }
+
         public Database()
         {
-            connection = new SqlConnection("Server=tcp:projectcreator.database.windows.net,1433;Initial Catalog=projectcreatordb;Persist Security Info=False;User ID=creatoradmin;Password=ProjectCreator1233;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ProjectCreatorAzureDB"].ConnectionString);
+            //connection = new SqlConnection("Server=tcp:projectcreator.database.windows.net,1433;Initial Catalog=projectcreatordb;Persist Security Info=False;User ID=creatoradmin;Password=ProjectCreator1233;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             connection.Open();
         }
 
         ~Database()
         {
-            connection.Close();
+            Dispose();
         }
 
         public bool TestConnection() // returns true if success
@@ -523,6 +546,74 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@project_creation", new_project.project_creation);
                 cmd.Parameters.AddWithValue("@project_name", new_project.project_name);
                 cmd.Parameters.AddWithValue("@project_desc", new_project.project_desc);
+                cmd.Prepare();
+
+                //Executes the insert command.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
+            return QueryResult.FailedNoChanges;
+        }
+
+        public QueryResult CreateProjectLink(int projectID, int accountID)
+        {
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Prepares the sql query.
+            var sql = "INSERT INTO project_link(projectID, project_owner_accountID) VALUES(@projectID, @project_owner_accountID)";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@projectID", projectID);
+                cmd.Parameters.AddWithValue("@project_owner_accountID", accountID);
+                cmd.Prepare();
+
+                //Executes the insert command.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
+            return QueryResult.FailedNoChanges;
+        }
+
+        public QueryResult DeleteProjectLink(int projectID, int accountID)
+        {
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Prepares the sql query.
+            var sql = "DELETE FROM project_link WHERE projectID=@projectID AND project_owner_accountID=@project_owner_accountID";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@projectID", projectID);
+                cmd.Parameters.AddWithValue("@project_owner_accountID", accountID);
                 cmd.Prepare();
 
                 //Executes the insert command.
