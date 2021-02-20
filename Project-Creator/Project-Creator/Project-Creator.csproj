@@ -126,9 +126,8 @@
   <ItemGroup>
     <Content Include="Creator.aspx" />
     <Content Include="Home.aspx" />
-    <Content Include="Icons\icon_search.png" />
+    <Content Include="Icons\Search.png" />
     <Content Include="Login.aspx" />
-    <Content Include="ProjectManagement\page.css" />
     <Content Include="ProjectManagement\ProjectTimeline.aspx" />
     <Content Include="ProjectManagement\ViewUpdate.aspx" />
     <Content Include="Signup.aspx" />

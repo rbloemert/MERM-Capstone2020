@@ -11,43 +11,23 @@ namespace Project_Creator
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblLoginFeedback.Text = "";
+            
         }
 
-
-        protected void btnLogin_Clicked(object sender, EventArgs e)
+        protected void ValidateUsername(object source, ServerValidateEventArgs args)
         {
-            if(validatePassword())
-            {
-                // Basic validation grants allowance into this block.
 
-            }
-            else
-            {
-                lblLoginFeedback.Text = "Please try again.";
-            }
+            //Creates the database object.
+            Database db = new Database();
 
-
-
+            //Sets the validation value to whether the username exists.
+            args.IsValid = !db.AccountExists(TextBoxUsername.Text);
 
         }
 
-        protected bool validatePassword()
+        protected void Access(object sender, EventArgs e)
         {
-            bool boolResponse = false;
-            if (string.IsNullOrWhiteSpace(txtLoginUsername.Text) || string.IsNullOrWhiteSpace(txtLoginPassword.Text))
-            {
-                boolResponse = false;
-            }
-            else { boolResponse = true; }
-            return boolResponse;
-        }
-
-        protected void btnClear_Clicked(object sender, EventArgs e)
-        {
-            lblLoginFeedback.Text = "";
-            txtLoginUsername.Text = "";
-            txtLoginPassword.Text = "";
+            //Account login functionality.
         }
     }
 }

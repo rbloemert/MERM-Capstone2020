@@ -28,8 +28,10 @@
                                 <td class="Search">
                                     <asp:TextBox CssClass="Search Primary" runat="server"></asp:TextBox>
                                 </td>
-                                <td class="Search" style="text-align:left">
-                                    <asp:ImageButton CssClass="Icon" runat="server" ImageAlign="Middle" ImageUrl="Icons/Search.png"/>
+                                <td class="Search" style="text-align:left;vertical-align:middle">
+                                    <div class="Vertical">
+                                        <asp:ImageButton CssClass="Icon" runat="server" ImageAlign="Middle" ImageUrl="Icons/Search.png"/>
+                                    </div>
                                 </td>
                             </tr>
                         </table>

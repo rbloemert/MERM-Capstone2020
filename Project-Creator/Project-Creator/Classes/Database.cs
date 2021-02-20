@@ -53,7 +53,7 @@ namespace Project_Creator
 
         public Database()
         {
-            connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ProjectCreatorAzureDB"].ConnectionString);
+            connection = new SqlConnection("Data Source=tcp:projectcreator.database.windows.net,1433;Initial Catalog=projectcreatordb;User Id=creatoradmin@projectcreator;Password=ProjectCreator1233");
             //connection = new SqlConnection("Server=tcp:projectcreator.database.windows.net,1433;Initial Catalog=projectcreatordb;Persist Security Info=False;User ID=creatoradmin;Password=ProjectCreator1233;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             connection.Open();
         }
@@ -121,7 +121,7 @@ namespace Project_Creator
         //        cmd.Parameters.AddWithValue("@" + tuple.Item1, tuple.Item2);
         //    }
 
-        //    cmd.Prepare();
+        //    
 
         //    return cmd.ExecuteNonQuery() > 0;
         //}
@@ -246,7 +246,6 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@password", Encrypt(account.password));
                 cmd.Parameters.AddWithValue("@email", account.email);
                 cmd.Parameters.AddWithValue("@isSiteAdministrator", account.isSiteAdministrator);
-                cmd.Prepare();
 
                 //Executes the insert command.
                 try
@@ -280,7 +279,7 @@ namespace Project_Creator
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@accountID", accountID);
-                cmd.Prepare();
+                
 
                 //Executes the insert command.
                 try
@@ -330,7 +329,6 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@password", Encrypt(new_account.password));
                 cmd.Parameters.AddWithValue("@email", new_account.email);
                 cmd.Parameters.AddWithValue("@isSiteAdministrator", new_account.isSiteAdministrator);
-                cmd.Prepare();
 
                 //Executes the insert command.
                 try
@@ -471,7 +469,6 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@project_creation", new SqlDateTime(DateTime.Now));
                 cmd.Parameters.AddWithValue("@project_name", project.project_name);
                 cmd.Parameters.AddWithValue("@project_desc", project.project_desc);
-                cmd.Prepare();
 
                 //Executes the insert command.
                 try
@@ -504,7 +501,6 @@ namespace Project_Creator
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@projectID", projectID);
-                cmd.Prepare();
 
                 //Executes the insert command.
                 try
@@ -546,7 +542,7 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@project_creation", new_project.project_creation);
                 cmd.Parameters.AddWithValue("@project_name", new_project.project_name);
                 cmd.Parameters.AddWithValue("@project_desc", new_project.project_desc);
-                cmd.Prepare();
+                
 
                 //Executes the insert command.
                 try
@@ -580,7 +576,6 @@ namespace Project_Creator
             {
                 cmd.Parameters.AddWithValue("@projectID", projectID);
                 cmd.Parameters.AddWithValue("@project_owner_accountID", accountID);
-                cmd.Prepare();
 
                 //Executes the insert command.
                 try
@@ -614,7 +609,7 @@ namespace Project_Creator
             {
                 cmd.Parameters.AddWithValue("@projectID", projectID);
                 cmd.Parameters.AddWithValue("@project_owner_accountID", accountID);
-                cmd.Prepare();
+                
 
                 //Executes the insert command.
                 try
@@ -649,7 +644,7 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@projectID", projectID);
                 cmd.Parameters.AddWithValue("@follower_accountID", account.accountID);
                 cmd.Parameters.AddWithValue("@follow_date", new SqlDateTime(DateTime.Now));
-                cmd.Prepare();
+                
 
                 //Executes the insert command.
                 try
@@ -683,7 +678,7 @@ namespace Project_Creator
             {
                 cmd.Parameters.AddWithValue("@projectID", projectID);
                 cmd.Parameters.AddWithValue("@follower_accountID", account.accountID);
-                cmd.Prepare();
+                
 
                 //Executes the insert command.
                 try
@@ -781,7 +776,7 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@timeline_creation", new SqlDateTime(DateTime.Now));
                 cmd.Parameters.AddWithValue("@timeline_name", timeline.timeline_name);
                 cmd.Parameters.AddWithValue("@timeline_desc", timeline.timeline_desc);
-                cmd.Prepare();
+                
 
                 //Executes the insert command.
                 try
@@ -814,7 +809,7 @@ namespace Project_Creator
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@timelineID", timelineID);
-                cmd.Prepare();
+                
 
                 //Executes the insert command.
                 try
@@ -856,7 +851,7 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@timeline_creation", new_timeline.timeline_creation);
                 cmd.Parameters.AddWithValue("@timeline_name", new_timeline.timeline_name);
                 cmd.Parameters.AddWithValue("@timeline_desc", new_timeline.timeline_desc);
-                cmd.Prepare();
+                
 
                 //Executes the insert command.
                 try
@@ -951,7 +946,7 @@ namespace Project_Creator
             {
                 cmd.Parameters.AddWithValue("@comment_creation", new SqlDateTime(DateTime.Now));
                 cmd.Parameters.AddWithValue("@comment_text", comment.comment_text);
-                cmd.Prepare();
+                
 
                 //Executes the insert command.
                 try
@@ -984,7 +979,7 @@ namespace Project_Creator
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@commentID", commentID);
-                cmd.Prepare();
+                
 
                 //Executes the insert command.
                 try
@@ -1024,7 +1019,7 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@commentID", new_comment.commentID);
                 cmd.Parameters.AddWithValue("@comment_creation", new_comment.comment_creation);
                 cmd.Parameters.AddWithValue("@comment_text", new_comment.comment_text);
-                cmd.Prepare();
+                
 
                 //Executes the insert command.
                 try
@@ -1045,6 +1040,32 @@ namespace Project_Creator
             }
 
             return QueryResult.FailedNoChanges;
+        }
+
+        public bool AccountExists(string username)
+        {
+
+            //Gets a list of all existing accounts.
+            List<Account> accounts = GetAccountList();
+
+            //Default the username does not exist.
+            bool exists = false;
+
+            //Loops through each account comparing usernames.
+            foreach(Account account in accounts)
+            {
+
+                //Checks if the account usernames are equal.
+                if (username.Equals(account.username))
+                {
+                    exists = true;
+                }
+
+            }
+
+            //Returns the status of the username.
+            return exists;
+
         }
 
         // COMMENT

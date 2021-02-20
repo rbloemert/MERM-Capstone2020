@@ -41,7 +41,12 @@ div.Basic {
     border-width: 1px;
     outline-width: 0px;
 }
-
+div.Vertical {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
 
 /* Used to split the Screen in half (two rows)*/
 .split {

@@ -24,7 +24,7 @@ tr.Search{
 
 }
 td.Search{
-
+    overflow: hidden;
 }
 input[type=text].Search{
     width: 100%;

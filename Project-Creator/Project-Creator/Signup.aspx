@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <div class="Basic">
         <div>
-            <h1>Sign Up!</h1>
+            <h1 style="padding-top:4px;padding-bottom:4px;">Sign Up!</h1>
         </div>
         <table style="margin-left:auto; margin-right:auto;">
             <tr>
@@ -89,28 +89,7 @@
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <asp:Label runat="server">Creator?</asp:Label>
-                </td>
-                <td>
-                    <table style="width:100%;">
-                        <tr>
-                            <td>
-                                <asp:RadioButton ID="RadioCreator" Text="Yes" Checked="False" GroupName="RadioType" runat="server" />
-                            </td>
-                            <td>
-                                <asp:RadioButton ID="RadioUser" Text="No" Checked="True" GroupName="RadioType" runat="server" />
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><div class="Error"></div></td>
-            </tr>
         </table>
-        <asp:Button runat="server" Text="Submit" OnClick="Register" />
+        <asp:Button runat="server" Text="Signup" OnClick="Register" />
     </div>
 </asp:Content>
