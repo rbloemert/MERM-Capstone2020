@@ -7,9 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace Project_Creator.Classes
+namespace Project_Creator
 {
     // I haven't had a chance to try these out yet
+    // Note: Methods in the DB class are for internal use; I will provide funcs within the individual classes to offer functionality
 
     public class Database
     {
@@ -384,6 +385,37 @@ namespace Project_Creator.Classes
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@accountID", accountID);
+
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows)
+                {
+                    projects.Add(new Project2()
+                    {
+                        projectID = Convert.ToInt32(row["projectID"]),
+                        project_creation = Convert.ToDateTime(row["project_creation"]),
+                        project_name = row["project_name"].ToString(),
+                        project_desc = row["project_desc"].ToString(),
+                    });
+                }
+            }
+
+            return projects;
+        }
+
+        public List<Project2> GetProjectList(string search) // return projects with substring in title
+        {
+            List<Project2> projects = new List<Project2>();
+            if (!IsConnectionOpen()) return projects;
+
+            var sql = "SELECT * " +
+                      "FROM project" +
+                      "WHERE CHARINDEX('@search', project.project_name) > 0";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@search", search);
 
                 var adapter = new SqlDataAdapter(cmd);
                 var datatable = new DataTable();
