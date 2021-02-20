@@ -133,7 +133,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Comment.cs" />
     <Compile Include="Classes\Database.cs" />
+    <Compile Include="Classes\Project2.cs" />
+    <Compile Include="Classes\Timeline.cs" />
     <Compile Include="Creator.aspx.cs">
       <DependentUpon>Creator.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -186,7 +189,7 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Classes\Update.cs" />
-    <Compile Include="Classes\User.cs" />
+    <Compile Include="Classes\Account.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
