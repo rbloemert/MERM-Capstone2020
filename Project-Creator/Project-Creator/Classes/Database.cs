@@ -220,7 +220,7 @@ namespace Project_Creator
                         firstname = row["firstname"].ToString(),
                         lastname = row["lastname"].ToString(),
                         username = row["username"].ToString(),
-                        password = Decrypt(row["password"].ToString()),
+                        password = row["password"].ToString(),
                         email = row["email"].ToString(),
                         isSiteAdministrator = Convert.ToBoolean(row["isSiteAdministrator"])
                     });

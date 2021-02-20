@@ -14,17 +14,6 @@ namespace Project_Creator
             
         }
 
-        protected void ValidateUsername(object source, ServerValidateEventArgs args)
-        {
-
-            //Creates the database object.
-            Database db = new Database();
-
-            //Sets the validation value to whether the username exists.
-            args.IsValid = !db.AccountExists(TextBoxUsername.Text);
-
-        }
-
         protected void Access(object sender, EventArgs e)
         {
             //Account login functionality.

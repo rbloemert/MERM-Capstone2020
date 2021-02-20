@@ -20,7 +20,8 @@
                 <td></td>
                 <td>
                     <div class="Error">
-                        <asp:RequiredFieldValidator ControlToValidate="TextBoxUsername"  Display="Dynamic" runat="server" ErrorMessage="Username is required." ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ValidationGroup="SignupForm" ControlToValidate="TextBoxUsername"  Display="Dynamic" runat="server" ErrorMessage="Username is required." ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:CustomValidator ValidationGroup="SignupForm" ControlToValidate="TextBoxUsername" OnServerValidate="ValidateUsername" Display="Dynamic" runat="server" ErrorMessage="Username already in use." ForeColor="Red"></asp:CustomValidator>
                     </div>
                 </td>
             </tr>
@@ -36,7 +37,7 @@
                 <td></td>
                 <td>
                     <div class="Error">
-                        <asp:RequiredFieldValidator ControlToValidate="TextBoxPassword"  Display="Dynamic" runat="server" ErrorMessage="Password is required." ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ValidationGroup="SignupForm" ControlToValidate="TextBoxPassword"  Display="Dynamic" runat="server" ErrorMessage="Password is required." ForeColor="Red"></asp:RequiredFieldValidator>
                     </div>
                 </td>
             </tr>
@@ -52,7 +53,7 @@
                 <td></td>
                 <td>
                     <div class="Error">
-                        <asp:CompareValidator ControlToValidate="TextBoxPassword" ControlToCompare="TextBoxPasswordConfirm"  Display="Dynamic" runat="server" ErrorMessage="Passwords do not match." ForeColor="Red"></asp:CompareValidator>
+                        <asp:CompareValidator ValidationGroup="SignupForm" ControlToValidate="TextBoxPassword" ControlToCompare="TextBoxPasswordConfirm"  Display="Dynamic" runat="server" ErrorMessage="Passwords do not match." ForeColor="Red"></asp:CompareValidator>
                     </div>
                 </td>
             </tr>
@@ -68,7 +69,7 @@
                 <td></td>
                 <td>
                     <div class="Error">
-                        <asp:RegularExpressionValidator ControlToValidate="TextBoxFullName" Display="Dynamic" runat="server" ValidationExpression="^[A-Z][a-z]*(\s[A-Z][a-z]*)+$"  ErrorMessage="Full name is not valid." ForeColor="Red"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ValidationGroup="SignupForm" ControlToValidate="TextBoxFullName" Display="Dynamic" runat="server" ValidationExpression="^[A-Z][a-z]*(\s[A-Z][a-z]*)+$"  ErrorMessage="Full name is not valid." ForeColor="Red"></asp:RegularExpressionValidator>
                     </div>
                 </td>
             </tr>
@@ -84,12 +85,12 @@
                 <td></td>
                 <td>
                     <div class="Error">
-                        <asp:RequiredFieldValidator ControlToValidate="TextBoxEmail"  Display="Dynamic" runat="server" ErrorMessage="Email is required." ForeColor="Red"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ControlToValidate="TextBoxEmail" Display="Dynamic" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"  ErrorMessage="Email is not valid." ForeColor="Red"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ValidationGroup="SignupForm" ControlToValidate="TextBoxEmail"  Display="Dynamic" runat="server" ErrorMessage="Email is required." ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ValidationGroup="SignupForm" ControlToValidate="TextBoxEmail" Display="Dynamic" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"  ErrorMessage="Email is not valid." ForeColor="Red"></asp:RegularExpressionValidator>
                     </div>
                 </td>
             </tr>
         </table>
-        <asp:Button runat="server" Text="Signup" OnClick="Register" />
+        <asp:Button runat="server" Text="Signup" ValidationGroup="SignupForm" CausesValidation="True" OnClick="Register" />
     </div>
 </asp:Content>

@@ -20,7 +20,6 @@
                 <td>
                     <div class="Error">
                         <asp:RequiredFieldValidator ControlToValidate="TextBoxUsername"  Display="Dynamic" runat="server" ErrorMessage="Username is required." ForeColor="Red"></asp:RequiredFieldValidator>
-                        <asp:CustomValidator ControlToValidate="TextBoxUsername" OnServerValidate="ValidateUsername" Display="Dynamic" runat="server" ErrorMessage="Username already in use." ForeColor="Red"></asp:CustomValidator>
                     </div>
                 </td>
             </tr>
