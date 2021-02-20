@@ -28,7 +28,8 @@ namespace Project_Creator
 
             for(int i = 0; i < 5; i++)
             {
-                projectList.Add(new Project("proj1", "me", null, i.ToString(), null));
+                string x = "Project: " + (i + 1);
+                projectList.Add(new Project(x, "me", "Unavailable", i.ToString(), null));
 
             }
 
@@ -39,6 +40,21 @@ namespace Project_Creator
         }
 
 
+        protected void btnSelectProject_Clicked(object sender, GridViewCommandEventArgs e) //e is the position of the project in the list
+        {
+            int index = Convert.ToInt32(e.CommandArgument);
+            GridViewRow row = creatorProjectGrid.Rows[index];
+
+
+
+
+        }
+
+        protected void btnFollowCreator_Clicked(object sender, EventArgs e)
+        {
+
+
+        }
 
 
     }
