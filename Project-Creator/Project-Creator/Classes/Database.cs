@@ -323,7 +323,7 @@ namespace Project_Creator
                 if (username == acc.username && Password.ComparePassword(password, acc.password, acc.password_salt)) return acc;
             }
 
-            return new Account();
+            return null;
         }
 
         // ACCOUNTS

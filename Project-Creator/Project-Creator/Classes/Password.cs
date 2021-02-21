@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Security.Cryptography;
 
 namespace Project_Creator.Classes
@@ -17,7 +18,7 @@ namespace Project_Creator.Classes
             //Generates a random salt for the password.
             var salt = new byte[SALT_SIZE];
             new RNGCryptoServiceProvider().GetBytes(salt);
-            return salt.ToString();
+            return Convert.ToBase64String(salt);
 
         }
 
@@ -29,7 +30,7 @@ namespace Project_Creator.Classes
             var hash = pbkdf2.GetBytes(HASH_SIZE);
 
             //Returns the password hash.
-            return hash.ToString();
+            return Convert.ToBase64String(hash);
 
         }
 

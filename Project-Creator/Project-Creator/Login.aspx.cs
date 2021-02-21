@@ -16,7 +16,15 @@ namespace Project_Creator
 
         protected void Access(object sender, EventArgs e)
         {
-            //Account login functionality.
+
+            //Creates a database object.
+            Database db = new Database();
+            
+            //Checks if the account is authenticated correctly.
+            if(db.AuthenticateAccount(TextBoxUsername.Text, TextBoxPassword.Text) != null)
+            {
+                //Login session variables.
+            }
         }
     }
 }

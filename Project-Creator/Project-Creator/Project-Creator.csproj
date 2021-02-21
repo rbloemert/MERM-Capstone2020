@@ -140,6 +140,7 @@
   <ItemGroup>
     <Compile Include="Classes\Comment.cs" />
     <Compile Include="Classes\Database.cs" />
+    <Compile Include="Classes\Password.cs" />
     <Compile Include="Classes\Project2.cs" />
     <Compile Include="Classes\Timeline.cs" />
     <Compile Include="Creator.aspx.cs">
