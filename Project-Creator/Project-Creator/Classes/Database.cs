@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using Project_Creator.Classes;
 
 namespace Project_Creator
 {
@@ -25,10 +27,8 @@ namespace Project_Creator
         }
 
         //Defines the database connection variables.
-        private string lastErr = "";
-        private string key = "EVAO9NR3R920";
-        private byte[] salt = { 0x14, 0x64, 0x98, 0x65, 0x24, 0x75, 0x45, 0x12, 0x15, 0x13, 0x18, 0x19, 0x14 };
         private SqlConnection connection;
+        private string lastErr = "";
 
         // IDisposable
         ~Database()
@@ -106,77 +106,6 @@ namespace Project_Creator
         //    return cmd.ExecuteNonQuery() > 0;
         //}
 
-        public string Encrypt(string password)
-        {
-
-            //Gets the password byte array.
-            byte[] passwordBytes = System.Text.Encoding.Unicode.GetBytes(password);
-
-            //Creates an encryptor.
-            using (Aes encryptor = Aes.Create())
-            {
-
-                //Derives bytes for the password.
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(key, salt);
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-
-                //Creates a memory stream.
-                using (MemoryStream ms = new MemoryStream())
-                {
-
-                    //Creates a crypto stream.
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
-
-                        //Writes the password to the stream.
-                        cs.Write(passwordBytes, 0, passwordBytes.Length);
-                        cs.Close();
-                    }
-
-                    //Sets the password to the encrypted password.
-                    password = Convert.ToBase64String(ms.ToArray());
-                }
-            }
-
-            //Returns the encrypted password.
-            return password;
-        }
-
-        public string Decrypt(string password)
-        {
-            //Gets the password byte array.
-            byte[] passwordBytes = System.Text.Encoding.Unicode.GetBytes(password);
-
-            //Creates an encryptor.
-            using (Aes encryptor = Aes.Create())
-            {
-
-                //Derives bytes for the password.
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(key, salt);
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-
-                //Creates a memory stream.
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    //Creates a crypto stream.
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
-                    {
-                        //Writes the password to the stream.
-                        cs.Write(passwordBytes, 0, passwordBytes.Length);
-                        cs.Close();
-                    }
-
-                    //Sets the password to the encrypted password.
-                    password = Convert.ToBase64String(ms.ToArray());
-                }
-            }
-
-            //Returns the encrypted password.
-            return password;
-        }
-
         // ACCOUNTS
 
         public List<Account> GetAccountList()
@@ -202,6 +131,7 @@ namespace Project_Creator
                         username = row["username"].ToString(),
                         password = row["password"].ToString(),
                         email = row["email"].ToString(),
+                        salt = row["salt"].ToString(),
                         isSiteAdministrator = Convert.ToBoolean(row["isSiteAdministrator"])
                     });
                 }
@@ -223,7 +153,7 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@firstname", account.firstname);
                 cmd.Parameters.AddWithValue("@lastname", account.lastname);
                 cmd.Parameters.AddWithValue("@username", account.username);
-                cmd.Parameters.AddWithValue("@password", Encrypt(account.password));
+                cmd.Parameters.AddWithValue("@password", Password.Encrypt(account.password));
                 cmd.Parameters.AddWithValue("@email", account.email);
                 cmd.Parameters.AddWithValue("@isSiteAdministrator", account.isSiteAdministrator);
 
