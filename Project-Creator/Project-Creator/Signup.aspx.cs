@@ -50,8 +50,7 @@ namespace Project_Creator
                 //Sets the values of the user from the signup page.
                 signupUser.username = TextBoxUsername.Text;
                 signupUser.password = TextBoxPassword.Text;
-                signupUser.firstname = "John";
-                signupUser.lastname = "Lad";
+                signupUser.fullname = "John Lad";
                 signupUser.email = TextBoxEmail.Text;
                 signupUser.isSiteAdministrator = false;
 

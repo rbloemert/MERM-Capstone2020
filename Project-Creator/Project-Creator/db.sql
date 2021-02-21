@@ -10,11 +10,11 @@ DROP TABLE IF EXISTS follower_link;
 DROP TABLE IF EXISTS account;
 CREATE TABLE account(
 	accountID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,                       /* accountID: Unique Account ID per user. Auto incremented */
-    account_creation DATE NOT NULL,                                         /* accountCreation: When this account was created. */
-    firstname VARCHAR(255) NOT NULL,                                        /* firstname: The first name for this account. */
-    lastname VARCHAR(255) NOT NULL,                                         /* lastname: The last name for this account. */
+    account_creation DATE NOT NULL,                                         /* account_creation: When this account was created. */
+    fullname VARCHAR(255) NOT NULL,                                         /* fullname: The name for this account. */
     username VARCHAR(255) NOT NULL,                                         /* username: The username for this account. */
     password VARCHAR(255) NOT NULL,                                         /* password: The password for this account. */
+    password_salt VARCHAR(255) NOT NULL,                                    /* password_salt: The salt used for the password. */
     email VARCHAR(255) NOT NULL,                                            /* email: The email for this account. */
     isSiteAdministrator BIT NOT NULL,                                       /* isSiteAdministrator: Is this user an administrator? */
 );
@@ -33,6 +33,7 @@ DROP TABLE IF EXISTS timeline;
 CREATE TABLE timeline(
     timelineID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,                      /* timelineID: Unique Timeline ID per timeline. Auto incremented. */
     timeline_creation DATE NOT NULL,                                        /* timeline_creation: Date this timeline was posted. */
+    timeline_image_path VARCHAR(255),                                       /* timeline_image_path: The path to the image of this timeline. */
     timeline_name VARCHAR(255) NOT NULL,                                    /* timeline_name: Title of this timeline. */
     timeline_desc VARCHAR(255) NOT NULL,                                    /* timeline_desc: Description of this timeline. */
 );
