@@ -7,6 +7,7 @@ using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using Project_Creator.Classes;
 
 namespace Project_Creator
 {
@@ -106,77 +107,6 @@ namespace Project_Creator
         //    return cmd.ExecuteNonQuery() > 0;
         //}
 
-        public string Encrypt(string password)
-        {
-
-            //Gets the password byte array.
-            byte[] passwordBytes = System.Text.Encoding.Unicode.GetBytes(password);
-
-            //Creates an encryptor.
-            using (Aes encryptor = Aes.Create())
-            {
-
-                //Derives bytes for the password.
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(key, salt);
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-
-                //Creates a memory stream.
-                using (MemoryStream ms = new MemoryStream())
-                {
-
-                    //Creates a crypto stream.
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
-
-                        //Writes the password to the stream.
-                        cs.Write(passwordBytes, 0, passwordBytes.Length);
-                        cs.Close();
-                    }
-
-                    //Sets the password to the encrypted password.
-                    password = Convert.ToBase64String(ms.ToArray());
-                }
-            }
-
-            //Returns the encrypted password.
-            return password;
-        }
-
-        public string Decrypt(string password)
-        {
-            //Gets the password byte array.
-            byte[] passwordBytes = System.Text.Encoding.Unicode.GetBytes(password);
-
-            //Creates an encryptor.
-            using (Aes encryptor = Aes.Create())
-            {
-
-                //Derives bytes for the password.
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(key, salt);
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-
-                //Creates a memory stream.
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    //Creates a crypto stream.
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
-                    {
-                        //Writes the password to the stream.
-                        cs.Write(passwordBytes, 0, passwordBytes.Length);
-                        cs.Close();
-                    }
-
-                    //Sets the password to the encrypted password.
-                    password = Convert.ToBase64String(ms.ToArray());
-                }
-            }
-
-            //Returns the encrypted password.
-            return password;
-        }
-
         // ACCOUNTS
 
         public bool AccountExists(string username)
@@ -271,11 +201,12 @@ namespace Project_Creator
             var sql = "INSERT INTO account(account_creation, fullname, username, password, password_salt, email, isSiteAdministrator) VALUES(@account_creation, @fullname, @username, @password, @password_salt, @email, @isSiteAdministrator)";
             using (var cmd = new SqlCommand(sql, connection))
             {
+                var salt = Password.Salt();
                 cmd.Parameters.AddWithValue("@account_creation", new SqlDateTime(DateTime.Now));
                 cmd.Parameters.AddWithValue("@fullname", account.fullname);
                 cmd.Parameters.AddWithValue("@username", account.username);
-                cmd.Parameters.AddWithValue("@password", Encrypt(account.password));
-                cmd.Parameters.AddWithValue("@password_salt", account.password_salt);
+                cmd.Parameters.AddWithValue("@password", Password.Encrypt(account.password, salt));
+                cmd.Parameters.AddWithValue("@password_salt", salt);
                 cmd.Parameters.AddWithValue("@email", account.email);
                 cmd.Parameters.AddWithValue("@isSiteAdministrator", account.isSiteAdministrator);
 
@@ -352,13 +283,14 @@ namespace Project_Creator
                       "WHERE accountID = @oldAccountID";
             using (var cmd = new SqlCommand(sql, connection))
             {
+                var salt = Password.Salt();
                 cmd.Parameters.AddWithValue("@oldAccountID", accountID);
                 cmd.Parameters.AddWithValue("@accountID", new_account.accountID);
                 cmd.Parameters.AddWithValue("@account_creation", new_account.account_creation);
                 cmd.Parameters.AddWithValue("@fullname", new_account.fullname);
                 cmd.Parameters.AddWithValue("@username", new_account.username);
-                cmd.Parameters.AddWithValue("@password", Encrypt(new_account.password));
-                cmd.Parameters.AddWithValue("@password_salt", new_account.password_salt);
+                cmd.Parameters.AddWithValue("@password", Password.Encrypt(new_account.password, salt));
+                cmd.Parameters.AddWithValue("@password_salt", salt);
                 cmd.Parameters.AddWithValue("@email", new_account.email);
                 cmd.Parameters.AddWithValue("@isSiteAdministrator", new_account.isSiteAdministrator);
 
@@ -385,11 +317,10 @@ namespace Project_Creator
 
         public Account AuthenticateAccount(string username, string password)
         {
-            string encPwd = Encrypt(password);
 
             foreach (Account acc in GetAccountList())
             {
-                if (username == acc.username && encPwd == acc.password) return acc;
+                if (username == acc.username && Password.ComparePassword(password, acc.password, acc.password_salt)) return acc;
             }
 
             return new Account();

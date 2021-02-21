@@ -15,7 +15,6 @@ namespace Project_Creator
         public string password;                 /* password: The password for this account. */
         public string password_salt;            /* password_salt: The salt used for the password. */
         public string email;                    /* email: The email for this account. */
-        public string salt;                     /* salt: The salt used to decrypt the password. */
         public bool isSiteAdministrator;        /* isSiteAdministrator: If this account is an administrator */
     }
 }
