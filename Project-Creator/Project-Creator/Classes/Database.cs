@@ -330,8 +330,10 @@ namespace Project_Creator
             Project2 project = new Project2();
             if (!IsConnectionOpen()) return null;
 
-            var sql = "SELECT * FROM project where projectID = " + projectID;
+            var sql = "SELECT * FROM project where projectID = @projectID";
             using (var cmd = new SqlCommand(sql, connection)) {
+                cmd.Parameters.AddWithValue("@projectID", projectID);
+
                 var adapter = new SqlDataAdapter(cmd);
                 var datatable = new DataTable();
                 adapter.Fill(datatable);
@@ -684,7 +686,6 @@ namespace Project_Creator
         // PROJECTS
 
         // TIMELINE
-
         public List<Timeline> GetTimelineList()
         {
             List<Timeline> timelines = new List<Timeline>();
