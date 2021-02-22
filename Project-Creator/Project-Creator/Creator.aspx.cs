@@ -10,46 +10,62 @@ namespace Project_Creator
 {
     public partial class Creator : System.Web.UI.Page
     {
-        List<Project2> projectList;
+        private List<Project2> projectList;
+        private int creatorID = -1;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!this.IsPostBack)
+            projectList = new List<Project2>();
+            projectList = PopulateList();
+            if (!this.IsPostBack)
             {
-                PopulateGrid();
+                // Checks to see if creator ID is passed through
+                int tmp = Convert.ToInt32(Server.UrlDecode(Request.QueryString["Parameter"]));
+                if (tmp >= 0)
+                {
+                    creatorID = tmp;
+                }
+
+
+                creatorProjectGrid.DataSource = projectList;
+                creatorProjectGrid.DataBind();
+                // Populate Creator information
+                CreatorUsernameLabel.Text = "Rick The Creator Test";
+                CreatorDescriptionLabel.Text = "\n\nBio:\nsadflkasjdlkjfasdl;jflsadjfl;safjs;lfsjdasljfls;ajsljfsaljflsajasfl;jasdl;flas";
             }
 
 
-            // Populate Creator information
-            CreatorUsernameLabel.Text = "Rick The Creator Test";
-            CreatorDescriptionLabel.Text = "\n\nBio:\nsadflkasjdlkjfasdl;jflsadjfl;safjs;lfsjdasljfls;ajsljfsaljflsajasfl;jasdl;flas";
         }
 
 
-        private void PopulateGrid()
+        private List<Project2> PopulateList()
         {
-            projectList = new List<Project2>();
-
-
-            for(int i = 0; i < 5; i++)
+            Database db = new Database();
+            if(creatorID != -1) // Returns creator's projects given the creator ID
             {
-                string x = "Project: " + (i + 1);
-                projectList.Add(new Project2(i, x, "me", "Unavailable"));
-
+                return db.GetProjectList(creatorID);
             }
-
-
-            creatorProjectGrid.DataSource = projectList;
-            creatorProjectGrid.DataBind();
-
+            else
+            {
+                return db.GetProjectList();
+            }
         }
 
 
         protected void btnSelectProject_Clicked(object sender, GridViewCommandEventArgs e) //e is the position of the project in the list
         {
+            
             int index = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = creatorProjectGrid.Rows[index];
+            int focusedProjectID = projectList[index].projectID;
 
+
+
+            Response.Redirect("Project?Parameter=" + Server.UrlEncode(focusedProjectID.ToString()));
+
+            /*
+             * For Project.aspx to read the Parameter passes projectID, to read refreshed data from db?:
+             *      int focusedProjectID = Server.UrlDecord(Request.QueryString["Parameter"].ToInt());
+             */
 
 
 

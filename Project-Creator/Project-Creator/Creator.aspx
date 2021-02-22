@@ -40,10 +40,15 @@
             <br /><br />
             <asp:GridView ID="creatorProjectGrid" autoGenerateColumns="False" DataKeyNames="projectID" GridLines="Horizontal" runat="server"  style="margin-left:auto; margin-right:auto; width:80%; text-align:Center;" OnRowCommand="btnSelectProject_Clicked"> 
                 <Columns>
+                    <asp:BoundField DataField="projectID" HeaderText="ID" InsertVisible="false" ReadOnly="true" SortExpression="projectID" HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Center" />
                     <asp:ImageField dataimageurlfield="project_icon_path" HeaderText="Icon"    InsertVisible="False" ReadOnly="true" SortExpression="projectID" HeaderStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" ItemStyle-Width="5%" /> 
                     <asp:BoundField DataField="project_name"     HeaderText="Title"   InsertVisible="False" ReadOnly="true" SortExpression="projectID" HeaderStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" ItemStyle-Width="5%" /> 
                     <asp:BoundField DataField="project_desc"    HeaderText="Description"  InsertVisible="False" ReadOnly="true" SortExpression="projectID" HeaderStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" ItemStyle-Width="5%" /> 
-                    <asp:ButtonField buttontype="Button" commandname="Select"   text="Select" InsertVisible="False" SortExpression="projectID" HeaderStyle-Width="10%" HeaderStyle-HorizontalAlign="Center" /> 
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Button Text="Select" runat="server" CommandName="Select" CommandArgument="<%# Container.DataItemIndex %>" Width="10%" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
 
