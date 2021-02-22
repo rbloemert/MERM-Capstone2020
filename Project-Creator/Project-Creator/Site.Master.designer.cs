@@ -33,6 +33,51 @@ namespace Project_Creator
         protected global::System.Web.UI.HtmlControls.HtmlForm form;
 
         /// <summary>
+        /// TextBoxSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxSearch;
+
+        /// <summary>
+        /// LinkLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell LinkLogin;
+
+        /// <summary>
+        /// LinkSignup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell LinkSignup;
+
+        /// <summary>
+        /// LinkAccount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell LinkAccount;
+
+        /// <summary>
+        /// LinkLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell LinkLogout;
+
+        /// <summary>
         /// ContentPlaceholder control.
         /// </summary>
         /// <remarks>

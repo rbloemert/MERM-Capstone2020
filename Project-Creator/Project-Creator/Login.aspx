@@ -1,34 +1,48 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Project_Creator.Login" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-
-
-
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-    <div >
-        <h1>Login</h1>
+    <div class="Basic">
         <div>
-            <asp:Label ID="lblLoginUsername" Text="Username/Email:" AssociatedControlID= "lblLoginUsername" runat="server" ></asp:Label>
-            <asp:TextBox ID="txtLoginUsername" CssClass="form-control" runat="server" ></asp:TextBox>
+            <h1 style="padding-top:4px;padding-bottom:4px;">Login!</h1>
         </div>
-        <div>
-            <asp:Label ID="lblLoginPassword" Text="Password:" AssociatedControlID= "lblLoginPassword" runat="server" ></asp:Label>
-            <asp:TextBox ID="txtLoginPassword" CssClass="form-control" runat="server" ></asp:TextBox>
-        </div>
-        <hr />
-        <div>
-            <asp:Button ID="btnLogin" Text="Login" runat="server" CssClass="btn btn-primary" OnClick="btnLogin_Clicked" ></asp:Button>
-            <asp:Button ID="btnClear" Text="Clear" runat="server" CssClass="btn btn-primary" OnClick="btnClear_Clicked" ></asp:Button>
-        </div>
-        <div>
-            <asp:Label ID="lblLoginFeedback" AssociatedControlID= "lblLoginFeedback" runat="server" style="color:red" ></asp:Label>
-        </div>
-    </div>    
-    
-    
-
-
+        <table style="margin-left:auto; margin-right:auto;">
+            <tr>
+                <td>
+                    <asp:Label runat="server">Username</asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="TextBoxUsername" runat="server" placeholder="Username..."></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="Error">
+                        <asp:RequiredFieldValidator ValidationGroup="LoginForm" ControlToValidate="TextBoxUsername"  Display="Dynamic" runat="server" ErrorMessage="Username is required." ForeColor="Red"></asp:RequiredFieldValidator>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label runat="server">Password</asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="TextBoxPassword" TextMode="Password" runat="server" placeholder="Password..."></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="Error">
+                        <asp:RequiredFieldValidator ValidationGroup="LoginForm" ControlToValidate="TextBoxPassword"  Display="Dynamic" runat="server" ErrorMessage="Password is required." ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:CustomValidator ValidationGroup="LoginForm" ControlToValidate="TextBoxPassword" OnServerValidate="ValidatePassword" Display="Dynamic" runat="server" ErrorMessage="Password is incorrect." ForeColor="Red"></asp:CustomValidator>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <asp:Button runat="server"  ValidationGroup="LoginForm" CausesValidation="True" Text="Login" OnClick="Access"/>
+    </div>
 </asp:Content>
 
 

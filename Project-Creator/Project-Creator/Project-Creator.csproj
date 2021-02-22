@@ -124,11 +124,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Browse.aspx" />
     <Content Include="Creator.aspx" />
     <Content Include="Home.aspx" />
-    <Content Include="Icons\icon_search.png" />
+    <Content Include="Icons\Search.png" />
     <Content Include="Login.aspx" />
-    <Content Include="ProjectManagement\page.css" />
     <Content Include="ProjectManagement\ProjectTimeline.aspx" />
     <Content Include="ProjectManagement\ViewUpdate.aspx" />
     <Content Include="Signup.aspx" />
@@ -139,8 +139,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Browse.aspx.cs">
+      <DependentUpon>Browse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Browse.aspx.designer.cs">
+      <DependentUpon>Browse.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Classes\Comment.cs" />
     <Compile Include="Classes\Database.cs" />
+    <Compile Include="Classes\Password.cs" />
     <Compile Include="Classes\Project2.cs" />
     <Compile Include="Classes\Timeline.cs" />
     <Compile Include="Creator.aspx.cs">
@@ -164,7 +172,6 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Project.cs" />
     <Compile Include="ProjectManagement\ProjectTimeline.aspx.cs">
       <DependentUpon>ProjectTimeline.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

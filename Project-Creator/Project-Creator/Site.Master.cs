@@ -12,26 +12,64 @@ namespace Project_Creator
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            //Checks if the user has a session avaiable.
+            if(Session["User"] != null)
+            {
+                LinkLogin.Visible = false;
+                LinkSignup.Visible = false;
+                LinkAccount.Visible = true;
+                LinkLogout.Visible = true;
+            }
+
+        }
+
+        protected void Search(object sender, ImageClickEventArgs e)
+        {
+
+            //Checks if the search box is not empty.
+            if(TextBoxSearch.Text.Trim() != "")
+            {
+
+                //Redirects to the browsing page with a search.
+                Response.Redirect("/Browse?Search=" + TextBoxSearch.Text);
+
+            }
+
         }
 
         protected void Link_Home(object sender, EventArgs e)
         {
-            Response.Redirect("/Home.aspx");
+            Response.Redirect("/Home");
         }
 
-        protected void Link_Projects(object sender, EventArgs e)
+        protected void Link_Browse(object sender, EventArgs e)
         {
-            Response.Redirect("/Projects.aspx");
+            Response.Redirect("/Browse");
         }
 
         protected void Link_Signup(object sender, EventArgs e)
         {
-            Response.Redirect("/Signup.aspx");
+            Response.Redirect("/Signup");
         }
 
         protected void Link_Login(object sender, EventArgs e)
         {
-            Response.Redirect("/Login.aspx");
+            Response.Redirect("/Login");
+        }
+
+        protected void Link_Account(object sender, EventArgs e)
+        {
+            Response.Redirect("/Home");
+        }
+        protected void Link_Logout(object sender, EventArgs e)
+        {
+
+            //Clears the session variables.
+            Session.Clear();
+
+            //Redirects to the home page.
+            Response.Redirect("/Home");
+
         }
     }
 }

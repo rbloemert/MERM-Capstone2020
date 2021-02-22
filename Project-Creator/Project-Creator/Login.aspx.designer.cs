@@ -15,66 +15,21 @@ namespace Project_Creator
     {
 
         /// <summary>
-        /// lblLoginUsername control.
+        /// TextBoxUsername control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLoginUsername;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxUsername;
 
         /// <summary>
-        /// txtLoginUsername control.
+        /// TextBoxPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLoginUsername;
-
-        /// <summary>
-        /// lblLoginPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLoginPassword;
-
-        /// <summary>
-        /// txtLoginPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLoginPassword;
-
-        /// <summary>
-        /// btnLogin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogin;
-
-        /// <summary>
-        /// btnClear control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClear;
-
-        /// <summary>
-        /// lblLoginFeedback control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLoginFeedback;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxPassword;
     }
 }

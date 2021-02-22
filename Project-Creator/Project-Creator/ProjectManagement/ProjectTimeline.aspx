@@ -13,7 +13,7 @@
                         <h1>
                             <asp:Label ID="lblTitle" runat="server" Text="Project Title"></asp:Label>
                             &nbsp;<asp:Label ID="Label2" runat="server" Text=" | "></asp:Label>
-                            <asp:Label ID="lblAuthor" runat="server" Text="Author Name"></asp:Label>
+                            <asp:Label ID="lblDesc" runat="server" Text="Small Decription"></asp:Label>
                         </h1>
                     </div>
                 </td>

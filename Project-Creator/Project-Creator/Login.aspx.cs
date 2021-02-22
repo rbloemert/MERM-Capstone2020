@@ -9,45 +9,61 @@ namespace Project_Creator
 {
     public partial class Login : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblLoginFeedback.Text = "";
+
+            //Checks if the user is logged in.
+            if (Session["User"] != null)
+            {
+
+                //Redirects to the homepage.
+                Response.Redirect("Home.aspx");
+
+            }
+
         }
 
-
-        protected void btnLogin_Clicked(object sender, EventArgs e)
+        protected void ValidatePassword(object source, ServerValidateEventArgs args)
         {
-            if(validatePassword())
+
+            //Creates a database object.
+            Database db = new Database();
+            Account user = db.AuthenticateAccount(TextBoxUsername.Text, args.Value);
+
+            //Checks if the user has been authenticated.
+            if (user != null)
             {
-                // Basic validation grants allowance into this block.
+
+                //Sets the validator to be valid.
+                args.IsValid = true;
+
+                //Login session variables.
+                Session["User"] = user;
 
             }
             else
             {
-                lblLoginFeedback.Text = "Please try again.";
+
+                //Sets the validator to be invalid.
+                args.IsValid = false;
+
             }
-
-
-
 
         }
 
-        protected bool validatePassword()
+        protected void Access(object sender, EventArgs e)
         {
-            bool boolResponse = false;
-            if (string.IsNullOrWhiteSpace(txtLoginUsername.Text) || string.IsNullOrWhiteSpace(txtLoginPassword.Text))
+
+            //Checks if the page has been validated.
+            if (Page.IsValid)
             {
-                boolResponse = false;
-            }
-            else { boolResponse = true; }
-            return boolResponse;
-        }
 
-        protected void btnClear_Clicked(object sender, EventArgs e)
-        {
-            lblLoginFeedback.Text = "";
-            txtLoginUsername.Text = "";
-            txtLoginPassword.Text = "";
+                //Redirects to the homepage.
+                Response.Redirect("/Home");
+
+            }
+
         }
     }
 }

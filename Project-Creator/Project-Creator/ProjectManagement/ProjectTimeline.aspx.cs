@@ -23,13 +23,11 @@ using System.Web.UI.WebControls;
 
 namespace Project_Creator.ProjectManagement {
     public partial class ProjectTimeline : System.Web.UI.Page {
-        string user = "user";   /*potentally gotten from somewhere. maybe the session*/
 
         /*this is the project that we are viewing. currently has place holder info. should be gotten from the previous screen*/
         /*may be pass as a string. if that is the case we need to reteieve from the database. we will see*/
-        private static readonly Project[] sampleProjects = { new Project("Test Project", "Mark", "https://64.media.tumblr.com/avatar_4f1f4a829fdd_128.pnj", "001"), new Project("Second Project", "Mark", "https://ih1.redbubble.net/image.173786715.7034/flat,128x,075,f-pad,128x128,f8f8f8.u4.jpg", "002") };
-        public Project project = sampleProjects[0];
-        public ArrayList otherProjects = new ArrayList();
+        public Project2 project = new Project2();
+        public List<Project2> otherProjects = new List<Project2>();
 
 
         /*
@@ -46,65 +44,51 @@ namespace Project_Creator.ProjectManagement {
             string id = Session["Project"] as string;
 
             if (id != null) {
-                /*read project data from db*/
-                /*then populate*/
+                int projectID = Int32.Parse(id);
 
-                if (id == "002") {
-                    project = sampleProjects[1];
-                }
+                Database d = new Database();
+                project = d.GetProject(projectID);
+                if(project != null) {
+                    project.getUpdates();
 
-                /*this next section needs to be moved inside the above if statement when we start linking the pages together*/
-                Session["Project"] = project.id;
-                projectIcon.ImageUrl = project.icon;    /*set the icon to be the icon stored within the project*/
-                lblTitle.Text = project.title;          /*update the title label to the project name*/
-                lblAuthor.Text = project.author;        /*update the author label with data from the project object*/
+                    lblTitle.Text = project.project_name;
+                    lblDesc.Text = project.project_desc;
 
-                /*for each of the updates within the project*/
-                foreach (Update u in project.updates) {
-                    /*create a div using createUpdatePanel and add it to the UpdatePanel section of the screen*/
-                    Panel div = createUpdatePanel(u);
-                    UpdatePanel.Controls.Add(div);
-                }
-
-                /*there are some additional options if the user is the owner of the project, in that case, they can create a new post*/
-                /*we need to figure out how the user is logged in.*/
-                if (user == "owner") {
-                    /*create a new update object with a + logo and add it to the screen*/
-                    Update newUpdate = new Update("https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=6&m=688550958&s=612x612&w=0&h=nVa-a5Fb79Dgmqk3F00kop9kF4CXFpF4kh7vr91ERGk=", "000", " < h3>New Update</h3> <br />", "<p />", DateTime.Today);
-                    Panel p = createUpdatePanel(newUpdate);
-                    UpdatePanel.Controls.Add(p);
-                }
-
-
-
-                /*generate related projects this will come from the db later*/
-                /*create 4 projects to show at the bottom of the page*/
-                /*they are all just the test project currently*/
-                /*format the title to fit nicely on the screen. should probably be done differently. more research is needed*/
-                for (int i = 0; i < 4; i++) {
-                    Project currentProject;
-                    if (i == 1) {
-                        currentProject = sampleProjects[1];
-                    } else {
-                        currentProject = sampleProjects[0];
+                    /*for each of the updates within the project*/
+                    foreach (Timeline t in project.project_timeline) {
+                        /*create a div using createUpdatePanel and add it to the UpdatePanel section of the screen*/
+                        Panel div = createUpdatePanel(t);
+                        UpdatePanel.Controls.Add(div);
                     }
-                    Project n = new Project("<h3>" + currentProject.title + "</h3>", "<p>" + currentProject.author + "</p>", currentProject.icon, "00" + (i + 1));
-                    otherProjects.Add(n);
-                }
 
-                //RelatedPanel.Controls.Add
-                /*for each of the projects in the related projects list*/
-                int panelNum = 1;
-                foreach (Project p in otherProjects) {
-                    /*create a div using createUpdatePanel and add it to the related panel of the screen*/
-                    Panel div = createRelatedPanel(p);
-                    div.ID = "related" + panelNum;
-                    RelatedPanel.Controls.Add(div);
-                    panelNum++;
+
+                    ////probably are going to get rid of this
+                    ///*there are some additional options if the user is the owner of the project, in that case, they can create a new post*/
+                    ///*we need to figure out how the user is logged in.*/
+                    //if (user == "owner") {
+                    //    /*create a new update object with a + logo and add it to the screen*/
+                    //    Update newUpdate = new Update("https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=6&m=688550958&s=612x612&w=0&h=nVa-a5Fb79Dgmqk3F00kop9kF4CXFpF4kh7vr91ERGk=", "000", " < h3>New Update</h3> <br />", "<p />", DateTime.Today);
+                    //    Panel p = createUpdatePanel(newUpdate);
+                    //    UpdatePanel.Controls.Add(p);
+                    //}
+
+                    otherProjects = d.GetProjectList();
+                    /*for each of the projects in the related projects list*/
+                    int panelNum = 1;
+                    foreach (Project2 p in otherProjects) {
+                        /*create a div using createUpdatePanel and add it to the related panel of the screen*/
+                        Panel div = createRelatedPanel(p);
+                        div.ID = "related" + panelNum;
+                        RelatedPanel.Controls.Add(div);
+                        panelNum++;
+                        if(panelNum > 4) {
+                            break;
+                        }
+                    }
                 }
             } else {
                 /*404*/
-                Session["Project"] = "001";
+                Session["Project"] = "-1";
                 Response.Redirect("ProjectTimeline.aspx");
             }
 
@@ -122,26 +106,26 @@ namespace Project_Creator.ProjectManagement {
         * RETURNS :
         *	Panel : a div containing all of the data relevant for a related project
         */
-        public Panel createRelatedPanel(Project project) {
+        public Panel createRelatedPanel(Project2 project) {
             Panel div = new Panel();                /*the div we are building*/
             ImageButton image = new ImageButton();  /*this is the image that is used to diplay the project as well as navigate to that project*/
             Label title = new Label();              /*the label that will hold the title of the project*/
-            Label author = new Label();             /*the label that will hold the author of the project*/
+            Label desc = new Label();             /*the label that will hold the author of the project*/
 
             div.CssClass = "timeline-content";        /*the styling that is used for formatting the div*/
 
             image.Click += relatedClick;
-            image.ID = project.id;
-            image.ImageUrl = project.icon;      /*set the image we want to use for the hyperlink. it is stored within the Project object*/
+            image.ID = project.projectID.ToString();
+            image.ImageUrl = project.project_icon_path;      /*set the image we want to use for the hyperlink. it is stored within the Project object*/
             image.CssClass = "related-img";     /*the styling that is used for formatting the image*/
 
-            title.Text = project.title;         /*set the title of the project based on the project object*/
-            author.Text = project.author;       /*set the author of the project based on the project object*/
+            title.Text = "<h3>" + project.project_name + "</h3>";         /*set the title of the project based on the project object*/
+            desc.Text = "<p>" + project.project_desc + "</p>";       /*set the author of the project based on the project object*/
 
             /*add the objects we created to the div in the order we want them to appear*/
             div.Controls.Add(image);
             div.Controls.Add(title);
-            div.Controls.Add(author);
+            div.Controls.Add(desc);
             return (div);
         }
 
@@ -175,7 +159,7 @@ namespace Project_Creator.ProjectManagement {
         * RETURNS :
         *	Panel : a div containing all of the data relevant for a related project
         */
-        public Panel createUpdatePanel(Update update) {
+        public Panel createUpdatePanel(Timeline update) {
             Panel div = new Panel();                /*the div we are building*/
             ImageButton image = new ImageButton();      /*this is the image that is used to diplay the project as well as navigate to that update*/
             Label updateTitle = new Label();        /*the label that will hold the title of the update*/
@@ -184,13 +168,13 @@ namespace Project_Creator.ProjectManagement {
 
             div.CssClass = "timeline-content";             /*the styling that is used for formatting the div*/
             image.Click += updateClick;
-            image.ID = update.updatePage;
-            image.ImageUrl = update.iconURL;        /*set the image we want to use for the hyperlink. it is stored within the Update object*/
+            image.ID = update.timelineID.ToString();
+            image.ImageUrl = update.timeline_image_path;        /*set the image we want to use for the hyperlink. it is stored within the Update object*/
             image.CssClass = "update-img";          /*the styling that is used for formatting the image*/
 
-            updateTitle.Text = update.title;                /*set the title of the update based on the update object*/
-            updateDescription.Text = update.description;    /*set the description of the update based on the update object*/
-            updateDate.Text = update.date.ToString("d");    /*set the date of the update based on the update object and format it to be short date ex. 2020-02-02*/
+            updateTitle.Text = "<h3>"+update.timeline_name+"</h3>";                /*set the title of the update based on the update object*/
+            updateDescription.Text = "<p>"+update.timeline_desc;    /*set the description of the update based on the update object*/
+            updateDate.Text = "<br>"+update.timeline_creation.ToString()+"</p>";    /*set the date of the update based on the update object and format it to be short date ex. 2020-02-02*/
 
             /*add the objects we created to the div in the order we want them to appear*/
             div.Controls.Add(image);

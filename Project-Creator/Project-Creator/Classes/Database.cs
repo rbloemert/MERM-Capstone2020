@@ -7,13 +7,14 @@ using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using Project_Creator.Classes;
 
 namespace Project_Creator
 {
     // I haven't had a chance to try these out yet
     // Note: Methods in the DB class are for internal use; I will provide funcs within the individual classes to offer functionality
 
-    public class Database : IDisposable
+    public class Database
     {
         public enum QueryResult
         {
@@ -25,42 +26,15 @@ namespace Project_Creator
         }
 
         //Defines the database connection variables.
-        private bool disposed = false;
         private string lastErr = "";
-        private string key = "EVAO9NR3R920";
-        private byte[] salt = { 0x14, 0x64, 0x98, 0x65, 0x24, 0x75, 0x45, 0x12, 0x15, 0x13, 0x18, 0x19, 0x14 };
         private SqlConnection connection;
-
-        // IDisposable
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (disposed) return;
-
-            if (disposing)
-            {
-                connection.Close();
-                connection.Dispose();
-            }
-
-            disposed = true;
-        }
+        private string connectionString = "Data Source=tcp:projectcreator.database.windows.net,1433;Initial Catalog=projectcreatordb;User Id=creatoradmin@projectcreator;Password=ProjectCreator1233";
 
         public Database()
         {
-            connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ProjectCreatorAzureDB"].ConnectionString);
+            connection = new SqlConnection(connectionString);
             //connection = new SqlConnection("Server=tcp:projectcreator.database.windows.net,1433;Initial Catalog=projectcreatordb;Persist Security Info=False;User ID=creatoradmin;Password=ProjectCreator1233;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             connection.Open();
-        }
-
-        ~Database()
-        {
-            Dispose();
         }
 
         public bool TestConnection() // returns true if success
@@ -121,83 +95,64 @@ namespace Project_Creator
         //        cmd.Parameters.AddWithValue("@" + tuple.Item1, tuple.Item2);
         //    }
 
-        //    cmd.Prepare();
+        //    
 
         //    return cmd.ExecuteNonQuery() > 0;
         //}
 
-        public string Encrypt(string password)
-        {
-
-            //Gets the password byte array.
-            byte[] passwordBytes = System.Text.Encoding.Unicode.GetBytes(password);
-
-            //Creates an encryptor.
-            using (Aes encryptor = Aes.Create())
-            {
-
-                //Derives bytes for the password.
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(key, salt);
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-
-                //Creates a memory stream.
-                using (MemoryStream ms = new MemoryStream())
-                {
-
-                    //Creates a crypto stream.
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
-
-                        //Writes the password to the stream.
-                        cs.Write(passwordBytes, 0, passwordBytes.Length);
-                        cs.Close();
-                    }
-
-                    //Sets the password to the encrypted password.
-                    password = Convert.ToBase64String(ms.ToArray());
-                }
-            }
-
-            //Returns the encrypted password.
-            return password;
-        }
-
-        public string Decrypt(string password)
-        {
-            //Gets the password byte array.
-            byte[] passwordBytes = System.Text.Encoding.Unicode.GetBytes(password);
-
-            //Creates an encryptor.
-            using (Aes encryptor = Aes.Create())
-            {
-
-                //Derives bytes for the password.
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(key, salt);
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-
-                //Creates a memory stream.
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    //Creates a crypto stream.
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
-                    {
-                        //Writes the password to the stream.
-                        cs.Write(passwordBytes, 0, passwordBytes.Length);
-                        cs.Close();
-                    }
-
-                    //Sets the password to the encrypted password.
-                    password = Convert.ToBase64String(ms.ToArray());
-                }
-            }
-
-            //Returns the encrypted password.
-            return password;
-        }
-
         // ACCOUNTS
+
+        public bool AccountExists(string username)
+        {
+
+            //Gets a list of all existing accounts.
+            List<Account> accounts = GetAccountList();
+
+            //Default the username does not exist.
+            bool exists = false;
+
+            //Loops through each account comparing usernames.
+            foreach (Account account in accounts)
+            {
+
+                //Checks if the account usernames are equal.
+                if (username.Equals(account.username))
+                {
+                    exists = true;
+                }
+
+            }
+
+            //Returns the status of the username.
+            return exists;
+
+        }
+
+        public bool EmailExists(string email)
+        {
+
+            //Gets a list of all existing accounts.
+            List<Account> accounts = GetAccountList();
+
+            //Default the username does not exist.
+            bool exists = false;
+
+            //Loops through each account comparing usernames.
+            foreach (Account account in accounts)
+            {
+
+                //Checks if the account usernames are equal.
+                if (email.Equals(account.email))
+                {
+                    exists = true;
+                }
+
+            }
+
+            //Returns the status of the username.
+            return exists;
+
+        }
 
         public List<Account> GetAccountList()
         {
@@ -217,16 +172,16 @@ namespace Project_Creator
                     {
                         accountID = Convert.ToInt32(row["accountID"]),
                         account_creation = Convert.ToDateTime(row["account_creation"]),
-                        firstname = row["firstname"].ToString(),
-                        lastname = row["lastname"].ToString(),
+                        fullname = row["fullname"].ToString(),
                         username = row["username"].ToString(),
-                        password = Decrypt(row["password"].ToString()),
+                        password = row["password"].ToString(),
+                        password_salt = row["password_salt"].ToString(),
                         email = row["email"].ToString(),
                         isSiteAdministrator = Convert.ToBoolean(row["isSiteAdministrator"])
                     });
                 }
             }
-
+            connection.Close();
             return accs;
         }
 
@@ -236,17 +191,17 @@ namespace Project_Creator
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
 
             //Prepares the sql query.
-            var sql = "INSERT INTO account(account_creation, firstname, lastname, username, password, email, isSiteAdministrator) VALUES(@account_creation, @firstname, @lastname, @username, @password, @email, @isSiteAdministrator)";
+            var sql = "INSERT INTO account(account_creation, fullname, username, password, password_salt, email, isSiteAdministrator) VALUES(@account_creation, @fullname, @username, @password, @password_salt, @email, @isSiteAdministrator)";
             using (var cmd = new SqlCommand(sql, connection))
             {
+                var salt = Password.Salt();
                 cmd.Parameters.AddWithValue("@account_creation", new SqlDateTime(DateTime.Now));
-                cmd.Parameters.AddWithValue("@firstname", account.firstname);
-                cmd.Parameters.AddWithValue("@lastname", account.lastname);
+                cmd.Parameters.AddWithValue("@fullname", account.fullname);
                 cmd.Parameters.AddWithValue("@username", account.username);
-                cmd.Parameters.AddWithValue("@password", Encrypt(account.password));
+                cmd.Parameters.AddWithValue("@password", Password.Encrypt(account.password, salt));
+                cmd.Parameters.AddWithValue("@password_salt", salt);
                 cmd.Parameters.AddWithValue("@email", account.email);
                 cmd.Parameters.AddWithValue("@isSiteAdministrator", account.isSiteAdministrator);
-                cmd.Prepare();
 
                 //Executes the insert command.
                 try
@@ -258,8 +213,9 @@ namespace Project_Creator
                     lastErr = except.Message;
                     return QueryResult.FailedBadQuery;
                 }
-                
+
             }
+            connection.Close();
 
             //Returns if the insert was successful.
             if (result > 0)
@@ -280,7 +236,7 @@ namespace Project_Creator
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@accountID", accountID);
-                cmd.Prepare();
+
 
                 //Executes the insert command.
                 try
@@ -293,6 +249,7 @@ namespace Project_Creator
                     return QueryResult.FailedBadQuery;
                 }
             }
+            connection.Close();
 
             //Returns if the insert was successful.
             if (result > 0)
@@ -312,25 +269,25 @@ namespace Project_Creator
             var sql = "UPDATE account SET " +
                       "accountID = @accountID" +
                       "account_creation = @account_creation" +
-                      "firstname = @firstname" +
-                      "lastname = @lastname" +
+                      "fullname = @fullname" +
                       "username = @username" +
                       "password = @password" +
+                      "password_salt = @password_salt" +
                       "email = @email" +
-                      "isSiteAdministrator = @isSiteAdministrator" + 
+                      "isSiteAdministrator = @isSiteAdministrator" +
                       "WHERE accountID = @oldAccountID";
             using (var cmd = new SqlCommand(sql, connection))
             {
+                var salt = Password.Salt();
                 cmd.Parameters.AddWithValue("@oldAccountID", accountID);
                 cmd.Parameters.AddWithValue("@accountID", new_account.accountID);
                 cmd.Parameters.AddWithValue("@account_creation", new_account.account_creation);
-                cmd.Parameters.AddWithValue("@firstname", new_account.firstname);
-                cmd.Parameters.AddWithValue("@lastname", new_account.lastname);
+                cmd.Parameters.AddWithValue("@fullname", new_account.fullname);
                 cmd.Parameters.AddWithValue("@username", new_account.username);
-                cmd.Parameters.AddWithValue("@password", Encrypt(new_account.password));
+                cmd.Parameters.AddWithValue("@password", Password.Encrypt(new_account.password, salt));
+                cmd.Parameters.AddWithValue("@password_salt", salt);
                 cmd.Parameters.AddWithValue("@email", new_account.email);
                 cmd.Parameters.AddWithValue("@isSiteAdministrator", new_account.isSiteAdministrator);
-                cmd.Prepare();
 
                 //Executes the insert command.
                 try
@@ -343,6 +300,7 @@ namespace Project_Creator
                     return QueryResult.FailedBadQuery;
                 }
             }
+            connection.Close();
 
             //Returns if the insert was successful.
             if (result > 0)
@@ -355,19 +313,39 @@ namespace Project_Creator
 
         public Account AuthenticateAccount(string username, string password)
         {
-            string encPwd = Encrypt(password);
 
             foreach (Account acc in GetAccountList())
             {
-                if (username == acc.username && encPwd == acc.password) return acc;
+                if (username == acc.username && Password.ComparePassword(password, acc.password, acc.password_salt)) return acc;
             }
 
-            return new Account();
+            return null;
         }
 
         // ACCOUNTS
 
         // PROJECTS
+
+        public Project2 GetProject(int projectID) {
+            Project2 project = new Project2();
+            if (!IsConnectionOpen()) return null;
+
+            var sql = "SELECT * FROM project where projectID = " + projectID;
+            using (var cmd = new SqlCommand(sql, connection)) {
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows) {
+                    project.projectID = Convert.ToInt32(row["projectID"]);
+                    project.project_creation = Convert.ToDateTime(row["project_creation"]);
+                    project.project_name = row["project_name"].ToString();
+                    project.project_desc = row["project_desc"].ToString();
+                }
+            }
+
+            return project;
+        }
 
         public List<Project2> GetProjectList()
         {
@@ -392,7 +370,7 @@ namespace Project_Creator
                     });
                 }
             }
-
+            connection.Close();
             return projects;
         }
 
@@ -424,7 +402,7 @@ namespace Project_Creator
                     });
                 }
             }
-
+            connection.Close();
             return projects;
         }
 
@@ -455,7 +433,7 @@ namespace Project_Creator
                     });
                 }
             }
-
+            connection.Close();
             return projects;
         }
 
@@ -471,7 +449,6 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@project_creation", new SqlDateTime(DateTime.Now));
                 cmd.Parameters.AddWithValue("@project_name", project.project_name);
                 cmd.Parameters.AddWithValue("@project_desc", project.project_desc);
-                cmd.Prepare();
 
                 //Executes the insert command.
                 try
@@ -504,7 +481,6 @@ namespace Project_Creator
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@projectID", projectID);
-                cmd.Prepare();
 
                 //Executes the insert command.
                 try
@@ -546,7 +522,7 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@project_creation", new_project.project_creation);
                 cmd.Parameters.AddWithValue("@project_name", new_project.project_name);
                 cmd.Parameters.AddWithValue("@project_desc", new_project.project_desc);
-                cmd.Prepare();
+
 
                 //Executes the insert command.
                 try
@@ -580,7 +556,6 @@ namespace Project_Creator
             {
                 cmd.Parameters.AddWithValue("@projectID", projectID);
                 cmd.Parameters.AddWithValue("@project_owner_accountID", accountID);
-                cmd.Prepare();
 
                 //Executes the insert command.
                 try
@@ -614,7 +589,7 @@ namespace Project_Creator
             {
                 cmd.Parameters.AddWithValue("@projectID", projectID);
                 cmd.Parameters.AddWithValue("@project_owner_accountID", accountID);
-                cmd.Prepare();
+
 
                 //Executes the insert command.
                 try
@@ -649,7 +624,7 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@projectID", projectID);
                 cmd.Parameters.AddWithValue("@follower_accountID", account.accountID);
                 cmd.Parameters.AddWithValue("@follow_date", new SqlDateTime(DateTime.Now));
-                cmd.Prepare();
+
 
                 //Executes the insert command.
                 try
@@ -683,7 +658,7 @@ namespace Project_Creator
             {
                 cmd.Parameters.AddWithValue("@projectID", projectID);
                 cmd.Parameters.AddWithValue("@follower_accountID", account.accountID);
-                cmd.Prepare();
+
 
                 //Executes the insert command.
                 try
@@ -728,6 +703,7 @@ namespace Project_Creator
                     {
                         timelineID = Convert.ToInt32(row["timelineID"]),
                         timeline_creation = Convert.ToDateTime(row["timeline_creation"]),
+                        timeline_image_path = row["timeline_image_path"].ToString(),
                         timeline_name = row["timeline_name"].ToString(),
                         timeline_desc = row["timeline_desc"].ToString(),
                     });
@@ -743,7 +719,7 @@ namespace Project_Creator
             if (!IsConnectionOpen()) return timelines;
 
             var sql = "SELECT * " +
-                      "FROM timeline" +
+                      "FROM timeline " +
                       "LEFT JOIN timeline_link ON (timeline.timelineID = timeline_link.timelineID)" +
                       "WHERE timeline_link.project_owner_projectID = @projectID";
             using (var cmd = new SqlCommand(sql, connection))
@@ -760,6 +736,7 @@ namespace Project_Creator
                     {
                         timelineID = Convert.ToInt32(row["timelineID"]),
                         timeline_creation = Convert.ToDateTime(row["timeline_creation"]),
+                        timeline_image_path = row["timeline_image_path"].ToString(),
                         timeline_name = row["timeline_name"].ToString(),
                         timeline_desc = row["timeline_desc"].ToString(),
                     });
@@ -775,13 +752,14 @@ namespace Project_Creator
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
 
             //Prepares the sql query.
-            var sql = "INSERT INTO timeline(timeline_creation, timeline_name, timeline_desc) VALUES(@timeline_creation, @timeline_name, @timeline_desc)";
+            var sql = "INSERT INTO timeline(timeline_creation, timeline_image_path, timeline_name, timeline_desc) VALUES(@timeline_creation, @timeline_image_path, @timeline_name, @timeline_desc)";
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@timeline_creation", new SqlDateTime(DateTime.Now));
+                cmd.Parameters.AddWithValue("@timeline_image_path", timeline.timeline_image_path);
                 cmd.Parameters.AddWithValue("@timeline_name", timeline.timeline_name);
                 cmd.Parameters.AddWithValue("@timeline_desc", timeline.timeline_desc);
-                cmd.Prepare();
+
 
                 //Executes the insert command.
                 try
@@ -814,7 +792,7 @@ namespace Project_Creator
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@timelineID", timelineID);
-                cmd.Prepare();
+
 
                 //Executes the insert command.
                 try
@@ -846,6 +824,7 @@ namespace Project_Creator
             var sql = "UPDATE timeline SET " +
                       "timelineID = @timelineID" +
                       "timeline_creation = @timeline_creation" +
+                      "timeline_image_path = @timeline_image_path" +
                       "timeline_name = @timeline_name" +
                       "timeline_desc = @timeline_desc" +
                       "WHERE timelineID = @oldTimelineID";
@@ -854,9 +833,76 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@oldTimelineID", timelineID);
                 cmd.Parameters.AddWithValue("@timelineID", new_timeline.timelineID);
                 cmd.Parameters.AddWithValue("@timeline_creation", new_timeline.timeline_creation);
+                cmd.Parameters.AddWithValue("@timeline_image_path", new_timeline.timeline_image_path);
                 cmd.Parameters.AddWithValue("@timeline_name", new_timeline.timeline_name);
                 cmd.Parameters.AddWithValue("@timeline_desc", new_timeline.timeline_desc);
-                cmd.Prepare();
+
+
+                //Executes the insert command.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
+            return QueryResult.FailedNoChanges;
+        }
+
+        public QueryResult CreateTimelineLink(int timelineID, int projectID)
+        {
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Prepares the sql query.
+            var sql = "INSERT INTO timeline_link(timelineID, project_owner_projectID) VALUES(@timelineID, @project_owner_projectID)";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@timelineID", timelineID);
+                cmd.Parameters.AddWithValue("@project_owner_projectID", projectID);
+
+                //Executes the insert command.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
+            return QueryResult.FailedNoChanges;
+        }
+
+        public QueryResult DeleteTimelineLink(int timelineID, int projectID)
+        {
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Prepares the sql query.
+            var sql = "DELETE FROM timeline_link WHERE timelineID=@timelineID AND project_owner_projectID=@project_owner_projectID";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@timelineID", timelineID);
+                cmd.Parameters.AddWithValue("@project_owner_projectID", projectID);
 
                 //Executes the insert command.
                 try
@@ -951,7 +997,7 @@ namespace Project_Creator
             {
                 cmd.Parameters.AddWithValue("@comment_creation", new SqlDateTime(DateTime.Now));
                 cmd.Parameters.AddWithValue("@comment_text", comment.comment_text);
-                cmd.Prepare();
+
 
                 //Executes the insert command.
                 try
@@ -984,7 +1030,7 @@ namespace Project_Creator
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@commentID", commentID);
-                cmd.Prepare();
+
 
                 //Executes the insert command.
                 try
@@ -1024,7 +1070,75 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@commentID", new_comment.commentID);
                 cmd.Parameters.AddWithValue("@comment_creation", new_comment.comment_creation);
                 cmd.Parameters.AddWithValue("@comment_text", new_comment.comment_text);
-                cmd.Prepare();
+
+
+                //Executes the insert command.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
+            return QueryResult.FailedNoChanges;
+        }
+
+        public QueryResult CreateCommentLink(int commentID, int timelineID, int accountID)
+        {
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Prepares the sql query.
+            var sql = "INSERT INTO comment_link(commentID, timeline_owner_timelineID, comment_owner_accountID) VALUES(@commentID, @timeline_owner_timelineID, @comment_owner_accountID)";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@commentID", commentID);
+                cmd.Parameters.AddWithValue("@timeline_owner_timelineID", timelineID);
+                cmd.Parameters.AddWithValue("@comment_owner_accountID", accountID);
+
+                //Executes the insert command.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
+            return QueryResult.FailedNoChanges;
+        }
+
+        public QueryResult DeleteCommentLink(int commentID, int timelineID, int accountID)
+        {
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Prepares the sql query.
+            var sql = "DELETE FROM comment_link WHERE commentID=@commentID AND timeline_owner_timelineID=@timeline_owner_timelineID AND comment_owner_accountID=@comment_owner_accountID";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@commentID", commentID);
+                cmd.Parameters.AddWithValue("@timeline_owner_timelineID", timelineID);
+                cmd.Parameters.AddWithValue("@comment_owner_accountID", accountID);
 
                 //Executes the insert command.
                 try

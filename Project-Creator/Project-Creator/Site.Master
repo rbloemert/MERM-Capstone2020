@@ -17,35 +17,39 @@
 <body>
     <form id="form" runat="server">
         <div class="Navigation Secondary">
-            <table class="Navigation">
-                <tr class="Navigation">
-                    <td class="Navigation" style="width:33%; text-align:left;">
+            <asp:Table runat="server" CssClass="Navigation">
+                <asp:TableRow  runat="server" CssClass="Navigation">
+                    <asp:TableCell CssClass="Navigation" style="width:33%; text-align:left;">
                         Project Creator
-                    </td>
-                    <td class="Navigation" style="width:33%; text-align:center;">
-                        <table class="Search">
-                            <tr class="Search">
-                                <td class="Search">
-                                    <asp:TextBox CssClass="Search Primary" runat="server"></asp:TextBox>
-                                </td>
-                                <td class="Search" style="text-align:left">
-                                    <asp:ImageButton CssClass="Icon" runat="server" ImageAlign="Middle" ImageUrl="Icons/Search.png"/>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td class="Navigation" style="width:33%; text-align:right;">
-                        <table class="Link">
-                            <tr class="Link">
-                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Home" CausesValidation="false" runat="server">Home</asp:LinkButton></td>
-                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Projects" CausesValidation="false" runat="server">Browse</asp:LinkButton></td>
-                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Login" CausesValidation="false" runat="server">Login</asp:LinkButton></td>
-                                <td class="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Signup" CausesValidation="false" runat="server">Signup</asp:LinkButton></td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
+                    </asp:TableCell>
+                    <asp:TableCell CssClass="Navigation" style="width:33%; text-align:center;">
+                        <asp:Table runat="server" CssClass="Search">
+                            <asp:TableRow CssClass="Search">
+                                <asp:TableCell CssClass="Search">
+                                    <asp:TextBox ID="TextBoxSearch" CssClass="Search Primary" runat="server"></asp:TextBox>
+                                </asp:TableCell>
+                                <asp:TableCell CssClass="Search" style="text-align:left;vertical-align:middle">
+                                    <div class="Vertical">
+                                        <asp:ImageButton CssClass="Icon" runat="server" ImageAlign="Middle" ImageUrl="Icons/Search.png" OnClick="Search"/>
+                                    </div>
+                                </asp:TableCell>
+                            </asp:TableRow>
+                        </asp:Table>
+                    </asp:TableCell>
+                    <asp:TableCell CssClass="Navigation" style="width:33%; text-align:right;">
+                        <asp:Table runat="server" CssClass="Link">
+                            <asp:TableRow CssClass="Link">
+                                <asp:TableCell CssClass="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Home" CausesValidation="false" runat="server">Home</asp:LinkButton></asp:TableCell>
+                                <asp:TableCell CssClass="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Browse" CausesValidation="false" runat="server">Browse</asp:LinkButton></asp:TableCell>
+                                <asp:TableCell ID="LinkLogin" CssClass="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Login" CausesValidation="false" runat="server">Login</asp:LinkButton></asp:TableCell>
+                                <asp:TableCell ID="LinkSignup" CssClass="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Signup" CausesValidation="false" runat="server">Signup</asp:LinkButton></asp:TableCell>
+                                <asp:TableCell ID="LinkAccount" Visible="false" CssClass="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Account" CausesValidation="false" runat="server">Account</asp:LinkButton></asp:TableCell>
+                                <asp:TableCell ID="LinkLogout" Visible="false" CssClass="Link"><asp:LinkButton CssClass="Link" OnClick="Link_Logout" CausesValidation="false" runat="server">Logout</asp:LinkButton></asp:TableCell>
+                            </asp:TableRow>
+                        </asp:Table>
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
         </div>
         <asp:ContentPlaceHolder ID="ContentPlaceholder" runat="server">
 
