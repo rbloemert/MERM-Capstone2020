@@ -6,6 +6,8 @@
         <asp:Panel CssClass="bgimg" id="sidebarImage" runat="server"></asp:Panel>
     </nav>
     <div style="margin-left:40%;">
+        <br />
+        <a href="ProjectTimeline.aspx">&lt-- Back to timeline</a>
         <div class="update-info update-centre" style="padding:128px 16px" id="home">
             <asp:Panel ID="updateData" runat="server"></asp:Panel>
         </div>
