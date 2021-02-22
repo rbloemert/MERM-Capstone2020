@@ -92,6 +92,6 @@
                 </td>
             </tr>
         </table>
-        <asp:Button runat="server" Text="Signup" ValidationGroup="SignupForm" CausesValidation="True" OnClick="Register" />
+        <asp:Button runat="server" Text="Signup" ValidationGroup="SignupForm" CausesValidation="True" OnClick="Register"/>
     </div>
 </asp:Content>

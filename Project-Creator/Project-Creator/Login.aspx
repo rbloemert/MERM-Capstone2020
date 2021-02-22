@@ -19,7 +19,7 @@
                 <td></td>
                 <td>
                     <div class="Error">
-                        <asp:RequiredFieldValidator ControlToValidate="TextBoxUsername"  Display="Dynamic" runat="server" ErrorMessage="Username is required." ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ValidationGroup="LoginForm" ControlToValidate="TextBoxUsername"  Display="Dynamic" runat="server" ErrorMessage="Username is required." ForeColor="Red"></asp:RequiredFieldValidator>
                     </div>
                 </td>
             </tr>
@@ -35,12 +35,13 @@
                 <td></td>
                 <td>
                     <div class="Error">
-                        <asp:RequiredFieldValidator ControlToValidate="TextBoxPassword"  Display="Dynamic" runat="server" ErrorMessage="Password is required." ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ValidationGroup="LoginForm" ControlToValidate="TextBoxPassword"  Display="Dynamic" runat="server" ErrorMessage="Password is required." ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:CustomValidator ValidationGroup="LoginForm" ControlToValidate="TextBoxPassword" OnServerValidate="ValidatePassword" Display="Dynamic" runat="server" ErrorMessage="Password is incorrect." ForeColor="Red"></asp:CustomValidator>
                     </div>
                 </td>
             </tr>
         </table>
-        <asp:Button runat="server" Text="Login" OnClick="Access" />
+        <asp:Button runat="server"  ValidationGroup="LoginForm" CausesValidation="True" Text="Login" OnClick="Access"/>
     </div>
 </asp:Content>
 

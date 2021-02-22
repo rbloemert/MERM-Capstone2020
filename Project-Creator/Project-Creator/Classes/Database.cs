@@ -27,19 +27,12 @@ namespace Project_Creator
 
         //Defines the database connection variables.
         private string lastErr = "";
-        private string key = "EVAO9NR3R920";
-        private byte[] salt = { 0x14, 0x64, 0x98, 0x65, 0x24, 0x75, 0x45, 0x12, 0x15, 0x13, 0x18, 0x19, 0x14 };
         private SqlConnection connection;
-
-        // IDisposable
-        ~Database()
-        {
-            connection.Close();
-        }
+        private string connectionString = "Data Source=tcp:projectcreator.database.windows.net,1433;Initial Catalog=projectcreatordb;User Id=creatoradmin@projectcreator;Password=ProjectCreator1233";
 
         public Database()
         {
-            connection = new SqlConnection("Data Source=tcp:projectcreator.database.windows.net,1433;Initial Catalog=projectcreatordb;User Id=creatoradmin@projectcreator;Password=ProjectCreator1233");
+            connection = new SqlConnection(connectionString);
             //connection = new SqlConnection("Server=tcp:projectcreator.database.windows.net,1433;Initial Catalog=projectcreatordb;Persist Security Info=False;User ID=creatoradmin;Password=ProjectCreator1233;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             connection.Open();
         }
@@ -188,7 +181,7 @@ namespace Project_Creator
                     });
                 }
             }
-
+            connection.Close();
             return accs;
         }
 
@@ -222,6 +215,7 @@ namespace Project_Creator
                 }
 
             }
+            connection.Close();
 
             //Returns if the insert was successful.
             if (result > 0)
@@ -255,6 +249,7 @@ namespace Project_Creator
                     return QueryResult.FailedBadQuery;
                 }
             }
+            connection.Close();
 
             //Returns if the insert was successful.
             if (result > 0)
@@ -305,6 +300,7 @@ namespace Project_Creator
                     return QueryResult.FailedBadQuery;
                 }
             }
+            connection.Close();
 
             //Returns if the insert was successful.
             if (result > 0)
@@ -374,7 +370,7 @@ namespace Project_Creator
                     });
                 }
             }
-
+            connection.Close();
             return projects;
         }
 
@@ -406,7 +402,7 @@ namespace Project_Creator
                     });
                 }
             }
-
+            connection.Close();
             return projects;
         }
 
@@ -437,7 +433,7 @@ namespace Project_Creator
                     });
                 }
             }
-
+            connection.Close();
             return projects;
         }
 
