@@ -5,27 +5,37 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-    <div >
-        <div class="split left">
-            <div class="centered">
-                <br /><br />
-                <h1>Creator: [CREATOR NAME]</h1>
-        
-                <div>
-                    <br />
-                    <p>lmao this is text</p>
-                </div>
-            </div>
-        </div>
+    <div>
+        <asp:Table ID="CreatorTable" runat="server" style="width:90%" border="1"  HorizontalAlign="Center" >
+            <asp:TableRow>
+                <asp:TableCell>
+                    <div>
+                        <asp:Label ID="CreatorUsernameLabel" runat="server" ></asp:Label>
+                    </div>
+                    <div>
+                        <asp:Label ID="CreatorDescriptionLabel" runat="server" Width="300px" Height="300px" ></asp:Label>
+                    </div>
+                    <div>
+                        <br />
+                        <p>lmao this is text</p>
+                    </div>
 
-        <div class="split right">
-            <div class="centered">
+                </asp:TableCell>
+                <asp:TableCell>
+                    <asp:Image id="creatorProfilePicture" runat="server" alt="CreatorProfilePicture" />
+                </asp:TableCell>
+            </asp:TableRow>
+
+
+        </asp:Table>
+        
+        <div>
+            <div>
                 <p>lmao this is text</p>
 
                 
             </div>
         </div>
-
         <div>
             <br /><br />
             <asp:GridView ID="creatorProjectGrid" autoGenerateColumns="False" DataKeyNames="id" GridLines="Horizontal" runat="server"  style="margin-left:auto; margin-right:auto; width:80%; text-align:Center;" OnRowCommand="btnSelectProject_Clicked"> 

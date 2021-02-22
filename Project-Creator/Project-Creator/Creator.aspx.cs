@@ -18,6 +18,11 @@ namespace Project_Creator
             {
                 PopulateGrid();
             }
+
+
+            // Populate Creator information
+            CreatorUsernameLabel.Text = "Rick The Creator Test";
+            CreatorDescriptionLabel.Text = "\n\nBio:\nsadflkasjdlkjfasdl;jflsadjfl;safjs;lfsjdasljfls;ajsljfsaljflsajasfl;jasdl;flas";
         }
 
 
