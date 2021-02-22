@@ -330,6 +330,27 @@ namespace Project_Creator
 
         // PROJECTS
 
+        public Project2 GetProject(int projectID) {
+            Project2 project = new Project2();
+            if (!IsConnectionOpen()) return null;
+
+            var sql = "SELECT * FROM project where projectID = " + projectID;
+            using (var cmd = new SqlCommand(sql, connection)) {
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows) {
+                    project.projectID = Convert.ToInt32(row["projectID"]);
+                    project.project_creation = Convert.ToDateTime(row["project_creation"]);
+                    project.project_name = row["project_name"].ToString();
+                    project.project_desc = row["project_desc"].ToString();
+                }
+            }
+
+            return project;
+        }
+
         public List<Project2> GetProjectList()
         {
             List<Project2> projects = new List<Project2>();
@@ -702,7 +723,7 @@ namespace Project_Creator
             if (!IsConnectionOpen()) return timelines;
 
             var sql = "SELECT * " +
-                      "FROM timeline" +
+                      "FROM timeline " +
                       "LEFT JOIN timeline_link ON (timeline.timelineID = timeline_link.timelineID)" +
                       "WHERE timeline_link.project_owner_projectID = @projectID";
             using (var cmd = new SqlCommand(sql, connection))
