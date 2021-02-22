@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -12,6 +9,15 @@ namespace Project_Creator
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            //Checks if the user is logged in.
+            if (Session["User"] != null)
+            {
+
+                //Redirects to the homepage.
+                Response.Redirect("/Home");
+
+            }
 
         }
 
@@ -50,7 +56,7 @@ namespace Project_Creator
                 //Sets the values of the user from the signup page.
                 signupUser.username = TextBoxUsername.Text;
                 signupUser.password = TextBoxPassword.Text;
-                signupUser.fullname = "John Lad";
+                signupUser.fullname = TextBoxFullName.Text;
                 signupUser.email = TextBoxEmail.Text;
                 signupUser.isSiteAdministrator = false;
 

@@ -124,6 +124,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Browse.aspx" />
     <Content Include="Creator.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Icons\Search.png" />
@@ -138,6 +139,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Browse.aspx.cs">
+      <DependentUpon>Browse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Browse.aspx.designer.cs">
+      <DependentUpon>Browse.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Classes\Comment.cs" />
     <Compile Include="Classes\Database.cs" />
     <Compile Include="Classes\Password.cs" />
