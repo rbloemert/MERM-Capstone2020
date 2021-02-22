@@ -54,11 +54,13 @@ namespace Project_Creator.ProjectManagement {
                     lblTitle.Text = project.project_name;
                     lblDesc.Text = project.project_desc;
 
+                    int update = 1;
                     /*for each of the updates within the project*/
                     foreach (Timeline t in project.project_timeline) {
                         /*create a div using createUpdatePanel and add it to the UpdatePanel section of the screen*/
-                        Panel div = createUpdatePanel(t);
+                        Panel div = createUpdatePanel(t, update);
                         UpdatePanel.Controls.Add(div);
+                        update++;
                     }
 
 
@@ -159,7 +161,7 @@ namespace Project_Creator.ProjectManagement {
         * RETURNS :
         *	Panel : a div containing all of the data relevant for a related project
         */
-        public Panel createUpdatePanel(Timeline update) {
+        public Panel createUpdatePanel(Timeline update, int updateNumber) {
             Panel div = new Panel();                /*the div we are building*/
             ImageButton image = new ImageButton();      /*this is the image that is used to diplay the project as well as navigate to that update*/
             Label updateTitle = new Label();        /*the label that will hold the title of the update*/
@@ -168,7 +170,7 @@ namespace Project_Creator.ProjectManagement {
 
             div.CssClass = "timeline-content";             /*the styling that is used for formatting the div*/
             image.Click += updateClick;
-            image.ID = update.timelineID.ToString();
+            image.ID = updateNumber.ToString();
             image.ImageUrl = update.timeline_image_path;        /*set the image we want to use for the hyperlink. it is stored within the Update object*/
             image.CssClass = "update-img";          /*the styling that is used for formatting the image*/
 
