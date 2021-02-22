@@ -10,7 +10,7 @@ namespace Project_Creator
 {
     public partial class Creator : System.Web.UI.Page
     {
-        List<Project> projectList;
+        List<Project2> projectList;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,13 +23,13 @@ namespace Project_Creator
 
         private void PopulateGrid()
         {
-            projectList = new List<Project>();
+            projectList = new List<Project2>();
 
 
             for(int i = 0; i < 5; i++)
             {
                 string x = "Project: " + (i + 1);
-                projectList.Add(new Project(x, "me", "Unavailable", i.ToString(), null));
+                projectList.Add(new Project2(i, x, "me", "Unavailable"));
 
             }
 

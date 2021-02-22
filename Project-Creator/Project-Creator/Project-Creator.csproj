@@ -164,7 +164,6 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Project.cs" />
     <Compile Include="ProjectManagement\ProjectTimeline.aspx.cs">
       <DependentUpon>ProjectTimeline.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
