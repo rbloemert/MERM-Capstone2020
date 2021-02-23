@@ -202,7 +202,6 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Update.cs" />
     <Compile Include="Classes\Account.cs" />
   </ItemGroup>
   <ItemGroup>

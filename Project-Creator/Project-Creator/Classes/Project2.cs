@@ -25,12 +25,12 @@ namespace Project_Creator
 
     public class Project2
     {
-        public int projectID;                   /* projectID: Unique ID of this project. */
-        public SqlDateTime project_creation;    /* project_creation: When this project was created. */
-        public string project_name;             /* project_name: Name of this project. */
-        public string project_desc;             /* project_desc: Description of this project. */
-        public string project_icon_path;        /* project_icon_path:  path to the image used as the icon */
-        public List<Timeline> project_timeline; /* project_timeline: list of the related timeline elements */
+        public int projectID { get; set; }                   /* projectID: Unique ID of this project. */
+        public SqlDateTime project_creation { get; set; }    /* project_creation: When this project was created. */
+        public string project_name { get; set; }             /* project_name: Name of this project. */
+        public string project_desc { get; set; }             /* project_desc: Description of this project. */
+        public string project_icon_path { get; set; }        /* project_icon_path:  path to the image used as the icon */
+        public List<Timeline> project_timeline { get; set; } /* project_timeline: list of the related timeline elements */
 
         public static Database.QueryResult RegisterProject(Account project_owner, Project2 new_project)
         {

@@ -10,13 +10,13 @@
 *		-it shows links to the next and previous updates as well
 */
 using System;
+using System.Collections.Generic;
 using System.Web.UI.WebControls;
 
 namespace Project_Creator.ProjectManagement {
     public partial class ViewUpdate : System.Web.UI.Page {
-        private Update currentUpdate;   /*the information related to the update we want to display is stored here*/
-
-
+        private Timeline currentUpdate;   /*the information related to the update we want to display is stored here*/
+        private List<Timeline> timelines;
         /*
         * METHOD : Page_Load
         * DESCRIPTION :
@@ -35,41 +35,59 @@ namespace Project_Creator.ProjectManagement {
             /*/if we did not get the information passed to us*/
             if (update == null || project == null) {
                 /*404*/
+                /*temp redirect for testing*/
+                Session["Project"] = "-2";
+                Session["Update"] = "1";
+                Response.Redirect("ViewUpdate.aspx");
             } else {
+                int updateID = Int32.Parse(update) - 1;
                 /*get from db and populate page*/
-
-                /*since db doesn't exist yet generate update information to display*/
-                string img = "";
-                if (project == "002") {
-                    img = "https://pbs.twimg.com/profile_images/656441231560585216/NWOReGD5_400x400.jpg";
-                } else {
-                    img = "https://cdn.escapistmagazine.com/media/global/images/library/deriv/1400/1400821.jpg";
-                }
-                currentUpdate = new Update(img, "https://google.com", "<h3>Project Update Title</h3>", "<p>a description about the update which summarises the complete description that is displayed upon clicking on the card for more information.</p><br />", DateTime.Today);
+                Database db = new Database();
+                timelines = db.GetTimelineList(Int32.Parse(project));
+                currentUpdate = timelines[updateID];
 
                 /*build elements to add to the content section*/
                 Label title = new Label();
-                title.Text = currentUpdate.title;
+                title.Text = "<h1>" + currentUpdate.timeline_name +"</h1>";
                 title.CssClass = "update-title";
                 Label content = new Label();
-                content.Text = currentUpdate.description;
+                content.Text = "<p>" + currentUpdate.timeline_desc + "</p>";
 
                 /*add the content to the page*/
                 updateData.Controls.Add(title);
                 updateData.Controls.Add(content);
 
                 /*make the sidebar image the one from the update*/
-                sidebarImage.BackImageUrl = currentUpdate.iconURL;
+                sidebarImage.BackImageUrl = currentUpdate.timeline_image_path;
 
                 /*add the current update to the update panel*/
-                RelatedPanel.Controls.Add(createOtherPanel(currentUpdate));
                 Panel div = new Panel();
                 div.CssClass = "timeline-content";
-                RelatedPanel.Controls.Add(div);
-                RelatedPanel.Controls.Add(div);
-                div = createOtherPanel(currentUpdate);
-                div.CssClass += " next-update";
-                RelatedPanel.Controls.Add(div);
+                Timeline nextUpdate;
+                Timeline prevUpdate;
+                try {
+                    prevUpdate = timelines[updateID - 1];
+                } catch {
+                    prevUpdate = null;
+                }
+                try {
+                    nextUpdate = timelines[updateID + 1];
+                } catch {
+                    nextUpdate = null;
+                }
+                 
+                if (prevUpdate == null) {
+                    RelatedPanel.Controls.Add(div);
+                } else {
+                    RelatedPanel.Controls.Add(createOtherPanel(prevUpdate, updateID));
+                }
+                if (nextUpdate == null) {
+                    RelatedPanel.Controls.Add(div);
+                } else {
+                    div = createOtherPanel(nextUpdate, updateID + 2);
+                    div.CssClass += " next-update";
+                    RelatedPanel.Controls.Add(div);
+                }
             }
         }
 
@@ -84,7 +102,7 @@ namespace Project_Creator.ProjectManagement {
        * RETURNS :
        *	Panel : a div containing all of the data relevant for a related project
        */
-        public Panel createOtherPanel(Update update) {
+        public Panel createOtherPanel(Timeline update, int updateNumber) {
             Panel div = new Panel();                /*the div we are building*/
             ImageButton image = new ImageButton();      /*this is the image that is used to diplay the project as well as navigate to that update*/
             Label nextPrev = new Label();
@@ -93,16 +111,16 @@ namespace Project_Creator.ProjectManagement {
             div.CssClass = "timeline-content";             /*the styling that is used for formatting the div*/
 
             image.Click += new System.Web.UI.ImageClickEventHandler(updateClick);
-            image.ID = update.updatePage;
-            image.ImageUrl = update.iconURL;        /*set the image we want to use for the hyperlink. it is stored within the Update object*/
+            image.ID = updateNumber.ToString();
+            image.ImageUrl = update.timeline_image_path;        /*set the image we want to use for the hyperlink. it is stored within the Update object*/
             image.CssClass = "related-img";          /*the styling that is used for formatting the image*/
 
-            if(update.date > currentUpdate.date) {
-                nextPrev.Text = "<br>Next Update";
+            if(update.timeline_creation > currentUpdate.timeline_creation) {
+                nextPrev.Text = "<br>Next Update<br>";
             } else {
-                nextPrev.Text = "<br>Prev Update";
+                nextPrev.Text = "<br>Prev Update<br>";
             }
-            updateTitle.Text = update.title;                /*set the title of the update based on the update object*/
+            updateTitle.Text = update.timeline_name;                /*set the title of the update based on the update object*/
 
             /*add the objects we created to the div in the order we want them to appear*/
             div.Controls.Add(image);
@@ -128,7 +146,7 @@ namespace Project_Creator.ProjectManagement {
         */
         protected void updateClick(object sender, EventArgs e) {
             Session["Update"] = ((ImageButton)sender).ID;
-            Response.Redirect("ProjectTimeline.aspx");
+            Response.Redirect("ViewUpdate.aspx");
         }
     }
 }
