@@ -1,5 +1,5 @@
 ﻿/*
-*	FILE : Project2.cs
+*	FILE : Project.cs
 *	PROJECT : Project Creator
 *	PROGRAMMER : Mark Jackson
 *	             Eric Emerson
@@ -23,7 +23,7 @@ namespace Project_Creator
     // This class is to be merged with the actual Project class at some point
     // I just didn't want to break any existing components
 
-    public class Project2
+    public class Project
     {
         public int projectID { get; set; }                   /* projectID: Unique ID of this project. */
         public SqlDateTime project_creation { get; set; }    /* project_creation: When this project was created. */
@@ -32,7 +32,7 @@ namespace Project_Creator
         public string project_icon_path { get; set; }        /* project_icon_path:  path to the image used as the icon */
         public List<Timeline> project_timeline { get; set; } /* project_timeline: list of the related timeline elements */
 
-        public static Database.QueryResult RegisterProject(Account project_owner, Project2 new_project)
+        public static Database.QueryResult RegisterProject(Account project_owner, Project new_project)
         {
             // work in progress
             // TODO: implement proper error handling using QueryResult, handle ID correctly...
@@ -71,7 +71,7 @@ namespace Project_Creator
         *	none
         *	A project object is created
         */
-        public Project2() {
+        public Project() {
         }
 
         /*
@@ -88,7 +88,7 @@ namespace Project_Creator
         *	none
         *	A project object is created
         */
-        public Project2(int id, string title, string desc, string iconUrl, List<Timeline> updates) {
+        public Project(int id, string title, string desc, string iconUrl, List<Timeline> updates) {
             project_name = title;
             project_desc = desc;
             project_icon_path = iconUrl;
@@ -109,7 +109,7 @@ namespace Project_Creator
         *	none
         *	A project object is created
         */
-        public Project2(int id, string title, string desc, string iconUrl) {
+        public Project(int id, string title, string desc, string iconUrl) {
             project_name = title;
             project_desc = desc;
             project_icon_path = iconUrl;

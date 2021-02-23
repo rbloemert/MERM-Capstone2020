@@ -326,8 +326,8 @@ namespace Project_Creator
 
         // PROJECTS
 
-        public Project2 GetProject(int projectID) {
-            Project2 project = new Project2();
+        public Project GetProject(int projectID) {
+            Project project = new Project();
             if (!IsConnectionOpen()) return null;
 
             var sql = "SELECT * FROM project where projectID = @projectID";
@@ -349,9 +349,9 @@ namespace Project_Creator
             return project;
         }
 
-        public List<Project2> GetProjectList()
+        public List<Project> GetProjectList()
         {
-            List<Project2> projects = new List<Project2>();
+            List<Project> projects = new List<Project>();
             if (!IsConnectionOpen()) return projects;
 
             var sql = "SELECT * FROM project";
@@ -363,7 +363,7 @@ namespace Project_Creator
 
                 foreach (DataRow row in datatable.Rows)
                 {
-                    projects.Add(new Project2()
+                    projects.Add(new Project()
                     {
                         projectID = Convert.ToInt32(row["projectID"]),
                         project_creation = Convert.ToDateTime(row["project_creation"]),
@@ -376,9 +376,9 @@ namespace Project_Creator
             return projects;
         }
 
-        public List<Project2> GetProjectList(int accountID) // return projects belonging to a user
+        public List<Project> GetProjectList(int accountID) // return projects belonging to a user
         {
-            List<Project2> projects = new List<Project2>();
+            List<Project> projects = new List<Project>();
             if (!IsConnectionOpen()) return projects;
 
             var sql = "SELECT * " +
@@ -395,7 +395,7 @@ namespace Project_Creator
 
                 foreach (DataRow row in datatable.Rows)
                 {
-                    projects.Add(new Project2()
+                    projects.Add(new Project()
                     {
                         projectID = Convert.ToInt32(row["projectID"]),
                         project_creation = Convert.ToDateTime(row["project_creation"]),
@@ -408,9 +408,9 @@ namespace Project_Creator
             return projects;
         }
 
-        public List<Project2> GetProjectList(string search) // return projects with substring in title
+        public List<Project> GetProjectList(string search) // return projects with substring in title
         {
-            List<Project2> projects = new List<Project2>();
+            List<Project> projects = new List<Project>();
             if (!IsConnectionOpen()) return projects;
 
             var sql = "SELECT * " +
@@ -426,7 +426,7 @@ namespace Project_Creator
 
                 foreach (DataRow row in datatable.Rows)
                 {
-                    projects.Add(new Project2()
+                    projects.Add(new Project()
                     {
                         projectID = Convert.ToInt32(row["projectID"]),
                         project_creation = Convert.ToDateTime(row["project_creation"]),
@@ -439,7 +439,7 @@ namespace Project_Creator
             return projects;
         }
 
-        public QueryResult CreateProject(Project2 project)
+        public QueryResult CreateProject(Project project)
         {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -505,7 +505,7 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
-        public QueryResult ModifyProject(int projectID, Project2 new_project)
+        public QueryResult ModifyProject(int projectID, Project new_project)
         {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;

@@ -26,8 +26,8 @@ namespace Project_Creator.ProjectManagement {
 
         /*this is the project that we are viewing. currently has place holder info. should be gotten from the previous screen*/
         /*may be pass as a string. if that is the case we need to reteieve from the database. we will see*/
-        public Project2 project = new Project2();
-        public List<Project2> otherProjects = new List<Project2>();
+        public Project project = new Project();
+        public List<Project> otherProjects = new List<Project>();
 
 
         /*
@@ -77,7 +77,7 @@ namespace Project_Creator.ProjectManagement {
                     otherProjects = d.GetProjectList();
                     /*for each of the projects in the related projects list*/
                     int panelNum = 1;
-                    foreach (Project2 p in otherProjects) {
+                    foreach (Project p in otherProjects) {
                         /*create a div using createUpdatePanel and add it to the related panel of the screen*/
                         Panel div = createRelatedPanel(p);
                         div.ID = "related" + panelNum;
@@ -108,7 +108,7 @@ namespace Project_Creator.ProjectManagement {
         * RETURNS :
         *	Panel : a div containing all of the data relevant for a related project
         */
-        public Panel createRelatedPanel(Project2 project) {
+        public Panel createRelatedPanel(Project project) {
             Panel div = new Panel();                /*the div we are building*/
             ImageButton image = new ImageButton();  /*this is the image that is used to diplay the project as well as navigate to that project*/
             Label title = new Label();              /*the label that will hold the title of the project*/
