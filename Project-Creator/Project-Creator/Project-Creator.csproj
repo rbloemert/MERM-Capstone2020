@@ -127,7 +127,8 @@
     <Content Include="Browse.aspx" />
     <Content Include="Creator.aspx" />
     <Content Include="Home.aspx" />
-    <Content Include="Icons\Search.png" />
+    <Content Include="Images\Logo.svg" />
+    <Content Include="Images\Search.png" />
     <Content Include="Login.aspx" />
     <Content Include="ProjectManagement\ProjectTimeline.aspx" />
     <Content Include="ProjectManagement\ViewUpdate.aspx" />

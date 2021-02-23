@@ -20,7 +20,7 @@
             <asp:Table runat="server" CssClass="Navigation">
                 <asp:TableRow  runat="server" CssClass="Navigation">
                     <asp:TableCell CssClass="Navigation" style="width:33%; text-align:left;">
-                        Project Creator
+                        <asp:ImageButton CssClass="Logo" ImageUrl="Images/Logo.svg" runat="server"/>
                     </asp:TableCell>
                     <asp:TableCell CssClass="Navigation" style="width:33%; text-align:center;">
                         <asp:Table runat="server" CssClass="Search">
@@ -30,7 +30,7 @@
                                 </asp:TableCell>
                                 <asp:TableCell CssClass="Search" style="text-align:left;vertical-align:middle">
                                     <div class="Vertical">
-                                        <asp:ImageButton CssClass="Icon" runat="server" ImageAlign="Middle" ImageUrl="Icons/Search.png" OnClick="Search"/>
+                                        <asp:ImageButton CssClass="Icon" runat="server" ImageAlign="Middle" ImageUrl="Images/Search.png" OnClick="Search"/>
                                     </div>
                                 </asp:TableCell>
                             </asp:TableRow>
@@ -51,9 +51,11 @@
                 </asp:TableRow>
             </asp:Table>
         </div>
-        <asp:ContentPlaceHolder ID="ContentPlaceholder" runat="server">
+        <div class="Center">
+            <asp:ContentPlaceHolder ID="ContentPlaceholder" runat="server">
 
-        </asp:ContentPlaceHolder>
+            </asp:ContentPlaceHolder>
+        </div>
     </form>
 </body>
 </html>

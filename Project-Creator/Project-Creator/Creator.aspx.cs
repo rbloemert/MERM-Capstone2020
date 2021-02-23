@@ -18,11 +18,6 @@ namespace Project_Creator
             {
                 PopulateGrid();
             }
-
-
-            // Populate Creator information
-            CreatorUsernameLabel.Text = "Rick The Creator Test";
-            CreatorDescriptionLabel.Text = "\n\nBio:\nsadflkasjdlkjfasdl;jflsadjfl;safjs;lfsjdasljfls;ajsljfsaljflsajasfl;jasdl;flas";
         }
 
 
@@ -39,16 +34,16 @@ namespace Project_Creator
             }
 
 
-            creatorProjectGrid.DataSource = projectList;
-            creatorProjectGrid.DataBind();
+            //creatorProjectGrid.DataSource = projectList;
+            //creatorProjectGrid.DataBind();
 
         }
 
 
         protected void btnSelectProject_Clicked(object sender, GridViewCommandEventArgs e) //e is the position of the project in the list
         {
-            int index = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = creatorProjectGrid.Rows[index];
+            //int index = Convert.ToInt32(e.CommandArgument);
+            //GridViewRow row = creatorProjectGrid.Rows[index];
 
 
 

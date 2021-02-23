@@ -1,6 +1,6 @@
 ﻿
 /* Input style. */
-input {
+input:not(.Logo) {
     color: white;
     padding: 4px;
     border-color: #3b3b3b;
@@ -28,12 +28,7 @@ input[type=button], input[type=submit] {
     color: white;
     font-size: 16px;
 }
-input[type=button]:hover, input[type=submit]:hover, input[type=image]:hover {
+input[type=button]:hover, input[type=submit]:hover, input[type=image]:not(.Logo):hover {
     cursor: pointer;
     background-color: #3b3b3b;
-}
-
-input[type=image].Icon {
-    width: 16px;
-    height: 16px;
 }
