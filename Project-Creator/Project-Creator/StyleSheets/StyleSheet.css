@@ -26,10 +26,8 @@ body {
 
 /* Basic Floating Divider. */
 div.Basic {
-    display: inline-block;
     margin-top: 24px;
-    margin-bottom: 24px;
-    padding: 24px 64px 24px 64px;
+    padding: 24px 24px 24px 24px;
     text-align: center;
     background-color: #0f0f0f;
     border-color: #3b3b3b;

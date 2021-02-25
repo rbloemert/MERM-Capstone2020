@@ -137,7 +137,7 @@
     <Content Include="Project\View.aspx" />
     <Content Include="Signup.aspx" />
     <Content Include="StyleSheets\StyleSheet.css" />
-    <Content Include="StyleSheets\StyleSheetBrowse.css" />
+    <Content Include="StyleSheets\StyleSheetProject.css" />
     <Content Include="StyleSheets\StyleSheetForm.css" />
     <Content Include="StyleSheets\StyleSheetHeader.css" />
     <Content Include="StyleSheets\StyleSheet_ProjectManagement.css" />
