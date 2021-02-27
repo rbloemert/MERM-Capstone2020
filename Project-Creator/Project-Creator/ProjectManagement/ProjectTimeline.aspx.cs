@@ -118,7 +118,7 @@ namespace Project_Creator.ProjectManagement {
 
             image.Click += relatedClick;
             image.ID = project.projectID.ToString();
-            image.ImageUrl = project.project_icon_path;      /*set the image we want to use for the hyperlink. it is stored within the Project object*/
+            image.ImageUrl = project.project_image_path;      /*set the image we want to use for the hyperlink. it is stored within the Project object*/
             image.CssClass = "related-img";     /*the styling that is used for formatting the image*/
 
             title.Text = "<h3>" + project.project_name + "</h3>";         /*set the title of the project based on the project object*/
