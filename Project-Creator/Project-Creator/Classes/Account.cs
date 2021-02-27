@@ -16,5 +16,6 @@ namespace Project_Creator
         public string password_salt;            /* password_salt: The salt used for the password. */
         public string email;                    /* email: The email for this account. */
         public bool isSiteAdministrator;        /* isSiteAdministrator: If this account is an administrator */
+        public string account_image_path;       /* account_image_path: The File path of the account's profile picture; NULL means none */
     }
 }

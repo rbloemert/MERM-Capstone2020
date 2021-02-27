@@ -177,7 +177,8 @@ namespace Project_Creator
                         password = row["password"].ToString(),
                         password_salt = row["password_salt"].ToString(),
                         email = row["email"].ToString(),
-                        isSiteAdministrator = Convert.ToBoolean(row["isSiteAdministrator"])
+                        isSiteAdministrator = Convert.ToBoolean(row["isSiteAdministrator"]),
+                        account_image_path = row["account_image_path"].ToString()
                     });
                 }
             }
@@ -191,7 +192,7 @@ namespace Project_Creator
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
 
             //Prepares the sql query.
-            var sql = "INSERT INTO account(account_creation, fullname, username, password, password_salt, email, isSiteAdministrator) VALUES(@account_creation, @fullname, @username, @password, @password_salt, @email, @isSiteAdministrator)";
+            var sql = "INSERT INTO account(account_creation, fullname, username, password, password_salt, email, isSiteAdministrator, account_image_path) VALUES(@account_creation, @fullname, @username, @password, @password_salt, @email, @isSiteAdministrator, account_image_path)";
             using (var cmd = new SqlCommand(sql, connection))
             {
                 var salt = Password.Salt();
@@ -202,6 +203,7 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@password_salt", salt);
                 cmd.Parameters.AddWithValue("@email", account.email);
                 cmd.Parameters.AddWithValue("@isSiteAdministrator", account.isSiteAdministrator);
+                cmd.Parameters.AddWithValue("@account_image_path", "NULL");
 
                 //Executes the insert command.
                 try
@@ -275,6 +277,7 @@ namespace Project_Creator
                       "password_salt = @password_salt" +
                       "email = @email" +
                       "isSiteAdministrator = @isSiteAdministrator" +
+                      "account_image_path = @account_image_path" +
                       "WHERE accountID = @oldAccountID";
             using (var cmd = new SqlCommand(sql, connection))
             {
@@ -288,6 +291,7 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@password_salt", salt);
                 cmd.Parameters.AddWithValue("@email", new_account.email);
                 cmd.Parameters.AddWithValue("@isSiteAdministrator", new_account.isSiteAdministrator);
+                cmd.Parameters.AddWithValue("@account_image_path", new_account.account_image_path);
 
                 //Executes the insert command.
                 try
@@ -331,7 +335,8 @@ namespace Project_Creator
             if (!IsConnectionOpen()) return null;
 
             var sql = "SELECT * FROM project where projectID = @projectID";
-            using (var cmd = new SqlCommand(sql, connection)) {
+            using (var cmd = new SqlCommand(sql, connection)) 
+            {
                 cmd.Parameters.AddWithValue("@projectID", projectID);
 
                 var adapter = new SqlDataAdapter(cmd);
@@ -343,6 +348,7 @@ namespace Project_Creator
                     project.project_creation = Convert.ToDateTime(row["project_creation"]);
                     project.project_name = row["project_name"].ToString();
                     project.project_desc = row["project_desc"].ToString();
+                    project.project_image_path = row["project_image_path"].ToString();
                 }
             }
 
@@ -369,7 +375,8 @@ namespace Project_Creator
                         project_creation = Convert.ToDateTime(row["project_creation"]),
                         project_name = row["project_name"].ToString(),
                         project_desc = row["project_desc"].ToString(),
-                    });
+                        project_image_path = row["project_image_path"].ToString()
+                });
                 }
             }
             connection.Close();
@@ -401,6 +408,7 @@ namespace Project_Creator
                         project_creation = Convert.ToDateTime(row["project_creation"]),
                         project_name = row["project_name"].ToString(),
                         project_desc = row["project_desc"].ToString(),
+                        project_image_path = row["project_image_path"].ToString()
                     });
                 }
             }
@@ -432,6 +440,7 @@ namespace Project_Creator
                         project_creation = Convert.ToDateTime(row["project_creation"]),
                         project_name = row["project_name"].ToString(),
                         project_desc = row["project_desc"].ToString(),
+                        project_image_path = row["project_image_path"].ToString()
                     });
                 }
             }
@@ -445,12 +454,13 @@ namespace Project_Creator
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
 
             //Prepares the sql query.
-            var sql = "INSERT INTO project(project_creation, project_name, project_desc) VALUES(@project_creation, @project_name, @project_desc)";
+            var sql = "INSERT INTO project(project_creation, project_name, project_desc, project_image_path) VALUES(@project_creation, @project_name, @project_desc, @project_image_path)";
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@project_creation", new SqlDateTime(DateTime.Now));
                 cmd.Parameters.AddWithValue("@project_name", project.project_name);
                 cmd.Parameters.AddWithValue("@project_desc", project.project_desc);
+                cmd.Parameters.AddWithValue("@project_image_path", "NULL");
 
                 //Executes the insert command.
                 try
@@ -516,6 +526,7 @@ namespace Project_Creator
                       "project_creation = @project_creation" +
                       "project_name = @project_name" +
                       "project_desc = @project_desc" +
+                      "project_image_path = @project_image_path" +
                       "WHERE projectID = @oldProjectID";
             using (var cmd = new SqlCommand(sql, connection))
             {
@@ -524,7 +535,7 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@project_creation", new_project.project_creation);
                 cmd.Parameters.AddWithValue("@project_name", new_project.project_name);
                 cmd.Parameters.AddWithValue("@project_desc", new_project.project_desc);
-
+                cmd.Parameters.AddWithValue("@project_image_path", new_project.project_image_path);
 
                 //Executes the insert command.
                 try
@@ -704,9 +715,10 @@ namespace Project_Creator
                     {
                         timelineID = Convert.ToInt32(row["timelineID"]),
                         timeline_creation = Convert.ToDateTime(row["timeline_creation"]),
-                        timeline_image_path = row["timeline_image_path"].ToString(),
                         timeline_name = row["timeline_name"].ToString(),
                         timeline_desc = row["timeline_desc"].ToString(),
+                        timeline_image_path = row["timeline_image_path"].ToString(),
+                        timeline_file_path = row["timeline_file_path"].ToString()
                     });
                 }
             }
@@ -737,9 +749,10 @@ namespace Project_Creator
                     {
                         timelineID = Convert.ToInt32(row["timelineID"]),
                         timeline_creation = Convert.ToDateTime(row["timeline_creation"]),
-                        timeline_image_path = row["timeline_image_path"].ToString(),
                         timeline_name = row["timeline_name"].ToString(),
                         timeline_desc = row["timeline_desc"].ToString(),
+                        timeline_image_path = row["timeline_image_path"].ToString(),
+                        timeline_file_path = row["timeline_file_path"].ToString()
                     });
                 }
             }
@@ -753,14 +766,14 @@ namespace Project_Creator
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
 
             //Prepares the sql query.
-            var sql = "INSERT INTO timeline(timeline_creation, timeline_image_path, timeline_name, timeline_desc) VALUES(@timeline_creation, @timeline_image_path, @timeline_name, @timeline_desc)";
+            var sql = "INSERT INTO timeline(timeline_creation, timeline_name, timeline_desc, timeline_image_path, timeline_file_path) VALUES(@timeline_creation, @timeline_name, @timeline_desc, @timeline_image_path, @timeline_file_path)";
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@timeline_creation", new SqlDateTime(DateTime.Now));
-                cmd.Parameters.AddWithValue("@timeline_image_path", timeline.timeline_image_path);
                 cmd.Parameters.AddWithValue("@timeline_name", timeline.timeline_name);
                 cmd.Parameters.AddWithValue("@timeline_desc", timeline.timeline_desc);
-
+                cmd.Parameters.AddWithValue("@timeline_image_path", "NULL");
+                cmd.Parameters.AddWithValue("@timeline_file_path", "NULL");
 
                 //Executes the insert command.
                 try
@@ -825,18 +838,20 @@ namespace Project_Creator
             var sql = "UPDATE timeline SET " +
                       "timelineID = @timelineID" +
                       "timeline_creation = @timeline_creation" +
-                      "timeline_image_path = @timeline_image_path" +
                       "timeline_name = @timeline_name" +
                       "timeline_desc = @timeline_desc" +
+                      "timeline_image_path = @timeline_image_path" +
+                      "timeline_file_path = @timeline_file_path" +
                       "WHERE timelineID = @oldTimelineID";
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@oldTimelineID", timelineID);
                 cmd.Parameters.AddWithValue("@timelineID", new_timeline.timelineID);
                 cmd.Parameters.AddWithValue("@timeline_creation", new_timeline.timeline_creation);
-                cmd.Parameters.AddWithValue("@timeline_image_path", new_timeline.timeline_image_path);
                 cmd.Parameters.AddWithValue("@timeline_name", new_timeline.timeline_name);
                 cmd.Parameters.AddWithValue("@timeline_desc", new_timeline.timeline_desc);
+                cmd.Parameters.AddWithValue("@timeline_image_path", new_timeline.timeline_image_path);
+                cmd.Parameters.AddWithValue("@timeline_file_path", new_timeline.timeline_file_path);
 
 
                 //Executes the insert command.

@@ -29,8 +29,9 @@ namespace Project_Creator
         public SqlDateTime project_creation { get; set; }    /* project_creation: When this project was created. */
         public string project_name { get; set; }             /* project_name: Name of this project. */
         public string project_desc { get; set; }             /* project_desc: Description of this project. */
-        public string project_icon_path { get; set; }        /* project_icon_path:  path to the image used as the icon */
-        public List<Timeline> project_timeline { get; set; } /* project_timeline: list of the related timeline elements */
+        public string project_image_path { get; set; }       /* project_image_path: The File path of the project's picture; NULL means none */
+        // I really think we should align the respective classes with the database, and make methods to access extensions of a class
+        // This is because the exact same class is used to interact with the database directly.
 
         public static Database.QueryResult RegisterProject(Account project_owner, Project new_project)
         {
@@ -45,20 +46,17 @@ namespace Project_Creator
         /*
         * METHOD : getUpdates
         * DESCRIPTION :
-        *	fetch the updates for the project from the database and put them into the updates data member
+        *	fetch the updates for the project from the database
         * PARAMETERS :
         *	none
         * RETURNS :
         *	none
         */
-        public void getUpdates() {
-            if(project_timeline == null) {
-                project_timeline = new List<Timeline>();
-            } else {
-                project_timeline.Clear();    /*remove all of the contents in the array list*/
-            }
+        public List<Timeline> getUpdates()
+        {
             Database d = new Database();
-            project_timeline = d.GetTimelineList(projectID);
+            List<Timeline> timelines = d.GetTimelineList(projectID);
+            return timelines;
         }
 
         /*
@@ -71,8 +69,13 @@ namespace Project_Creator
         *	none
         *	A project object is created
         */
-        public Project() {
+        public Project() 
+        {
+
         }
+
+        // Changes were made to the database,
+        // commented out for now
 
         /*
         * METHOD : Project -- Constructor
@@ -88,13 +91,13 @@ namespace Project_Creator
         *	none
         *	A project object is created
         */
-        public Project(int id, string title, string desc, string iconUrl, List<Timeline> updates) {
-            project_name = title;
-            project_desc = desc;
-            project_icon_path = iconUrl;
-            project_timeline = updates;
-            projectID = id;
-        }
+        //public Project(int id, string title, string desc, string iconUrl, List<Timeline> updates) {
+        //    project_name = title;
+        //    project_desc = desc;
+        //    project_icon_path = iconUrl;
+        //    project_timeline = updates;
+        //    projectID = id;
+        //}
 
         /*
         * METHOD : Project -- Constructor
@@ -109,13 +112,13 @@ namespace Project_Creator
         *	none
         *	A project object is created
         */
-        public Project(int id, string title, string desc, string iconUrl) {
-            project_name = title;
-            project_desc = desc;
-            project_icon_path = iconUrl;
-            projectID = id;
-            /*create a list for the updates*/
-            project_timeline = new List<Timeline>();
-        }
+        //public Project(int id, string title, string desc, string iconUrl) {
+        //    project_name = title;
+        //    project_desc = desc;
+        //    project_icon_path = iconUrl;
+        //    projectID = id;
+        //    /*create a list for the updates*/
+        //    project_timeline = new List<Timeline>();
+        //}
     }
 }

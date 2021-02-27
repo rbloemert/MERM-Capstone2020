@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS timeline_link;
 DROP TABLE IF EXISTS comment_link;
 DROP TABLE IF EXISTS follower_link;
 
+
+
 /* Creates the account table. */
 DROP TABLE IF EXISTS account;
 CREATE TABLE account(
@@ -17,6 +19,7 @@ CREATE TABLE account(
     password_salt VARCHAR(255) NOT NULL,                                    /* password_salt: The salt used for the password. */
     email VARCHAR(255) NOT NULL,                                            /* email: The email for this account. */
     isSiteAdministrator BIT NOT NULL,                                       /* isSiteAdministrator: Is this user an administrator? */
+    account_image_path VARCHAR(255) NOT NULL,                               /* account_image_path: The File path of the account's profile picture; NULL means none */
 );
 
 /* Creates the project table. */
@@ -26,6 +29,7 @@ CREATE TABLE project(
     project_creation DATE NOT NULL,                                         /* project_creation: When this project was created. */
     project_name VARCHAR(255) NOT NULL,                                     /* project_name: Name of this project. */
     project_desc VARCHAR(255),                                              /* project_desc: Description of this project. */
+    project_image_path VARCHAR(255) NOT NULL,                               /* project_image_path: The File path of the project's picture; NULL means none */
 );
 
 /* Creates the timeline table. */
@@ -33,9 +37,10 @@ DROP TABLE IF EXISTS timeline;
 CREATE TABLE timeline(
     timelineID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,                      /* timelineID: Unique Timeline ID per timeline. Auto incremented. */
     timeline_creation DATE NOT NULL,                                        /* timeline_creation: Date this timeline was posted. */
-    timeline_image_path VARCHAR(255),                                       /* timeline_image_path: The path to the image of this timeline. */
     timeline_name VARCHAR(255) NOT NULL,                                    /* timeline_name: Title of this timeline. */
     timeline_desc VARCHAR(255) NOT NULL,                                    /* timeline_desc: Description of this timeline. */
+    timeline_image_path VARCHAR(255) NOT NULL,                              /* timeline_image_path: The File path of the timeline's picture; NULL means none */
+    timeline_file_path VARCHAR(255) NOT NULL,                               /* timeline_file_path: The File path of the timeline's file; NULL means none */
 );
 
 /* Creates the comment table. */
@@ -67,7 +72,7 @@ CREATE TABLE comment_link(
 
 /* Creates the follower_link table. Used to keep track of followers of a project. */
 CREATE TABLE follower_link(
-    projectID INT NOT NULL FOREIGN KEY REFERENCES account(accountID),                       /* projectID: The followed project ID. */
+    projectID INT NOT NULL FOREIGN KEY REFERENCES project(projectID),                       /* projectID: The followed project ID. */
     follower_accountID INT NOT NULL FOREIGN KEY REFERENCES account(accountID),              /* follower_accountID: The account ID of the follower. */
     follow_date DATE NOT NULL                                                               /* follow_date: The date this follow occured. */
 )
