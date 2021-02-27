@@ -460,7 +460,7 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@project_creation", new SqlDateTime(DateTime.Now));
                 cmd.Parameters.AddWithValue("@project_name", project.project_name);
                 cmd.Parameters.AddWithValue("@project_desc", project.project_desc);
-                cmd.Parameters.AddWithValue("@project_image_path", project.project_image_path);
+                cmd.Parameters.AddWithValue("@project_image_path", "NULL");
 
                 //Executes the insert command.
                 try
@@ -772,8 +772,8 @@ namespace Project_Creator
                 cmd.Parameters.AddWithValue("@timeline_creation", new SqlDateTime(DateTime.Now));
                 cmd.Parameters.AddWithValue("@timeline_name", timeline.timeline_name);
                 cmd.Parameters.AddWithValue("@timeline_desc", timeline.timeline_desc);
-                cmd.Parameters.AddWithValue("@timeline_image_path", timeline.timeline_image_path);
-                cmd.Parameters.AddWithValue("@timeline_file_path", timeline.timeline_file_path);
+                cmd.Parameters.AddWithValue("@timeline_image_path", "NULL");
+                cmd.Parameters.AddWithValue("@timeline_file_path", "NULL");
 
                 //Executes the insert command.
                 try
