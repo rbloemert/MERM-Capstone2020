@@ -8,7 +8,7 @@
                 <asp:Table runat="server">
                     <asp:TableRow>
                         <asp:TableCell>
-                            <asp:Image ID="ImageProject" ImageUrl="<%#:Item.project_icon_path%>" runat="server" />
+                            <asp:Image ID="ImageProject" ImageUrl="<%#:Item.project_image_path%>" runat="server" />
                         </asp:TableCell>
                     </asp:TableRow>
                 </asp:Table>

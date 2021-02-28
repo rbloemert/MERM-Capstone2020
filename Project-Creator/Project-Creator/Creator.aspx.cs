@@ -29,7 +29,7 @@ namespace Project_Creator
             for(int i = 0; i < 5; i++)
             {
                 string x = "Project: " + (i + 1);
-                projectList.Add(new Project(i, x, "me", "Unavailable"));
+                //projectList.Add(new Project(i, x, "me", "Unavailable"));
 
             }
 

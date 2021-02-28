@@ -22,3 +22,21 @@ img.Project {
     height: 160px;
     background-color: #3b3b3b;
 }
+.gallery {
+    background: #0f0f0f;
+}
+.gallery-cell {
+    width: 320px;
+    height: 400px;
+    margin-right: 10px;
+    padding: 12px;
+    counter-increment: gallery-cell;
+}
+.gallery-image {
+    width: 100%;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+}

@@ -156,6 +156,7 @@
     <Content Include="Creator.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Images\Logo.svg" />
+    <Content Include="Images\Test.png" />
     <Content Include="Images\Search.png" />
     <Content Include="Login.aspx" />
     <Content Include="ProjectManagement\ProjectTimeline.aspx" />
@@ -165,6 +166,7 @@
     <Content Include="Project\View.aspx" />
     <Content Include="Signup.aspx" />
     <Content Include="StyleSheets\StyleSheet.css" />
+    <Content Include="StyleSheets\StyleSheetFlickity.css" />
     <Content Include="StyleSheets\StyleSheetProject.css" />
     <Content Include="StyleSheets\StyleSheetForm.css" />
     <Content Include="StyleSheets\StyleSheetHeader.css" />
@@ -182,7 +184,7 @@
     <Compile Include="Classes\Comment.cs" />
     <Compile Include="Classes\Database.cs" />
     <Compile Include="Classes\Password.cs" />
-    <Compile Include="Classes\Project2.cs" />
+    <Compile Include="Classes\Project.cs" />
     <Compile Include="Classes\StorageService.cs" />
     <Compile Include="Classes\Timeline.cs" />
     <Compile Include="Creator.aspx.cs">

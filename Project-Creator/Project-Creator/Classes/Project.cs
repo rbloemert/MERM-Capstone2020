@@ -30,8 +30,6 @@ namespace Project_Creator
         public string project_name { get; set; }             /* project_name: Name of this project. */
         public string project_desc { get; set; }             /* project_desc: Description of this project. */
         public string project_image_path { get; set; }       /* project_image_path: The File path of the project's picture; NULL means none */
-        // I really think we should align the respective classes with the database, and make methods to access extensions of a class
-        // This is because the exact same class is used to interact with the database directly.
 
         public static Database.QueryResult RegisterProject(Account project_owner, Project new_project)
         {
@@ -74,31 +72,6 @@ namespace Project_Creator
 
         }
 
-        // Changes were made to the database,
-        // commented out for now
-
-        /*
-        * METHOD : Project -- Constructor
-        * DESCRIPTION :
-        *	create a new project with all of the members specified by the caller
-        * PARAMETERS :
-        *	string t : the title of the project
-        *   string a : the author of the project
-        *   string i : the URL for the icon
-        *   string URL : the URL that the project exists on
-        *   ArrayList u : an arraylist that contains all of the updates for the project
-        * RETURNS :
-        *	none
-        *	A project object is created
-        */
-        //public Project(int id, string title, string desc, string iconUrl, List<Timeline> updates) {
-        //    project_name = title;
-        //    project_desc = desc;
-        //    project_icon_path = iconUrl;
-        //    project_timeline = updates;
-        //    projectID = id;
-        //}
-
         /*
         * METHOD : Project -- Constructor
         * DESCRIPTION :
@@ -112,13 +85,12 @@ namespace Project_Creator
         *	none
         *	A project object is created
         */
-        //public Project(int id, string title, string desc, string iconUrl) {
-        //    project_name = title;
-        //    project_desc = desc;
-        //    project_icon_path = iconUrl;
-        //    projectID = id;
-        //    /*create a list for the updates*/
-        //    project_timeline = new List<Timeline>();
-        //}
+        public Project(int id, string title, string desc, string imageUrl)
+        {
+            project_name = title;
+            project_desc = desc;
+            project_image_path = imageUrl;
+            projectID = id;
+        }
     }
 }

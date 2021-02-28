@@ -9,6 +9,18 @@
 body {
     background-color: #0f0f0f;
 }
+p {
+    overflow: hidden;
+    text-align: justify;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+hr {
+    border-color: #3b3b3b;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
 
 /* Constant Colors. */
 .Primary {
@@ -26,6 +38,7 @@ body {
 
 /* Basic Floating Divider. */
 div.Basic {
+    overflow: hidden;
     margin-top: 24px;
     padding: 24px 24px 24px 24px;
     text-align: center;

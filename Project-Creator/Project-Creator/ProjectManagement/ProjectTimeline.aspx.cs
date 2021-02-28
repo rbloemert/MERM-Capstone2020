@@ -55,13 +55,6 @@ namespace Project_Creator.ProjectManagement {
                     lblDesc.Text = project.project_desc;
 
                     int update = 1;
-                    /*for each of the updates within the project*/
-                    foreach (Timeline t in project.project_timeline) {
-                        /*create a div using createUpdatePanel and add it to the UpdatePanel section of the screen*/
-                        Panel div = createUpdatePanel(t, update);
-                        UpdatePanel.Controls.Add(div);
-                        update++;
-                    }
 
 
                     ////probably are going to get rid of this
@@ -118,7 +111,7 @@ namespace Project_Creator.ProjectManagement {
 
             image.Click += relatedClick;
             image.ID = project.projectID.ToString();
-            image.ImageUrl = project.project_icon_path;      /*set the image we want to use for the hyperlink. it is stored within the Project object*/
+            image.ImageUrl = project.project_image_path;      /*set the image we want to use for the hyperlink. it is stored within the Project object*/
             image.CssClass = "related-img";     /*the styling that is used for formatting the image*/
 
             title.Text = "<h3>" + project.project_name + "</h3>";         /*set the title of the project based on the project object*/
