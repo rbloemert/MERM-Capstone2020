@@ -38,9 +38,11 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic">
-                                <asp:Image ID="TimelineImage" runat="server" />
+                                <asp:Image ID="TimelineImage" CssClass="timeline-image" runat="server" />
                                 <br />
-                                <p><asp:Label ID="lblDesc" runat="server"></asp:Label></p>
+                                <p>
+                                    <asp:Label ID="lblDesc" runat="server"></asp:Label>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -100,12 +102,46 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="margin-top: 0">
-                                TODO: comment zone here
+                                <asp:Repeater ID="RepeaterComment" ItemType="Project_Creator.Comment2" runat="server">
+                                    <ItemTemplate>
+                                        <div class="Basic">
+                                            <table>
+                                                <tr>
+                                                    <td class="comment-info">
+                                                        <a href="/Home.aspx">
+                                                            <asp:Image CssClass="comment-img" ImageUrl="<%#Item.account_image_path %>" runat="server" />
+                                                        </a>
+                                                        <br />
+                                                        <%#Item.comment_account_name %>
+                                                        <br />
+                                                        <%# Item.comment_creation %>
+                                                    </td>
+                                                    <td class="comment-content">
+                                                        <p><%#Item.comment_text %></p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <div class="Basic">
+                                    <table>
+                                        <tr>
+                                            <td class="comment-info">
+                                                <asp:Button ID="btnSubmitComment" CssClass="comment-button" Text="Submit" OnClick="btnSubmitComment_Click" runat="server" />
+                                            </td>
+                                            <td class="comment-content">
+                                                <asp:Textbox id="txtNewComment" CssClass="comment-textbox" runat="server"></asp:Textbox>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </asp:TableCell> 
+            </asp:TableCell>
         </asp:TableRow>
     </asp:Table>
 </asp:Content>

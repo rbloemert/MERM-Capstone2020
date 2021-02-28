@@ -20,7 +20,7 @@ namespace Project_Creator.Projects
             Database db = new Database();
 
             Project project = db.GetProject(ProjectID);
-            project.project_author = db.GetAuthor(ProjectID);
+            project.project_author = db.GetProjectAuthor(ProjectID);
             lblAuthor.Text = project.project_author;
             lblTitle.Text = project.project_name;
             lblDate.Text = project.project_creation.ToString();
