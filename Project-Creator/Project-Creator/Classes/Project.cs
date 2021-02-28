@@ -28,8 +28,12 @@ namespace Project_Creator
         public int projectID { get; set; }                   /* projectID: Unique ID of this project. */
         public SqlDateTime project_creation { get; set; }    /* project_creation: When this project was created. */
         public string project_name { get; set; }             /* project_name: Name of this project. */
-        public string project_desc { get; set; }             /* project_desc: Description of this project. */
+        public string project_author { get; set; }           /* project_author: Author of this project. */
         public string project_image_path { get; set; }       /* project_image_path: The File path of the project's picture; NULL means none */
+        public List<Timeline> project_timeline { get; set; }
+        // I really think we should align the respective classes with the database, and make methods to access extensions of a class
+        // This is because the exact same class is used to interact with the database directly.
+        //maybe we should have separate classes
 
         public static Database.QueryResult RegisterProject(Account project_owner, Project new_project)
         {
@@ -72,6 +76,35 @@ namespace Project_Creator
 
         }
 
+        public Project(int id, string title, string desc, string iconUrl) {
+
+        }
+
+        // Changes were made to the database,
+        // commented out for now
+
+        /*
+        * METHOD : Project -- Constructor
+        * DESCRIPTION :
+        *	create a new project with all of the members specified by the caller
+        * PARAMETERS :
+        *	string t : the title of the project
+        *   string a : the author of the project
+        *   string i : the URL for the icon
+        *   string URL : the URL that the project exists on
+        *   ArrayList u : an arraylist that contains all of the updates for the project
+        * RETURNS :
+        *	none
+        *	A project object is created
+        */
+        //public Project(int id, string title, string author, string iconUrl, List<Timeline> updates) {
+        //    project_name = title;
+        //    project_author = author;
+        //    project_icon_path = iconUrl;
+        //    project_timeline = updates;
+        //    projectID = id;
+        //}
+
         /*
         * METHOD : Project -- Constructor
         * DESCRIPTION :
@@ -85,12 +118,13 @@ namespace Project_Creator
         *	none
         *	A project object is created
         */
-        public Project(int id, string title, string desc, string imageUrl)
-        {
-            project_name = title;
-            project_desc = desc;
-            project_image_path = imageUrl;
-            projectID = id;
-        }
+        //public Project(int id, string title, string author, string iconUrl) {
+        //    project_name = title;
+        //    project_author = author;
+        //    project_icon_path = iconUrl;
+        //    projectID = id;
+        //    /*create a list for the updates*/
+        //    project_timeline = new List<Timeline>();
+        //}
     }
 }
