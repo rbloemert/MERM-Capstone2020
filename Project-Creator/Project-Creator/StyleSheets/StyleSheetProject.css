@@ -79,3 +79,30 @@ div.Timeline:hover {
     height: 128px;
     width: 128px;
 }
+
+.comment-img {
+    height: 80px;
+    width: 80px;
+}
+
+div.comment {
+    margin-bottom: 10px;
+    border-bottom: solid;
+}
+
+td.comment-info{
+    width: 100px;
+    height: 100px;
+    padding-right: 24px;
+    border-right:solid;
+}
+
+td.comment-content{
+    padding-left: 24px;
+}
+
+.comment-textbox {
+    height: 100px;
+    width: 100%;
+    text-wrap: normal;
+}
