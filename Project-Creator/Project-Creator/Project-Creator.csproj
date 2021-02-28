@@ -162,8 +162,6 @@
     <Content Include="Project\Timeline\Create.aspx" />
     <Content Include="Project\Timeline\Edit.aspx" />
     <Content Include="Project\Timeline\View.aspx" />
-    <Content Include="ProjectManagement\ProjectTimeline.aspx" />
-    <Content Include="ProjectManagement\ViewUpdate.aspx" />
     <Content Include="Project\Create.aspx" />
     <Content Include="Project\Edit.aspx" />
     <Content Include="Project\View.aspx" />
@@ -231,20 +229,6 @@
     <Compile Include="Project\Timeline\View.aspx.designer.cs">
       <DependentUpon>View.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ProjectManagement\ProjectTimeline.aspx.cs">
-      <DependentUpon>ProjectTimeline.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ProjectManagement\ProjectTimeline.aspx.designer.cs">
-      <DependentUpon>ProjectTimeline.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectManagement\ViewUpdate.aspx.cs">
-      <DependentUpon>ViewUpdate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ProjectManagement\ViewUpdate.aspx.designer.cs">
-      <DependentUpon>ViewUpdate.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Project\Create.aspx.cs">
       <DependentUpon>Create.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -295,6 +279,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ProjectManagement\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
