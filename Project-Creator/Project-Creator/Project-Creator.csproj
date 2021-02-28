@@ -182,6 +182,7 @@
     <Compile Include="Browse.aspx.designer.cs">
       <DependentUpon>Browse.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Comment2.cs" />
     <Compile Include="Classes\Comment.cs" />
     <Compile Include="Classes\Database.cs" />
     <Compile Include="Classes\Password.cs" />
