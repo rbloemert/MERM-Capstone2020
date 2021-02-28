@@ -7,19 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project_Creator.ProjectManagement {
+namespace Project_Creator.Posts {
 
 
-    public partial class ProjectTimeline {
+    public partial class View {
 
         /// <summary>
-        /// projectIcon control.
+        /// ProjectIcon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image projectIcon;
+        protected global::System.Web.UI.WebControls.Image ProjectIcon;
 
         /// <summary>
         /// lblTitle control.
@@ -31,13 +31,31 @@ namespace Project_Creator.ProjectManagement {
         protected global::System.Web.UI.WebControls.Label lblTitle;
 
         /// <summary>
-        /// Label2 control.
+        /// lblUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label lblUpdate;
+
+        /// <summary>
+        /// lblDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDate;
+
+        /// <summary>
+        /// TimelineImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image TimelineImage;
 
         /// <summary>
         /// lblDesc control.
@@ -49,21 +67,12 @@ namespace Project_Creator.ProjectManagement {
         protected global::System.Web.UI.WebControls.Label lblDesc;
 
         /// <summary>
-        /// UpdatePanel control.
+        /// RepeaterTimeline control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel UpdatePanel;
-
-        /// <summary>
-        /// RelatedPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel RelatedPanel;
+        protected global::System.Web.UI.WebControls.Repeater RepeaterTimeline;
     }
 }

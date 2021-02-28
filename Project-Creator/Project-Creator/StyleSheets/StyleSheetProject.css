@@ -50,3 +50,32 @@ div.Timeline:hover {
     image-rendering: -webkit-optimize-contrast;
     -ms-interpolation-mode: nearest-neighbor;
 }
+
+/****/
+.related-panel {
+    padding: 0.01em 16px;
+    margin-top: 16px;
+    margin-bottom: 16px
+}
+
+.related-panel:after, .related-panel:before {
+    content: "";
+    display: table;
+    clear: both
+}
+
+.timeline-content {
+    float: left;
+    width: 100%
+}
+
+@media (min-width:601px) {
+    .timeline-content {
+        width: 24.99999%
+    }
+}
+
+.related-img {
+    height: 128px;
+    width: 128px;
+}
