@@ -42,41 +42,11 @@
                                     <asp:Repeater ID="RepeaterTimeline" ItemType="Project_Creator.Timeline" runat="server">
                                         <ItemTemplate>
                                             <div class="gallery-cell">
-<<<<<<< HEAD:Project-Creator/Project-Creator/Projects/View.aspx
-                                                <a href="Updates/View?t="<%#Item.timelineID %>>
-                                                    <div class="Basic Timeline">
-                                                        <table>
-                                                            <tr>
-                                                                <td>
-                                                                    <asp:Image CssClass="gallery-image" ImageUrl="<%#Item.timeline_image_path %>" runat="server" />
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <h2><%#Item.timeline_name %></h2>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <hr />
-                                                                    <p style="height:120px;"><%#Item.timeline_desc %></p>
-                                                                    <hr />
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    Date Created: <%#Item.timeline_creation %>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </a>
-=======
                                                 <div class="Basic" style="width: 90%; height: 360px; margin: 0; padding: 8px;">
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                                <a href="Timeline/View.aspx?p=<%#ProjectID %>&u=<%#Item.timelineID %>">
+                                                                <a href="Updates/View.aspx?p=<%#ProjectID %>&u=<%#Item.timelineID %>">
                                                                     <asp:Image CssClass="gallery-image" ImageUrl="<%#Item.timeline_image_path %>" runat="server" />
                                                                 </a>
                                                             </td>
@@ -142,7 +112,6 @@
                                                         </tr>
                                                     </table>
                                                 </div>
->>>>>>> 54059d338f2f8a67cc15c6990a037f837e4d81f3:Project-Creator/Project-Creator/Project/View.aspx
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>
