@@ -38,32 +38,34 @@
                                     <asp:Repeater ID="RepeaterTimeline" ItemType="Project_Creator.Timeline" runat="server">
                                         <ItemTemplate>
                                             <div class="gallery-cell">
-                                                <div class="Basic" style="width:90%;height:360px;margin:0;padding:8px;">
-                                                    <table>
-                                                        <tr>
-                                                            <td>
-                                                                <asp:Image CssClass="gallery-image" ImageUrl="<%#Item.timeline_image_path %>" runat="server" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <h2><%#Item.timeline_name %></h2>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <hr />
-                                                                <p><%#Item.timeline_desc %></p>
-                                                                <hr />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Date Created: <%#Item.timeline_creation %>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
+                                                <a href="Updates/View?t="<%#Item.timelineID %>>
+                                                    <div class="Basic Timeline">
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <asp:Image CssClass="gallery-image" ImageUrl="<%#Item.timeline_image_path %>" runat="server" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h2><%#Item.timeline_name %></h2>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <hr />
+                                                                    <p style="height:120px;"><%#Item.timeline_desc %></p>
+                                                                    <hr />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    Date Created: <%#Item.timeline_creation %>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>

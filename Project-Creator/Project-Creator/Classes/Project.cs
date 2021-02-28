@@ -15,7 +15,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
-
 using System.Web;
 
 namespace Project_Creator
@@ -75,6 +74,16 @@ namespace Project_Creator
 
         public Project(int id, string title, string desc, string iconUrl) {
 
+        }
+
+        public Project(int projectID, SqlDateTime project_creation, string project_name, string project_desc, string project_author, string project_image_path)
+        {
+            this.projectID = projectID;
+            this.project_creation = project_creation;
+            this.project_name = project_name;
+            this.project_desc = project_desc;
+            this.project_author = project_author;
+            this.project_image_path = project_image_path;
         }
 
         // Changes were made to the database,

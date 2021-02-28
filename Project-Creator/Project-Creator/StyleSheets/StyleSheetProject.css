@@ -22,6 +22,16 @@ img.Project {
     height: 160px;
     background-color: #3b3b3b;
 }
+div.Timeline {
+    width: 90%;
+    height: 360px;
+    margin: 0;
+    padding: 8px;
+}
+div.Timeline:hover {
+    cursor: pointer;
+    background-color: #242424;
+}
 .gallery {
     background: #0f0f0f;
 }
