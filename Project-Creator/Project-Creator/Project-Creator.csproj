@@ -159,11 +159,16 @@
     <Content Include="Images\Test.png" />
     <Content Include="Images\Search.png" />
     <Content Include="Login.aspx" />
+<<<<<<< Updated upstream
     <Content Include="ProjectManagement\ProjectTimeline.aspx" />
     <Content Include="ProjectManagement\ViewUpdate.aspx" />
+=======
+>>>>>>> Stashed changes
     <Content Include="Projects\Create.aspx" />
     <Content Include="Projects\Edit.aspx" />
-    <Content Include="Projects\Updates\View.aspx" />
+    <Content Include="Projects\Timeline\Create.aspx" />
+    <Content Include="Projects\Timeline\Edit.aspx" />
+    <Content Include="Projects\Timeline\View.aspx" />
     <Content Include="Projects\View.aspx" />
     <Content Include="Signup.aspx" />
     <Content Include="StyleSheets\StyleSheet.css" />
@@ -171,7 +176,6 @@
     <Content Include="StyleSheets\StyleSheetProject.css" />
     <Content Include="StyleSheets\StyleSheetForm.css" />
     <Content Include="StyleSheets\StyleSheetHeader.css" />
-    <Content Include="StyleSheets\StyleSheet_ProjectManagement.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +214,7 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+<<<<<<< Updated upstream
     <Compile Include="ProjectManagement\ProjectTimeline.aspx.cs">
       <DependentUpon>ProjectTimeline.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -225,6 +230,8 @@
       <DependentUpon>ViewUpdate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Projects\Create.aspx.cs">
+=======
+    <Compile Include="Projects\Create.aspx.cs">
       <DependentUpon>Create.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -238,11 +245,26 @@
     <Compile Include="Projects\Edit.aspx.designer.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Projects\Updates\View.aspx.cs">
+    <Compile Include="Projects\Timeline\Create.aspx.cs">
+>>>>>>> Stashed changes
+      <DependentUpon>Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Projects\Timeline\Create.aspx.designer.cs">
+      <DependentUpon>Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Projects\Timeline\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Projects\Timeline\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Projects\Timeline\View.aspx.cs">
       <DependentUpon>View.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Projects\Updates\View.aspx.designer.cs">
+    <Compile Include="Projects\Timeline\View.aspx.designer.cs">
       <DependentUpon>View.aspx</DependentUpon>
     </Compile>
     <Compile Include="Projects\View.aspx.cs">

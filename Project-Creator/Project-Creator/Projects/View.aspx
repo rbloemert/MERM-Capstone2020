@@ -18,14 +18,14 @@
                         <div class="ProjectColumn" style="width: 100%; max-width: 800px;">
                             <div class="Basic">
                                 <h1 style="text-align: left">
-                                    <asp:Label ID="lblTitle" runat="server" /></h1>
+                                <asp:Label ID="lblTitle" runat="server" /></h1>
                             </div>
                             <div class="Basic" style="height: 72px; margin-top: 4px;">
                                 <h2 class="Project" style="text-align: left">Project Creator: <span style="color: white;">
-                                    <asp:Label ID="lblAuthor" runat="server" /></span></h2>
+                                <asp:Label ID="lblAuthor" runat="server" /></span></h2>
                                 <br />
                                 <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;">
-                                    <asp:Label ID="lblDate" runat="server" /></span></h2>
+                                <asp:Label ID="lblDate" runat="server" /></span></h2>
                             </div>
                         </div>
                     </div>
@@ -42,6 +42,7 @@
                                     <asp:Repeater ID="RepeaterTimeline" ItemType="Project_Creator.Timeline" runat="server">
                                         <ItemTemplate>
                                             <div class="gallery-cell">
+<<<<<<< Updated upstream
                                                 <div class="Basic" style="width: 90%; height: 360px; margin: 0; padding: 8px;">
                                                     <table>
                                                         <tr>
@@ -68,8 +69,36 @@
                                                             </td>
                                                         </tr>
                                                     </table>
+=======
+                                                <a href="Timeline/View.aspx?p=<%#ProjectID %>&u=<%#Item.timelineID %>">
+                                                    <div class="Basic Timeline">
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <asp:Image CssClass="gallery-image" ImageUrl="<%#Item.timeline_image_path %>" runat="server" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h2><%#Item.timeline_name %></h2>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <hr />
+                                                                    <p><%#Item.timeline_desc %></p>
+                                                                    <hr />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Date Created: <%#Item.timeline_creation %>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+>>>>>>> Stashed changes
                                                 </div>
-                                            </div>
+                                            </a>
                                         </ItemTemplate>
                                     </asp:Repeater>
                                 </div>
