@@ -48,6 +48,8 @@ div.Basic {
     border-radius: 0px;
     border-width: 1px;
     outline-width: 0px;
+    -webkit-box-shadow: 0px 5px 7px 0px #000000;
+    box-shadow: 0px 5px 7px 0px #000000;
 }
 div.Center {
     display: flex;

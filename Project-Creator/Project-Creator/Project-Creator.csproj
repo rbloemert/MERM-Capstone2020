@@ -159,8 +159,6 @@
     <Content Include="Images\Test.png" />
     <Content Include="Images\Search.png" />
     <Content Include="Login.aspx" />
-    <Content Include="ProjectManagement\ProjectTimeline.aspx" />
-    <Content Include="ProjectManagement\ViewUpdate.aspx" />
     <Content Include="Projects\Create.aspx" />
     <Content Include="Projects\Edit.aspx" />
     <Content Include="Projects\Updates\View.aspx" />
@@ -209,20 +207,6 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectManagement\ProjectTimeline.aspx.cs">
-      <DependentUpon>ProjectTimeline.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ProjectManagement\ProjectTimeline.aspx.designer.cs">
-      <DependentUpon>ProjectTimeline.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectManagement\ViewUpdate.aspx.cs">
-      <DependentUpon>ViewUpdate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ProjectManagement\ViewUpdate.aspx.designer.cs">
-      <DependentUpon>ViewUpdate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Projects\Create.aspx.cs">
       <DependentUpon>Create.aspx</DependentUpon>

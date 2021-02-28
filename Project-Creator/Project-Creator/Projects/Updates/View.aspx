@@ -37,7 +37,7 @@
                 <div class="ProjectTable">
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
-                            <div class="Basic">
+                            <div class="Basic" style="margin:0;">
                                 <asp:Image ID="TimelineImage" CssClass="timeline-image" runat="server" />
                                 <br />
                                 <p>
@@ -56,39 +56,43 @@
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="margin-top: 0">
                                 <div class="gallery js-flickity" data-flickity-options='{ "wrapAround": true }'>
+
+                                    <!-- Timeline carousel repeater. -->
                                     <asp:Repeater ID="RepeaterTimeline" ItemType="Project_Creator.Timeline" runat="server">
                                         <ItemTemplate>
                                             <div class="gallery-cell">
-                                                <div class="Basic" style="width: 90%; height: 360px; margin: 0; padding: 8px;">
-                                                    <table>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="View.aspx?p=<%#ProjectID %>&u=<%#Item.timelineID %>">
+                                                <a style="text-decoration:none;" href="View.aspx?p=<%#ProjectID %>&u=<%#Item.timelineID %>">
+                                                    <div class="Basic Timeline">
+                                                        <table>
+                                                            <tr>
+                                                                <td>
                                                                     <asp:Image CssClass="gallery-image" ImageUrl="<%#Item.timeline_image_path %>" runat="server" />
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <h2><%#Item.timeline_name %></h2>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <hr />
-                                                                <p><%#Item.timeline_desc %></p>
-                                                                <hr />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Date Created: <%#Item.timeline_creation %>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h2><%#Item.timeline_name %></h2>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <hr />
+                                                                    <p style="height:120px;"><%#Item.timeline_desc %></p>
+                                                                    <hr />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Date Created: <%#Item.timeline_creation %>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>
+                                    <!-- Timeline carousel repeater. -->
+
                                 </div>
                             </div>
                         </div>
