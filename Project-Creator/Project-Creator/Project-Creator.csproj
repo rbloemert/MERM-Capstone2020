@@ -159,9 +159,6 @@
     <Content Include="Images\Test.png" />
     <Content Include="Images\Search.png" />
     <Content Include="Login.aspx" />
-    <Content Include="Posts\Create.aspx" />
-    <Content Include="Posts\Edit.aspx" />
-    <Content Include="Posts\View.aspx" />
     <Content Include="ProjectManagement\ProjectTimeline.aspx" />
     <Content Include="ProjectManagement\ViewUpdate.aspx" />
     <Content Include="Projects\Create.aspx" />
@@ -211,27 +208,6 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Posts\Create.aspx.cs">
-      <DependentUpon>Create.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Posts\Create.aspx.designer.cs">
-      <DependentUpon>Create.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Posts\Edit.aspx.cs">
-      <DependentUpon>Edit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Posts\Edit.aspx.designer.cs">
-      <DependentUpon>Edit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Posts\View.aspx.cs">
-      <DependentUpon>View.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Posts\View.aspx.designer.cs">
-      <DependentUpon>View.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProjectManagement\ProjectTimeline.aspx.cs">
       <DependentUpon>ProjectTimeline.aspx</DependentUpon>
