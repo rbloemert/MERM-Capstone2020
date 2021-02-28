@@ -28,12 +28,9 @@ namespace Project_Creator
         public int projectID { get; set; }                   /* projectID: Unique ID of this project. */
         public SqlDateTime project_creation { get; set; }    /* project_creation: When this project was created. */
         public string project_name { get; set; }             /* project_name: Name of this project. */
+        public string project_desc { get; set; }
         public string project_author { get; set; }           /* project_author: Author of this project. */
         public string project_image_path { get; set; }       /* project_image_path: The File path of the project's picture; NULL means none */
-        public List<Timeline> project_timeline { get; set; }
-        // I really think we should align the respective classes with the database, and make methods to access extensions of a class
-        // This is because the exact same class is used to interact with the database directly.
-        //maybe we should have separate classes
 
         public static Database.QueryResult RegisterProject(Account project_owner, Project new_project)
         {
