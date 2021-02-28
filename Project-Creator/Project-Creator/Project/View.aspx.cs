@@ -49,21 +49,5 @@ namespace Project_Creator.Projects
             RepeaterRelated.DataSource = otherProjects;
             RepeaterRelated.DataBind();
         }
-
-        /*
-        * METHOD : updateClick
-        * DESCRIPTION :
-        *	when an update icon is clicked on, navigate to that updates page
-        * PARAMETERS :
-        *	object sender : the object that invoked the method
-        *   EventArgs e : addional arguments thata may be useful
-        * RETURNS :
-        *	none
-        *	we are navigated to another page
-        */
-        protected void updateClick(object sender, EventArgs e) {
-            Session["Update"] = ((ImageButton)sender).ID;
-            Response.Redirect("ViewUpdate.aspx");
-        }
     }
 }

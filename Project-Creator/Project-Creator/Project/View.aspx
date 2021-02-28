@@ -30,7 +30,9 @@
                         </div>
                     </div>
                 </div>
-            </asp:TableCell></asp:TableRow><asp:TableRow>
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow>
             <asp:TableCell>
                 <div class="ProjectTable">
                     <div class="ProjectRow">
@@ -44,7 +46,7 @@
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                                <a href="Posts/View.aspx?p=<%#ProjectID %>u=<%#Item.timelineID %>">
+                                                                <a href="Timeline/View.aspx?p=<%#ProjectID %>&u=<%#Item.timelineID %>">
                                                                     <asp:Image CssClass="gallery-image" ImageUrl="<%#Item.timeline_image_path %>" runat="server" />
                                                                 </a>
                                                             </td>
@@ -75,7 +77,9 @@
                         </div>
                     </div>
                 </div>
-            </asp:TableCell></asp:TableRow><asp:TableRow>
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow>
             <asp:TableCell>
                 <div class="ProjectTable">
                     <div class="ProjectRow">
@@ -90,13 +94,13 @@
                                                         <tr>
                                                             <td>
                                                                 <a href="View.aspx?p=<%#Item.projectID %>">
-                                                    <asp:Image CssClass="related-img" ImageUrl="<%#Item.project_image_path %>" runat="server" />
-                                                </a>
+                                                                    <asp:Image CssClass="related-img" ImageUrl="<%#Item.project_image_path %>" runat="server" />
+                                                                </a>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                               <h2><%#Item.project_name %></h2>
+                                                                <h2><%#Item.project_name %></h2>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -116,4 +120,7 @@
                         </div>
                     </div>
                 </div>
-            </asp:TableCell></asp:TableRow></asp:Table></asp:Content>
+            </asp:TableCell>
+        </asp:TableRow>
+    </asp:Table>
+</asp:Content>
