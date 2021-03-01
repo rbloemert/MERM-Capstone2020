@@ -887,6 +887,24 @@ namespace Project_Creator {
             return comments;
         }
 
+        public int GetRecentCommentID() {
+            int id = 0;
+            if (!IsConnectionOpen()) return id;
+
+            var sql = "SELECT IDENT_CURRENT('comment') as current_identity";
+            using (var cmd = new SqlCommand(sql, connection)) {
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows) {
+                    id = Convert.ToInt32(row["current_identity"]);
+                }
+            }
+
+            return id;
+        }
+
         public List<Comment> GetCommentList(int timelineID) // return comments belonging to a timeline
         {
             List<Comment> comments = new List<Comment>();
@@ -943,6 +961,7 @@ namespace Project_Creator {
 
             return QueryResult.FailedNoChanges;
         }
+
 
         public QueryResult DeleteComment(int commentID) {
             int result;
