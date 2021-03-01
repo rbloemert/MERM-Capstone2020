@@ -61,7 +61,7 @@
                                     <asp:Repeater ID="RepeaterTimeline" ItemType="Project_Creator.Timeline" runat="server">
                                         <ItemTemplate>
                                             <div class="gallery-cell">
-                                                <a style="text-decoration:none;" href="View.aspx?p=<%#ProjectID %>&u=<%#Item.timelineID %>">
+                                                <a style="text-decoration:none;" href="View?p=<%#ProjectID %>&u=<%#Item.timelineID %>">
                                                     <div class="Basic Timeline">
                                                         <table>
                                                             <tr>
@@ -112,7 +112,7 @@
                                             <table>
                                                 <tr>
                                                     <td class="comment-info">
-                                                        <a href="/Home.aspx">
+                                                        <a href="/Home">
                                                             <asp:Image CssClass="comment-img" ImageUrl="<%#Item.account_image_path %>" runat="server" />
                                                         </a>
                                                         <br />
