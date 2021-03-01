@@ -10,7 +10,7 @@ namespace Project_Creator.Posts {
     public partial class View : System.Web.UI.Page {
         public int ProjectID = 0;
         public int UpdateID = 0;
-        public bool loggedIn = false;
+        public bool loggedIn = true;
         protected void Page_Load(object sender, EventArgs e) {
             //check if we are logged in
             if (!loggedIn) {
@@ -64,6 +64,20 @@ namespace Project_Creator.Posts {
         protected void btnSubmitComment_Click(object sender, EventArgs e) {
             if (loggedIn) {
                 //submit comment
+                int accountID = 2;  //TODO: adjust for use with session login
+
+
+                DateTime now = DateTime.Now;
+                Comment comment = new Comment();
+                comment.comment_creation = now;
+                comment.comment_owner_accountID = accountID.ToString(); 
+                comment.comment_text = txtNewComment.Text; //needs to be filtered for security reasons.
+                Database db = new Database();
+                db.CreateComment(comment);
+                int id = db.GetRecentCommentID();
+                db.CreateCommentLink(id, UpdateID, accountID);
+
+                Response.Redirect("View?p="+ ProjectID + "&u=" + UpdateID);
             }
         }
     }
