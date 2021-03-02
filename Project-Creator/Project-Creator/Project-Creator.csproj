@@ -165,6 +165,7 @@
     <Content Include="Projects\View.aspx" />
     <Content Include="Signup.aspx" />
     <Content Include="StyleSheets\StyleSheet.css" />
+    <Content Include="StyleSheets\StyleSheetCreator.css" />
     <Content Include="StyleSheets\StyleSheetFlickity.css" />
     <Content Include="StyleSheets\StyleSheetProject.css" />
     <Content Include="StyleSheets\StyleSheetForm.css" />

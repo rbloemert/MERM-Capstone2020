@@ -11,6 +11,7 @@ namespace Project_Creator
     public partial class Creator : System.Web.UI.Page
     {
         List<Project> projectList;
+        string sampleDesc = "Sample Description Text.Paragraphs are the building blocks of papers. Many students define paragraphs in terms of length: a paragraph is a group of at least five sentences, a paragraph is half a page long, etc.In reality, though, the unity and coherence of ideas among sentences is what constitutes a paragraph. A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116).";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,6 +19,8 @@ namespace Project_Creator
             {
                 PopulateGrid();
             }
+            CreatorUsernameLabel.Text = "Sample Username";
+            CreatorDescriptionTextBox.Text = sampleDesc;
         }
 
 
@@ -29,13 +32,13 @@ namespace Project_Creator
             for(int i = 0; i < 5; i++)
             {
                 string x = "Project: " + (i + 1);
-                //projectList.Add(new Project(i, x, "me", "Unavailable"));
+                projectList.Add(new Project(i, x, sampleDesc, "Unavailable"));
 
             }
 
 
-            //creatorProjectGrid.DataSource = projectList;
-            //creatorProjectGrid.DataBind();
+            creatorProjectGrid.DataSource = projectList;
+            creatorProjectGrid.DataBind();
 
         }
 
