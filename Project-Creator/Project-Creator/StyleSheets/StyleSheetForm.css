@@ -22,6 +22,18 @@ div.Error{
 input[type=text], input[type=password] {
     width: 200px;
 }
+textarea {
+    resize: none;
+    width: 100%;
+    color: white;
+    padding: 4px;
+    border-color: #3b3b3b;
+    border-style: solid;
+    border-radius: 0px;
+    border-width: 1px;
+    outline-width: 0px;
+    background-color: #0f0f0f;
+}
 
 /* Button style. */
 input[type=button], input[type=submit] {

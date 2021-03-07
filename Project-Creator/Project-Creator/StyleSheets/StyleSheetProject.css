@@ -17,11 +17,15 @@ div.ProjectColumn {
     display: inline-block;
     vertical-align: top;
 }
-img.Project {
+label.Project, img.Project {
+    display: flex;
     width: 160px;
     height: 160px;
+    justify-content: center;
+    align-items: center;
     background-color: #3b3b3b;
 }
+
 div.Timeline {
     width: 90%;
     height: 360px;
@@ -33,6 +37,7 @@ div.Timeline:hover {
     background-color: #242424;
 }
 .gallery {
+    min-height: 424px;
     background: #0f0f0f;
 }
 .gallery-cell {

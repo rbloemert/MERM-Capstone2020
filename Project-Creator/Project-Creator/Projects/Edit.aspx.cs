@@ -50,9 +50,19 @@ namespace Project_Creator.Projects
 
                             //Gets the project information.
                             ProjectObject = db.GetProject(ProjectID);
+                            ProjectObject.project_author = db.GetProjectAuthor(ProjectID);
 
                             //Sets the textbox to the project title.
                             TextBoxTitle.Text = ProjectObject.project_name;
+                            lblAuthor.Text = ProjectObject.project_author;
+                            lblDate.Text = ProjectObject.project_creation.ToString();
+
+                            //Gets a list of all the timelines for the project.
+                            List<Timeline> ProjectTimeline = db.GetTimelineList(ProjectID);
+
+                            //Sets the list to the timeline repeater.
+                            RepeaterTimeline.DataSource = ProjectTimeline;
+                            RepeaterTimeline.DataBind();
 
                         }
 

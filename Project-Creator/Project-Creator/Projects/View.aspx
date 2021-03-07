@@ -17,15 +17,22 @@
                         </div>
                         <div class="ProjectColumn" style="width: 100%; max-width: 800px;">
                             <div class="Basic">
-                                <h1 style="text-align: left">
-                                    <asp:Label ID="lblTitle" runat="server" /></h1>
+                                <h1 style="text-align: left"><asp:Label ID="lblTitle" runat="server" /></h1>
+                                <h2 style="text-align: left"><asp:Label ID="lblDescription" runat="server" /></h2>
                             </div>
-                            <div class="Basic" style="height: 72px; margin-top: 4px;">
-                                <h2 class="Project" style="text-align: left">Project Creator: <span style="color: white;">
-                                    <asp:Label ID="lblAuthor" runat="server" /></span></h2>
-                                <br />
-                                <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;">
-                                    <asp:Label ID="lblDate" runat="server" /></span></h2>
+                            <div class="Basic" style="height:16px;margin-top:4px;">
+                                <table style="margin:0;width:100%;">
+                                    <tr>
+                                        <td>
+                                            <h2 class="Project" style="text-align: left">Project Creator: <span style="color: white;">
+                                            <asp:Label ID="lblAuthor" runat="server" /></span></h2>
+                                        </td>
+                                        <td>
+                                            <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;">
+                                            <asp:Label ID="lblDate" runat="server" /></span></h2>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -37,7 +44,7 @@
                 <div class="ProjectTable">
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
-                            <div class="Basic" style="margin-top: 0">
+                            <div class="Basic" style="margin-top:0;min-height:474px;">
                                 <div class="gallery js-flickity" data-flickity-options='{ "wrapAround": true }'>
 
                                     <!-- Timeline carousel repeater. -->
