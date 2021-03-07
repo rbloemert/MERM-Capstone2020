@@ -10,22 +10,11 @@
             <asp:TableCell>
                 <div class="ProjectTable">
                     <div class="ProjectRow">
-                        <div class="ProjectColumn">
-                            <div class="Basic">
-                                <asp:Image ID="ProjectIcon" CssClass="Project" runat="server" />
-                            </div>
-                        </div>
-                        <div class="ProjectColumn" style="width: 100%; max-width: 800px;">
-                            <div class="Basic">
-                                <h1 style="text-align: left">
-                                    <asp:Label ID="lblTitle" runat="server" /></h1>
-                            </div>
+                        <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="height: 72px; margin-top: 4px;">
-                                <h2 class="Project" style="text-align: left">Update: <span style="color: white;">
-                                    <asp:Label ID="lblUpdate" runat="server" /></span></h2>
+                                <h1 class="Project" style="text-align: left"><asp:Label ID="lblUpdate" runat="server" /></h1>
                                 <br />
-                                <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;">
-                                    <asp:Label ID="lblDate" runat="server" /></span></h2>
+                                <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;"><asp:Label ID="lblDate" runat="server" /></span></h2>
                             </div>
                         </div>
                     </div>
@@ -40,6 +29,8 @@
                             <div class="Basic" style="margin:0;">
                                 <asp:Image ID="TimelineImage" CssClass="timeline-image" runat="server" />
                                 <br />
+                            </div>
+                            <div class="Basic" style="margin-top:5px;">
                                 <p>
                                     <asp:Label ID="lblDesc" runat="server"></asp:Label>
                                 </p>

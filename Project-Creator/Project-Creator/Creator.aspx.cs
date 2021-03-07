@@ -29,12 +29,12 @@ namespace Project_Creator
             projectList = new List<Project>();
 
 
-            for(int i = 0; i < 5; i++)
-            {
-                string x = "Project: " + (i + 1);
-                projectList.Add(new Project(i, x, sampleDesc, "Unavailable"));
+            //for(int i = 0; i < 5; i++)
+            //{
+            //    string x = "Project: " + (i + 1);
+            //    projectList.Add(new Project(i, x, sampleDesc, "Unavailable"));
 
-            }
+            //}
 
 
             creatorProjectGrid.DataSource = projectList;

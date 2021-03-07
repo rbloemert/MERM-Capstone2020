@@ -159,7 +159,6 @@
     <Content Include="Images\Test.png" />
     <Content Include="Images\Search.png" />
     <Content Include="Login.aspx" />
-    <Content Include="Projects\Create.aspx" />
     <Content Include="Projects\Edit.aspx" />
     <Content Include="Projects\Updates\View.aspx" />
     <Content Include="Projects\View.aspx" />
@@ -170,7 +169,6 @@
     <Content Include="StyleSheets\StyleSheetProject.css" />
     <Content Include="StyleSheets\StyleSheetForm.css" />
     <Content Include="StyleSheets\StyleSheetHeader.css" />
-    <Content Include="StyleSheets\StyleSheet_ProjectManagement.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -208,13 +206,6 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Projects\Create.aspx.cs">
-      <DependentUpon>Create.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Projects\Create.aspx.designer.cs">
-      <DependentUpon>Create.aspx</DependentUpon>
     </Compile>
     <Compile Include="Projects\Edit.aspx.cs">
       <DependentUpon>Edit.aspx</DependentUpon>

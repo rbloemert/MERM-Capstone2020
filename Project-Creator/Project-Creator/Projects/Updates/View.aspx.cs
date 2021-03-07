@@ -39,9 +39,7 @@ namespace Project_Creator.Posts {
             }
 
             lblUpdate.Text = currentTimeline.timeline_name;
-            lblTitle.Text = project.project_name;
             lblDate.Text = currentTimeline.timeline_creation.ToString();
-            ProjectIcon.ImageUrl = project.project_image_path;
             TimelineImage.ImageUrl = currentTimeline.timeline_image_path;
             lblDesc.Text = currentTimeline.timeline_desc;
 

@@ -202,7 +202,7 @@ namespace Project_Creator {
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
 
             //Prepares the sql query.
-            var sql = "INSERT INTO account(account_creation, fullname, username, password, password_salt, email, isSiteAdministrator, account_image_path) VALUES(@account_creation, @fullname, @username, @password, @password_salt, @email, @isSiteAdministrator, account_image_path)";
+            var sql = "INSERT INTO account(account_creation, fullname, username, password, password_salt, email, isSiteAdministrator, account_image_path) VALUES(@account_creation, @fullname, @username, @password, @password_salt, @email, @isSiteAdministrator, @account_image_path)";
             using (var cmd = new SqlCommand(sql, connection)) {
                 var salt = Password.Salt();
                 cmd.Parameters.AddWithValue("@account_creation", new SqlDateTime(DateTime.Now));
@@ -447,33 +447,31 @@ namespace Project_Creator {
             return projects;
         }
 
-        public QueryResult CreateProject(Project project) {
-            int result;
-            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+        public int CreateProject(Project project) {
 
             //Prepares the sql query.
-            var sql = "INSERT INTO project(project_creation, project_name, project_desc, project_image_path) VALUES(@project_creation, @project_name, @project_desc, @project_image_path)";
+            var sql = "INSERT INTO project(project_creation, project_name, project_desc, project_image_path) VALUES(@project_creation, @project_name, @project_desc, @project_image_path) SELECT SCOPE_IDENTITY()";
             using (var cmd = new SqlCommand(sql, connection)) {
-                cmd.Parameters.AddWithValue("@project_creation", new SqlDateTime(DateTime.Now));
+
+                cmd.Parameters.AddWithValue("@project_creation", project.project_creation);
                 cmd.Parameters.AddWithValue("@project_name", project.project_name);
                 cmd.Parameters.AddWithValue("@project_desc", project.project_desc);
                 cmd.Parameters.AddWithValue("@project_image_path", "NULL");
 
                 //Executes the insert command.
-                try {
-                    result = cmd.ExecuteNonQuery();
-                } catch (SqlException except) {
-                    lastErr = except.Message;
-                    return QueryResult.FailedBadQuery;
+                try
+                {
+                    return Convert.ToInt32(cmd.ExecuteScalar());
                 }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                }
+
+                return 0;
+
             }
 
-            //Returns if the insert was successful.
-            if (result > 0) {
-                return QueryResult.Successful;
-            }
-
-            return QueryResult.FailedNoChanges;
         }
 
         public QueryResult DeleteProject(int projectID) {
