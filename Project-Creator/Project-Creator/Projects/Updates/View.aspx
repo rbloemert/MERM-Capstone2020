@@ -12,9 +12,11 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="height: 72px; margin-top: 4px;">
-                                <h1 class="Project" style="text-align: left"><asp:Label ID="lblUpdate" runat="server" /></h1>
+                                <h1 class="Project" style="text-align: left">
+                                    <asp:Label ID="lblUpdate" runat="server" /></h1>
                                 <br />
-                                <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;"><asp:Label ID="lblDate" runat="server" /></span></h2>
+                                <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;">
+                                    <asp:Label ID="lblDate" runat="server" /></span></h2>
                             </div>
                         </div>
                     </div>
@@ -26,13 +28,18 @@
                 <div class="ProjectTable">
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
-                            <div class="Basic" style="margin:0;">
+                            <div class="Basic" style="margin: 0;">
                                 <asp:Image ID="TimelineImage" CssClass="timeline-image" runat="server" />
                                 <br />
                             </div>
-                            <div class="Basic" style="margin-top:5px;">
+                            <div class="Basic" style="margin-top: 5px;">
                                 <p>
                                     <asp:Label ID="lblDesc" runat="server"></asp:Label>
+                                </p>
+                            </div>
+                            <div class="Basic" style="margin-top: 5px;">
+                                <p>
+                                    <asp:Label ID="lblContent" runat="server" Text="Put attatched content here"></asp:Label>
                                 </p>
                             </div>
                         </div>
@@ -52,7 +59,7 @@
                                     <asp:Repeater ID="RepeaterTimeline" ItemType="Project_Creator.Timeline" runat="server">
                                         <ItemTemplate>
                                             <div class="gallery-cell">
-                                                <a style="text-decoration:none;" href="View?p=<%#ProjectID %>&u=<%#Item.timelineID %>">
+                                                <a style="text-decoration: none;" href="View?p=<%#ProjectID %>&u=<%#Item.timelineID %>">
                                                     <div class="Basic Timeline">
                                                         <table>
                                                             <tr>
@@ -68,7 +75,7 @@
                                                             <tr>
                                                                 <td>
                                                                     <hr />
-                                                                    <p style="height:120px;"><%#Item.timeline_desc %></p>
+                                                                    <p style="height: 120px;"><%#Item.timeline_desc %></p>
                                                                     <hr />
                                                                 </td>
                                                             </tr>
@@ -120,13 +127,27 @@
                                     </ItemTemplate>
                                 </asp:Repeater>
                                 <div class="Basic">
-                                    <table>
+                                    <table style="width: 100%">
                                         <tr>
                                             <td class="comment-info">
-                                                <asp:Button ID="btnSubmitComment" CssClass="comment-button" Text="Submit" OnClick="btnSubmitComment_Click" runat="server" />
+                                                <asp:Image ID="LoggedInUserImage" CssClass="comment-img" runat="server" />
+                                                <asp:Label ID="lblNewCommentUser" runat="server"></asp:Label>
                                             </td>
                                             <td class="comment-content">
-                                                <asp:Textbox id="txtNewComment" CssClass="comment-textbox" runat="server"></asp:Textbox>
+                                                <p>
+                                                    <asp:TextBox ID="txtNewComment" CssClass="comment-textbox" TextMode="MultiLine" runat="server" onKeyUp="TextChanged()" MaxLength="255" ClientIDMode="Static" style="overflow: hidden;"></asp:TextBox>
+                                                    <script>
+                                                        function TextChanged() {
+                                                            val = document.getElementById("txtNewComment").value;
+                                                            document.getElementById("lblDescCounter").innerHTML = val.length + " of 255";
+                                                        }
+                                                    </script>
+                                                    <br />
+                                                    <asp:Label ID="lblDescCounter" runat="server" ClientIDMode="Static">0 of 255</asp:Label>
+                                                </p>
+                                            </td>
+                                            <td class="comment-submit">
+                                                <asp:Button ID="btnSubmitComment" CssClass="comment-button" Text="Submit" OnClick="btnSubmitComment_Click" runat="server" />
                                             </td>
                                         </tr>
 

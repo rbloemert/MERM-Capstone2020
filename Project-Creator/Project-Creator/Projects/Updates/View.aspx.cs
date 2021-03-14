@@ -10,12 +10,21 @@ namespace Project_Creator.Posts {
     public partial class View : System.Web.UI.Page {
         public int ProjectID = 0;
         public int UpdateID = 0;
-        public bool loggedIn = true;
+        public bool loggedIn = false;
+        public Account user = null;
         protected void Page_Load(object sender, EventArgs e) {
-            //check if we are logged in
-            if (!loggedIn) {
-                btnSubmitComment.Enabled = false;
+            txtNewComment.Rows = 4;
+
+            //check if the user is logged in
+            if (Session["User"] != null) {
+                //Gets the session user object.
+                user = (Account)Session["User"];
+                loggedIn = true;
+                LoggedInUserImage.ImageUrl = user.account_image_path;
+                lblNewCommentUser.Text = user.username;
+            } else {
                 txtNewComment.Enabled = false;
+                txtNewComment.Text = "You must be signed in order to leave a comment";
             }
 
             //Gets the project id from the URL.
@@ -62,20 +71,20 @@ namespace Project_Creator.Posts {
         protected void btnSubmitComment_Click(object sender, EventArgs e) {
             if (loggedIn) {
                 //submit comment
-                int accountID = 2;  //TODO: adjust for use with session login
-
-
+ 
                 DateTime now = DateTime.Now;
                 Comment comment = new Comment();
                 comment.comment_creation = now;
-                comment.comment_owner_accountID = accountID.ToString(); 
+                comment.comment_owner_accountID = user.accountID.ToString(); 
                 comment.comment_text = txtNewComment.Text; //needs to be filtered for security reasons.
                 Database db = new Database();
                 db.CreateComment(comment);
                 int id = db.GetRecentCommentID();
-                db.CreateCommentLink(id, UpdateID, accountID);
+                db.CreateCommentLink(id, UpdateID, user.accountID);
 
                 Response.Redirect("View?p="+ ProjectID + "&u=" + UpdateID);
+            } else {
+                Response.Redirect("/Login");
             }
         }
     }

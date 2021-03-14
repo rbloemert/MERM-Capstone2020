@@ -7,12 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project_Creator.Posts
-{
+namespace Project_Creator.Posts {
 
 
-    public partial class View
-    {
+    public partial class View {
 
         /// <summary>
         /// lblUpdate control.
@@ -51,6 +49,15 @@ namespace Project_Creator.Posts
         protected global::System.Web.UI.WebControls.Label lblDesc;
 
         /// <summary>
+        /// lblContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblContent;
+
+        /// <summary>
         /// RepeaterTimeline control.
         /// </summary>
         /// <remarks>
@@ -69,13 +76,22 @@ namespace Project_Creator.Posts
         protected global::System.Web.UI.WebControls.Repeater RepeaterComment;
 
         /// <summary>
-        /// btnSubmitComment control.
+        /// LoggedInUserImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmitComment;
+        protected global::System.Web.UI.WebControls.Image LoggedInUserImage;
+
+        /// <summary>
+        /// lblNewCommentUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNewCommentUser;
 
         /// <summary>
         /// txtNewComment control.
@@ -85,5 +101,23 @@ namespace Project_Creator.Posts
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNewComment;
+
+        /// <summary>
+        /// lblDescCounter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDescCounter;
+
+        /// <summary>
+        /// btnSubmitComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSubmitComment;
     }
 }
