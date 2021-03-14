@@ -506,12 +506,11 @@ namespace Project_Creator {
 
             //Prepares the sql query.
             var sql = "UPDATE project SET " +
-                      "projectID = @projectID" +
-                      "project_creation = @project_creation" +
-                      "project_name = @project_name" +
-                      "project_desc = @project_desc" +
-                      "project_image_path = @project_image_path" +
-                      "WHERE projectID = @oldProjectID";
+                      "project_creation = @project_creation, " +
+                      "project_name = @project_name, " +
+                      "project_desc = @project_desc, " +
+                      "project_image_path = @project_image_path " +
+                      "WHERE projectID = @oldProjectID;";
             using (var cmd = new SqlCommand(sql, connection)) {
                 cmd.Parameters.AddWithValue("@oldProjectID", projectID);
                 cmd.Parameters.AddWithValue("@projectID", new_project.projectID);

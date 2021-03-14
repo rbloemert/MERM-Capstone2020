@@ -155,6 +155,7 @@
     <Content Include="Browse.aspx" />
     <Content Include="Creator.aspx" />
     <Content Include="Home.aspx" />
+    <Content Include="Images\Add.png" />
     <Content Include="Images\Logo.svg" />
     <Content Include="Images\Test.png" />
     <Content Include="Images\Search.png" />

@@ -47,6 +47,9 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="margin:0;min-height:474px">
+                                <div style="text-align:right">
+                                    <asp:ImageButton CssClass="Icon" runat="server" ImageUrl="~/Images/Add.png" OnClick="AddUpdate_Click" />
+                                </div>
                                 <div class="gallery js-flickity" data-flickity-options='{ "wrapAround": true }'>
 
                                     <!-- Timeline carousel repeater. -->
@@ -86,6 +89,19 @@
                                     <!-- Timeline carousel repeater. -->
 
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow>
+            <asp:TableCell>
+                <div class="ProjectTable">
+                    <div class="ProjectRow">
+                        <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
+                            <div class="Basic" style="text-align:right;margin:0">
+                                <asp:Button runat="server" Text="Save and Publish" CausesValidation="true" OnClick="Complete_Click" />
                             </div>
                         </div>
                     </div>

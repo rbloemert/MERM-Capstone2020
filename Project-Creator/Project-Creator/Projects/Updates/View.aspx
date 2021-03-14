@@ -12,9 +12,16 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="height: 72px; margin-top: 4px;">
-                                <h1 class="Project" style="text-align: left">
-                                    <asp:Label ID="lblUpdate" runat="server" /></h1>
-                                <br />
+<table style="width:100%;">
+                                    <tr>
+                                        <td>
+                                            <h1 class="Project" style="text-align: left"><asp:Label ID="lblUpdate" runat="server" /></h1>
+                                        </td>
+                                        <td>
+                                            <a style="text-align:right;text-decoration:none;" href="../View?p=<%=ProjectID %>"><h3>Back to project</h3></a>
+                                        </td>
+                                    </tr>
+                                </table>                                <br />
                                 <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;">
                                     <asp:Label ID="lblDate" runat="server" /></span></h2>
                             </div>

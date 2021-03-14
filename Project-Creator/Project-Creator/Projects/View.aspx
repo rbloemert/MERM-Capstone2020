@@ -15,9 +15,10 @@
                                 <asp:Image ID="ProjectIcon" CssClass="Project" runat="server" />
                             </div>
                         </div>
-                        <div class="ProjectColumn" style="width: 100%; max-width: 800px;">
-                            <div class="Basic">
+                        <div class="ProjectColumn" style="width: 100%;max-width: 800px;">
+                            <div class="Basic" style="height:90px;">
                                 <h1 style="text-align: left"><asp:Label ID="lblTitle" runat="server" /></h1>
+                                <br />
                                 <h2 style="text-align: left"><asp:Label ID="lblDescription" runat="server" /></h2>
                             </div>
                             <div class="Basic" style="height:16px;margin-top:4px;">
