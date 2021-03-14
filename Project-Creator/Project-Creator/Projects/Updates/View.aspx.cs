@@ -51,6 +51,7 @@ namespace Project_Creator.Posts {
             lblDate.Text = currentTimeline.timeline_creation.ToString();
             TimelineImage.ImageUrl = currentTimeline.timeline_image_path;
             lblDesc.Text = currentTimeline.timeline_desc;
+            lblContent.Text = currentTimeline.timeline_file_path;
 
             //Sets the list to the timeline repeater.
             RepeaterTimeline.DataSource = ProjectTimeline;
