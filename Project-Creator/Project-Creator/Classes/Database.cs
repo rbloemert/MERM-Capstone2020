@@ -708,6 +708,34 @@ namespace Project_Creator {
             return timelines;
         }
 
+        public Timeline GetTimeline(int timelineID) // return a specific timeline
+        {
+            Timeline timeline = new Timeline();
+            if (!IsConnectionOpen()) return timeline;
+
+            var sql = "SELECT * " +
+                      "FROM timeline " +
+                      "WHERE timelineID = @timelineID";
+            using (var cmd = new SqlCommand(sql, connection)) {
+                cmd.Parameters.AddWithValue("@timelineID", timelineID);
+
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows) {
+                    timeline.timelineID = Convert.ToInt32(row["timelineID"]);
+                    timeline.timeline_creation = Convert.ToDateTime(row["timeline_creation"]);
+                    timeline.timeline_name = row["timeline_name"].ToString();
+                    timeline.timeline_desc = row["timeline_desc"].ToString();
+                    timeline.timeline_image_path = row["timeline_image_path"].ToString();
+                    timeline.timeline_file_path = row["timeline_file_path"].ToString();
+                }
+            }
+
+            return timeline;
+        }
+
         public QueryResult CreateTimeline(Timeline timeline) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -771,16 +799,14 @@ namespace Project_Creator {
 
             //Prepares the sql query.
             var sql = "UPDATE timeline SET " +
-                      "timelineID = @timelineID" +
-                      "timeline_creation = @timeline_creation" +
-                      "timeline_name = @timeline_name" +
-                      "timeline_desc = @timeline_desc" +
-                      "timeline_image_path = @timeline_image_path" +
-                      "timeline_file_path = @timeline_file_path" +
-                      "WHERE timelineID = @oldTimelineID";
+                      "timeline_creation = @timeline_creation, " +
+                      "timeline_name = @timeline_name, " +
+                      "timeline_desc = @timeline_desc, " +
+                      "timeline_image_path = @timeline_image_path, " +
+                      "timeline_file_path = @timeline_file_path " +
+                      "WHERE timelineID = @oldTimelineID ";
             using (var cmd = new SqlCommand(sql, connection)) {
                 cmd.Parameters.AddWithValue("@oldTimelineID", timelineID);
-                cmd.Parameters.AddWithValue("@timelineID", new_timeline.timelineID);
                 cmd.Parameters.AddWithValue("@timeline_creation", new_timeline.timeline_creation);
                 cmd.Parameters.AddWithValue("@timeline_name", new_timeline.timeline_name);
                 cmd.Parameters.AddWithValue("@timeline_desc", new_timeline.timeline_desc);
