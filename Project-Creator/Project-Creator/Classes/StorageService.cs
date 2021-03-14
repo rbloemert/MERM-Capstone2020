@@ -30,12 +30,14 @@ namespace Project_Creator
         // timeline_file
         // timeline_image
         //
-        // example of valid path: "project_image\image1.png"
+        // example of valid path: "project_image/image1.png"
         // fileStream is a stream to the actual file iteself
         // fileName is what the file name should be on the server
         public static Response<ShareFileUploadInfo> UploadFileToStorage(Stream fileStream, string fileName)
         {
             ShareFileClient cl = new ShareFileClient(connectionString, "projectcreator", fileName);
+            cl.Create(fileStream.Length);
+            fileStream.Position = 0;
             return cl.Upload(fileStream); ;
         }
 
