@@ -2,21 +2,26 @@
     color: #525252;
     font-size: 20px;
 }
+
 div.Project {
     width: 100%;
 }
+
 div.ProjectTable {
     display: table;
-    width: 100%;   
+    width: 100%;
 }
+
 div.ProjectRow {
     display: table-cell;
     text-align: center;
 }
+
 div.ProjectColumn {
     display: inline-block;
     vertical-align: top;
 }
+
 label.Project, img.Project {
     display: flex;
     width: 160px;
@@ -32,14 +37,17 @@ div.Timeline {
     margin: 0;
     padding: 8px;
 }
-div.Timeline:hover {
-    cursor: pointer;
-    background-color: #242424;
-}
+
+    div.Timeline:hover {
+        cursor: pointer;
+        background-color: #242424;
+    }
+
 .gallery {
     min-height: 424px;
     background: #0f0f0f;
 }
+
 .gallery-cell {
     width: 320px;
     height: 400px;
@@ -47,36 +55,36 @@ div.Timeline:hover {
     padding: 12px;
     counter-increment: gallery-cell;
 }
+
 .gallery-image {
     width: 100%;
-    image-rendering: -moz-crisp-edges;
     image-rendering: -moz-crisp-edges;
     image-rendering: -o-crisp-edges;
     image-rendering: -webkit-optimize-contrast;
     -ms-interpolation-mode: nearest-neighbor;
 }
 
-/****/
+
 .related-panel {
     padding: 0.01em 16px;
     margin-top: 16px;
-    margin-bottom: 16px
+    margin-bottom: 16px;
 }
 
-.related-panel:after, .related-panel:before {
-    content: "";
-    display: table;
-    clear: both
-}
+    .related-panel::after, .related-panel::before {
+        content: "";
+        display: table;
+        clear: both;
+    }
 
 .timeline-content {
     float: left;
-    width: 100%
+    width: 100%;
 }
 
 @media (min-width:601px) {
     .timeline-content {
-        width: 24.99999%
+        width: 24.99999%;
     }
 }
 
@@ -95,19 +103,28 @@ div.comment {
     border-bottom: solid;
 }
 
-td.comment-info{
-    width: 100px;
+td.comment-info {
+    width: 15%;
     height: 100px;
     padding-right: 24px;
-    border-right:solid;
+    border-right: solid;
 }
 
-td.comment-content{
+td.comment-content {
     padding-left: 24px;
+    padding-right: 24px;
 }
 
-.comment-textbox {
-    height: 100px;
+
+input[type="text"] {
     width: 100%;
-    text-wrap: normal;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+
+.comment-submit {
+    width: 15%;
+    border-left: solid;
 }
