@@ -4,10 +4,10 @@
 <html>
 <head runat="server">
     <title></title>
-    <link rel="stylesheet" href="StyleSheets/StyleSheet.css" />
-    <link rel="stylesheet" href="StyleSheets/StyleSheetForm.css" />
-    <link rel="stylesheet" href="StyleSheets/StyleSheetHeader.css" />
-    <link rel="stylesheet" href="StyleSheets/StyleSheetProject.css" />
+    <link rel="stylesheet" href="/StyleSheets/StyleSheet.css" />
+    <link rel="stylesheet" href="/StyleSheets/StyleSheetForm.css" />
+    <link rel="stylesheet" href="/StyleSheets/StyleSheetHeader.css" />
+    <link rel="stylesheet" href="/StyleSheets/StyleSheetProject.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
     <asp:ContentPlaceHolder ID="head" runat="server">

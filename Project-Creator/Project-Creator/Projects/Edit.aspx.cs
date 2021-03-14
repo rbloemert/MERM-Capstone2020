@@ -9,8 +9,8 @@ namespace Project_Creator.Projects
 {
     public partial class Edit : System.Web.UI.Page
     {
-        public int ProjectID = 0;
-        public Project ProjectObject = new Project();
+        public int ProjectID;
+        public Project ProjectObject;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,6 +21,7 @@ namespace Project_Creator.Projects
 
                 //Gets the project id from the URL.
                 ProjectID = Convert.ToInt32(Request.QueryString["p"]);
+                ProjectObject = new Project();
 
                 //Gets the database connection.
                 Database db = new Database();
@@ -42,7 +43,7 @@ namespace Project_Creator.Projects
                         {
 
                             //Redirects the user to the home page.
-                            Response.Redirect("../Home");
+                            Response.Redirect("~/Home");
 
                         }
                         else
@@ -54,6 +55,7 @@ namespace Project_Creator.Projects
 
                             //Sets the textbox to the project title.
                             TextBoxTitle.Text = ProjectObject.project_name;
+                            TextBoxDescription.Text = ProjectObject.project_desc;
                             lblAuthor.Text = ProjectObject.project_author;
                             lblDate.Text = ProjectObject.project_creation.ToString();
 
@@ -103,7 +105,7 @@ namespace Project_Creator.Projects
                     {
 
                         //Redirects the user to the home page.
-                        Response.Redirect("../Home");
+                        Response.Redirect("~/Home");
 
                     }
                 }
@@ -112,6 +114,38 @@ namespace Project_Creator.Projects
 
         }
 
+        protected void AddUpdate_Click(object sender, ImageClickEventArgs e)
+        {
+
+        }
+
+        protected void Complete_Click(object sender, EventArgs e)
+        {
+
+            //Creates a database connection.
+            Database db = new Database();
+
+            //Gets the project id from the URL.
+            ProjectID = Convert.ToInt32(Request.QueryString["p"]);
+            ProjectObject = new Project();
+            ProjectObject = db.GetProject(ProjectID);
+            ProjectObject.project_author = db.GetProjectAuthor(ProjectID);
+
+            //Creates a new project with the project changes.
+            Project proj = new Project();
+            proj.project_name = TextBoxTitle.Text;
+            proj.project_desc = TextBoxDescription.Text;
+            proj.project_author = ProjectObject.project_author;
+            proj.project_creation = ProjectObject.project_creation;
+            proj.project_image_path = "NULL";
+
+            //Attempts to save and publish project changes.
+            db.ModifyProject(ProjectID, proj);
+
+            //Sends the creator to view their page.
+            Response.Redirect("~/Projects/View?p=" + ProjectID.ToString());
+
+        }
     }
 
 }

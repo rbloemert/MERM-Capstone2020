@@ -23,6 +23,7 @@ namespace Project_Creator.Projects
             project.project_author = db.GetProjectAuthor(ProjectID);
             lblAuthor.Text = project.project_author;
             lblTitle.Text = project.project_name;
+            lblDescription.Text = project.project_desc;
             lblDate.Text = project.project_creation.ToString();
             ProjectIcon.ImageUrl = project.project_image_path;
 

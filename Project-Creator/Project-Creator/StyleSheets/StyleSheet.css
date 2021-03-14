@@ -21,6 +21,13 @@ hr {
     margin-top: 4px;
     margin-bottom: 4px;
 }
+h3 {
+    color: white;
+    text-decoration: none;
+}
+h3:hover {
+    color: #a142f5;
+}
 
 /* Constant Colors. */
 .Primary {
