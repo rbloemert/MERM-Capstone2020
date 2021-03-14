@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,6 +12,7 @@ namespace Project_Creator.Projects.Updates {
         public int UpdateID = 0;
         public Project ProjectObject = new Project();
         public Timeline TimelineObject = new Timeline();
+        public string tempImagePath = "";
 
         protected void Page_Load(object sender, EventArgs e) {
             //Gets the project id from the URL.
@@ -100,6 +102,9 @@ namespace Project_Creator.Projects.Updates {
 
         protected void btnNewImage_Click(object sender, EventArgs e) {
             //TODO: Allow the user to upload an image
+            tempImagePath = "./Images/" + ProjectID + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
+            ImageUploader.SaveAs(tempImagePath);
+            TimelineImage.ImageUrl = tempImagePath;
         }
 
         protected void btnNewFile_Click(object sender, EventArgs e) {
@@ -111,9 +116,49 @@ namespace Project_Creator.Projects.Updates {
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e) {
+            if (ImageUploader.HasFile) {
+                try {
+                    switch (ImageUploader.PostedFile.ContentType) {
+                        case ("image/jpeg"):
+                        case ("image/png"):
+                        case ("image/bmp"):
+                            string filename = "timeline_image/" + ProjectID + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
+                            StorageService.UploadFileToStorage(ImageUploader.FileContent, filename);
+                            if (StorageService.DoesFileExistOnStorage(filename)) {
+                                TimelineObject.timeline_image_path = "https://projectcreatorstorage.file.core.windows.net/projectcreator/" + filename;
+                            }
+                            break;
+                    }
+                } catch (Exception ex) {
+
+                }
+            } else {
+                TimelineObject.timeline_image_path = TimelineImage.ImageUrl;
+            }
+            if (ContentUploader.HasFile) {
+                try {
+                    switch (ContentUploader.PostedFile.ContentType) {
+                        case ("image/jpeg"):
+                        case ("image/png"):
+                        case ("image/bmp"):
+                        case ("application/pdf"):
+                        case ("video/mp4"):
+                        case ("text/plain"):
+                            string filename = "timeline_file/" + ProjectID + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
+                            StorageService.UploadFileToStorage(ImageUploader.FileContent, filename);
+                            if (StorageService.DoesFileExistOnStorage(filename)) {
+                                TimelineObject.timeline_file_path = "https://projectcreatorstorage.file.core.windows.net/projectcreator/" + filename;
+                            }
+                            break;
+                    }
+                } catch (Exception ex) {
+
+                }
+            } else {
+                TimelineObject.timeline_file_path = lblContent.Text;
+            }
+
             TimelineObject.timeline_desc = txtDesc.Text;
-            TimelineObject.timeline_file_path = txtContent.Text;
-            TimelineObject.timeline_image_path = TimelineImage.ImageUrl;
             TimelineObject.timeline_name = txtUpdate.Text;
             TimelineObject.timeline_creation = Convert.ToDateTime(lblDate.Text);
             TimelineObject.timeline_name = txtUpdate.Text;

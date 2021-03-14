@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="../StyleSheets/StyleSheetFlickity.css">
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="JavaScript.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceholder" runat="server">
     <asp:Table Width="100%" runat="server">
@@ -33,26 +34,22 @@
                                 <br />
                                 <asp:Image ID="TimelineImage" CssClass="timeline-image" runat="server" />
                                 <br />
+                                <asp:FileUpload ID="ImageUploader" runat="server" />
                                 <asp:Button ID="btnNewImage" runat="server" OnClick="btnNewImage_Click" Text="Upload New Image" />
                             </div>
                             <div class="Basic" style="margin-top: 5px;">
                                 Update Description:
                                 <p>
                                     <asp:TextBox ID="txtDesc" CssClass="update-edit-textbox" runat="server" onKeyUp="txtDesc_TextChanged()" MaxLength="255" ClientIDMode="Static"></asp:TextBox>
-                                    <script>
-                                        function txtDesc_TextChanged() {
-                                            val = document.getElementById("txtDesc").value;
-                                            document.getElementById("lblDescCounter").innerHTML = val.length + " of 255";
-                                        }
-                                    </script>
                                     <asp:Label ID="lblDescCounter" runat="server" ClientIDMode="Static">0 of 255</asp:Label>
                                 </p>
                             </div>
                             <div class="Basic" style="margin-top: 5px;">
                                 Attatched File:
                                 <p>
-                                    <asp:TextBox ID="txtContent" CssClass="update-edit-textbox" runat="server" Text="Put attatched content here"></asp:TextBox>
+                                    <asp:TextBox ID="lblContent" CssClass="update-edit-textbox" runat="server" Text="Put attatched content here"></asp:TextBox>
                                 </p>
+                                <asp:FileUpload ID="ContentUploader" runat="server" />
                                 <asp:Button ID="btnNewFile" runat="server" OnClick="btnNewFile_Click" Text="Upload New File" />
                             </div>
                         </div>
