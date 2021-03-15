@@ -34,7 +34,6 @@
                                 <asp:Image ID="TimelineImage" CssClass="timeline-image" runat="server" />
                                 <br />
                                 <asp:FileUpload ID="ImageUploader" runat="server" />
-                                <asp:Button ID="btnNewImage" runat="server" OnClick="btnNewImage_Click" Text="Upload New Image" />
                             </div>
                             <div class="Basic" style="margin-top: 5px;">
                                 Update Description:
@@ -49,7 +48,6 @@
                                     <asp:TextBox ID="lblContent" CssClass="update-edit-textbox" runat="server" Text="Put attatched content here"></asp:TextBox>
                                 </p>
                                 <asp:FileUpload ID="ContentUploader" runat="server" />
-                                <asp:Button ID="btnNewFile" runat="server" OnClick="btnNewFile_Click" Text="Upload New File" />
                             </div>
                         </div>
                     </div>

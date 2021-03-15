@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -116,10 +117,52 @@ namespace Project_Creator.Projects.Updates {
             ProjectID = Convert.ToInt32(Request.QueryString["p"]);
             UpdateID = Convert.ToInt32(Request.QueryString["u"]);
 
+            if (ImageUploader.HasFile) {
+                try {
+                    switch (ImageUploader.PostedFile.ContentType) {
+                        case ("image/jpeg"):
+                        case ("image/png"):
+                        case ("image/bmp"):
+                            string filename = "timeline_image/" + ProjectID + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
+                            StorageService.UploadFileToStorage(ImageUploader.FileContent, filename);
+                            if (StorageService.DoesFileExistOnStorage(filename)) {
+                                TimelineObject.timeline_image_path = "https://projectcreatorstorage.file.core.windows.net/projectcreator/" + filename;
+                            }
+                            break;
+                    }
+                } catch (Exception ex) {
+
+                }
+            } else {
+                TimelineObject.timeline_image_path = TimelineImage.ImageUrl;
+            }
+            if (ContentUploader.HasFile) {
+                try {
+                    switch (ContentUploader.PostedFile.ContentType) {
+                        case ("image/jpeg"):
+                        case ("image/png"):
+                        case ("image/bmp"):
+                        case ("application/pdf"):
+                        case ("video/mp4"):
+                        case ("text/plain"):
+                            string filename = "timeline_file/" + ProjectID + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
+                            StorageService.UploadFileToStorage(ImageUploader.FileContent, filename);
+                            if (StorageService.DoesFileExistOnStorage(filename)) {
+                                TimelineObject.timeline_file_path = "https://projectcreatorstorage.file.core.windows.net/projectcreator/" + filename;
+                            }
+                            break;
+                    }
+                } catch (Exception ex) {
+
+                }
+            } else {
+                TimelineObject.timeline_file_path = lblContent.Text;
+            }
+
             //Gets the timeline object values.
             TimelineObject.timeline_name = TextBoxUpdate.Text;
             TimelineObject.timeline_desc = txtDesc.Text;
-            TimelineObject.timeline_file_path = txtContent.Text;
+            TimelineObject.timeline_file_path = lblContent.Text;
             TimelineObject.timeline_image_path = TimelineImage.ImageUrl;
             
             //Checks if the update has an ID.

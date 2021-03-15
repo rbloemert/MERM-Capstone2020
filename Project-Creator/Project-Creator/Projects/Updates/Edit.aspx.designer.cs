@@ -7,12 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project_Creator.Projects.Updates
-{
+namespace Project_Creator.Projects.Updates {
 
 
-    public partial class Edit
-    {
+    public partial class Edit {
 
         /// <summary>
         /// TextBoxUpdate control.
@@ -51,15 +49,6 @@ namespace Project_Creator.Projects.Updates
         protected global::System.Web.UI.WebControls.FileUpload ImageUploader;
 
         /// <summary>
-        /// btnNewImage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNewImage;
-
-        /// <summary>
         /// txtDesc control.
         /// </summary>
         /// <remarks>
@@ -94,15 +83,6 @@ namespace Project_Creator.Projects.Updates
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload ContentUploader;
-
-        /// <summary>
-        /// btnNewFile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNewFile;
 
         /// <summary>
         /// btnCancel control.
