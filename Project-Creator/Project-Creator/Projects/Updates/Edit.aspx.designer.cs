@@ -42,6 +42,15 @@ namespace Project_Creator.Projects.Updates
         protected global::System.Web.UI.WebControls.Image TimelineImage;
 
         /// <summary>
+        /// ImageUploader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload ImageUploader;
+
+        /// <summary>
         /// btnNewImage control.
         /// </summary>
         /// <remarks>
@@ -69,13 +78,22 @@ namespace Project_Creator.Projects.Updates
         protected global::System.Web.UI.WebControls.Label lblDescCounter;
 
         /// <summary>
-        /// txtContent control.
+        /// lblContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtContent;
+        protected global::System.Web.UI.WebControls.TextBox lblContent;
+
+        /// <summary>
+        /// ContentUploader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload ContentUploader;
 
         /// <summary>
         /// btnNewFile control.
