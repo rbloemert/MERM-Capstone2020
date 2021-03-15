@@ -23,6 +23,12 @@ hr {
     margin-top: 4px;
     margin-bottom: 4px;
 }
+h2 {
+    max-width: 286px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 h3 {
     color: white;
     text-decoration: none;
