@@ -152,6 +152,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Account.aspx" />
     <Content Include="Browse.aspx" />
     <Content Include="Creator.aspx" />
     <Content Include="Home.aspx" />
@@ -174,6 +175,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.aspx.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account.aspx.designer.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Browse.aspx.cs">
       <DependentUpon>Browse.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -59,7 +59,7 @@ namespace Project_Creator
 
         protected void Link_Account(object sender, EventArgs e)
         {
-            Response.Redirect("/Home");
+            Response.Redirect("/Account");
         }
         protected void Link_Logout(object sender, EventArgs e)
         {

@@ -267,16 +267,16 @@ namespace Project_Creator {
 
             //Prepares the sql query.
             var sql = "UPDATE account SET " +
-                      "accountID = @accountID" +
-                      "account_creation = @account_creation" +
-                      "fullname = @fullname" +
-                      "username = @username" +
-                      "password = @password" +
-                      "password_salt = @password_salt" +
-                      "email = @email" +
-                      "isSiteAdministrator = @isSiteAdministrator" +
-                      "account_image_path = @account_image_path" +
-                      "WHERE accountID = @oldAccountID";
+                      "accountID = @accountID " +
+                      "account_creation = @account_creation " +
+                      "fullname = @fullname " +
+                      "username = @username " +
+                      "password = @password " +
+                      "password_salt = @password_salt " +
+                      "email = @email " +
+                      "isSiteAdministrator = @isSiteAdministrator " +
+                      "account_image_path = @account_image_path " +
+                      "WHERE accountID = @oldAccountID ";
             using (var cmd = new SqlCommand(sql, connection)) {
                 var salt = Password.Salt();
                 cmd.Parameters.AddWithValue("@oldAccountID", accountID);
@@ -394,8 +394,8 @@ namespace Project_Creator {
             if (!IsConnectionOpen()) return projects;
 
             var sql = "SELECT * " +
-                      "FROM project" +
-                      "LEFT JOIN project_link ON (project.projectID = project_link.projectID)" +
+                      "FROM project " +
+                      "LEFT JOIN project_link ON (project.projectID = project_link.projectID) " +
                       "WHERE project_link.project_owner_accountID = @accountID";
             using (var cmd = new SqlCommand(sql, connection)) {
                 cmd.Parameters.AddWithValue("@accountID", accountID);
@@ -424,7 +424,7 @@ namespace Project_Creator {
             if (!IsConnectionOpen()) return projects;
 
             var sql = "SELECT * " +
-                      "FROM project" +
+                      "FROM project " +
                       "WHERE CHARINDEX('@search', project.project_name) > 0";
             using (var cmd = new SqlCommand(sql, connection)) {
                 cmd.Parameters.AddWithValue("@search", search);
