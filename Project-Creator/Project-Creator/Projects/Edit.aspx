@@ -50,13 +50,13 @@
                                 <div style="text-align:right">
                                     <asp:ImageButton CssClass="Icon" runat="server" ImageUrl="~/Images/Add.png" OnClick="AddUpdate_Click" />
                                 </div>
-                                <div class="gallery js-flickity" data-flickity-options='{ "wrapAround": true }'>
+                                <div class="gallery js-flickity" data-flickity-options='{ "initialIndex": <%=TimelineIndex %> }'>
 
                                     <!-- Timeline carousel repeater. -->
                                     <asp:Repeater ID="RepeaterTimeline" ItemType="Project_Creator.Timeline" runat="server">
                                         <ItemTemplate>
                                             <div class="gallery-cell">
-                                                <a style="text-decoration:none;" href="Updates/View?p=<%#ProjectID %>&u=<%#Item.timelineID %>">
+                                                <a style="text-decoration:none;" href="Updates/Edit?p=<%#ProjectID %>&u=<%#Item.timelineID %>">
                                                     <div class="Basic Timeline">
                                                         <table>
                                                             <tr>

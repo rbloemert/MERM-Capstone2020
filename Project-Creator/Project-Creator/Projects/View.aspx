@@ -46,7 +46,7 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="margin-top:0;min-height:474px;">
-                                <div class="gallery js-flickity" data-flickity-options='{ "wrapAround": true }'>
+                                <div class="gallery js-flickity" data-flickity-options='{ "initialIndex": <%=TimelineIndex %> }'>
 
                                     <!-- Timeline carousel repeater. -->
                                     <asp:Repeater ID="RepeaterTimeline" ItemType="Project_Creator.Timeline" runat="server">

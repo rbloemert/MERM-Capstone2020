@@ -735,13 +735,13 @@ namespace Project_Creator {
             return timeline;
         }
 
-        public QueryResult CreateTimeline(Timeline timeline) {
-            int result;
-            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+        public int CreateTimeline(Timeline timeline) {
+            int result = 0;
 
             //Prepares the sql query.
-            var sql = "INSERT INTO timeline(timeline_creation, timeline_name, timeline_desc, timeline_image_path, timeline_file_path) VALUES(@timeline_creation, @timeline_name, @timeline_desc, @timeline_image_path, @timeline_file_path)";
+            var sql = "INSERT INTO timeline(timeline_creation, timeline_name, timeline_desc, timeline_image_path, timeline_file_path) VALUES(@timeline_creation, @timeline_name, @timeline_desc, @timeline_image_path, @timeline_file_path) SELECT SCOPE_IDENTITY()";
             using (var cmd = new SqlCommand(sql, connection)) {
+
                 cmd.Parameters.AddWithValue("@timeline_creation", new SqlDateTime(DateTime.Now));
                 cmd.Parameters.AddWithValue("@timeline_name", timeline.timeline_name);
                 cmd.Parameters.AddWithValue("@timeline_desc", timeline.timeline_desc);
@@ -750,19 +750,15 @@ namespace Project_Creator {
 
                 //Executes the insert command.
                 try {
-                    result = cmd.ExecuteNonQuery();
-                } catch (SqlException except) {
+                    result = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+                catch (SqlException except) 
+                {
                     lastErr = except.Message;
-                    return QueryResult.FailedBadQuery;
                 }
             }
 
-            //Returns if the insert was successful.
-            if (result > 0) {
-                return QueryResult.Successful;
-            }
-
-            return QueryResult.FailedNoChanges;
+            return result;
         }
 
         public QueryResult DeleteTimeline(int timelineID) {

@@ -10,6 +10,7 @@ namespace Project_Creator.Posts {
     public partial class View : System.Web.UI.Page {
         public int ProjectID = 0;
         public int UpdateID = 0;
+        public int TimelineIndex = 0;
         public bool loggedIn = false;
         public Account user = null;
         protected void Page_Load(object sender, EventArgs e) {
@@ -40,12 +41,15 @@ namespace Project_Creator.Posts {
             //Gets a list of all the timelines for the project.
             List<Timeline> ProjectTimeline = db.GetTimelineList(ProjectID);
             Timeline currentTimeline = new Timeline();
+            var counter = 0;
             foreach(Timeline t in ProjectTimeline) {
                 if(t.timelineID == UpdateID) {
                     currentTimeline = t;
                     break;
                 }
+                counter++;
             }
+            TimelineIndex = counter;
 
             lblUpdate.Text = currentTimeline.timeline_name;
             lblDate.Text = currentTimeline.timeline_creation.ToString();

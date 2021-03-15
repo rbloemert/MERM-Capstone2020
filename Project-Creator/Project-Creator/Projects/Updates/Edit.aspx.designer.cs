@@ -7,19 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project_Creator.Projects.Updates {
+namespace Project_Creator.Projects.Updates
+{
 
 
-    public partial class Edit {
+    public partial class Edit
+    {
 
         /// <summary>
-        /// txtUpdate control.
+        /// TextBoxUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUpdate;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxUpdate;
 
         /// <summary>
         /// lblDate control.

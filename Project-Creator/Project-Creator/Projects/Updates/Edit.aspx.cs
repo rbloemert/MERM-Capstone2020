@@ -13,6 +13,7 @@ namespace Project_Creator.Projects.Updates {
         public Timeline TimelineObject = new Timeline();
 
         protected void Page_Load(object sender, EventArgs e) {
+
             //Gets the project id from the URL.
             ProjectID = Convert.ToInt32(Request.QueryString["p"]);
             UpdateID = Convert.ToInt32(Request.QueryString["u"]);
@@ -25,9 +26,11 @@ namespace Project_Creator.Projects.Updates {
 
                 //Checks if the project exists.
                 if (ProjectID != 0) {
+
                     UpdateID = Convert.ToInt32(Request.QueryString["u"]);
+
                     if(UpdateID != 0) {
-                        //Gets the database connection.
+
                         //Checks if the user is logged in.
                         if (Session["User"] != null) {
 
@@ -45,11 +48,10 @@ namespace Project_Creator.Projects.Updates {
                                 //Gets the project information.
                                 ProjectObject = db.GetProject(ProjectID);
                                 ProjectObject.project_author = db.GetProjectAuthor(ProjectID);
-
                                 TimelineObject = db.GetTimeline(UpdateID);
 
                                 //Sets the textbox to the project title.
-                                txtUpdate.Text = TimelineObject.timeline_name;
+                                TextBoxUpdate.Text = TimelineObject.timeline_name;
                                 lblDate.Text = TimelineObject.timeline_creation.ToString();
                                 TimelineImage.ImageUrl = TimelineObject.timeline_image_path;
                                 txtDesc.Text = TimelineObject.timeline_desc;
@@ -58,11 +60,6 @@ namespace Project_Creator.Projects.Updates {
                             }
 
                         }
-
-                    } else {
-
-                        //Redirects the user to the home page.
-                        Response.Redirect("/Home");
 
                     }
 
@@ -107,20 +104,55 @@ namespace Project_Creator.Projects.Updates {
         }
 
         protected void btnCancel_Click(object sender, EventArgs e) {
-            Response.Redirect("View?p=" + ProjectID + "&u=" + UpdateID);
+
+            //Redirects back to the project editing.
+            Response.Redirect("~/Projects/Edit?p=" + ProjectID);
+
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e) {
+
+            //Gets the project id from the URL.
+            ProjectID = Convert.ToInt32(Request.QueryString["p"]);
+            UpdateID = Convert.ToInt32(Request.QueryString["u"]);
+
+            //Gets the timeline object values.
+            TimelineObject.timeline_name = TextBoxUpdate.Text;
             TimelineObject.timeline_desc = txtDesc.Text;
             TimelineObject.timeline_file_path = txtContent.Text;
             TimelineObject.timeline_image_path = TimelineImage.ImageUrl;
-            TimelineObject.timeline_name = txtUpdate.Text;
-            TimelineObject.timeline_creation = Convert.ToDateTime(lblDate.Text);
-            TimelineObject.timeline_name = txtUpdate.Text;
-            Database db = new Database();
-            if(db.ModifyTimeline(UpdateID, TimelineObject) == Database.QueryResult.Successful) {
-                Response.Redirect("View?p=" + ProjectID + "&u=" + UpdateID);
+            
+            //Checks if the update has an ID.
+            if(UpdateID != 0)
+            {
+
+                //This should probably be changed to an actual date value.
+                TimelineObject.timeline_creation = Convert.ToDateTime(lblDate.Text);
+
+                //Updates the timeline in the database.
+                Database db = new Database();
+                if (db.ModifyTimeline(UpdateID, TimelineObject) == Database.QueryResult.Successful)
+                {
+                    Response.Redirect("View?p=" + ProjectID + "&u=" + UpdateID);
+                }
+
             }
+            else
+            {
+
+                //Creates a new date for the update object.
+                TimelineObject.timeline_creation = new System.Data.SqlTypes.SqlDateTime(DateTime.Now);
+
+                //Adds the new update to the project.
+                Database db = new Database();
+                int TimelineID = db.CreateTimeline(TimelineObject);
+                db.CreateTimelineLink(TimelineID, ProjectID);
+
+                //Redirects back to the project editing.
+                Response.Redirect("~/Projects/Edit?p=" + ProjectID);
+
+            }
+
         }
     }
 

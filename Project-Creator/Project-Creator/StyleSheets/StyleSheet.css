@@ -10,11 +10,13 @@ body {
     background-color: #0f0f0f;
 }
 p {
+    word-break: break-all;
     overflow: hidden;
     text-align: justify;
     display: -webkit-box;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
 }
 hr {
     border-color: #3b3b3b;

@@ -12,11 +12,10 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="height: 72px; margin-top: 4px; text-align: left">
-                                Update Title:
-                                <asp:TextBox ID="txtUpdate" CssClass="update-edit-textbox" Style="width: 90%" runat="server" />
+                                <asp:TextBox runat="server" Width="100%" ID="TextBoxUpdate" Font-Size="X-Large" placeholder="Title..."></asp:TextBox>
                                 <br />
-                                Creation Date:
-                                <asp:Label ID="lblDate" runat="server" />
+                                <br />
+                                <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;"><asp:Label ID="lblDate" runat="server" /></span></h2>
                             </div>
                         </div>
                     </div>

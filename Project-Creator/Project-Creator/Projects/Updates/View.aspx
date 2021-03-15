@@ -12,7 +12,7 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="height: 72px; margin-top: 4px;">
-<table style="width:100%;">
+                                <table style="width:100%;">
                                     <tr>
                                         <td>
                                             <h1 class="Project" style="text-align: left"><asp:Label ID="lblUpdate" runat="server" /></h1>
@@ -60,7 +60,7 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="margin-top: 0">
-                                <div class="gallery js-flickity" data-flickity-options='{ "wrapAround": true }'>
+                                <div class="gallery js-flickity" data-flickity-options='{ "initialIndex": <%=TimelineIndex %> }'>
 
                                     <!-- Timeline carousel repeater. -->
                                     <asp:Repeater ID="RepeaterTimeline" ItemType="Project_Creator.Timeline" runat="server">

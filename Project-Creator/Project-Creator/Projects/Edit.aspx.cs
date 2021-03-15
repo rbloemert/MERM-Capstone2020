@@ -10,6 +10,7 @@ namespace Project_Creator.Projects
     public partial class Edit : System.Web.UI.Page
     {
         public int ProjectID;
+        public int TimelineIndex = 0;
         public Project ProjectObject;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -61,6 +62,7 @@ namespace Project_Creator.Projects
 
                             //Gets a list of all the timelines for the project.
                             List<Timeline> ProjectTimeline = db.GetTimelineList(ProjectID);
+                            TimelineIndex = ProjectTimeline.Count - 1;
 
                             //Sets the list to the timeline repeater.
                             RepeaterTimeline.DataSource = ProjectTimeline;
@@ -73,7 +75,7 @@ namespace Project_Creator.Projects
                     {
 
                         //Redirects the user to the home page.
-                        Response.Redirect("../Home");
+                        Response.Redirect("~/Home");
 
                     }
 
@@ -100,6 +102,9 @@ namespace Project_Creator.Projects
                         //Updates the project ID.
                         ProjectObject.projectID = ProjectID;
 
+                        //Redirects to the project edit page.
+                        Response.Redirect("~/Projects/Edit?p=" + ProjectID.ToString());
+
                     }
                     else
                     {
@@ -116,6 +121,12 @@ namespace Project_Creator.Projects
 
         protected void AddUpdate_Click(object sender, ImageClickEventArgs e)
         {
+
+            //Gets the project id from the URL.
+            ProjectID = Convert.ToInt32(Request.QueryString["p"]);
+
+            //Redirects to the project update edit page.
+            Response.Redirect("~/Projects/Updates/Edit?p=" + ProjectID.ToString());
 
         }
 

@@ -10,6 +10,7 @@ namespace Project_Creator.Projects
     public partial class View : System.Web.UI.Page
     {
         public int ProjectID = 0;
+        public int TimelineIndex = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -29,6 +30,7 @@ namespace Project_Creator.Projects
 
             //Gets a list of all the timelines for the project.
             List<Timeline> ProjectTimeline = db.GetTimelineList(ProjectID);
+            TimelineIndex = ProjectTimeline.Count - 1;
 
             //Sets the list to the timeline repeater.
             RepeaterTimeline.DataSource = ProjectTimeline;
