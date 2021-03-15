@@ -46,7 +46,7 @@
                             <div class="Basic" style="margin-top: 5px;">
                                 Attatched File:
                                 <p>
-                                    <asp:TextBox ID="lblContent" CssClass="update-edit-textbox" runat="server" Text="Put attatched content here"></asp:TextBox>
+                                    <asp:TextBox ID="txtContent" CssClass="update-edit-textbox" runat="server" Text="Put attatched content here"></asp:TextBox>
                                 </p>
                                 <asp:FileUpload ID="ContentUploader" runat="server" />
                                 <asp:Button ID="btnNewFile" runat="server" OnClick="btnNewFile_Click" Text="Upload New File" />

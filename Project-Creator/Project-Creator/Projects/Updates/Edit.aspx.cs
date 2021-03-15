@@ -86,7 +86,7 @@ namespace Project_Creator.Projects.Updates {
                     } else {
 
                         //Redirects the user to the home page.
-                        Response.Redirect("/Home");
+                        Response.Redirect("~/Home");
 
                     }
                 }
@@ -133,7 +133,7 @@ namespace Project_Creator.Projects.Updates {
                 Database db = new Database();
                 if (db.ModifyTimeline(UpdateID, TimelineObject) == Database.QueryResult.Successful)
                 {
-                    Response.Redirect("View?p=" + ProjectID + "&u=" + UpdateID);
+                    Response.Redirect("~/Projects/Edit?p=" + ProjectID);
                 }
 
             }

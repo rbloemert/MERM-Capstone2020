@@ -78,13 +78,13 @@ namespace Project_Creator.Projects.Updates
         protected global::System.Web.UI.WebControls.Label lblDescCounter;
 
         /// <summary>
-        /// lblContent control.
+        /// txtContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox lblContent;
+        protected global::System.Web.UI.WebControls.TextBox txtContent;
 
         /// <summary>
         /// ContentUploader control.
