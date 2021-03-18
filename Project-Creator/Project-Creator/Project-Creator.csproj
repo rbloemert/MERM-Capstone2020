@@ -154,7 +154,7 @@
   <ItemGroup>
     <Content Include="Account.aspx" />
     <Content Include="Browse.aspx" />
-    <Content Include="Creator.aspx" />
+    <Content Include="Creator\Creator.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Images\Add.png" />
     <Content Include="Images\Logo.svg" />
@@ -196,11 +196,11 @@
     <Compile Include="Classes\Project.cs" />
     <Compile Include="Classes\StorageService.cs" />
     <Compile Include="Classes\Timeline.cs" />
-    <Compile Include="Creator.aspx.cs">
+    <Compile Include="Creator\Creator.aspx.cs">
       <DependentUpon>Creator.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Creator.aspx.designer.cs">
+    <Compile Include="Creator\Creator.aspx.designer.cs">
       <DependentUpon>Creator.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.cs">
@@ -275,6 +275,7 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
