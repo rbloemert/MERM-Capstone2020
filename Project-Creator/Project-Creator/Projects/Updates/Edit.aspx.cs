@@ -123,8 +123,9 @@ namespace Project_Creator.Projects.Updates {
                         case ("image/png"):
                         case ("image/bmp"):
                             string filename = ProjectID + "" + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
-                            if (StorageService.UploadFileToStorage(ImageUploader.FileContent, filename, StorageService.timeline_image)) {
-                                TimelineObject.timeline_image_path = StorageService.baseUrl + StorageService.timeline_image + "/" + filename;
+                            TimelineObject.timeline_image_path = StorageService.UploadFileToStorage(ImageUploader.FileContent, filename, StorageService.timeline_image);
+                            if (TimelineObject.timeline_image_path == null) {
+                                TimelineObject.timeline_image_path = TimelineImage.ImageUrl;
                             }
                             break;
                     }
@@ -132,7 +133,7 @@ namespace Project_Creator.Projects.Updates {
 
                 }
             } else {
-                TimelineObject.timeline_image_path = TimelineImage.ImageUrl;
+                
             }
             if (ContentUploader.HasFile) {
                 try {
@@ -144,8 +145,9 @@ namespace Project_Creator.Projects.Updates {
                         case ("video/mp4"):
                         case ("text/plain"):
                             string filename = ProjectID + "" + UpdateID + Path.GetExtension(ContentUploader.PostedFile.FileName);
-                            if (StorageService.UploadFileToStorage(ContentUploader.FileContent, filename, StorageService.timeline_file)) {
-                                TimelineObject.timeline_file_path = StorageService.baseUrl + StorageService.timeline_file + "/" + filename;
+                            TimelineObject.timeline_file_path = StorageService.UploadFileToStorage(ContentUploader.FileContent, filename, StorageService.timeline_file);
+                            if (TimelineObject.timeline_file_path == null) {
+                                TimelineObject.timeline_file_path = lblContent.Text;
                             }
                             break;
                     }
