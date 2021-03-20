@@ -58,7 +58,7 @@ namespace Project_Creator.Projects
                             TextBoxTitle.Text = ProjectObject.project_name;
                             TextBoxDescription.Text = ProjectObject.project_desc;
                             lblAuthor.Text = ProjectObject.project_author;
-                            lblDate.Text = ProjectObject.project_creation.ToString();
+                            lblDate.Text = ProjectObject.project_creation.Value.ToString("yyyy-MM-dd"); ;
 
                             //Gets a list of all the timelines for the project.
                             List<Timeline> ProjectTimeline = db.GetTimelineList(ProjectID);
@@ -130,7 +130,7 @@ namespace Project_Creator.Projects
 
         }
 
-        protected void Complete_Click(object sender, EventArgs e)
+        protected void Save_Click(object sender, EventArgs e)
         {
 
             //Creates a database connection.
@@ -157,6 +157,41 @@ namespace Project_Creator.Projects
             Response.Redirect("~/Projects/View?p=" + ProjectID.ToString());
 
         }
+
+        protected void Delete_Click(object sender, EventArgs e)
+        {
+
+            //Creates a database connection.
+            Database db = new Database();
+
+            //Gets the project ID.
+            ProjectID = Convert.ToInt32(Request.QueryString["p"]);
+            int AccountID = db.GetProjectOwner(ProjectID);
+
+            //Gets the list of project timelines.
+            List<Timeline> ProjectTimeline = db.GetTimelineList(ProjectID);
+
+            //Loops through each timeline of the project.
+            foreach(var update in ProjectTimeline)
+            {
+
+                //Deletes the timeline link.
+                db.DeleteTimelineLink(update.timelineID, ProjectID);
+                db.DeleteTimeline(update.timelineID);
+
+            }
+
+            //Deletes the project and link.
+            db.DeleteProjectLink(ProjectID, AccountID);
+            db.DeleteProject(ProjectID);
+
+            //Sends the creator to their account page.
+            Response.Redirect("~/Home");
+
+
+        }
+
+
     }
 
 }

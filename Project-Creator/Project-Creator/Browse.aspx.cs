@@ -24,6 +24,7 @@ namespace Project_Creator
 
             //Sets the repeater data source to the project list.
             RepeaterProject.DataSource = projects;
+            RepeaterProject.DataBind();
 
         }
     }

@@ -78,18 +78,18 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>
-                                                                    <h2><%#Item.timeline_name %></h2>
+                                                                    <h2 class="TimelineTitle"><%#Item.timeline_name %></h2>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>
                                                                     <hr />
-                                                                    <p style="height: 120px;"><%#Item.timeline_desc %></p>
+                                                                    <p style="height:116px;"><%#Item.timeline_desc %></p>
                                                                     <hr />
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Date Created: <%#Item.timeline_creation %>
+                                                                <td>Date Created: <%#Item.timeline_creation.Value.ToString("yyyy-MM-dd") %>
                                                                 </td>
                                                             </tr>
                                                         </table>

@@ -66,18 +66,18 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>
-                                                                    <h2><%#Item.timeline_name %></h2>
+                                                                    <h2 class="TimelineTitle"><%#Item.timeline_name %></h2>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>
                                                                     <hr />
-                                                                    <p style="height:120px;"><%#Item.timeline_desc %></p>
+                                                                    <p style="height:116px;"><%#Item.timeline_desc %></p>
                                                                     <hr />
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Date Created: <%#Item.timeline_creation %>
+                                                                <td>Date Created: <%#Item.timeline_creation.Value.ToString("yyyy-MM-dd") %>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -100,8 +100,17 @@
                 <div class="ProjectTable">
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
-                            <div class="Basic" style="text-align:right;margin:0">
-                                <asp:Button runat="server" Text="Save and Publish" CausesValidation="true" OnClick="Complete_Click" />
+                            <div class="Basic" style="margin:0">
+                                <table style="width:100%">
+                                    <tr>
+                                        <td style="text-align:left;">
+                                            <asp:Button runat="server" Text="Delete Project" CausesValidation="true" OnClick="Delete_Click" />
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <asp:Button runat="server" Text="Save Changes" CausesValidation="true" OnClick="Save_Click" />
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>

@@ -340,6 +340,29 @@ namespace Project_Creator {
             return author;
         }
 
+        public int GetProjectOwner(int projectID)
+        {
+            int author = 0;
+            if (!IsConnectionOpen()) return 0;
+
+            var sql = "select accountID from project_link inner join account on project_link.project_owner_accountID = account.accountID where projectID = @projectID";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@projectID", projectID);
+
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows)
+                {
+                    author = Convert.ToInt32(row["accountID"]);
+                }
+            }
+
+            return author;
+        }
+
         public Project GetProject(int projectID) {
             Project project = new Project();
             if (!IsConnectionOpen()) return null;

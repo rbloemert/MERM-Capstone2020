@@ -53,7 +53,7 @@ namespace Project_Creator.Projects.Updates {
 
                                 //Sets the textbox to the project title.
                                 TextBoxUpdate.Text = TimelineObject.timeline_name;
-                                lblDate.Text = TimelineObject.timeline_creation.ToString();
+                                lblDate.Text = TimelineObject.timeline_creation.Value.ToString("yyyy-MM-dd"); ;
                                 TimelineImage.ImageUrl = TimelineObject.timeline_image_path;
                                 txtDesc.Text = TimelineObject.timeline_desc;
                                 lblDescCounter.Text = txtDesc.Text.Length + " of 255";

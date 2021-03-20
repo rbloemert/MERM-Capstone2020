@@ -25,7 +25,7 @@ namespace Project_Creator.Projects
             lblAuthor.Text = project.project_author;
             lblTitle.Text = project.project_name;
             lblDescription.Text = project.project_desc;
-            lblDate.Text = project.project_creation.ToString();
+            lblDate.Text = project.project_creation.Value.ToString("yyyy-MM-dd"); ;
             ProjectIcon.ImageUrl = project.project_image_path;
 
             //Gets a list of all the timelines for the project.
