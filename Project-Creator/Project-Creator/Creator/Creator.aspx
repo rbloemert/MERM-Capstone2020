@@ -11,8 +11,8 @@
                 <div class="CreatorTable">
                     <div class="CreationRow" style="margin-left:50px; margin-bottom: 20px; ">
                         <div class="CreatorColumn" style="width:75%; height:20%; float:left;">
-                            <div class="Basic" >
-                                <asp:Label ID="CreatorUsernameLabel" runat="server" />
+                            <div class="Basic" style="height: 25%">
+                                <asp:Label ID="CreatorUsernameLabel"  style="font-size: 50px;" runat="server" />
                                 <br/><br/><br/>
                                 <asp:Label ID="CreatorDescriptionTextBox" runat="server" ReadOnly="true" wrap="true" style="width: 100%; height: 500px;" />
                                 <br/><br/>
@@ -25,8 +25,7 @@
                     </div>
                     <div class="CreationRow" >
                         &nbsp;
-                        <hr style="margin-top: 10px; height: 3px;" />
-                        <h2 style="text-align: center; width: 100%;" >Projects</h2>
+                        <p style="text-align: center; width: 100%; font-size: 40px;" >Projects</p>
                     </div>
                     <div class="CreationRow" style="margin-left:50px;">
                         <div class="related-panel">
@@ -37,7 +36,7 @@
                                             <table>
                                                 <tr>
                                                     <td>
-                                                        <a href="View?p=<%#Item.projectID %>">
+                                                        <a href="../Projects/View?p=<%#Item.projectID %>">
                                                             <asp:Image CssClass="related-img" ImageUrl="<%#Item.project_image_path %>" runat="server" />
                                                         </a>
                                                     </td>
@@ -52,11 +51,6 @@
                                                         <hr />
                                                         <p><%#Item.project_desc %></p>
                                                         <hr />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:Button ID="CreatorSelectProjectButton" OnClick="btnSelectProject_Clicked" Text="Select" runat="server" />
                                                     </td>
                                                 </tr>
                                             </table>
