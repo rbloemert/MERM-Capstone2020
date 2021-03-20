@@ -112,7 +112,6 @@ namespace Project_Creator.Projects.Updates {
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e) {
-
             //Gets the project id from the URL.
             ProjectID = Convert.ToInt32(Request.QueryString["p"]);
             UpdateID = Convert.ToInt32(Request.QueryString["u"]);
@@ -123,10 +122,9 @@ namespace Project_Creator.Projects.Updates {
                         case ("image/jpeg"):
                         case ("image/png"):
                         case ("image/bmp"):
-                            string filename = "timeline_image/" + ProjectID + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
-                            StorageService.UploadFileToStorage(ImageUploader.FileContent, filename).ToString();
-                            if (StorageService.DoesFileExistOnStorage(filename)) {
-                                TimelineObject.timeline_image_path = "https://projectcreatorstorage.file.core.windows.net/projectcreator/" + filename;
+                            string filename = ProjectID + "" + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
+                            if (StorageService.UploadFileToStorage(ImageUploader.FileContent, filename, StorageService.timeline_image)) {
+                                TimelineObject.timeline_image_path = StorageService.baseUrl + StorageService.timeline_image + "/" + filename;
                             }
                             break;
                     }
@@ -145,10 +143,9 @@ namespace Project_Creator.Projects.Updates {
                         case ("application/pdf"):
                         case ("video/mp4"):
                         case ("text/plain"):
-                            string filename = "timeline_file/" + ProjectID + UpdateID + Path.GetExtension(ContentUploader.PostedFile.FileName);
-                            StorageService.UploadFileToStorage(ContentUploader.FileContent, filename);
-                            if (StorageService.DoesFileExistOnStorage(filename)) {
-                                TimelineObject.timeline_file_path = "https://projectcreatorstorage.file.core.windows.net/projectcreator/" + filename;
+                            string filename = ProjectID + "" + UpdateID + Path.GetExtension(ContentUploader.PostedFile.FileName);
+                            if (StorageService.UploadFileToStorage(ContentUploader.FileContent, filename, StorageService.timeline_file)) {
+                                TimelineObject.timeline_file_path = StorageService.baseUrl + StorageService.timeline_file + "/" + filename;
                             }
                             break;
                     }
