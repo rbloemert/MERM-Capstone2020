@@ -36,7 +36,9 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="margin: 0;">
-                                <asp:Image ID="TimelineImage" CssClass="timeline-image" runat="server" />
+                                <div class="timeline-image-container">
+                                    <asp:Image ID="TimelineImage" CssClass="timeline-image" runat="server" />
+                                </div>
                                 <br />
                             </div>
                             <div class="Basic" style="margin-top: 5px;">
