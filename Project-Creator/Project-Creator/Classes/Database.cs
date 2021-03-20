@@ -683,8 +683,9 @@ namespace Project_Creator {
 
             var sql = "SELECT * " +
                       "FROM timeline " +
-                      "LEFT JOIN timeline_link ON (timeline.timelineID = timeline_link.timelineID)" +
-                      "WHERE timeline_link.project_owner_projectID = @projectID";
+                      "LEFT JOIN timeline_link ON (timeline.timelineID = timeline_link.timelineID) " +
+                      "WHERE timeline_link.project_owner_projectID = @projectID " +
+                      "ORDER BY timeline.timelineID ASC;";
             using (var cmd = new SqlCommand(sql, connection)) {
                 cmd.Parameters.AddWithValue("@projectID", projectID);
 
@@ -745,8 +746,8 @@ namespace Project_Creator {
                 cmd.Parameters.AddWithValue("@timeline_creation", new SqlDateTime(DateTime.Now));
                 cmd.Parameters.AddWithValue("@timeline_name", timeline.timeline_name);
                 cmd.Parameters.AddWithValue("@timeline_desc", timeline.timeline_desc);
-                cmd.Parameters.AddWithValue("@timeline_image_path", "NULL");
-                cmd.Parameters.AddWithValue("@timeline_file_path", "NULL");
+                cmd.Parameters.AddWithValue("@timeline_image_path", timeline.timeline_image_path);
+                cmd.Parameters.AddWithValue("@timeline_file_path", timeline.timeline_file_path);
 
                 //Executes the insert command.
                 try {
