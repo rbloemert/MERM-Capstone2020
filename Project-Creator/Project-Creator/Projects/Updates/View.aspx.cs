@@ -32,44 +32,56 @@ namespace Project_Creator.Posts {
             ProjectID = Convert.ToInt32(Request.QueryString["p"]);
             UpdateID = Convert.ToInt32(Request.QueryString["u"]);
 
-            //Gets the database connection.
-            Database db = new Database();
-            Project project = db.GetProject(ProjectID);
-            project.project_author = db.GetProjectAuthor(ProjectID);
-            
+            //Checks if the project and update is set.
+            if ((ProjectID != 0) && (UpdateID != 0))
+            {
 
-            //Gets a list of all the timelines for the project.
-            List<Timeline> ProjectTimeline = db.GetTimelineList(ProjectID);
-            Timeline currentTimeline = new Timeline();
-            var counter = 0;
-            foreach(Timeline t in ProjectTimeline) {
-                if(t.timelineID == UpdateID) {
-                    currentTimeline = t;
-                    break;
+                //Gets the database connection.
+                Database db = new Database();
+                Project project = db.GetProject(ProjectID);
+                project.project_author = db.GetProjectAuthor(ProjectID);
+
+                //Gets a list of all the timelines for the project.
+                List<Timeline> ProjectTimeline = db.GetTimelineList(ProjectID);
+                Timeline currentTimeline = new Timeline();
+                var counter = 0;
+                foreach (Timeline t in ProjectTimeline)
+                {
+                    if (t.timelineID == UpdateID)
+                    {
+                        currentTimeline = t;
+                        break;
+                    }
+                    counter++;
                 }
-                counter++;
+                TimelineIndex = counter;
+
+                lblUpdate.Text = currentTimeline.timeline_name;
+                lblDate.Text = currentTimeline.timeline_creation.Value.ToString("yyyy-MM-dd");
+                TimelineImage.ImageUrl = currentTimeline.timeline_image_path;
+                lblDesc.Text = currentTimeline.timeline_desc;
+                lblContent.Text = currentTimeline.timeline_file_path;
+
+                //Sets the list to the timeline repeater.
+                RepeaterTimeline.DataSource = ProjectTimeline;
+                RepeaterTimeline.DataBind();
+
+                List<Comment> rawComments = db.GetCommentList(currentTimeline.timelineID);
+                List<Comment2> comments = new List<Comment2>();
+                foreach (Comment c in rawComments)
+                {
+                    Comment2 newComment = new Comment2(c);
+                    comments.Add(newComment);
+                }
+
+                RepeaterComment.DataSource = comments;
+                RepeaterComment.DataBind();
+
             }
-            TimelineIndex = counter;
-
-            lblUpdate.Text = currentTimeline.timeline_name;
-            lblDate.Text = currentTimeline.timeline_creation.ToString();
-            TimelineImage.ImageUrl = currentTimeline.timeline_image_path;
-            lblDesc.Text = currentTimeline.timeline_desc;
-            lblContent.Text = currentTimeline.timeline_file_path;
-
-            //Sets the list to the timeline repeater.
-            RepeaterTimeline.DataSource = ProjectTimeline;
-            RepeaterTimeline.DataBind();
-
-            List<Comment> rawComments = db.GetCommentList(currentTimeline.timelineID);
-            List<Comment2> comments = new List<Comment2>();
-            foreach(Comment c in rawComments) {
-                Comment2 newComment = new Comment2(c);
-                comments.Add(newComment);
+            else
+            {
+                Response.Redirect("~/Home");
             }
-
-            RepeaterComment.DataSource = comments;
-            RepeaterComment.DataBind();
 
         }
 

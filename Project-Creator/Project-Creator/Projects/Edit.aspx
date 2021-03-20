@@ -50,7 +50,7 @@
                                 <div style="text-align:right">
                                     <asp:ImageButton CssClass="Icon" runat="server" ImageUrl="~/Images/Add.png" OnClick="AddUpdate_Click" />
                                 </div>
-                                <div class="gallery js-flickity" data-flickity-options='{ "initialIndex": <%=TimelineIndex %> }'>
+                                <div class="gallery js-flickity" data-flickity-options='{ "pageDots": false, "initialIndex": <%=TimelineIndex %> }'>
 
                                     <!-- Timeline carousel repeater. -->
                                     <asp:Repeater ID="RepeaterTimeline" ItemType="Project_Creator.Timeline" runat="server">
