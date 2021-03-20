@@ -9,26 +9,26 @@
         <asp:TableRow>
             <asp:TableCell>
                 <div class="CreatorTable">
-                    <div class="CreationRow" style="margin-left:50px;">
-                        <div class="CreatorColumn" style="width:75%; float:left;">
+                    <div class="CreationRow" style="margin-left:50px; margin-bottom: 20px; ">
+                        <div class="CreatorColumn" style="width:75%; height:20%; float:left;">
                             <div class="Basic" >
-                                <asp:Label ID="CreatorUsernameLabel" style="h1" runat="server" />
+                                <asp:Label ID="CreatorUsernameLabel" runat="server" />
                                 <br/><br/><br/>
                                 <asp:Label ID="CreatorDescriptionTextBox" runat="server" ReadOnly="true" wrap="true" style="width: 100%; height: 500px;" />
                                 <br/><br/>
-                                <asp:Button ID="CreatorFollowButton" Text="Follow" runat="server" />
-                                <asp:Button ID="CreatorContactButton" Text="Contact" runat="server" />
+                                <asp:Button ID="CreatorContactButton" OnClick="btnContactCreator_Clicked" Text="Contact" runat="server" />
                             </div>
                         </div>
-                        <div class="CreatorColumn" style="width:25%; float:right;">
-                            <asp:Image ID="CreatorIcon" runat="server" ImageAlign="Right" Width="80%" Height="90%" style="margin-left:50px; margin-top:25px; margin-right:50px; "/>
+                        <div class="CreatorColumn" style="width:25%; height:25%; float:right;">
+                            <asp:Image ID="CreatorIcon" runat="server" ImageAlign="Right" Width="80%" Height="100%" style="margin-left:50px; margin-top:25px; margin-bottom:10px; margin-right:50px; "/>
                         </div>
                     </div>
-
-                </div>
-            </asp:TableCell>
-            <asp:TableCell runat="server">
-                <div class="Basic" style="margin-top: 0">
+                    <div class="CreationRow" >
+                        &nbsp;
+                        <hr style="margin-top: 10px; height: 3px;" />
+                        <h2 style="text-align: center; width: 100%;" >Projects</h2>
+                    </div>
+                    <div class="CreationRow" style="margin-left:50px;">
                         <div class="related-panel">
                             <asp:Repeater ID="RepeaterRelated" ItemType="Project_Creator.Project" runat="server">
                                 <ItemTemplate>
@@ -52,6 +52,11 @@
                                                         <hr />
                                                         <p><%#Item.project_desc %></p>
                                                         <hr />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Button ID="CreatorSelectProjectButton" OnClick="btnSelectProject_Clicked" Text="Select" runat="server" />
                                                     </td>
                                                 </tr>
                                             </table>
