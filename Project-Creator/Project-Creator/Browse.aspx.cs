@@ -22,6 +22,15 @@ namespace Project_Creator
             //Adds the projects from the database to the list.
             projects = db.GetProjectList();
 
+            //Gets a connection to the database.
+            db = new Database();
+
+            //Gets the project authors for each project.
+            for (var p = 0; p < projects.Count; p++)
+            {
+                projects[p].project_author = db.GetProjectAuthor(projects[p].projectID);
+            }
+
             //Sets the repeater data source to the project list.
             RepeaterProject.DataSource = projects;
             RepeaterProject.DataBind();
