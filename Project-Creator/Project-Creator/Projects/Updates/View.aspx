@@ -113,7 +113,7 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="margin-top: 0">
-                                <asp:Repeater ID="RepeaterComment" ItemType="Project_Creator.Comment2" runat="server">
+                                <asp:Repeater ID="RepeaterComment" ItemType="Project_Creator.Comment2" onitemcommand="RepeaterComment_ItemCommand" runat="server">
                                     <ItemTemplate>
                                         <div class="Basic">
                                             <table>
@@ -129,6 +129,7 @@
                                                     </td>
                                                     <td class="comment-content">
                                                         <p><%#Item.comment_text %></p>
+                                                        <asp:Button  ClientIDMode="AutoID" ID="btnEditThisItem" CommandName="delete_comment" CssClass="comment-delete-button" CommandArgument=<%# Item.commentID + "," + Item.comment_owner_accountID %> Text="Delete" runat="server" />
                                                     </td>
                                                 </tr>
                                             </table>

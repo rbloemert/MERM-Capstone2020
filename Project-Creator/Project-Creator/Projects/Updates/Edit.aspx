@@ -59,11 +59,18 @@
                 <div class="ProjectTable">
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
-                            <div class="Basic" style="margin: 0; text-align: right">
-                                <asp:Button ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="Cancel" />
-                                <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
+                            <table style="width:100%">
+                                    <tr>
+                                        <td style="text-align:left;">
+                                            <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete" />
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <asp:Button ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="Cancel" />
+                                            <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
-                        </div>
                     </div>
                 </div>
             </asp:TableCell>
