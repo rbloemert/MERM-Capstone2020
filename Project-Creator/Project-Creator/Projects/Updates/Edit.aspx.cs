@@ -161,8 +161,6 @@ namespace Project_Creator.Projects.Updates {
             //Gets the timeline object values.
             TimelineObject.timeline_name = TextBoxUpdate.Text;
             TimelineObject.timeline_desc = txtDesc.Text;
-            //TimelineObject.timeline_file_path = lblContent.Text;
-            //TimelineObject.timeline_image_path = TimelineImage.ImageUrl;
             
             //Checks if the update has an ID.
             if(UpdateID != 0)
@@ -195,6 +193,25 @@ namespace Project_Creator.Projects.Updates {
 
             }
 
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e) {
+            //Gets the project id from the URL.
+            ProjectID = Convert.ToInt32(Request.QueryString["p"]);
+            UpdateID = Convert.ToInt32(Request.QueryString["u"]);
+
+            Database db = new Database();
+            List<Comment> comments = db.GetCommentList(UpdateID);
+            foreach(Comment c in comments) {
+                db.DeleteCommentLink(c.commentID, UpdateID, Int32.Parse(c.comment_owner_accountID));
+                db.DeleteComment(c.commentID);
+            }
+            //Deletes the timeline link.
+            db.DeleteTimelineLink(UpdateID, ProjectID);
+            db.DeleteTimeline(UpdateID);
+
+            //Redirects back to the project editing.
+            Response.Redirect("~/Projects/Edit?p=" + ProjectID);
         }
     }
 
