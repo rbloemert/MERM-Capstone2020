@@ -42,6 +42,33 @@ namespace Project_Creator.Projects
         protected global::System.Web.UI.WebControls.Label lblDescription;
 
         /// <summary>
+        /// ButtonFollow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonFollow;
+
+        /// <summary>
+        /// lblFollowers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFollowers;
+
+        /// <summary>
+        /// lblFollowing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFollowing;
+
+        /// <summary>
         /// lblAuthor control.
         /// </summary>
         /// <remarks>

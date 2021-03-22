@@ -23,7 +23,7 @@ namespace Project_Creator
 
         }
 
-        protected void Search(object sender, ImageClickEventArgs e)
+        protected void Search_Click(object sender, ImageClickEventArgs e)
         {
 
             //Checks if the search box is not empty.
@@ -39,7 +39,7 @@ namespace Project_Creator
 
         protected void Link_Home(object sender, EventArgs e)
         {
-            Response.Redirect("/Home");
+            Response.Redirect("~/Home");
         }
 
         protected void Link_Browse(object sender, EventArgs e)

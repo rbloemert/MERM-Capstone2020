@@ -671,6 +671,30 @@ namespace Project_Creator {
             return QueryResult.FailedNoChanges;
         }
 
+        public List<int> GetFollowers(int projectID)
+        {
+            List<int> result = new List<int>();
+            if (!IsConnectionOpen()) return null;
+
+            //Prepares the sql query.
+            var sql = "SELECT * FROM follower_link WHERE projectID=@projectID";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@projectID", projectID);
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                //Adds the follower account IDs to the list.
+                foreach(DataRow row in datatable.Rows)
+                {
+                    result.Add(Convert.ToInt32(row["follower_accountID"]));
+                }
+            }
+
+            return result;
+        }
+
         // PROJECTS
 
         // TIMELINE

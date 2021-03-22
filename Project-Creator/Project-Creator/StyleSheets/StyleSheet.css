@@ -80,6 +80,9 @@ input[type=image].Logo {
     height: 100%;
     max-height: 28px;
 }
+span.Label {
+    color: dimgray;
+}
 
 /* Used to split the Screen in half (two rows)*/
 .split {

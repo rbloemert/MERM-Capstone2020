@@ -18,8 +18,26 @@
                         <div class="ProjectColumn" style="width: 100%;max-width: 800px;">
                             <div class="Basic" style="height:90px;">
                                 <h1 style="text-align: left"><asp:Label ID="lblTitle" runat="server" /></h1>
-                                <br />
                                 <h2 style="text-align: left"><asp:Label ID="lblDescription" runat="server" /></h2>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div style="margin-top: 8px;text-align: left">
+                                                <asp:Button ID="ButtonFollow" Text="Follow" Width="200px" runat="server" OnClick="Follow_Click" Enabled="false" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="padding-left:6px;padding-top:6px;text-align:left;">
+                                                <asp:Label ID="lblFollowers" runat="server" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="padding-left:6px;padding-top:6px;text-align:left;">
+                                                <asp:Label CssClass="Label" ID="lblFollowing" Text="(You follow this project)" runat="server" Visible="false"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                             <div class="Basic" style="height:16px;margin-top:4px;">
                                 <table style="margin:0;width:100%;">
