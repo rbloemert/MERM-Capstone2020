@@ -23,7 +23,7 @@
                                     <tr>
                                         <td>
                                             <div style="margin-top: 8px;text-align: left">
-                                                <asp:Button ID="ButtonFollow" Text="Follow" Width="200px" runat="server" OnClick="Follow_Click" Enabled="false" />
+                                                <asp:Button ID="ButtonFollow" Text="Follow" Width="200px" runat="server" OnClick="Follow_Click" />
                                             </div>
                                         </td>
                                         <td>

@@ -41,18 +41,14 @@ namespace Project_Creator.Projects
                     Account user = (Account)Session["User"];
 
                     //Checks if the user doesn't exist in the followers table.
-                    if (!followers.Contains(user.accountID))
-                    {
-
-                        //Enables the follow button.
-                        ButtonFollow.Enabled = true;
-
-                    }
-                    else
+                    if (followers.Contains(user.accountID))
                     {
 
                         //Enables the already following note.
                         lblFollowing.Visible = true;
+
+                        //Enables the follow button.
+                        ButtonFollow.Text = "Unfollow";
 
                     }
 
@@ -104,6 +100,16 @@ namespace Project_Creator.Projects
 
                 //Adds the logged-in account to the project followers.
                 db.AddFollower(ProjectID, user);
+
+                //Redirects back to the page.
+                Response.Redirect("~/Projects/View?p=" + ProjectID.ToString());
+
+            }
+            else
+            {
+
+                //Removes the logged-in account from the project followers.
+                db.RemoveFollower(ProjectID, user);
 
                 //Redirects back to the page.
                 Response.Redirect("~/Projects/View?p=" + ProjectID.ToString());
