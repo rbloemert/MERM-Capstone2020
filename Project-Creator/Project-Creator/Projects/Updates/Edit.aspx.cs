@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,6 +13,7 @@ namespace Project_Creator.Projects.Updates {
         public int UpdateID = 0;
         public Project ProjectObject = new Project();
         public Timeline TimelineObject = new Timeline();
+        public string FileLink = "";
 
         protected void Page_Load(object sender, EventArgs e) {
 
@@ -19,33 +21,30 @@ namespace Project_Creator.Projects.Updates {
             ProjectID = Convert.ToInt32(Request.QueryString["p"]);
             UpdateID = Convert.ToInt32(Request.QueryString["u"]);
 
-            //Checks if the page is a post back.
-            if (!IsPostBack) {
+            Database db = new Database();
 
-                Database db = new Database();
+            //Checks if the project exists.
+            if (ProjectID != 0) {
+
                 string ProjectAuthor = db.GetProjectAuthor(ProjectID);
 
-                //Checks if the project exists.
-                if (ProjectID != 0) {
+                if (UpdateID != 0) {
 
-                    UpdateID = Convert.ToInt32(Request.QueryString["u"]);
+                    //Checks if the user is logged in.
+                    if (Session["User"] != null) {
 
-                    if(UpdateID != 0) {
+                        //Gets the session user object.
+                        Account user = (Account)Session["User"];
 
-                        //Checks if the user is logged in.
-                        if (Session["User"] != null) {
+                        //Checks if the creator is the author of this project.
+                        if (user.username != ProjectAuthor) {
 
-                            //Gets the session user object.
-                            Account user = (Account)Session["User"];
+                            //Redirects the user to the home page.
+                            Response.Redirect("/Home");
 
-                            //Checks if the creator is the author of this project.
-                            if (user.username != ProjectAuthor) {
+                        } else {
 
-                                //Redirects the user to the home page.
-                                Response.Redirect("/Home");
-
-                            } else {
-
+                            if(db.CheckTimelineInProject(ProjectID, UpdateID)) {
                                 //Gets the project information.
                                 ProjectObject = db.GetProject(ProjectID);
                                 ProjectObject.project_author = db.GetProjectAuthor(ProjectID);
@@ -57,51 +56,94 @@ namespace Project_Creator.Projects.Updates {
                                 TimelineImage.ImageUrl = TimelineObject.timeline_image_path;
                                 txtDesc.Text = TimelineObject.timeline_desc;
                                 lblDescCounter.Text = txtDesc.Text.Length + " of 255";
-                                lblContent.Text = TimelineObject.timeline_file_path;
-                            }
+                                FileLink = TimelineObject.timeline_file_path;
 
+                                //Checks the extension of the uploaded file.
+                                switch (System.IO.Path.GetExtension(FileLink)) {
+                                    case ".png":
+                                    case ".jpg":
+                                    case ".jpeg":
+                                    case ".bmp":
+                                        //Displays the artwork showcase.
+                                        FileImage.Style["display"] = "block";
+                                        break;
+                                    case ".mp4":
+                                        //Displays the video player.
+                                        FileVideo.Style["display"] = "block";
+                                        break;
+                                    case ".pdf":
+                                        FilePDF.Style["display"] = "block";
+                                        break;
+                                    case ".txt":
+                                        FileText.Style["display"] = "block";
+                                        var webRequest = WebRequest.Create(@FileLink);
+                                        using (var response = webRequest.GetResponse())
+                                        using (var content = response.GetResponseStream())
+                                        using (var reader = new StreamReader(content)) {
+                                            var strContent = reader.ReadToEnd();
+                                            strContent = strContent.Replace("&", "&amp");
+                                            strContent = strContent.Replace("<", "&lt");
+                                            strContent = strContent.Replace(">", "&gt");
+                                            //strContent = strContent.Replace("\n", "<br>");
+                                            FileTextContent.Text = "<br>" + strContent;
+                                        }
+                                        break;
+                                }
+                            } else {
+                                //Redirects the user to the home page.
+                                Response.Redirect("~/Projects/Edit?p=");
+                            }
                         }
 
                     }
 
-                } else {
-
-                    //Checks if the user is logged in.
-                    if (Session["User"] != null) {
-
-                        //Gets the session user object.
-                        Account user = (Account)Session["User"];
-
-                        //Gets a project object.
-                        ProjectObject = new Project("New Project", "", user.username, "NULL", 1);
-
-                        //Creates a new project to be editted.
-                        ProjectID = db.CreateProject(ProjectObject);
-
-                        //Links the project to the account.
-                        db.CreateProjectLink(ProjectID, user.accountID);
-
-                        //Updates the project ID.
-                        ProjectObject.projectID = ProjectID;
-
-                    } else {
-
-                        //Redirects the user to the home page.
-                        Response.Redirect("~/Home");
-
-                    }
                 }
 
+            } else {
+
+                //Checks if the user is logged in.
+                if (Session["User"] != null) {
+
+                    //Gets the session user object.
+                    Account user = (Account)Session["User"];
+
+                    //Gets a project object.
+                    ProjectObject = new Project("New Project", "", user.username, "NULL", 1);
+
+                    //Creates a new project to be editted.
+                    ProjectID = db.CreateProject(ProjectObject);
+
+                    //Links the project to the account.
+                    db.CreateProjectLink(ProjectID, user.accountID);
+
+                    //Updates the project ID.
+                    ProjectObject.projectID = ProjectID;
+
+                } else {
+
+                    //Redirects the user to the home page.
+                    Response.Redirect("~/Home");
+
+                }
             }
 
         }
 
-        protected void btnNewImage_Click(object sender, EventArgs e) {
-            //TODO: Allow the user to upload an image
-        }
-
         protected void btnNewFile_Click(object sender, EventArgs e) {
-            //TODO: Add a way for the user to add content
+            if (ImageUploader.HasFile) {
+                try {
+                    switch (ImageUploader.PostedFile.ContentType) {
+                        case ("image/jpeg"):
+                        case ("image/png"):
+                        case ("image/bmp"):
+                            string filename = ProjectID + "" + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
+                            TimelineImage.ImageUrl = StorageService.UploadFileToStorage(ImageUploader.FileContent, filename, StorageService.temp_storage);
+                            break;
+                    }
+                } catch (Exception ex) {
+
+                }
+            }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e) {
@@ -115,6 +157,8 @@ namespace Project_Creator.Projects.Updates {
             //Gets the project id from the URL.
             ProjectID = Convert.ToInt32(Request.QueryString["p"]);
             UpdateID = Convert.ToInt32(Request.QueryString["u"]);
+            Database db = new Database();
+            TimelineObject = db.GetTimeline(UpdateID);
 
             if (ImageUploader.HasFile) {
                 try {
@@ -124,16 +168,12 @@ namespace Project_Creator.Projects.Updates {
                         case ("image/bmp"):
                             string filename = ProjectID + "" + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
                             TimelineObject.timeline_image_path = StorageService.UploadFileToStorage(ImageUploader.FileContent, filename, StorageService.timeline_image);
-                            if (TimelineObject.timeline_image_path == null) {
-                                TimelineObject.timeline_image_path = TimelineImage.ImageUrl;
-                            }
+                            StorageService.DeleteFileFromStorage(filename, StorageService.temp_storage);
                             break;
                     }
                 } catch (Exception ex) {
 
                 }
-            } else {
-                
             }
             if (ContentUploader.HasFile) {
                 try {
@@ -146,45 +186,34 @@ namespace Project_Creator.Projects.Updates {
                         case ("text/plain"):
                             string filename = ProjectID + "" + UpdateID + Path.GetExtension(ContentUploader.PostedFile.FileName);
                             TimelineObject.timeline_file_path = StorageService.UploadFileToStorage(ContentUploader.FileContent, filename, StorageService.timeline_file);
-                            if (TimelineObject.timeline_file_path == null) {
-                                TimelineObject.timeline_file_path = lblContent.Text;
-                            }
                             break;
                     }
                 } catch (Exception ex) {
 
                 }
-            } else {
-                TimelineObject.timeline_file_path = lblContent.Text;
             }
 
             //Gets the timeline object values.
             TimelineObject.timeline_name = TextBoxUpdate.Text;
             TimelineObject.timeline_desc = txtDesc.Text;
-            
+
             //Checks if the update has an ID.
-            if(UpdateID != 0)
-            {
+            if (UpdateID != 0) {
 
                 //This should probably be changed to an actual date value.
                 TimelineObject.timeline_creation = Convert.ToDateTime(lblDate.Text);
 
                 //Updates the timeline in the database.
-                Database db = new Database();
-                if (db.ModifyTimeline(UpdateID, TimelineObject) == Database.QueryResult.Successful)
-                {
+                if (db.ModifyTimeline(UpdateID, TimelineObject) == Database.QueryResult.Successful) {
                     Response.Redirect("~/Projects/Edit?p=" + ProjectID);
                 }
 
-            }
-            else
-            {
+            } else {
 
                 //Creates a new date for the update object.
                 TimelineObject.timeline_creation = new System.Data.SqlTypes.SqlDateTime(DateTime.Now);
 
                 //Adds the new update to the project.
-                Database db = new Database();
                 int TimelineID = db.CreateTimeline(TimelineObject);
                 db.CreateTimelineLink(TimelineID, ProjectID);
 
@@ -202,7 +231,7 @@ namespace Project_Creator.Projects.Updates {
 
             Database db = new Database();
             List<Comment> comments = db.GetCommentList(UpdateID);
-            foreach(Comment c in comments) {
+            foreach (Comment c in comments) {
                 db.DeleteCommentLink(c.commentID, UpdateID, Int32.Parse(c.comment_owner_accountID));
                 db.DeleteComment(c.commentID);
             }
