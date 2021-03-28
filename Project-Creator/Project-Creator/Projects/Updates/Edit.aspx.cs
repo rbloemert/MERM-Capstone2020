@@ -73,7 +73,7 @@ namespace Project_Creator.Projects.Updates {
                         Account user = (Account)Session["User"];
 
                         //Gets a project object.
-                        ProjectObject = new Project("New Project", "", user.username, "NULL");
+                        ProjectObject = new Project("New Project", "", user.username, "NULL", 1);
 
                         //Creates a new project to be editted.
                         ProjectID = db.CreateProject(ProjectObject);

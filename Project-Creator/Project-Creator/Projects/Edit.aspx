@@ -101,13 +101,19 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="margin:0">
-                                <table style="width:100%">
+                                <table>
                                     <tr>
-                                        <td style="text-align:left;">
+                                        <td style="text-align:right;padding-left:12px">
+                                            <asp:Button runat="server" Text="Save Changes" CausesValidation="true" OnClick="Save_Click" />
+                                        </td>
+                                        <td style="text-align:left;padding-left:12px">
                                             <asp:Button runat="server" Text="Delete Project" CausesValidation="true" OnClick="Delete_Click" />
                                         </td>
-                                        <td style="text-align:right;">
-                                            <asp:Button runat="server" Text="Save Changes" CausesValidation="true" OnClick="Save_Click" />
+                                        <td style="text-align:left;padding-left:12px">
+                                            <asp:RadioButton runat="server" id="RadioPrivate" GroupName="RadioVisibility" Text="Private" Checked="true" />
+                                        </td>
+                                        <td style="text-align:left;padding-left:12px">
+                                            <asp:RadioButton runat="server" id="RadioPublic" GroupName="RadioVisibility" Text="Public" />
                                         </td>
                                     </tr>
                                 </table>

@@ -58,7 +58,9 @@ namespace Project_Creator.Projects
                             TextBoxTitle.Text = ProjectObject.project_name;
                             TextBoxDescription.Text = ProjectObject.project_desc;
                             lblAuthor.Text = ProjectObject.project_author;
-                            lblDate.Text = ProjectObject.project_creation.Value.ToString("yyyy-MM-dd"); ;
+                            lblDate.Text = ProjectObject.project_creation.Value.ToString("yyyy-MM-dd");
+                            RadioPrivate.Checked = (ProjectObject.project_visibility == 0);
+                            RadioPublic.Checked = (ProjectObject.project_visibility == 1);
 
                             //Gets a list of all the timelines for the project.
                             List<Timeline> ProjectTimeline = db.GetTimelineList(ProjectID);
@@ -91,7 +93,7 @@ namespace Project_Creator.Projects
                         Account user = (Account)Session["User"];
 
                         //Gets a project object.
-                        ProjectObject = new Project("New Project", "", user.username, "NULL");
+                        ProjectObject = new Project("New Project", "", user.username, "NULL", 0);
 
                         //Creates a new project to be editted.
                         ProjectID = db.CreateProject(ProjectObject);
@@ -149,6 +151,7 @@ namespace Project_Creator.Projects
             proj.project_author = ProjectObject.project_author;
             proj.project_creation = ProjectObject.project_creation;
             proj.project_image_path = "NULL";
+            proj.project_visibility = Convert.ToInt32(RadioPublic.Checked);
 
             //Attempts to save and publish project changes.
             db.ModifyProject(ProjectID, proj);

@@ -20,7 +20,7 @@ namespace Project_Creator
             List<Project> projects = new List<Project>();
 
             //Adds the projects from the database to the list.
-            projects = db.GetProjectList();
+            projects = db.GetProjectList("", 1);
 
             //Gets a connection to the database.
             db = new Database();

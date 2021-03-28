@@ -30,6 +30,7 @@ namespace Project_Creator
         public string project_desc { get; set; }
         public string project_author { get; set; }           /* project_author: Author of this project. */
         public string project_image_path { get; set; }       /* project_image_path: The File path of the project's picture; NULL means none */
+        public int project_visibility { get; set; }
 
         public static Database.QueryResult RegisterProject(Account project_owner, Project new_project)
         {
@@ -72,13 +73,14 @@ namespace Project_Creator
 
         }
 
-        public Project(string project_name, string project_desc, string project_author, string project_image_path)
+        public Project(string project_name, string project_desc, string project_author, string project_image_path, int project_visibility)
         {
             this.project_creation = new SqlDateTime(DateTime.Now);
             this.project_name = project_name;
             this.project_desc = project_desc;
             this.project_author = project_author;
             this.project_image_path = project_image_path;
+            this.project_visibility = project_visibility;
         }
 
         // Changes were made to the database,

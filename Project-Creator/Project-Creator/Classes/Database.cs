@@ -381,6 +381,7 @@ namespace Project_Creator {
                     project.project_name = row["project_name"].ToString();
                     project.project_desc = row["project_desc"].ToString();
                     project.project_image_path = row["project_image_path"].ToString();
+                    project.project_visibility = Convert.ToInt32(row["project_visibility"]);
                 }
             }
 
@@ -403,7 +404,8 @@ namespace Project_Creator {
                         project_creation = Convert.ToDateTime(row["project_creation"]),
                         project_name = row["project_name"].ToString(),
                         project_desc = row["project_desc"].ToString(),
-                        project_image_path = row["project_image_path"].ToString()
+                        project_image_path = row["project_image_path"].ToString(),
+                        project_visibility = Convert.ToInt32(row["project_visibility"])
                     });
                 }
             }
@@ -433,7 +435,8 @@ namespace Project_Creator {
                         project_creation = Convert.ToDateTime(row["project_creation"]),
                         project_name = row["project_name"].ToString(),
                         project_desc = row["project_desc"].ToString(),
-                        project_image_path = row["project_image_path"].ToString()
+                        project_image_path = row["project_image_path"].ToString(),
+                        project_visibility = Convert.ToInt32(row["project_visibility"])
                     });
                 }
             }
@@ -441,16 +444,24 @@ namespace Project_Creator {
             return projects;
         }
 
-        public List<Project> GetProjectList(string search) // return projects with substring in title
+        public List<Project> GetProjectList(string search, int visibility) // return projects with substring in title
         {
             List<Project> projects = new List<Project>();
             if (!IsConnectionOpen()) return projects;
 
             var sql = "SELECT * " +
                       "FROM project " +
-                      "WHERE CHARINDEX('@search', project.project_name) > 0";
+                      "WHERE CHARINDEX('@search', project.project_name) > 0 " +
+                      "AND project_visibility = @visibility;";
+            if(search == "")
+            {
+                sql = "SELECT * " +
+                      "FROM project " +
+                      "WHERE project_visibility = @visibility;";
+            }
             using (var cmd = new SqlCommand(sql, connection)) {
                 cmd.Parameters.AddWithValue("@search", search);
+                cmd.Parameters.AddWithValue("@visibility", visibility);
 
                 var adapter = new SqlDataAdapter(cmd);
                 var datatable = new DataTable();
@@ -462,7 +473,8 @@ namespace Project_Creator {
                         project_creation = Convert.ToDateTime(row["project_creation"]),
                         project_name = row["project_name"].ToString(),
                         project_desc = row["project_desc"].ToString(),
-                        project_image_path = row["project_image_path"].ToString()
+                        project_image_path = row["project_image_path"].ToString(),
+                        project_visibility = Convert.ToInt32(row["project_visibility"])
                     });
                 }
             }
@@ -473,13 +485,14 @@ namespace Project_Creator {
         public int CreateProject(Project project) {
 
             //Prepares the sql query.
-            var sql = "INSERT INTO project(project_creation, project_name, project_desc, project_image_path) VALUES(@project_creation, @project_name, @project_desc, @project_image_path) SELECT SCOPE_IDENTITY()";
+            var sql = "INSERT INTO project(project_creation, project_name, project_desc, project_image_path, project_visibility) VALUES(@project_creation, @project_name, @project_desc, @project_image_path, @project_visibility) SELECT SCOPE_IDENTITY()";
             using (var cmd = new SqlCommand(sql, connection)) {
 
                 cmd.Parameters.AddWithValue("@project_creation", project.project_creation);
                 cmd.Parameters.AddWithValue("@project_name", project.project_name);
                 cmd.Parameters.AddWithValue("@project_desc", project.project_desc);
-                cmd.Parameters.AddWithValue("@project_image_path", "NULL");
+                cmd.Parameters.AddWithValue("@project_image_path", project.project_image_path);
+                cmd.Parameters.AddWithValue("@project_visibility", project.project_visibility);
 
                 //Executes the insert command.
                 try
@@ -532,7 +545,8 @@ namespace Project_Creator {
                       "project_creation = @project_creation, " +
                       "project_name = @project_name, " +
                       "project_desc = @project_desc, " +
-                      "project_image_path = @project_image_path " +
+                      "project_image_path = @project_image_path, " +
+                      "project_visibility = @project_visibility " +
                       "WHERE projectID = @oldProjectID;";
             using (var cmd = new SqlCommand(sql, connection)) {
                 cmd.Parameters.AddWithValue("@oldProjectID", projectID);
@@ -541,6 +555,7 @@ namespace Project_Creator {
                 cmd.Parameters.AddWithValue("@project_name", new_project.project_name);
                 cmd.Parameters.AddWithValue("@project_desc", new_project.project_desc);
                 cmd.Parameters.AddWithValue("@project_image_path", new_project.project_image_path);
+                cmd.Parameters.AddWithValue("@project_visibility", new_project.project_visibility);
 
                 //Executes the insert command.
                 try {

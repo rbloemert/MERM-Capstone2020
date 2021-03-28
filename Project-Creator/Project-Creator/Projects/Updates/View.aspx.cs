@@ -15,6 +15,7 @@ namespace Project_Creator.Posts {
         public Account user = null;
         public Project project;
         List<Comment2> comments;
+        public string FileLink = "";
         protected void Page_Load(object sender, EventArgs e) {
             txtNewComment.Rows = 4;
 
@@ -57,12 +58,29 @@ namespace Project_Creator.Posts {
                         counter++;
                     }
                     TimelineIndex = counter;
-
                     lblUpdate.Text = currentTimeline.timeline_name;
                     lblDate.Text = currentTimeline.timeline_creation.Value.ToString("yyyy-MM-dd");
                     TimelineImage.ImageUrl = currentTimeline.timeline_image_path;
                     lblDesc.Text = currentTimeline.timeline_desc;
-                    lblContent.Text = currentTimeline.timeline_file_path;
+                    FileLink = currentTimeline.timeline_file_path;
+
+                    //Checks the extension of the uploaded file.
+                    switch (System.IO.Path.GetExtension(FileLink))
+                    {
+                        case ".png":
+                        case ".jpg":
+                        case ".jpeg":
+                        case ".bmp":
+                            //Displays the artwork showcase.
+
+
+                        case ".mp4":
+                            //Displays the video player.
+                            FileVideo.Visible = true;
+                            break;
+
+
+                    }
 
                     //Sets the list to the timeline repeater.
                     RepeaterTimeline.DataSource = ProjectTimeline;

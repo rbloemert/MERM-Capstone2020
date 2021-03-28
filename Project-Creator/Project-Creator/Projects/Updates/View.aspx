@@ -39,16 +39,23 @@
                                 <div class="timeline-image-container">
                                     <asp:Image ID="TimelineImage" CssClass="timeline-image" runat="server" />
                                 </div>
-                                <br />
+                            </div>
+                            <div class="Basic" style="margin-top: 5px;">
+                                <div id="FileImage" runat="server" hidden>
+                                    <img src="<%=FileLink %>" />
+                                </div>
+                                <div id="FileVideo" runat="server" hidden>
+                                    <video width="960" height="540" src="<%=FileLink %>" controls autoplay>
+                                        <script>
+                                            var video = document.currentScript.parentElement;
+                                            video.volume = 0.3;
+                                        </script>
+                                    </video>
+                                </div>
                             </div>
                             <div class="Basic" style="margin-top: 5px;">
                                 <p>
                                     <asp:Label ID="lblDesc" runat="server"></asp:Label>
-                                </p>
-                            </div>
-                            <div class="Basic" style="margin-top: 5px;">
-                                <p>
-                                    <asp:Label ID="lblContent" runat="server" Text="Put attatched content here"></asp:Label>
                                 </p>
                             </div>
                         </div>
