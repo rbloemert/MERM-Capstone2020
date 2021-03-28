@@ -12,16 +12,20 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="height: 72px; margin-top: 4px;">
-                                <table style="width:100%;">
+                                <table style="width: 100%;">
                                     <tr>
                                         <td>
-                                            <h1 class="Project" style="text-align: left"><asp:Label ID="lblUpdate" runat="server" /></h1>
+                                            <h1 class="Project" style="text-align: left">
+                                                <asp:Label ID="lblUpdate" runat="server" /></h1>
                                         </td>
                                         <td>
-                                            <a style="text-align:right;text-decoration:none;" href="../View?p=<%=ProjectID %>"><h3>Back to project</h3></a>
+                                            <a style="text-align: right; text-decoration: none;" href="../View?p=<%=ProjectID %>">
+                                                <h3>Back to project</h3>
+                                            </a>
                                         </td>
                                     </tr>
-                                </table>                                <br />
+                                </table>
+                                <br />
                                 <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;">
                                     <asp:Label ID="lblDate" runat="server" /></span></h2>
                             </div>
@@ -41,16 +45,24 @@
                                 </div>
                             </div>
                             <div class="Basic" style="margin-top: 5px;">
-                                <div id="FileImage" runat="server" hidden>
-                                    <img src="<%=FileLink %>" />
+                                <div id="FileImage" runat="server" style="display: none">
+                                    <img src="<%=FileLink %>" class="file-image" />
                                 </div>
-                                <div id="FileVideo" runat="server" hidden>
+                                <div id="FileVideo" runat="server" style="display: none">
                                     <video width="960" height="540" src="<%=FileLink %>" controls autoplay>
                                         <script>
                                             var video = document.currentScript.parentElement;
                                             video.volume = 0.3;
                                         </script>
                                     </video>
+                                </div>
+                                <div id="FilePDF" runat="server" style="display: none">
+                                    <a href="http://docs.google.com/gview?url=<%=FileLink %>">Click here to view the Pdf Document</a>
+                                </div>
+                                <div id="FileText" runat="server" style="display: none; text-align: left; white-space: pre-wrap;">
+                                    <asp:Label ID="FileTextContent" runat="server">
+
+                                    </asp:Label>
                                 </div>
                             </div>
                             <div class="Basic" style="margin-top: 5px;">
@@ -91,7 +103,7 @@
                                                             <tr>
                                                                 <td>
                                                                     <hr />
-                                                                    <p style="height:116px;"><%#Item.timeline_desc %></p>
+                                                                    <p style="height: 116px;"><%#Item.timeline_desc %></p>
                                                                     <hr />
                                                                 </td>
                                                             </tr>
@@ -120,7 +132,7 @@
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="margin-top: 0">
-                                <asp:Repeater ID="RepeaterComment" ItemType="Project_Creator.Comment2" onitemcommand="RepeaterComment_ItemCommand" runat="server">
+                                <asp:Repeater ID="RepeaterComment" ItemType="Project_Creator.Comment2" OnItemCommand="RepeaterComment_ItemCommand" runat="server">
                                     <ItemTemplate>
                                         <div class="Basic">
                                             <table>
@@ -136,7 +148,7 @@
                                                     </td>
                                                     <td class="comment-content">
                                                         <p><%#Item.comment_text %></p>
-                                                        <asp:Button  ClientIDMode="AutoID" ID="btnEditThisItem" CommandName="delete_comment" CssClass="comment-delete-button" CommandArgument=<%# Item.commentID + "," + Item.comment_owner_accountID %> Text="Delete" runat="server" />
+                                                        <asp:Button ClientIDMode="AutoID" ID="btnEditThisItem" CommandName="delete_comment" CssClass="comment-delete-button" CommandArgument='<%# Item.commentID + "," + Item.comment_owner_accountID %>' Text="Delete" runat="server" />
                                                     </td>
                                                 </tr>
                                             </table>
@@ -152,7 +164,7 @@
                                             </td>
                                             <td class="comment-content">
                                                 <p>
-                                                    <asp:TextBox ID="txtNewComment" CssClass="comment-textbox" TextMode="MultiLine" runat="server" onKeyUp="TextChanged()" MaxLength="255" ClientIDMode="Static" style="overflow: hidden;"></asp:TextBox>
+                                                    <asp:TextBox ID="txtNewComment" CssClass="comment-textbox" TextMode="MultiLine" runat="server" onKeyUp="TextChanged()" MaxLength="255" ClientIDMode="Static" Style="overflow: hidden;"></asp:TextBox>
                                                     <script>
                                                         function TextChanged() {
                                                             val = document.getElementById("txtNewComment").value;

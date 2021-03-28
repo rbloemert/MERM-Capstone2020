@@ -1,7 +1,9 @@
 ﻿using Project_Creator.Classes;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -72,13 +74,29 @@ namespace Project_Creator.Posts {
                         case ".jpeg":
                         case ".bmp":
                             //Displays the artwork showcase.
-
-
+                            FileImage.Style["display"] = "block";
+                            break;
                         case ".mp4":
                             //Displays the video player.
-                            FileVideo.Visible = true;
+                            FileVideo.Style["display"] = "block";
                             break;
-
+                        case ".pdf":
+                            FilePDF.Style["display"] = "block";
+                            break;
+                        case ".txt":
+                            FileText.Style["display"] = "block";
+                            var webRequest = WebRequest.Create(@FileLink);
+                            using (var response = webRequest.GetResponse())
+                            using (var content = response.GetResponseStream())
+                            using (var reader = new StreamReader(content)) {
+                                var strContent = reader.ReadToEnd();
+                                strContent = strContent.Replace("&", "&amp");
+                                strContent = strContent.Replace("<", "&lt");
+                                strContent = strContent.Replace(">", "&gt");
+                                //strContent = strContent.Replace("\n", "<br>");
+                                FileTextContent.Text = "<br>" + strContent;
+                            }
+                            break;
 
                     }
 
