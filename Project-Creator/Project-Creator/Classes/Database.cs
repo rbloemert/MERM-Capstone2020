@@ -770,6 +770,30 @@ namespace Project_Creator {
             return timelines;
         }
 
+        public bool CheckTimelineInProject(int projectID, int timelineID) // return a specific timeline
+        {
+            Timeline timeline = new Timeline();
+            if (!IsConnectionOpen()) return false;
+
+            var sql = "SELECT * " +
+                      "FROM timeline_link " +
+                      "WHERE timelineID = @timelineID and project_owner_projectID = @project";
+            using (var cmd = new SqlCommand(sql, connection)) {
+                cmd.Parameters.AddWithValue("@timelineID", timelineID);
+
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                if(datatable.Rows.Count > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+        }
+
         public Timeline GetTimeline(int timelineID) // return a specific timeline
         {
             Timeline timeline = new Timeline();
