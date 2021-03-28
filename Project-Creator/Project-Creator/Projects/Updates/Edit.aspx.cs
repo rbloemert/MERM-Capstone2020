@@ -130,20 +130,20 @@ namespace Project_Creator.Projects.Updates {
         }
 
         protected void btnNewFile_Click(object sender, EventArgs e) {
-            if (ImageUploader.HasFile) {
-                try {
-                    switch (ImageUploader.PostedFile.ContentType) {
-                        case ("image/jpeg"):
-                        case ("image/png"):
-                        case ("image/bmp"):
-                            string filename = ProjectID + "" + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
-                            TimelineImage.ImageUrl = StorageService.UploadFileToStorage(ImageUploader.FileContent, filename, StorageService.temp_storage);
-                            break;
-                    }
-                } catch (Exception ex) {
-
-                }
-            }
+            //if (ImageUploader.HasFile) {
+            //    try {
+            //        switch (ImageUploader.PostedFile.ContentType) {
+            //            case ("image/jpeg"):
+            //            case ("image/png"):
+            //            case ("image/bmp"):
+            //                string filename = ProjectID + "" + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
+            //                TimelineImage.ImageUrl = StorageService.UploadFileToStorage(ImageUploader.FileContent, filename, StorageService.temp_storage);
+            //                break;
+            //        }
+            //    } catch (Exception ex) {
+	    //
+            //    }
+            //}
         }
 
         protected void btnCancel_Click(object sender, EventArgs e) {
