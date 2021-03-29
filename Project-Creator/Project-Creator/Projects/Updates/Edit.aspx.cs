@@ -37,8 +37,6 @@ namespace Project_Creator.Projects.Updates {
                         RadioPublic.Visible = false;
                         RadioPrivate.Visible = false;
 
-                        //Checks if the user is logged in.
-                        if (Session["User"] != null) {
                         //Gets the session user object.
                         Account user = (Account)Session["User"];
 
@@ -61,8 +59,6 @@ namespace Project_Creator.Projects.Updates {
                                 lblDate.Text = TimelineObject.timeline_creation.Value.ToString("yyyy-MM-dd"); ;
                                 TimelineImage.ImageUrl = TimelineObject.timeline_image_path;
                                 txtDesc.Text = TimelineObject.timeline_desc;
-                                lblContent.Text = TimelineObject.timeline_file_path;
-                                lblDescCounter.Text = txtDesc.Text.Length + " of 255";
                                 FileLink = TimelineObject.timeline_file_path;
 
                                 //Checks the extension of the uploaded file.
