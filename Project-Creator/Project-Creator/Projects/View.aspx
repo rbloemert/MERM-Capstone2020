@@ -116,48 +116,5 @@
                 </div>
             </asp:TableCell>
         </asp:TableRow>
-        <asp:TableRow>
-            <asp:TableCell>
-                <div class="ProjectTable">
-                    <div class="ProjectRow">
-                        <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
-                            <div class="Basic" style="margin-top: 0">
-                                <div class="related-panel">
-                                    <asp:Repeater ID="RepeaterRelated" ItemType="Project_Creator.Project" runat="server">
-                                        <ItemTemplate>
-                                            <div class="timeline-content">
-                                                <div class="Basic" style="width: 90%; height: 250px; margin: 0; padding: 8px;">
-                                                    <table>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="View?p=<%#Item.projectID %>">
-                                                                    <asp:Image CssClass="related-img" ImageUrl="<%#Item.project_image_path %>" runat="server" />
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <h2><%#Item.project_name %></h2>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <hr />
-                                                                <p><%#Item.project_desc %></p>
-                                                                <hr />
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </asp:TableCell>
-        </asp:TableRow>
     </asp:Table>
 </asp:Content>

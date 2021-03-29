@@ -110,25 +110,6 @@ namespace Project_Creator.Projects
                     RepeaterTimeline.DataSource = ProjectTimeline;
                     RepeaterTimeline.DataBind();
 
-                    List<Project> projects = db.GetProjectList();
-                    List<Project> otherProjects = new List<Project>();
-                    /*for each of the projects in the related projects list*/
-                    int panelNum = 1;
-                    foreach (Project p in projects)
-                    {
-                        if (p.projectID != ProjectID)
-                        {
-                            panelNum++;
-                            otherProjects.Add(p);
-                            if (panelNum > 4)
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    RepeaterRelated.DataSource = otherProjects;
-                    RepeaterRelated.DataBind();
-
                 }
                 else
                 {

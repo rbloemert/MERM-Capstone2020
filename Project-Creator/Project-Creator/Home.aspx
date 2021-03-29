@@ -67,8 +67,8 @@
                                 <div style="width: 100%; max-width: 1014px;">
                                     <div class="Basic" style="margin-top:0;min-height:474px;">
                                         <div class="Basic" style="margin:0">
-                                            <h1>
-                                                Followed Project Updates:
+                                            <h1 style="color:navajowhite">
+                                                New Project Updates:
                                             </h1>
                                         </div>
                                         <div class="gallery js-flickity" data-flickity-options='{ "pageDots": false, "initialIndex": <%=TimelineIndex %> }'>

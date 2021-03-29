@@ -444,21 +444,36 @@ namespace Project_Creator {
             return projects;
         }
 
-        public List<Project> GetProjectList(string search, int visibility) // return projects with substring in title
+        public List<Project> GetProjectList(string search, int visibility, int ascending) // return projects with substring in title
         {
             List<Project> projects = new List<Project>();
             if (!IsConnectionOpen()) return projects;
 
             var sql = "SELECT * " +
                       "FROM project " +
-                      "WHERE CHARINDEX('@search', project.project_name) > 0 " +
-                      "AND project_visibility = @visibility;";
+                      "INNER JOIN project_link ON project_link.projectID = project.projectID " +
+                      "INNER JOIN account ON account.accountID = project_link.project_owner_accountID " +
+                      "WHERE CHARINDEX(@search, project.project_name) > 0 " +
+                      "OR CHARINDEX(@search, project.project_desc) > 0 " +
+                      "OR CHARINDEX(@search, account.username) > 0 " +
+                      "AND project.project_visibility = @visibility " +
+                      "ORDER BY project.projectID ";
             if(search == "")
             {
                 sql = "SELECT * " +
                       "FROM project " +
-                      "WHERE project_visibility = @visibility;";
+                      "WHERE project_visibility = @visibility " +
+                      "ORDER BY projectID ";
             }
+            if (ascending == 1)
+            {
+                sql += "ASC;";
+            }
+            else
+            {
+                sql += "DESC;";
+            }
+
             using (var cmd = new SqlCommand(sql, connection)) {
                 cmd.Parameters.AddWithValue("@search", search);
                 cmd.Parameters.AddWithValue("@visibility", visibility);

@@ -21,6 +21,21 @@ namespace Project_Creator
                 LinkLogout.Visible = true;
             }
 
+            //Checks if the page is postback.
+            if (IsPostBack)
+            {
+
+                //Checks if the textbox is empty.
+                if(TextBoxSearch.Text != "")
+                {
+
+                    //Sends the user to the search page.
+                    Response.Redirect("~/Browse?s=" + TextBoxSearch.Text);
+
+                }
+
+            }
+
         }
 
         protected void Search_Click(object sender, ImageClickEventArgs e)
@@ -31,7 +46,7 @@ namespace Project_Creator
             {
 
                 //Redirects to the browsing page with a search.
-                Response.Redirect("/Browse?Search=" + TextBoxSearch.Text);
+                Response.Redirect("/Browse?s=" + TextBoxSearch.Text);
 
             }
 
@@ -71,5 +86,7 @@ namespace Project_Creator
             Response.Redirect("/Home");
 
         }
+
     }
+
 }

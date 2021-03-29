@@ -27,7 +27,7 @@
                         <asp:Table runat="server" CssClass="Search">
                             <asp:TableRow CssClass="Search">
                                 <asp:TableCell CssClass="Search">
-                                    <asp:TextBox ID="TextBoxSearch" CssClass="Search Primary" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxSearch" CssClass="Search Primary" runat="server" ></asp:TextBox>
                                 </asp:TableCell>
                                 <asp:TableCell CssClass="Search" style="text-align:left;vertical-align:middle">
                                     <div class="Vertical">

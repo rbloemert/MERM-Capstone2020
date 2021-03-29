@@ -13,27 +13,42 @@ namespace Project_Creator
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //Gets a connection to the database.
-            Database db = new Database();
-
-            //Gets a list of projects.
-            List<Project> projects = new List<Project>();
-
-            //Adds the projects from the database to the list.
-            projects = db.GetProjectList("", 1);
-
-            //Gets a connection to the database.
-            db = new Database();
-
-            //Gets the project authors for each project.
-            for (var p = 0; p < projects.Count; p++)
+            //Checks if not postback.
+            if (!IsPostBack)
             {
-                projects[p].project_author = db.GetProjectAuthor(projects[p].projectID);
-            }
 
-            //Sets the repeater data source to the project list.
-            RepeaterProject.DataSource = projects;
-            RepeaterProject.DataBind();
+                //Gets the search term from the search bar.
+                string search = "";
+
+                //Checks if the quer string is valid.
+                if (Request.QueryString["s"] != null)
+                {
+                    search = Request.QueryString["s"].ToString();
+                }
+
+                //Gets a connection to the database.
+                Database db = new Database();
+
+                //Gets a list of projects.
+                List<Project> projects = new List<Project>();
+
+                //Adds the projects from the database to the list.
+                projects = db.GetProjectList(search, 1, 1);
+
+                //Gets a connection to the database.
+                db = new Database();
+
+                //Gets the project authors for each project.
+                for (var p = 0; p < projects.Count; p++)
+                {
+                    projects[p].project_author = db.GetProjectAuthor(projects[p].projectID);
+                }
+
+                //Sets the repeater data source to the project list.
+                RepeaterProject.DataSource = projects;
+                RepeaterProject.DataBind();
+
+            }
 
         }
     }
