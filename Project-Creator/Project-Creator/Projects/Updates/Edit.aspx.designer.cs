@@ -15,6 +15,15 @@ namespace Project_Creator.Projects.Updates
     {
 
         /// <summary>
+        /// ScriptManager2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager2;
+
+        /// <summary>
         /// TextBoxUpdate control.
         /// </summary>
         /// <remarks>
@@ -51,6 +60,15 @@ namespace Project_Creator.Projects.Updates
         protected global::System.Web.UI.WebControls.FileUpload ImageUploader;
 
         /// <summary>
+        /// btnFileSubmit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFileSubmit;
+
+        /// <summary>
         /// txtDesc control.
         /// </summary>
         /// <remarks>
@@ -69,13 +87,49 @@ namespace Project_Creator.Projects.Updates
         protected global::System.Web.UI.WebControls.TextBox lblContent;
 
         /// <summary>
-        /// ContentUploader control.
+        /// FileImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload ContentUploader;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FileImage;
+
+        /// <summary>
+        /// FileVideo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FileVideo;
+
+        /// <summary>
+        /// FilePDF control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FilePDF;
+
+        /// <summary>
+        /// FileText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FileText;
+
+        /// <summary>
+        /// FileTextContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label FileTextContent;
 
         /// <summary>
         /// btnSubmit control.

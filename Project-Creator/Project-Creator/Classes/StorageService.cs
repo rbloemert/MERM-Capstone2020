@@ -28,6 +28,7 @@ namespace Project_Creator
         public static string project_image = "project-image";
         public static string timeline_image = "timeline-image";
         public static string timeline_file = "timeline-file";
+        public static string temp_storage = "temp-storage";
         // we should REALLY centralize connection strings somewhere, not leave them lying about!!!
         private static string connectionString = "DefaultEndpointsProtocol=https;AccountName=mjackson9891;AccountKey=K97XpZJ95OzGG1UuUSmtfw0pv+cYo8e7N9uHVZSXrKHS+lYZqBLx4cd2mdH/xBwzJnNnVRUHwUt7HMm7BZ7cgw==;EndpointSuffix=core.windows.net";
         
@@ -39,6 +40,7 @@ namespace Project_Creator
                 case ("project-image"):
                 case ("timeline-image"):
                 case ("timeline-file"):
+                case ("temp-storage"):
                     BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
                     BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(fileContainer);
                     BlobClient blobClient = containerClient.GetBlobClient(fileName);
@@ -52,6 +54,26 @@ namespace Project_Creator
                     return null;
             }
             
+        }
+
+        public static bool DeleteFileFromStorage(string fileName, string fileContainer) {
+            switch (fileContainer) {
+                case ("account-image"):
+                case ("project-image"):
+                case ("timeline-image"):
+                case ("timeline-file"):
+                case ("temp-storage"):
+                    BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+                    BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(fileContainer);
+                    BlobClient blobClient = containerClient.GetBlobClient(fileName);
+                    try {
+                        return (blobClient.DeleteIfExists());
+                    } catch {
+                        return (false);
+                    }
+                default:
+                    return false;
+            }
         }
 
 
