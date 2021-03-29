@@ -19,25 +19,54 @@ namespace Project_Creator.Posts {
         protected void Page_Load(object sender, EventArgs e) {
             txtNewComment.Rows = 4;
 
+            //Gets the project id from the URL.
+            ProjectID = Convert.ToInt32(Request.QueryString["p"]);
+            UpdateID = Convert.ToInt32(Request.QueryString["u"]);
+
             //check if the user is logged in
             if (Session["User"] != null) {
+
                 //Gets the session user object.
                 user = (Account)Session["User"];
                 loggedIn = true;
                 LoggedInUserImage.ImageUrl = user.account_image_path;
                 lblNewCommentUser.Text = user.username;
-            } else {
+
+                //Checks if not a post back.
+                if (!IsPostBack)
+                {
+
+                    //Checks if the project and update is set.
+                    if ((ProjectID != 0) && (UpdateID != 0))
+                    {
+
+                        //Gets the database connection.
+                        Database db = new Database();
+
+                        //Checks if the user is notified of the update.
+                        if (db.GetNotifications(user.accountID).FindIndex(t => t.timelineID == UpdateID) >= 0)
+                        {
+
+                            //Deletes the notification from the list.
+                            db.DeleteNotification(user.accountID, UpdateID);
+
+                        }
+
+                    }
+
+                }
+
+            }
+            else
+            {
                 txtNewComment.Enabled = false;
                 txtNewComment.Text = "You must be signed in order to leave a comment";
+
             }
 
-            //Gets the project id from the URL.
-            ProjectID = Convert.ToInt32(Request.QueryString["p"]);
-            UpdateID = Convert.ToInt32(Request.QueryString["u"]);
+            if (!IsPostBack)
+            {
 
-            if (IsPostBack) {
-
-            } else {
                 //Checks if the project and update is set.
                 if ((ProjectID != 0) && (UpdateID != 0)) {
 
@@ -45,6 +74,39 @@ namespace Project_Creator.Posts {
                     Database db = new Database();
                     project = db.GetProject(ProjectID);
                     project.project_author = db.GetProjectAuthor(ProjectID);
+
+                    //check if the user is logged in
+                    if (Session["User"] != null)
+                    {
+
+                        //Gets the session user object.
+                        user = (Account)Session["User"];
+
+                        //Checks if the user is the project creator.
+                        if (user.username == project.project_author)
+                        {
+
+                            //Enables the edit button.
+                            ButtonEdit.Visible = true;
+
+                        }
+                        else
+                        {
+
+                            //Disables the edit button.
+                            ButtonEdit.Visible = false;
+
+                        }
+
+                    }
+                    else
+                    {
+
+                        //Disables the edit button.
+                        ButtonEdit.Visible = false;
+
+                    }
+
 
                     //Gets a list of all the timelines for the project.
                     List<Timeline> ProjectTimeline = db.GetTimelineList(ProjectID);

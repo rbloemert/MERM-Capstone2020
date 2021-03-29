@@ -9,8 +9,50 @@ namespace Project_Creator
 {
     public partial class Home : System.Web.UI.Page
     {
+        public int TimelineIndex = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (!IsPostBack)
+            {
+
+                //Gets a database connection.
+                Database db = new Database();
+
+                //Checks if the user is signed into the website.
+                if (Session["User"] != null)
+                {
+
+                    //Enables the timeline divider.
+                    Notifications.Visible = true;
+
+                    //Gets the user object from the session.
+                    Account user = (Account)Session["User"];
+
+                    //Updates the profile labels.
+                    lblUsername.Text = user.username;
+                    lblFullname.Text = "(" + user.fullname + ")";
+                    lblEmail.Text = user.email;
+                    lblDate.Text = user.account_creation.Value.ToString("yyyy-MM-dd");
+
+                    //Gets all the current notifications for the user.
+                    List<Timeline> ProjectTimeline = db.GetNotifications(user.accountID);
+
+                    //Binds the data to the project timeline.
+                    TimelineIndex = ProjectTimeline.Count - 1;
+                    RepeaterTimeline.DataSource = ProjectTimeline;
+                    RepeaterTimeline.DataBind();
+
+                }
+                else
+                {
+
+                    //Disables the timelinder divider.
+                    Notifications.Visible = false;
+
+                }
+
+            }
             
         }
     }

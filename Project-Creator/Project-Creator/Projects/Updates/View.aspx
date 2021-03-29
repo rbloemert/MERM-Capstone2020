@@ -18,12 +18,25 @@
                                             <h1 class="Project" style="text-align: left"><asp:Label ID="lblUpdate" runat="server" /></h1>
                                         </td>
                                         <td>
+                                            <div style="float:right" id="ButtonEdit" runat="server">
+                                                <a style="display:flex;width:32px;height:32px;align-items:center;justify-content:center" href="/Projects/Updates/Edit?p=<%=ProjectID %>&u=<%=UpdateID %>">
+                                                    <i style="color:gray;" class="gg-pen">
+
+                                                    </i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;">
+                                            <asp:Label ID="lblDate" runat="server" /></span></h2>
+                                        </td>
+                                        <td>
                                             <a style="text-align:right;text-decoration:none;" href="../View?p=<%=ProjectID %>"><h3>Back to project</h3></a>
                                         </td>
                                     </tr>
-                                </table>                                <br />
-                                <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;">
-                                    <asp:Label ID="lblDate" runat="server" /></span></h2>
+                                </table>
                             </div>
                         </div>
                     </div>

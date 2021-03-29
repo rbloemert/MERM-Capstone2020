@@ -28,21 +28,20 @@
                 <div class="ProjectTable">
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
-                            <div class="Basic" style="margin: 0;">
+                            <div class="Basic" style="text-align:left;margin: 0;">
                                 Update Image:
                                 <br />
                                 <asp:Image ID="TimelineImage" CssClass="timeline-image" runat="server" />
                                 <br />
                                 <asp:FileUpload ID="ImageUploader" runat="server" />
                             </div>
-                            <div class="Basic" style="margin-top: 5px;">
-                                Update Description:
+                            <div class="Basic" style="text-align:left;margin-top: 5px;">
+                                Description:
                                 <p>
-                                    <asp:TextBox ID="txtDesc" CssClass="update-edit-textbox" runat="server" onKeyUp="txtDesc_TextChanged()" MaxLength="255" ClientIDMode="Static"></asp:TextBox>
-                                    <asp:Label ID="lblDescCounter" runat="server" ClientIDMode="Static">0 of 255</asp:Label>
+                                    <asp:TextBox Height="160px" Width="99%" TextMode="MultiLine" Wrap="true" ID="txtDesc" CssClass="update-edit-textbox" runat="server" MaxLength="600"></asp:TextBox>
                                 </p>
                             </div>
-                            <div class="Basic" style="margin-top: 5px;">
+                            <div class="Basic" style="text-align:left;margin-top: 5px;">
                                 Attatched File:
                                 <p>
                                     <asp:TextBox ID="lblContent" CssClass="update-edit-textbox" runat="server" Text="Put attatched content here"></asp:TextBox>
@@ -59,18 +58,28 @@
                 <div class="ProjectTable">
                     <div class="ProjectRow">
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
-                            <table style="width:100%">
+                            <div class="Basic" style="margin:0">
+                                <table>
                                     <tr>
-                                        <td style="text-align:left;">
-                                            <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete" />
+                                        <td style="text-align:left;padding-left:12px">
+                                            <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Save Changes" />
                                         </td>
-                                        <td style="text-align:right;">
+                                        <td style="text-align:left;padding-left:12px">
+                                            <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete Update" />
+                                        </td>
+                                        <td style="text-align:right;padding-left:12px">
                                             <asp:Button ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="Cancel" />
-                                            <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
+                                        </td>
+                                        <td style="text-align:left;padding-left:12px">
+                                            <asp:RadioButton runat="server" id="RadioPublic" GroupName="RadioVisibility" Text="Send Notifications" Checked="true" />
+                                        </td>
+                                        <td style="text-align:left;padding-left:12px">
+                                            <asp:RadioButton runat="server" id="RadioPrivate" GroupName="RadioVisibility" Text="Don't Send Notifications" />
                                         </td>
                                     </tr>
                                 </table>
                             </div>
+                        </div>
                     </div>
                 </div>
             </asp:TableCell>

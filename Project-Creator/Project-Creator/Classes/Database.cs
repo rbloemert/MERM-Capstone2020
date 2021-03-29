@@ -1162,6 +1162,127 @@ namespace Project_Creator {
             return QueryResult.FailedNoChanges;
         }
 
+        // NOTIFICATIONS
+        public QueryResult CreateNotifications(int ProjectID, int TimelineID)
+        {
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Gets a list of followers.
+            List<int> follower_list = GetFollowers(ProjectID);
+
+            //Gets an SQL statement string.
+            var sql = "INSERT INTO notify(notify_account_id, notify_timeline_id) VALUES";
+
+            //Loops through each follower adding them to the query string.
+            foreach(var follower in follower_list)
+            {
+
+                //Adds the follower entry on to the list.
+                sql += "(" + follower + "," + TimelineID + "),";
+
+            }
+
+            //Replaces the last comma with a semi-colon.
+            sql = sql.Remove(sql.Length - 1, 1) + ";";
+
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+
+                //Executes the sql query.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
+            return QueryResult.FailedNoChanges;
+
+        }
+
+        public List<Timeline> GetNotifications(int AccountID)
+        {
+            List<Timeline> notifications = new List<Timeline>();
+            var sql = "SELECT *, timeline_link.project_owner_projectID " +
+                      "FROM timeline " +
+                      "INNER JOIN timeline_link ON (timeline.timelineID = timeline_link.timelineID) " +
+                      "LEFT JOIN notify ON (timeline.timelineID = notify.notify_timeline_id) " +
+                      "WHERE notify.notify_account_id = @accountID " +
+                      "ORDER BY timeline.timelineID ASC;";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@accountID", AccountID);
+
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows)
+                {
+                    notifications.Add(new Timeline()
+                    {
+                        timelineID = Convert.ToInt32(row["timelineID"]),
+                        timeline_creation = Convert.ToDateTime(row["timeline_creation"]),
+                        timeline_name = row["timeline_name"].ToString(),
+                        timeline_desc = row["timeline_desc"].ToString(),
+                        timeline_image_path = row["timeline_image_path"].ToString(),
+                        timeline_file_path = row["timeline_file_path"].ToString(),
+                        timeline_project = Convert.ToInt32(row["project_owner_projectID"]),
+                    });
+                }
+            }
+
+            return notifications;
+
+        }
+
+        public QueryResult DeleteNotification(int AccountID, int TimelineID)
+        {
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Replaces the last comma with a semi-colon.
+            string sql = "DELETE FROM notify WHERE notify_account_id = @notify_account_id AND notify_timeline_id = @notify_timeline_id;";
+
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@notify_account_id", AccountID);
+                cmd.Parameters.AddWithValue("@notify_timeline_id", TimelineID);
+
+                //Executes the sql query.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
+            return QueryResult.FailedNoChanges;
+        }
+
         // COMMENT
     }
 }

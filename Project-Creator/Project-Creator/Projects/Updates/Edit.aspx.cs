@@ -32,6 +32,10 @@ namespace Project_Creator.Projects.Updates {
 
                     if(UpdateID != 0) {
 
+                        //Disables the sending notifications radio buttons.
+                        RadioPublic.Visible = false;
+                        RadioPrivate.Visible = false;
+
                         //Checks if the user is logged in.
                         if (Session["User"] != null) {
 
@@ -56,7 +60,6 @@ namespace Project_Creator.Projects.Updates {
                                 lblDate.Text = TimelineObject.timeline_creation.Value.ToString("yyyy-MM-dd"); ;
                                 TimelineImage.ImageUrl = TimelineObject.timeline_image_path;
                                 txtDesc.Text = TimelineObject.timeline_desc;
-                                lblDescCounter.Text = txtDesc.Text.Length + " of 255";
                                 lblContent.Text = TimelineObject.timeline_file_path;
                             }
 
@@ -133,7 +136,7 @@ namespace Project_Creator.Projects.Updates {
 
                 }
             } else {
-                
+                TimelineObject.timeline_image_path = "";
             }
             if (ContentUploader.HasFile) {
                 try {
@@ -155,7 +158,7 @@ namespace Project_Creator.Projects.Updates {
 
                 }
             } else {
-                TimelineObject.timeline_file_path = lblContent.Text;
+                TimelineObject.timeline_file_path = "";
             }
 
             //Gets the timeline object values.
@@ -187,6 +190,10 @@ namespace Project_Creator.Projects.Updates {
                 Database db = new Database();
                 int TimelineID = db.CreateTimeline(TimelineObject);
                 db.CreateTimelineLink(TimelineID, ProjectID);
+                if(RadioPublic.Checked == true)
+                {
+                    db.CreateNotifications(ProjectID, TimelineID);
+                }
 
                 //Redirects back to the project editing.
                 Response.Redirect("~/Projects/Edit?p=" + ProjectID);
@@ -213,6 +220,7 @@ namespace Project_Creator.Projects.Updates {
             //Redirects back to the project editing.
             Response.Redirect("~/Projects/Edit?p=" + ProjectID);
         }
+
     }
 
 }

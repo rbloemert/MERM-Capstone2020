@@ -7,10 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project_Creator.Projects.Updates {
+namespace Project_Creator.Projects.Updates
+{
 
 
-    public partial class Edit {
+    public partial class Edit
+    {
 
         /// <summary>
         /// TextBoxUpdate control.
@@ -58,15 +60,6 @@ namespace Project_Creator.Projects.Updates {
         protected global::System.Web.UI.WebControls.TextBox txtDesc;
 
         /// <summary>
-        /// lblDescCounter control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescCounter;
-
-        /// <summary>
         /// lblContent control.
         /// </summary>
         /// <remarks>
@@ -83,6 +76,15 @@ namespace Project_Creator.Projects.Updates {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload ContentUploader;
+
+        /// <summary>
+        /// btnSubmit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSubmit;
 
         /// <summary>
         /// btnDelete control.
@@ -103,12 +105,21 @@ namespace Project_Creator.Projects.Updates {
         protected global::System.Web.UI.WebControls.Button btnCancel;
 
         /// <summary>
-        /// btnSubmit control.
+        /// RadioPrivate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmit;
+        protected global::System.Web.UI.WebControls.RadioButton RadioPrivate;
+
+        /// <summary>
+        /// RadioPublic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton RadioPublic;
     }
 }

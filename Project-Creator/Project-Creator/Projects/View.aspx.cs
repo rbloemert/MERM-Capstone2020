@@ -63,6 +63,7 @@ namespace Project_Creator.Projects
                             //Displays an unable to follow message.
                             ButtonFollow.Text = "You own this project";
                             ButtonFollow.Enabled = false;
+                            ButtonEdit.Visible = true;
 
                             //Checks if the project is private.
                             if (project.project_visibility == 0)
@@ -81,6 +82,13 @@ namespace Project_Creator.Projects
                             }
 
                         }
+                        else
+                        {
+
+                            //Disables the edit button.
+                            ButtonEdit.Visible = false;
+
+                        }
 
                     }
                     else
@@ -88,6 +96,9 @@ namespace Project_Creator.Projects
 
                         //Disables the follow button.
                         ButtonFollow.Enabled = false;
+
+                        //Disables the edit button.
+                        ButtonEdit.Visible = false;
 
                     }
 

@@ -17,6 +17,13 @@
                         </div>
                         <div class="ProjectColumn" style="width: 100%;max-width: 800px;">
                             <div class="Basic" style="height:90px;">
+                                <div style="float:right" id="ButtonEdit" runat="server">
+                                    <a style="display:flex;width:32px;height:32px;align-items:center;justify-content:center" href="/Projects/Edit?p=<%=ProjectID %>">
+                                        <i style="color:gray;" class="gg-pen">
+
+                                        </i>
+                                    </a>
+                                </div>
                                 <h1 style="text-align: left"><asp:Label ID="lblTitle" runat="server" /></h1>
                                 <h2 style="text-align: left"><asp:Label ID="lblDescription" runat="server" /></h2>
                                 <table>

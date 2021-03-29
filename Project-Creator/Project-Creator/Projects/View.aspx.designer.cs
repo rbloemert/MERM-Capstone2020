@@ -24,6 +24,15 @@ namespace Project_Creator.Projects
         protected global::System.Web.UI.WebControls.Image ProjectIcon;
 
         /// <summary>
+        /// ButtonEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ButtonEdit;
+
+        /// <summary>
         /// lblTitle control.
         /// </summary>
         /// <remarks>
