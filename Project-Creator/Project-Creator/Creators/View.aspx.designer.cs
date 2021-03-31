@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project_Creator
+namespace Project_Creator.Creators
 {
 
 
-    public partial class Creator
+    public partial class View
     {
 
         /// <summary>

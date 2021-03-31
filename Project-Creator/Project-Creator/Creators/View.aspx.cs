@@ -6,9 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 
-namespace Project_Creator
+namespace Project_Creator.Creators
 {
-    public partial class Creator : System.Web.UI.Page
+    public partial class View : System.Web.UI.Page
     {
         
         Account CreatorAccount;

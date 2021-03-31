@@ -157,7 +157,8 @@
   <ItemGroup>
     <Content Include="Account.aspx" />
     <Content Include="Browse.aspx" />
-    <Content Include="Creator\Creator.aspx" />
+    <Content Include="Creators\Edit.aspx" />
+    <Content Include="Creators\View.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Images\Add.png" />
     <Content Include="Images\Logo.svg" />
@@ -199,12 +200,19 @@
     <Compile Include="Classes\Project.cs" />
     <Compile Include="Classes\StorageService.cs" />
     <Compile Include="Classes\Timeline.cs" />
-    <Compile Include="Creator\Creator.aspx.cs">
-      <DependentUpon>Creator.aspx</DependentUpon>
+    <Compile Include="Creators\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Creator\Creator.aspx.designer.cs">
-      <DependentUpon>Creator.aspx</DependentUpon>
+    <Compile Include="Creators\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Creators\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Creators\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
