@@ -50,8 +50,10 @@
                                 <table style="margin:0;width:100%;">
                                     <tr>
                                         <td>
-                                            <h2 class="Project" style="text-align: left">Project Creator: <a><span style="color: white;">
-                                            <asp:Label ID="lblAuthor" runat="server" /></span></a></h2>
+                                            <h2 class="Project" style="text-align: left">Project Creator: <a href="../Creators/View.aspx?c=<%=CreatorID%>"><span style="color: white;">
+
+                                            <asp:Label ID="lblAuthor" runat="server" />
+                                            </span></a></h2>
                                         </td>
                                         <td>
                                             <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;">

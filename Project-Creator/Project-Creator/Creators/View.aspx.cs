@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,14 +13,13 @@ namespace Project_Creator.Creators
     {
         
         Account CreatorAccount;
+        public int creatorAccountID;
 
-
-
-        string sampleDesc = "Sample Description Text.Paragraphs are the building blocks of papers. Many students define paragraphs in terms of length: a paragraph is a group of at least five sentences, a paragraph is half a page long, etc.In reality, though, the unity and coherence of ideas among sentences is what constitutes a paragraph. A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116).";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int creatorAccountID = 3;//Convert.ToInt32(Request.QueryString["creatorID"]);
+            //int.TryParse(Request.QueryString["c"].ToString(), out creatorAccountID);
+            creatorAccountID = Int32.Parse(Request.QueryString["c"]);
             Database db = new Database();
             CreatorAccount = db.GetAccountInfo(creatorAccountID);
 
@@ -41,6 +41,13 @@ namespace Project_Creator.Creators
             //List<Project> projectList = db.GetProjectList(); //AccountID
             List<Project> projectList = db.GetProjectList(CreatorAccount.accountID); //AccountID
 
+            foreach (Project i in projectList)
+            {
+                if (i.project_visibility == 0)
+                {
+                    projectList.Remove(i);
+                }
+            }
 
             RepeaterRelated.DataSource = projectList;
             RepeaterRelated.DataBind();

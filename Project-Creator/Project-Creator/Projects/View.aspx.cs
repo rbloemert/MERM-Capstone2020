@@ -11,6 +11,7 @@ namespace Project_Creator.Projects
     {
         public int ProjectID = 0;
         public int TimelineIndex = 0;
+        public int CreatorID;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -24,6 +25,7 @@ namespace Project_Creator.Projects
                 Database db = new Database();
                 Project project = db.GetProject(ProjectID);
                 project.project_author = db.GetProjectAuthor(ProjectID);
+                CreatorID = db.GetProjectOwner(ProjectID);
 
                 //Gets the users account information.
                 Account user = (Account)Session["User"];
