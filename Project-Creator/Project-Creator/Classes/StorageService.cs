@@ -33,7 +33,7 @@ namespace Project_Creator
         private static string connectionString = "DefaultEndpointsProtocol=https;AccountName=mjackson9891;AccountKey=K97XpZJ95OzGG1UuUSmtfw0pv+cYo8e7N9uHVZSXrKHS+lYZqBLx4cd2mdH/xBwzJnNnVRUHwUt7HMm7BZ7cgw==;EndpointSuffix=core.windows.net";
         
         /*returns true if uploaded, false if not*/
-        public static string UploadFileToStorage(Stream fileStream, string fileName, string fileContainer)
+        public static string UploadFileToStorage(Stream fileStream, string fileName, string fileContainer, string contentType)
         {
             switch (fileContainer) {
                 case ("account-image"):
@@ -46,6 +46,9 @@ namespace Project_Creator
                     BlobClient blobClient = containerClient.GetBlobClient(fileName);
                     try {
                         blobClient.Upload(fileStream, overwrite: true);
+                        blobClient.SetHttpHeadersAsync(new BlobHttpHeaders {
+                            ContentType = contentType
+                        });
                         return (StorageService.baseUrl + fileContainer + "/" + fileName);
                     } catch {
                         return (null);

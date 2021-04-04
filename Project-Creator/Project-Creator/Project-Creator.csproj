@@ -167,6 +167,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Projects\Edit.aspx" />
     <Content Include="Projects\Updates\Edit.aspx" />
+    <Content Include="Projects\Updates\JavaScript.js" />
     <Content Include="Projects\Updates\View.aspx" />
     <Content Include="Projects\View.aspx" />
     <Content Include="Signup.aspx" />
@@ -177,6 +178,7 @@
     <Content Include="StyleSheets\StyleSheetForm.css" />
     <Content Include="StyleSheets\StyleSheetHeader.css" />
     <Content Include="Web.config" />
+    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.aspx.cs">
@@ -272,6 +274,13 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Classes\Account.cs" />
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

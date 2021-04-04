@@ -919,7 +919,6 @@ namespace Project_Creator {
             using (var cmd = new SqlCommand(sql, connection)) {
                 cmd.Parameters.AddWithValue("@timelineID", timelineID);
                 cmd.Parameters.AddWithValue("@project", projectID);
-
                 var adapter = new SqlDataAdapter(cmd);
                 var datatable = new DataTable();
                 adapter.Fill(datatable);
