@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -14,6 +15,7 @@ namespace Project_Creator.Projects.Updates {
         public Project ProjectObject = new Project();
         public Timeline TimelineObject = new Timeline();
         public string FileLink = "";
+        public Stream ImageStream;
 
         protected void Page_Load(object sender, EventArgs e) {
 
@@ -57,7 +59,7 @@ namespace Project_Creator.Projects.Updates {
                                 //Sets the textbox to the project title.
                                 TextBoxUpdate.Text = TimelineObject.timeline_name;
                                 lblDate.Text = TimelineObject.timeline_creation.Value.ToString("yyyy-MM-dd"); ;
-                                TimelineImage.ImageUrl = TimelineObject.timeline_image_path;
+                                //TimelineImage.ImageUrl = TimelineObject.timeline_image_path;
                                 txtDesc.Text = TimelineObject.timeline_desc;
                                 FileLink = TimelineObject.timeline_file_path;
 
@@ -132,23 +134,6 @@ namespace Project_Creator.Projects.Updates {
 
         }
 
-        protected void btnNewFile_Click(object sender, EventArgs e) {
-            //if (ImageUploader.HasFile) {
-            //    try {
-            //        switch (ImageUploader.PostedFile.ContentType) {
-            //            case ("image/jpeg"):
-            //            case ("image/png"):
-            //            case ("image/bmp"):
-            //                string filename = ProjectID + "" + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
-            //                TimelineImage.ImageUrl = StorageService.UploadFileToStorage(ImageUploader.FileContent, filename, StorageService.temp_storage);
-            //                break;
-            //        }
-            //    } catch (Exception ex) {
-	    //
-            //    }
-            //}
-        }
-
         protected void btnCancel_Click(object sender, EventArgs e) {
 
             //Redirects back to the project editing.
@@ -163,41 +148,40 @@ namespace Project_Creator.Projects.Updates {
             Database db = new Database();
             TimelineObject = db.GetTimeline(UpdateID);
 
-            if (ImageUploader.HasFile) {
+            HttpPostedFile file = Request.Files["ImageUploader"];
+
+            if (file != null && file.ContentLength > 0) {
                 try {
-                    switch (ImageUploader.PostedFile.ContentType) {
+                    switch (file.ContentType) {
                         case ("image/jpeg"):
                         case ("image/png"):
                         case ("image/bmp"):
-                            string filename = ProjectID + "" + UpdateID + Path.GetExtension(ImageUploader.PostedFile.FileName);
-                            TimelineObject.timeline_image_path = StorageService.UploadFileToStorage(ImageUploader.FileContent, filename, StorageService.timeline_image);
-                            StorageService.DeleteFileFromStorage(filename, StorageService.temp_storage);
+                            string filename = ProjectID + "" + UpdateID + Path.GetExtension(file.FileName);
+                            TimelineObject.timeline_image_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.timeline_image, file.ContentType);
                             break;
                     }
                 } catch (Exception ex) {
 
                 }
-            } else {
-                TimelineObject.timeline_image_path = "";
             }
-            if (ContentUploader.HasFile) {
+
+            file = Request.Files["ContentUploader"];
+            if (file != null && file.ContentLength > 0) {
                 try {
-                    switch (ContentUploader.PostedFile.ContentType) {
+                    switch (file.ContentType) {
                         case ("image/jpeg"):
                         case ("image/png"):
                         case ("image/bmp"):
                         case ("application/pdf"):
                         case ("video/mp4"):
                         case ("text/plain"):
-                            string filename = ProjectID + "" + UpdateID + Path.GetExtension(ContentUploader.PostedFile.FileName);
-                            TimelineObject.timeline_file_path = StorageService.UploadFileToStorage(ContentUploader.FileContent, filename, StorageService.timeline_file);
+                            string filename = ProjectID + "" + UpdateID + Path.GetExtension(file.FileName);
+                            TimelineObject.timeline_file_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.timeline_file, file.ContentType);
                             break;
                     }
                 } catch (Exception ex) {
 
                 }
-            } else {
-                TimelineObject.timeline_file_path = "";
             }
 
             //Gets the timeline object values.

@@ -16,7 +16,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form" runat="server">
+    <form id="form" enctype="multipart/form-data" runat="server">
         <div class="Navigation Secondary">
             <asp:Table runat="server" CssClass="Navigation">
                 <asp:TableRow  runat="server" CssClass="Navigation">
