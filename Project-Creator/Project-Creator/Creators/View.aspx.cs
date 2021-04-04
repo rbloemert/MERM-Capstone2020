@@ -18,40 +18,82 @@ namespace Project_Creator.Creators
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //int.TryParse(Request.QueryString["c"].ToString(), out creatorAccountID);
-            creatorAccountID = Int32.Parse(Request.QueryString["c"]);
-            Database db = new Database();
-            CreatorAccount = db.GetAccountInfo(creatorAccountID);
-
-            if (!this.IsPostBack)
+            //Checks if the creator is defined.
+            if(Request.QueryString["c"] != null)
             {
-                PopulateGrid();
-            }
-            //Creator 
-            CreatorUsernameLabel.Text = CreatorAccount.username;
-            CreatorDescriptionTextBox.Text = "Created: " + CreatorAccount.account_creation.ToString();
-            CreatorIcon.ImageUrl = CreatorAccount.account_image_path;
-        }
 
+                creatorAccountID = Int32.Parse(Request.QueryString["c"]);
+                Database db = new Database();
+                CreatorAccount = db.GetAccountInfo(creatorAccountID);
 
-        private void PopulateGrid()
-        {
-            //Gets the database connection.
-            Database db = new Database();
-            //List<Project> projectList = db.GetProjectList(); //AccountID
-            List<Project> projectList = db.GetProjectList(CreatorAccount.accountID); //AccountID
+                //Creator 
+                lblUsername.Text = CreatorAccount.username;
+                lblDate.Text = "Created: " + CreatorAccount.account_creation.Value.ToString("yyyy-MM-dd");
+                CreatorIcon.ImageUrl = CreatorAccount.account_image_path;
 
-            foreach (Project i in projectList)
-            {
-                if (i.project_visibility == 0)
+                //Gets the database connection.
+                db = new Database();
+
+                //List<Project> projectList = db.GetProjectList(); //AccountID
+                List<Project> projectList = new List<Project>();
+
+                //Checks if the search is defined.
+                if(Request.QueryString["s"] != null)
                 {
-                    projectList.Remove(i);
+
+                    //Gets the search string.
+                    string search = Request.QueryString["s"];
+
+                    //Checks if the search option is defined.
+                    if(Request.QueryString["o"] != null)
+                    {
+
+                        //Gets the search option.
+                        int option = Convert.ToInt32(Request.QueryString["o"]);
+
+                        //Checks if the option is valid.
+                        if(option != 0)
+                        {
+
+                            //Gets the project list.
+                            projectList = db.GetProjectList(creatorAccountID, search, 1, option);
+
+                        }
+                        else
+                        {
+
+                            //Gets the project list.
+                            projectList = db.GetProjectList(creatorAccountID, search, 1, 3);
+
+                        }
+
+                    }
+                    else
+                    {
+
+                        //Gets the project list.
+                        projectList = db.GetProjectList(creatorAccountID, search, 1, 3);
+
+                    }
+
                 }
+                else
+                {
+
+                    //Gets the project list.
+                    projectList = db.GetProjectList(creatorAccountID, "", 1, 3);
+
+                }
+
+                RepeaterProject.DataSource = projectList;
+                RepeaterProject.DataBind();
+
             }
-
-            RepeaterRelated.DataSource = projectList;
-            RepeaterRelated.DataBind();
-
+            else
+            {
+                Response.Redirect("~/Home");
+            }
+            
         }
 
 
@@ -61,7 +103,12 @@ namespace Project_Creator.Creators
             ClientScript.RegisterStartupScript(this.GetType(), "mailto", "parent.location='mailto:" + CreatorAccount.email + "'", true);
         }
 
-       
+        protected void Search_Click(object sender, EventArgs e)
+        {
 
+            //Redirects to the account project search.
+            Response.Redirect("~/Creators/View?c=" + creatorAccountID.ToString() + "&s=" + SearchBox.Text + "&o=" + DropDownSort.SelectedValue.ToString());
+
+        }
     }
 }

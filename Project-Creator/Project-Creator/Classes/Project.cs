@@ -31,6 +31,7 @@ namespace Project_Creator
         public string project_author { get; set; }           /* project_author: Author of this project. */
         public string project_image_path { get; set; }       /* project_image_path: The File path of the project's picture; NULL means none */
         public int project_visibility { get; set; }
+        public int project_followers = 0;
 
         public static Database.QueryResult RegisterProject(Account project_owner, Project new_project)
         {

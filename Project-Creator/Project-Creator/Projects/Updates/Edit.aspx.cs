@@ -49,6 +49,7 @@ namespace Project_Creator.Projects.Updates {
                         } else {
 
                             if(db.CheckTimelineInProject(ProjectID, UpdateID)) {
+
                                 //Gets the project information.
                                 ProjectObject = db.GetProject(ProjectID);
                                 ProjectObject.project_author = db.GetProjectAuthor(ProjectID);

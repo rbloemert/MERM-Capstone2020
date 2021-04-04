@@ -32,17 +32,18 @@
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="margin: 0;">
                                 Timeline Image:
-                                <div class="timeline-image-container" style="margin-top: 5px;">
-                                    <asp:Image ID="TimelineImage" CssClass="timeline-image" runat="server" />
-                                </div>
-                                <div class="Basic" style="margin-top: 5px;">
-                                    <asp:FileUpload ID="ImageUploader" onchange="FileUpload()" runat="server" />
-                                    <asp:Button ID="btnFileSubmit" OnClick="btnNewFile_Click" runat="server" hidden></asp:Button>
-                                    <script type="text/javascript">
-                                        function FileUpload() {
-                                            document.getElementById("<%=btnFileSubmit.ClientID %>").click();
-                                        }
-                                    </script>
+                                    <div class="timeline-image-container-edit" style="margin-top: 5px;">
+                                        <asp:Image ID="TimelineImage" CssClass="timeline-image" runat="server" />
+                                    </div>
+                                    <div class="Basic" style="margin-top: 5px;">
+                                        <asp:FileUpload ID="ImageUploader" onchange="FileUpload()" runat="server" />
+                                        <asp:Button ID="btnFileSubmit" OnClick="btnNewFile_Click" runat="server" hidden></asp:Button>
+                                        <script type="text/javascript">
+                                            function FileUpload() {
+                                                document.getElementById("<%=btnFileSubmit.ClientID %>").click();
+                                            }
+                                        </script>
+                                    </div>
                                 </div>
                             </div>
                             <div class="Basic" style="text-align:left;margin-top: 5px;">

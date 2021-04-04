@@ -36,6 +36,11 @@ h3:hover {
 a {
     text-decoration: none;
 }
+select {
+    width: 160px;
+    padding: 4px;
+    background-color: #0f0f0f;
+}
 
 /* Constant Colors. */
 .Primary {

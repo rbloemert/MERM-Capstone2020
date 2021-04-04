@@ -197,6 +197,39 @@ namespace Project_Creator {
             return accs;
         }
 
+        public List<Account> GetAccountList(string search)
+        {
+            List<Account> accs = new List<Account>();
+            if (!IsConnectionOpen()) return accs;
+
+            var sql = "SELECT * FROM account WHERE CHARINDEX(@search, username) > 0;";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@search", search);
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows)
+                {
+                    accs.Add(new Account()
+                    {
+                        accountID = Convert.ToInt32(row["accountID"]),
+                        account_creation = Convert.ToDateTime(row["account_creation"]),
+                        fullname = row["fullname"].ToString(),
+                        username = row["username"].ToString(),
+                        password = row["password"].ToString(),
+                        password_salt = row["password_salt"].ToString(),
+                        email = row["email"].ToString(),
+                        isSiteAdministrator = Convert.ToBoolean(row["isSiteAdministrator"]),
+                        account_image_path = row["account_image_path"].ToString()
+                    });
+                }
+            }
+            connection.Close();
+            return accs;
+        }
+
         public QueryResult CreateAccount(Account account) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -444,34 +477,50 @@ namespace Project_Creator {
             return projects;
         }
 
-        public List<Project> GetProjectList(string search, int visibility, int ascending) // return projects with substring in title
+        public List<Project> GetProjectList(string search, int visibility, int sorting) // return projects with substring in title
         {
+            /*
+             * SORTING:
+             * 1 = DESCENDING
+             * 2 = ASCENDING
+             * 3 = MOST FOLLOWERS
+             * 4 = LEAST FOLLOWERS
+             */
             List<Project> projects = new List<Project>();
             if (!IsConnectionOpen()) return projects;
 
-            var sql = "SELECT * " +
+            var sql = "SELECT project.*, (SELECT COUNT(*) FROM follower_link WHERE follower_link.projectID = project.projectID) AS follower_count " +
                       "FROM project " +
                       "INNER JOIN project_link ON project_link.projectID = project.projectID " +
                       "INNER JOIN account ON account.accountID = project_link.project_owner_accountID " +
                       "WHERE CHARINDEX(@search, project.project_name) > 0 " +
                       "OR CHARINDEX(@search, project.project_desc) > 0 " +
                       "OR CHARINDEX(@search, account.username) > 0 " +
-                      "AND project.project_visibility = @visibility " +
-                      "ORDER BY project.projectID ";
+                      "AND project.project_visibility = @visibility ";
             if(search == "")
             {
-                sql = "SELECT * " +
+                sql = "SELECT *, (SELECT COUNT(*) FROM follower_link WHERE follower_link.projectID = project.projectID) AS follower_count " +
                       "FROM project " +
-                      "WHERE project_visibility = @visibility " +
-                      "ORDER BY projectID ";
+                      "WHERE project_visibility = @visibility ";
             }
-            if (ascending == 1)
+            switch (sorting)
             {
-                sql += "ASC;";
-            }
-            else
-            {
-                sql += "DESC;";
+
+                case 1:
+                    sql += "ORDER BY project.projectID DESC;";
+                    break;
+
+                case 2:
+                    sql += "ORDER BY project.projectID ASC;";
+                    break;
+
+                case 3:
+                    sql += "ORDER BY follower_count DESC;";
+                    break;
+
+                case 4:
+                    sql += "ORDER BY follower_count ASC;";
+                    break;
             }
 
             using (var cmd = new SqlCommand(sql, connection)) {
@@ -484,6 +533,80 @@ namespace Project_Creator {
 
                 foreach (DataRow row in datatable.Rows) {
                     projects.Add(new Project() {
+                        projectID = Convert.ToInt32(row["projectID"]),
+                        project_creation = Convert.ToDateTime(row["project_creation"]),
+                        project_name = row["project_name"].ToString(),
+                        project_desc = row["project_desc"].ToString(),
+                        project_image_path = row["project_image_path"].ToString(),
+                        project_visibility = Convert.ToInt32(row["project_visibility"])
+                    });
+                }
+            }
+            connection.Close();
+            return projects;
+        }
+
+        public List<Project> GetProjectList(int accountID, string search, int visibility, int sorting) // return projects with substring in title
+        {
+            /*
+             * SORTING:
+             * 1 = DESCENDING
+             * 2 = ASCENDING
+             * 3 = MOST FOLLOWERS
+             * 4 = LEAST FOLLOWERS
+             */
+            List<Project> projects = new List<Project>();
+            if (!IsConnectionOpen()) return projects;
+
+            var sql = "SELECT project.*, (SELECT COUNT(*) FROM follower_link WHERE follower_link.projectID = project.projectID) AS follower_count " +
+                      "FROM project " +
+                      "INNER JOIN project_link ON project_link.projectID = project.projectID " +
+                      "INNER JOIN account ON account.accountID = project_link.project_owner_accountID " +
+                      "WHERE CHARINDEX(@search, project.project_name) > 0 " +
+                      "OR CHARINDEX(@search, project.project_desc) > 0 " +
+                      "OR CHARINDEX(@search, account.username) > 0 " +
+                      "AND project.project_visibility = @visibility " +
+                      "AND project_link.project_owner_accountID = @account ";
+            if (search == "")
+            {
+                sql = "SELECT *, (SELECT COUNT(*) FROM follower_link WHERE follower_link.projectID = project.projectID) AS follower_count " +
+                      "FROM project " +
+                      "WHERE project_visibility = @visibility ";
+            }
+            switch (sorting)
+            {
+
+                case 1:
+                    sql += "ORDER BY project.projectID DESC;";
+                    break;
+
+                case 2:
+                    sql += "ORDER BY project.projectID ASC;";
+                    break;
+
+                case 3:
+                    sql += "ORDER BY follower_count DESC;";
+                    break;
+
+                case 4:
+                    sql += "ORDER BY follower_count ASC;";
+                    break;
+            }
+
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@search", search);
+                cmd.Parameters.AddWithValue("@visibility", visibility);
+                cmd.Parameters.AddWithValue("@account", accountID);
+
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows)
+                {
+                    projects.Add(new Project()
+                    {
                         projectID = Convert.ToInt32(row["projectID"]),
                         project_creation = Convert.ToDateTime(row["project_creation"]),
                         project_name = row["project_name"].ToString(),
@@ -795,6 +918,7 @@ namespace Project_Creator {
                       "WHERE timelineID = @timelineID and project_owner_projectID = @project";
             using (var cmd = new SqlCommand(sql, connection)) {
                 cmd.Parameters.AddWithValue("@timelineID", timelineID);
+                cmd.Parameters.AddWithValue("@project", projectID);
 
                 var adapter = new SqlDataAdapter(cmd);
                 var datatable = new DataTable();
