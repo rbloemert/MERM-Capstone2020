@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="/StyleSheets/StyleSheetFlickity.css">
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-    <script src="JavaScript.js"></script>
+    <script src="Update_JavaScript.js"></script>
     <script type="text/javascript">
         function maybeDont() {
             var fileName = "<%=FileLink %>";
