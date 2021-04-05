@@ -4,38 +4,26 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-    <asp:Table runat="server" Width="100%">
-        <asp:TableRow runat="server">
-            <asp:TableCell runat="server">
-                <div class="Basic">
-                    My Account
-                    <div><asp:Label ID="MyAccountFullNameLabel" runat="server" /></div>
-                    <div><asp:Label ID="MyAccountUsernameLabel" runat="server" /></div>
-                    <div><asp:Label ID="MyAccountEmailLabel" runat="server" /></div>
-                </div>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow runat="server">
-            <asp:TableCell runat="server">
-                <div class="Basic">
-                    My Projects
-                    <div><asp:Label ID="MyAccountProjectsOwnedLabel" runat="server" /></div>
-                    <asp:Repeater ID="MyAccountProjectRepeater" ItemType="Project_Creator.Project" runat="server">
-                        <ItemTemplate>
-                            <asp:Table runat="server">
-                                <asp:TableRow>
-                                    <asp:TableCell>
-                                        <asp:Image ID="ImageProject" ImageUrl="<%#:Item.project_image_path%>" runat="server" />
-                                    </asp:TableCell>
-                                </asp:TableRow>
-                            </asp:Table>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-            </asp:TableCell>
-        </asp:TableRow>
-    </asp:Table>
-    
-    
-    
+    <asp:Panel ID="myAccountPanel" class="Basic" Width="80%" runat="server">
+        My Account<br/>
+        <asp:Label ID="MyAccountFullNameLabel" runat="server"/><br/>
+        <asp:Label ID="MyAccountDescLabel" runat="server"/><br/>
+        <asp:Label ID="MyAccountUsernameLabel" runat="server"/><br/>
+        <asp:Label ID="MyAccountEmailLabel" runat="server"/><br/>
+        <asp:Button ID="MyAccountEditButton" Text="Edit Account" OnClick="MyAccountEditButton_OnClick" runat="server"/><br/>
+        <asp:Panel ID="myAccountEditPanel" Visible="False" runat="server">
+            <%-- all edit panel items --%>
+            Full Name <asp:TextBox ID="fullNameTextbox" Width="20%" runat="server"/><br/>
+            Description <asp:TextBox ID="creatorDescTextbox" Width="20%" runat="server"/><br/>
+            Email <asp:TextBox ID="emailTextbox" Width="20%" runat="server"/><br/>
+            Username <asp:TextBox ID="usernameTextbox" Width="20%" runat="server"/><br/>
+            Password <asp:TextBox ID="passwordTextbox" Width="20%" runat="server"/><br/>
+            Display Full Name <asp:CheckBox ID="allowFullnameCheckbox" runat="server"/><br/>
+            Allow Contact by Email <asp:CheckBox ID="allowContactCheckbox" runat="server"/><br/>
+            <asp:Button ID="editSubmitButton" Text="Submit" OnClick="editSubmitButton_OnClick" runat="server"/>
+            <asp:Button ID="editCancelButton" Text="Cancel" OnClick="editCancelButton_OnClick" runat="server"/>
+            <br/>
+            <asp:Label ID="editErrorLabel" Visible="False" runat="server"/>
+        </asp:Panel>
+    </asp:Panel>
 </asp:Content>
