@@ -59,10 +59,10 @@
                             <div class="Basic" style="text-align: left; margin-top: 5px;">
                                 Attatched File:
                                 <div class="Basic" style="margin-top: 5px;">
-                                    <div id="FileImage" runat="server" style="display: none">
+                                    <div id="FileImage" ClientIDMode="static" runat="server" style="display: none">
                                         <img id="image_upload" src="<%=FileLink %>" class="file-image" />
                                     </div>
-                                    <div id="FileVideo" runat="server" style="display: none">
+                                    <div id="FileVideo" ClientIDMode="static" runat="server" style="display: none">
                                         <video id="video_upload" width="960" height="540" src="<%=FileLink %>" controls autoplay>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <script>
@@ -72,16 +72,16 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </video>
                                     </div>
-                                    <div id="FilePDF" runat="server" style="display: none">
+                                    <div id="FilePDF" ClientIDMode="static" runat="server" style="display: none">
                                         <!-- <a href="http://docs.google.com/gview?url=<%=FileLink %>">Click here to view the Pdf Document</a> -->
                                         <script type="text/javascript">
                                             maybeDont();
                                         </script>
                                     </div>
-                                    <div id="FileText" runat="server" style="display: none; text-align: left; white-space: pre-wrap;">
+                                    <div id="FileText" ClientIDMode="static" runat="server" style="display: none; text-align: left; white-space: pre-wrap;">
                                         <asp:Label Height="256" Width="100%" Style="overflow-y: scroll;" ID="FileTextContent" runat="server"></asp:Label>
                                     </div>
-                                    <div id="FileZip" runat="server" style="display: none; text-align: left">
+                                    <div id="FileZip" ClientIDMode="static" runat="server" style="display: none; text-align: left">
                                         <input id="zip_download" type="button" style="margin: 0; float: right"  value="Download" />
                                         <table style="height: 29px">
                                             <tbody>
@@ -105,64 +105,6 @@
                                         document.querySelector('#zip_download').addEventListener('click', btn_listener = () => {
                                             window.location.href = '<%=FileLink %>';
                                         });
-
-                                        function previewFile() {
-                                            var preview = null;
-                                            const file = document.getElementById('ContentUploader').files[0];
-                                            const reader = new FileReader();
-
-                                            reader.addEventListener("load", function () {
-                                                // convert image file to base64 string
-                                                preview.src = reader.result;
-                                            }, false);
-
-                                            if (file) {
-                                                document.getElementById("<%=FileImage.ClientID %>").style.display = "none";
-                                                document.getElementById("<%=FileVideo.ClientID %>").style.display = "none";
-                                                document.getElementById("<%=FilePDF.ClientID %>").style.display = "none";
-                                                document.getElementById("<%=FileText.ClientID %>").style.display = "none";
-                                                document.getElementById("<%=FileZip.ClientID %>").style.display = "none";
-                                                var complex = false;
-                                                switch (file.type) {
-                                                    case ("image/jpeg"):
-                                                    case ("image/png"):
-                                                    case ("image/bmp"):
-                                                        document.getElementById("<%=FileImage.ClientID %>").style.display = "block";
-                                                        preview = document.getElementById("image_upload");
-                                                        break;
-                                                    case ("application/pdf"):
-                                                        document.getElementById("<%=FilePDF.ClientID %>").style.display = "block";
-                                                        preview = document.getElementById("viewer");
-                                                        reader.readAsDataURL(file);
-                                                        document.getElementById("wrapper").data = reader.result;
-                                                        complex = true;
-                                                        break;
-                                                    case ("video/mp4"):
-                                                        document.getElementById("<%=FileVideo.ClientID %>").style.display = "block";
-                                                        preview = document.getElementById("video_upload");
-                                                        break;
-                                                    case ("text/plain"):
-                                                        document.getElementById("<%=FileText.ClientID %>").style.display = "block";
-                                                        preview = document.getElementById("PDF_upload");
-                                                        break;
-                                                    case ("application/x-zip-compressed"):
-                                                        document.getElementById("<%=FileZip.ClientID %>").style.display = "block";
-                                                        preview = document.createElement("BUTTON");
-                                                        reader.readAsDataURL(file);
-                                                        document.querySelector('#zip_download').removeEventListener("click", btn_listener);
-                                                        document.querySelector('#zip_download').addEventListener('click', btn_listener = () => {
-                                                            downloadToFile(reader.result, 'upload.zip', 'application/x-zip-compressed');
-                                                        });
-                                                        complex = true;
-                                                        break;
-                                                }
-
-                                                if (complex == false) {
-                                                    reader.readAsDataURL(file);
-                                                }
-
-                                            }
-                                        }
                                     </script>
                                 </div>
                             </div>
