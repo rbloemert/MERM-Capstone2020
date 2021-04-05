@@ -116,8 +116,8 @@ namespace Project_Creator {
                     accs.isSiteAdministrator = Convert.ToBoolean(row["isSiteAdministrator"]);
                     accs.account_image_path = row["account_image_path"].ToString();
                     accs.creatordesc = row["creatordesc"].ToString();
-                    accs.allows_full_name_display = Convert.IsDBNull(row["allows_full_name_display"]) ? false : Convert.ToBoolean(Convert.ToInt32(row["allows_email_contact"]));
-                    accs.allows_email_contact = Convert.IsDBNull(row["allows_email_contact"]) ? false : Convert.ToBoolean(Convert.ToInt32(row["allows_email_contact"]));
+                    accs.allows_full_name_display = Convert.IsDBNull(row["allows_full_name_display"]) ? false : Convert.ToBoolean(row["allows_full_name_display"]);
+                    accs.allows_email_contact = Convert.IsDBNull(row["allows_email_contact"]) ? false : Convert.ToBoolean(row["allows_email_contact"]);
                 }
             }
             connection.Close();
@@ -146,8 +146,8 @@ namespace Project_Creator {
                         isSiteAdministrator = Convert.ToBoolean(row["isSiteAdministrator"]),
                         account_image_path = row["account_image_path"].ToString(),
                         creatordesc = row["creatordesc"].ToString(),
-                        allows_full_name_display = Convert.IsDBNull(row["allows_full_name_display"]) ? false : Convert.ToBoolean(Convert.ToInt32(row["allows_email_contact"])),
-                        allows_email_contact = Convert.IsDBNull(row["allows_email_contact"]) ? false : Convert.ToBoolean(Convert.ToInt32(row["allows_email_contact"])),
+                        allows_full_name_display = Convert.IsDBNull(row["allows_full_name_display"]) ? false : Convert.ToBoolean(row["allows_full_name_display"]),
+                        allows_email_contact = Convert.IsDBNull(row["allows_email_contact"]) ? false : Convert.ToBoolean(row["allows_email_contact"]),
                     });
                 }
             }
@@ -182,8 +182,8 @@ namespace Project_Creator {
                         isSiteAdministrator = Convert.ToBoolean(row["isSiteAdministrator"]),
                         account_image_path = row["account_image_path"].ToString(),
                         creatordesc = row["creatordesc"].ToString(),
-                        allows_full_name_display = Convert.IsDBNull(row["allows_full_name_display"]) ? false : Convert.ToBoolean(Convert.ToInt32(row["allows_email_contact"])),
-                        allows_email_contact = Convert.IsDBNull(row["allows_email_contact"]) ? false : Convert.ToBoolean(Convert.ToInt32(row["allows_email_contact"])),
+                        allows_full_name_display = Convert.IsDBNull(row["allows_full_name_display"]) ? false : Convert.ToBoolean(row["allows_full_name_display"]),
+                        allows_email_contact = Convert.IsDBNull(row["allows_email_contact"]) ? false : Convert.ToBoolean(row["allows_email_contact"]),
                     });
                 }
             }
@@ -261,24 +261,22 @@ namespace Project_Creator {
 
             //Prepares the sql query.
             var sql = "UPDATE account SET " +
-                      "accountID = @accountID " +
-                      "account_creation = @account_creation " +
-                      "fullname = @fullname " +
-                      "username = @username " +
-                      "password = @password " +
-                      "password_salt = @password_salt " +
-                      "email = @email " +
-                      "isSiteAdministrator = @isSiteAdministrator " +
-                      "account_image_path = @account_image_path " +
-                      "creatordesc = @creatordesc" +
-                      "allows_full_name_display = @allows_full_name_display" +
-                      "allows_email_contact = @allows_email_contact" +
-                      "WHERE accountID = @oldAccountID ";
+                      "account_creation = @account_creation, " +
+                      "fullname = @fullname, " +
+                      "username = @username, " +
+                      "password = @password, " +
+                      "password_salt = @password_salt, " +
+                      "email = @email, " +
+                      "isSiteAdministrator = @isSiteAdministrator, " +
+                      "account_image_path = @account_image_path, " +
+                      "creatordesc = @creatordesc, " +
+                      "allows_full_name_display = @allows_full_name_display, " +
+                      "allows_email_contact = @allows_email_contact " +
+                      "WHERE accountID = @accountID ";
             using (var cmd = new SqlCommand(sql, connection)) {
                 var salt = Password.Salt();
-                cmd.Parameters.AddWithValue("@oldAccountID", accountID);
-                cmd.Parameters.AddWithValue("@accountID", new_account.accountID);
-                cmd.Parameters.AddWithValue("@account_creation", new_account.account_creation.Value);
+                cmd.Parameters.AddWithValue("@accountID", accountID);
+                cmd.Parameters.AddWithValue("@account_creation", new_account.account_creation);
                 cmd.Parameters.AddWithValue("@fullname", new_account.fullname);
                 cmd.Parameters.AddWithValue("@username", new_account.username);
                 cmd.Parameters.AddWithValue("@password", Password.Encrypt(new_account.password, salt));
@@ -287,9 +285,9 @@ namespace Project_Creator {
                 cmd.Parameters.AddWithValue("@isSiteAdministrator", new_account.isSiteAdministrator);
                 cmd.Parameters.AddWithValue("@account_image_path", new_account.account_image_path);
                 cmd.Parameters.AddWithValue("@creatordesc", new_account.creatordesc);
-                cmd.Parameters.AddWithValue("@allows_full_name_display", Convert.ToInt32(new_account.allows_full_name_display));
-                cmd.Parameters.AddWithValue("@allows_email_contact", Convert.ToInt32(new_account.allows_email_contact));
-                
+                cmd.Parameters.AddWithValue("@allows_full_name_display", new_account.allows_full_name_display);
+                cmd.Parameters.AddWithValue("@allows_email_contact", new_account.allows_email_contact);
+
                 //Executes the insert command.
                 try {
                     result = cmd.ExecuteNonQuery();

@@ -15,6 +15,8 @@ namespace Project_Creator
         {
             if (Session["user"] != null) // if this user is logged in
             {
+                Database db = new Database();
+                Session["user"] = db.GetAccountInfo(((Account)Session["user"]).accountID); // refresh account info
                 MyAccountFullNameLabel.Text = "Full Name: " + ((Account)Session["user"]).fullname;
                 MyAccountDescLabel.Text = "Desc: " + ((Account)Session["user"]).creatordesc;
                 MyAccountUsernameLabel.Text = "Username: " + ((Account)Session["user"]).username;
@@ -63,8 +65,8 @@ namespace Project_Creator
                     fullname = fullNameTextbox.Text,
                     creatordesc = creatorDescTextbox.Text,
                     username = usernameTextbox.Text,
-                    password = Password.Encrypt(passwordTextbox.Text, ((Account)Session["user"]).password_salt),
-                    password_salt = ((Account) Session["user"]).password_salt,
+                    password = passwordTextbox.Text,
+                    password_salt = "",
                     email = emailTextbox.Text,
                     isSiteAdministrator = ((Account) Session["user"]).isSiteAdministrator,
                     account_image_path = ((Account) Session["user"]).account_image_path,
@@ -76,9 +78,6 @@ namespace Project_Creator
                     editErrorLabel.Text = "Successfully modified account.";
                     editErrorLabel.ForeColor = Color.Green;
                     editErrorLabel.Visible = true;
-                    // wait 4 seconds then refresh page
-                    System.Threading.Thread.Sleep(5000);
-                    Response.Redirect("/Account");
                     break;
 
                 default:
