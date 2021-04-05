@@ -195,3 +195,14 @@ div.Browse:hover {
 input[type=submit].ButtonSearch{
     float: right;
 }
+
+.imgHolder {
+    position: relative;
+}
+
+    .imgHolder label {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        opacity: 0.5;
+    }
