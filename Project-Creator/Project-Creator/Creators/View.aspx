@@ -17,6 +17,13 @@
                                 <table style="margin:0;width:100%;">
                                     <tr>
                                         <td>
+                                            <div style="float:right" id="ButtonEdit" runat="server">
+                                                <a style="display:flex;width:32px;height:32px;align-items:center;justify-content:center" href="/Creators/Edit?p=<%=creatorAccountID %>">
+                                                    <i style="color:gray;" class="gg-pen">
+
+                                                    </i>
+                                                </a>
+                                            </div>
                                             <table>
                                                 <tbody>
                                                     <tr>
@@ -58,7 +65,7 @@
         </asp:TableRow>
         <asp:TableRow>
             <asp:TableCell>
-                <div id="SearchOptions" class="Basic" style="text-align:left;padding:8px;margin-left:auto;margin-right:auto;width:95%;max-width:1014px;">
+                <div id="SearchOptions" class="Basic" style="text-align:left;margin-top:4px;padding:8px;margin-left:auto;margin-right:auto;width:95%;max-width:1014px;">
                     <asp:Button Text="Search" CssClass="ButtonSearch" runat="server" OnClick="Search_Click"/>
                     <table style="width:80%">
                         <tbody>
@@ -85,9 +92,18 @@
         </asp:TableRow>
         <asp:TableRow>
             <asp:TableCell>
+                <div id="ButtonAddProject" style="text-align:left;padding:8px;margin-left:auto;margin-right:auto;width:95%;max-width:1014px;" runat="server">
+                    <div style="text-align:right">
+                        <asp:ImageButton CssClass="Icon" runat="server" ImageUrl="~/Images/Add.png" OnClick="AddProject_Click" />
+                    </div>
+                </div>
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow>
+            <asp:TableCell>
                 <asp:Repeater ID="RepeaterProject" ItemType="Project_Creator.Project" runat="server">
                     <ItemTemplate>
-                        <div class="Basic Browse" style="text-align:left;padding:8px;margin-left:auto;margin-right:auto;width:95%;max-width:1014px;">
+                        <div class="Basic Browse" style="margin-top:0;margin-bottom:20px;text-align:left;padding:8px;margin-left:auto;margin-right:auto;width:95%;max-width:1014px;">
                             <a href="/Projects/View?p=<%#:Item.projectID%>">
                                 <asp:Table runat="server" Width="100%">
                                     <asp:TableRow>

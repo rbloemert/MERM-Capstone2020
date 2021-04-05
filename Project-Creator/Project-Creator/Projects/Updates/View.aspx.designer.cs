@@ -7,10 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project_Creator.Posts {
+namespace Project_Creator.Posts
+{
 
 
-    public partial class View {
+    public partial class View
+    {
 
         /// <summary>
         /// lblUpdate control.
@@ -101,6 +103,15 @@ namespace Project_Creator.Posts {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label FileTextContent;
+
+        /// <summary>
+        /// FileZip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FileZip;
 
         /// <summary>
         /// RepeaterTimeline control.

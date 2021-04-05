@@ -495,13 +495,22 @@ namespace Project_Creator {
                       "INNER JOIN account ON account.accountID = project_link.project_owner_accountID " +
                       "WHERE CHARINDEX(@search, project.project_name) > 0 " +
                       "OR CHARINDEX(@search, project.project_desc) > 0 " +
-                      "OR CHARINDEX(@search, account.username) > 0 " +
-                      "AND project.project_visibility = @visibility ";
+                      "OR CHARINDEX(@search, account.username) > 0 ";
             if(search == "")
             {
                 sql = "SELECT *, (SELECT COUNT(*) FROM follower_link WHERE follower_link.projectID = project.projectID) AS follower_count " +
-                      "FROM project " +
-                      "WHERE project_visibility = @visibility ";
+                      "FROM project ";
+                if (visibility == 1)
+                {
+                    sql += "WHERE project.project_visibility = @visibility ";
+                }
+            }
+            else
+            {
+                if (visibility == 1)
+                {
+                    sql += "AND project.project_visibility = @visibility ";
+                }
             }
             switch (sorting)
             {
@@ -565,13 +574,17 @@ namespace Project_Creator {
                       "WHERE CHARINDEX(@search, project.project_name) > 0 " +
                       "OR CHARINDEX(@search, project.project_desc) > 0 " +
                       "OR CHARINDEX(@search, account.username) > 0 " +
-                      "AND project.project_visibility = @visibility " +
                       "AND project_link.project_owner_accountID = @account ";
             if (search == "")
             {
                 sql = "SELECT *, (SELECT COUNT(*) FROM follower_link WHERE follower_link.projectID = project.projectID) AS follower_count " +
                       "FROM project " +
-                      "WHERE project_visibility = @visibility ";
+                      "INNER JOIN project_link ON project_link.projectID = project.projectID " +
+                      "WHERE project_link.project_owner_accountID = @account ";
+            }
+            if (visibility == 1)
+            {
+                sql += "AND project.project_visibility = @visibility ";
             }
             switch (sorting)
             {

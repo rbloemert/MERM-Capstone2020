@@ -81,6 +81,21 @@
                                     <div id="FileText" runat="server" style="display: none; text-align: left; white-space: pre-wrap;">
                                         <asp:Label Height="256" Width="100%" Style="overflow-y: scroll;" ID="FileTextContent" runat="server"></asp:Label>
                                     </div>
+                                    <div id="FileZip" runat="server" style="display:none;text-align:left">
+                                        <input type="button" style="margin:0;float:right" onclick="location.href='<%=FileLink %>';" value="Download" />
+                                        <table style="height:29px">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <i class="gg-folder"></i>
+                                                    </td>
+                                                    <td>
+                                                        <p style="padding-left:12px">Attached Downloadable <%=FileType %></p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                                 <div class="Basic" style="margin-top: 5px;">
                                     <input type="file" id="ContentUploader" name="ContentUploader" onchange="previewFile()" />

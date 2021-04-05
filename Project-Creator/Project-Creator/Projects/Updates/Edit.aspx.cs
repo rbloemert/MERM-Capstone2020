@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Globalization;
 
 namespace Project_Creator.Projects.Updates {
     public partial class Edit : System.Web.UI.Page {
@@ -16,6 +17,7 @@ namespace Project_Creator.Projects.Updates {
         public Timeline TimelineObject = new Timeline();
         public string FileLink = "";
         public Stream ImageStream;
+        public string FileType = "";
 
         protected void Page_Load(object sender, EventArgs e) {
 
@@ -24,6 +26,7 @@ namespace Project_Creator.Projects.Updates {
             UpdateID = Convert.ToInt32(Request.QueryString["u"]);
 
             Database db = new Database();
+            TextInfo ti = new CultureInfo("en-US", false).TextInfo;
 
             //Checks if the project exists.
             if (ProjectID != 0) {
@@ -63,6 +66,7 @@ namespace Project_Creator.Projects.Updates {
                                 //TimelineImage.ImageUrl = TimelineObject.timeline_image_path;
                                 txtDesc.Text = TimelineObject.timeline_desc;
                                 FileLink = TimelineObject.timeline_file_path;
+                                FileType = ti.ToTitleCase(System.IO.Path.GetExtension(FileLink).Replace(".", ""));
 
                                 //Checks the extension of the uploaded file.
                                 switch (System.IO.Path.GetExtension(FileLink)) {
@@ -93,6 +97,9 @@ namespace Project_Creator.Projects.Updates {
                                             //strContent = strContent.Replace("\n", "<br>");
                                             FileTextContent.Text = "<br>" + strContent;
                                         }
+                                        break;
+                                    case ".zip":
+                                        FileZip.Style["display"] = "block";
                                         break;
                                 }
                             } else {
@@ -176,6 +183,7 @@ namespace Project_Creator.Projects.Updates {
                         case ("application/pdf"):
                         case ("video/mp4"):
                         case ("text/plain"):
+                        case ("application/x-zip-compressed"):
                             string filename = ProjectID + "" + UpdateID + Path.GetExtension(file.FileName);
                             TimelineObject.timeline_file_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.timeline_file, file.ContentType);
                             break;

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Globalization;
 
 namespace Project_Creator.Posts {
     public partial class View : System.Web.UI.Page {
@@ -18,8 +19,10 @@ namespace Project_Creator.Posts {
         public Project project;
         List<Comment2> comments;
         public string FileLink = "";
+        public string FileType = "";
         protected void Page_Load(object sender, EventArgs e) {
             txtNewComment.Rows = 4;
+            TextInfo ti = new CultureInfo("en-US", false).TextInfo;
 
             //Gets the project id from the URL.
             ProjectID = Convert.ToInt32(Request.QueryString["p"]);
@@ -127,6 +130,7 @@ namespace Project_Creator.Posts {
                     TimelineImage.ImageUrl = currentTimeline.timeline_image_path;
                     lblDesc.Text = currentTimeline.timeline_desc;
                     FileLink = currentTimeline.timeline_file_path;
+                    FileType = ti.ToTitleCase(System.IO.Path.GetExtension(FileLink).Replace(".", ""));
 
                     //Checks the extension of the uploaded file.
                     switch (System.IO.Path.GetExtension(FileLink))
@@ -158,6 +162,9 @@ namespace Project_Creator.Posts {
                                 //strContent = strContent.Replace("\n", "<br>");
                                 FileTextContent.Text = "<br>" + strContent;
                             }
+                            break;
+                        case ".zip":
+                            FileZip.Style["display"] = "block";
                             break;
 
                     }

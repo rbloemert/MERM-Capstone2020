@@ -7,10 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project_Creator.Projects.Updates {
+namespace Project_Creator.Projects.Updates
+{
 
 
-    public partial class Edit {
+    public partial class Edit
+    {
 
         /// <summary>
         /// ScriptManager1 control.
@@ -92,6 +94,15 @@ namespace Project_Creator.Projects.Updates {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label FileTextContent;
+
+        /// <summary>
+        /// FileZip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FileZip;
 
         /// <summary>
         /// btnSubmit control.
