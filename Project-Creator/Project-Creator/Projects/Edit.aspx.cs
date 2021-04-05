@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -144,13 +145,30 @@ namespace Project_Creator.Projects
             ProjectObject = db.GetProject(ProjectID);
             ProjectObject.project_author = db.GetProjectAuthor(ProjectID);
 
+            HttpPostedFile file = Request.Files["ImageUploader"];
+
             //Creates a new project with the project changes.
             Project proj = new Project();
             proj.project_name = TextBoxTitle.Text;
             proj.project_desc = TextBoxDescription.Text;
             proj.project_author = ProjectObject.project_author;
             proj.project_creation = ProjectObject.project_creation;
-            proj.project_image_path = "NULL";
+            if (file != null && file.ContentLength > 0) {
+                try {
+                    switch (file.ContentType) {
+                        case ("image/jpeg"):
+                        case ("image/png"):
+                        case ("image/bmp"):
+                            string filename = ProjectID + Path.GetExtension(file.FileName);
+                            proj.project_image_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.project_image, file.ContentType);
+                            break;
+                    }
+                } catch (Exception ex) {
+
+                }
+            } else {
+                proj.project_image_path = ProjectObject.project_image_path;
+            }
             proj.project_visibility = Convert.ToInt32(RadioPublic.Checked);
 
             //Attempts to save and publish project changes.

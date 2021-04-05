@@ -7,21 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project_Creator.Projects
-{
+namespace Project_Creator.Projects {
 
 
-    public partial class Edit
-    {
-
-        /// <summary>
-        /// FileImage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileImage;
+    public partial class Edit {
 
         /// <summary>
         /// TextBoxTitle control.
