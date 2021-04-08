@@ -18,7 +18,7 @@
                         <div class="ProjectRow">
                             <div class="ProjectColumn">
                                 <div class="Basic">
-                                    <asp:Image ID="ProjectIcon" Width="80" Height="80" CssClass="Project" runat="server" />
+                                    <asp:Image ID="AccountIcon" Width="80" Height="80" CssClass="Project" runat="server" />
                                 </div>
                             </div>
                             <div class="ProjectColumn" style="width: 100%;max-width: 880px;">

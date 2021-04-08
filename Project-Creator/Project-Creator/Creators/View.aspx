@@ -1,76 +1,155 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="View.aspx.cs" Inherits="Project_Creator.Creators.View" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-
-
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <asp:Table Width="100%" runat="server">
         <asp:TableRow>
             <asp:TableCell>
-                <div class="CreatorTable">
-                    <div class="CreationRow" style="margin-left:50px; margin-bottom: 20px; ">
-                        <div class="CreatorColumn" style="width:75%; height:20%; float:left;">
-                            <div class="Basic" style="height: 25%">
-                                <asp:Label ID="CreatorUsernameLabel"  style="font-size: 50px;" runat="server" />
-                                <br/><br/><br/>
-                                <asp:Label ID="CreatorDescriptionTextBox" runat="server" ReadOnly="true" wrap="true" style="width: 100%; height: 500px;" />
-                                <br/><br/>
-                                <asp:Button ID="CreatorContactButton" OnClick="btnContactCreator_Clicked" Text="Contact" runat="server" />
+                <div class="ProjectTable">
+                    <div class="ProjectRow">
+                        <div class="ProjectColumn">
+                            <div class="Basic">
+                                <asp:Image ID="CreatorIcon" Width="80" Height="80" CssClass="Project" runat="server" />
                             </div>
                         </div>
-                        <div class="CreatorColumn" style="width:25%; height:25%; float:right;">
-                            <asp:Image ID="CreatorIcon" runat="server" ImageAlign="Right" Width="80%" Height="100%" style="margin-left:50px; margin-top:25px; margin-bottom:10px; margin-right:50px; "/>
-                        </div>
-                    </div>
-                    <div class="CreationRow" >
-                        &nbsp;
-                        <p style="text-align: center; width: 100%; font-size: 40px;" >Projects</p>
-                    </div>
-                    <div class="CreationRow" style="margin-left:50px;">
-                        <div class="related-panel">
-                            <asp:Repeater ID="RepeaterRelated" ItemType="Project_Creator.Project" runat="server">
-                                <ItemTemplate>
-                                    <div class="timeline-content">
-                                        <div class="Basic" style="width: 90%; height: 250px; margin: 0; padding: 8px;">
+                        <div class="ProjectColumn" style="width: 100%;max-width: 900px;">
+                            <div class="Basic" style="height:80px;">
+                                <table style="margin:0;width:100%;">
+                                    <tr>
+                                        <td>
+                                            <div style="float:right" id="ButtonEdit" runat="server">
+                                                <a style="display:flex;width:32px;height:32px;align-items:center;justify-content:center" href="/Creators/Edit?p=<%=creatorAccountID %>">
+                                                    <i style="color:gray;" class="gg-pen">
+
+                                                    </i>
+                                                </a>
+                                            </div>
                                             <table>
-                                                <tr>
-                                                    <td>
-                                                        <a href="../Projects/View?p=<%#Item.projectID %>">
-                                                            <asp:Image CssClass="related-img" ImageUrl="<%#Item.project_image_path %>" runat="server" />
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h2><%#Item.project_name %></h2>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <hr />
-                                                        <p><%#Item.project_desc %></p>
-                                                        <hr />
-                                                    </td>
-                                                </tr>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h1 style="text-align: left"><asp:Label ID="lblUsername" runat="server" /></h1>
+                                                        </td>
+                                                        <td>
+                                                            <h2 style="margin-left:12px;text-align: left"><asp:Label ForeColor="Gray" ID="lblFullname" runat="server" /></h2>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
                                             </table>
-                                        </div>
-                                    </div>
-                                </ItemTemplate>
-                            </asp:Repeater>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h2 class="Project" style="text-align: left">Email: <a><span style="color: white;">
+                                                            <asp:Label ID="lblEmail" runat="server" /></span></a></h2>
+                                                        </td>
+                                                        <td>
+                                                            <h2 class="Project" style="margin-left:12px;text-align: left">Creation Date: <span style="color: white;">
+                                                            <asp:Label ID="lblDate" runat="server" /></span></h2>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </asp:TableCell>
         </asp:TableRow>
-
-
+        <asp:TableRow>
+            <asp:TableCell>
+                <div id="SearchOptions" class="Basic" style="text-align:left;margin-top:4px;padding:8px;margin-left:auto;margin-right:auto;width:95%;max-width:1014px;">
+                    <asp:Button Text="Search" CssClass="ButtonSearch" runat="server" OnClick="Search_Click"/>
+                    <table style="width:80%">
+                        <tbody>
+                            <tr>
+                                <td style="width:20%;">
+                                    <p style="text-overflow:ellipsis;text-wrap:none;white-space:nowrap"><b>Advanced Search:</b></p>
+                                </td>
+                                <td style="width:70%">
+                                    <asp:TextBox ID="SearchBox" Width="100%" runat="server"></asp:TextBox>
+                                </td>
+                                <td style="width:10%;padding-left:12px">
+                                    <asp:DropDownList ID="DropDownSort" runat="server">
+                                        <asp:ListItem Value="1">Newest</asp:ListItem>
+                                        <asp:ListItem Value="2">Oldest</asp:ListItem>
+                                        <asp:ListItem Selected="True" Value="3">Most Popular</asp:ListItem>
+                                        <asp:ListItem Value="4">Least Popular</asp:ListItem>
+                                    </asp:DropDownList>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow>
+            <asp:TableCell>
+                <div id="ButtonAddProject" style="text-align:left;padding:8px;margin-left:auto;margin-right:auto;width:95%;max-width:1014px;" runat="server">
+                    <div style="text-align:right">
+                        <asp:ImageButton CssClass="Icon" runat="server" ImageUrl="~/Images/Add.png" OnClick="AddProject_Click" />
+                    </div>
+                </div>
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow>
+            <asp:TableCell>
+                <asp:Repeater ID="RepeaterProject" ItemType="Project_Creator.Project" runat="server">
+                    <ItemTemplate>
+                        <div class="Basic Browse" style="margin-top:0;margin-bottom:20px;text-align:left;padding:8px;margin-left:auto;margin-right:auto;width:95%;max-width:1014px;">
+                            <a href="/Projects/View?p=<%#:Item.projectID%>">
+                                <asp:Table runat="server" Width="100%">
+                                    <asp:TableRow>
+                                        <asp:TableCell Width="160px">
+                                            <asp:Image ID="ImageProject" CssClass="Project" ImageUrl="<%#:Item.project_image_path %>" runat="server" />
+                                        </asp:TableCell>
+                                        <asp:TableCell>
+                                            <table style="width:100%;padding-left:12px">
+                                                <tr>
+                                                    <td>
+                                                        <h1 style="text-align:left"><%#:Item.project_name %></h1>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <h2 style="text-align:left"><%#:Item.project_desc %></h2>
+                                                        <hr style="margin-top:8px;" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <div style="text-align:left">
+                                                                        <span style="color:dimgray">Creator: </span><span style="color:white"><%#:Item.project_author %></span>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div style="margin-left:12px;text-align:left">
+                                                                        <span style="color:dimgray">Created: </span><span style="color:white"><%#:Item.project_creation.Value.ToString("yyyy-MM-dd") %></span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                </asp:Table>
+                            </a>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </asp:TableCell>
+        </asp:TableRow>
     </asp:Table>
-
-
-    
-    
-    
-
-
 </asp:Content>

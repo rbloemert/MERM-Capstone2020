@@ -15,13 +15,13 @@ namespace Project_Creator.Projects.Updates
     {
 
         /// <summary>
-        /// ScriptManager2 control.
+        /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager2;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
         /// TextBoxUpdate control.
@@ -40,33 +40,6 @@ namespace Project_Creator.Projects.Updates
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDate;
-
-        /// <summary>
-        /// TimelineImage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image TimelineImage;
-
-        /// <summary>
-        /// ImageUploader control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload ImageUploader;
-
-        /// <summary>
-        /// btnFileSubmit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFileSubmit;
 
         /// <summary>
         /// txtDesc control.
@@ -123,13 +96,13 @@ namespace Project_Creator.Projects.Updates
         protected global::System.Web.UI.WebControls.Label FileTextContent;
 
         /// <summary>
-        /// ContentUploader control.
+        /// FileZip control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload ContentUploader;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FileZip;
 
         /// <summary>
         /// btnSubmit control.

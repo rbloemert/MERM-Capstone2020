@@ -15,6 +15,15 @@ namespace Project_Creator
     {
 
         /// <summary>
+        /// myAccountPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel myAccountPanel;
+
+        /// <summary>
         /// MyAccountFullNameLabel control.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,15 @@ namespace Project_Creator
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label MyAccountFullNameLabel;
+
+        /// <summary>
+        /// MyAccountDescLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MyAccountDescLabel;
 
         /// <summary>
         /// MyAccountUsernameLabel control.
@@ -42,21 +60,111 @@ namespace Project_Creator
         protected global::System.Web.UI.WebControls.Label MyAccountEmailLabel;
 
         /// <summary>
-        /// MyAccountProjectsOwnedLabel control.
+        /// MyAccountEditButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MyAccountProjectsOwnedLabel;
+        protected global::System.Web.UI.WebControls.Button MyAccountEditButton;
 
         /// <summary>
-        /// MyAccountProjectRepeater control.
+        /// myAccountEditPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater MyAccountProjectRepeater;
+        protected global::System.Web.UI.WebControls.Panel myAccountEditPanel;
+
+        /// <summary>
+        /// fullNameTextbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox fullNameTextbox;
+
+        /// <summary>
+        /// creatorDescTextbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox creatorDescTextbox;
+
+        /// <summary>
+        /// emailTextbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox emailTextbox;
+
+        /// <summary>
+        /// usernameTextbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox usernameTextbox;
+
+        /// <summary>
+        /// passwordTextbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox passwordTextbox;
+
+        /// <summary>
+        /// allowFullnameCheckbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox allowFullnameCheckbox;
+
+        /// <summary>
+        /// allowContactCheckbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox allowContactCheckbox;
+
+        /// <summary>
+        /// editSubmitButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button editSubmitButton;
+
+        /// <summary>
+        /// editCancelButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button editCancelButton;
+
+        /// <summary>
+        /// editErrorLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label editErrorLabel;
     }
 }

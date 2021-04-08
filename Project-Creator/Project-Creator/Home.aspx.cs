@@ -35,6 +35,7 @@ namespace Project_Creator
                     lblFullname.Text = "(" + user.fullname + ")";
                     lblEmail.Text = user.email;
                     lblDate.Text = user.account_creation.Value.ToString("yyyy-MM-dd");
+                    AccountIcon.ImageUrl = user.account_image_path;
 
                     //Gets all the current notifications for the user.
                     List<Timeline> ProjectTimeline = db.GetNotifications(user.accountID);

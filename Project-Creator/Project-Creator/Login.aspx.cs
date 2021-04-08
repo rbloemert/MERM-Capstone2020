@@ -59,8 +59,21 @@ namespace Project_Creator
             if (Page.IsValid)
             {
 
-                //Redirects to the homepage.
-                Response.Redirect("/Home");
+                //Checks if the last page is available.
+                if(Session["Back"] != null)
+                {
+
+                    //Redirects to the last page.
+                    Response.Redirect(Session["Back"].ToString());
+
+                }
+                else
+                {
+
+                    //Redirects to the homepage.
+                    Response.Redirect("/Home");
+
+                }
 
             }
 

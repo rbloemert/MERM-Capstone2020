@@ -7,12 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project_Creator
-{
+namespace Project_Creator {
 
 
-    public partial class Home
-    {
+    public partial class Home {
 
         /// <summary>
         /// WelcomeMessage control.
@@ -33,13 +31,13 @@ namespace Project_Creator
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Notifications;
 
         /// <summary>
-        /// ProjectIcon control.
+        /// AccountIcon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ProjectIcon;
+        protected global::System.Web.UI.WebControls.Image AccountIcon;
 
         /// <summary>
         /// lblUsername control.

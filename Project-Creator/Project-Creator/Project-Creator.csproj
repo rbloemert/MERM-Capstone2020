@@ -166,7 +166,9 @@
     <Content Include="Images\Search.png" />
     <Content Include="Login.aspx" />
     <Content Include="Projects\Edit.aspx" />
+    <Content Include="Projects\Projects_JavaScript.js" />
     <Content Include="Projects\Updates\Edit.aspx" />
+    <Content Include="Projects\Updates\Update_JavaScript.js" />
     <Content Include="Projects\Updates\View.aspx" />
     <Content Include="Projects\View.aspx" />
     <Content Include="Signup.aspx" />

@@ -69,12 +69,14 @@ namespace Project_Creator
 
         protected void Link_Login(object sender, EventArgs e)
         {
+            Session["Back"] = Request.Url.ToString();
             Response.Redirect("/Login");
         }
 
         protected void Link_Account(object sender, EventArgs e)
         {
-            Response.Redirect("/Account");
+            Account user = (Account)Session["User"];
+            Response.Redirect("/Creators/View?c=" + user.accountID.ToString());
         }
         protected void Link_Logout(object sender, EventArgs e)
         {
@@ -82,8 +84,8 @@ namespace Project_Creator
             //Clears the session variables.
             Session.Clear();
 
-            //Redirects to the home page.
-            Response.Redirect("/Home");
+            //Redirects to the last page.
+            Response.Redirect(Request.Url.ToString());
 
         }
 

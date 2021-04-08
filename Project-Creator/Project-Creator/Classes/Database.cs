@@ -47,55 +47,7 @@ namespace Project_Creator {
         public string GetLastSQLError() {
             return lastErr;
         }
-
-        //public bool InsertIntoTable(string table, List<Tuple<string, object>> info)
-        //{
-        //    if (!IsConnectionOpen()) return false;
-
-        //    string sql = "INSERT INTO " + table;
-
-        //    sql += "(";
-        //    foreach (Tuple<string, object> tuple in info)
-        //    {
-        //        if (tuple.Equals(info.Last()))
-        //        {
-        //            sql += tuple.Item1;
-        //        }
-        //        else
-        //        {
-        //            sql += (tuple.Item1 + ", ");
-        //        }
-        //    }
-        //    sql += ") ";
-
-        //    sql += "VALUES(";
-        //    foreach (Tuple<string, object> tuple in info)
-        //    {
-        //        if (tuple.Equals(info.Last()))
-        //        {
-        //            sql += ("@" + tuple.Item1);
-        //        }
-        //        else
-        //        {
-        //            sql += ("@" + tuple.Item1 + ", ");
-        //        }
-        //    }
-        //    sql += ")";
-
-        //    var cmd = new SqlCommand(sql, connection);
-
-        //    foreach (Tuple<string, object> tuple in info)
-        //    {
-        //        cmd.Parameters.AddWithValue("@" + tuple.Item1, tuple.Item2);
-        //    }
-
-        //    
-
-        //    return cmd.ExecuteNonQuery() > 0;
-        //}
-
-        // ACCOUNTS
-
+        
         public bool AccountExists(string username) {
 
             //Gets a list of all existing accounts.
@@ -163,6 +115,9 @@ namespace Project_Creator {
                     accs.email = row["email"].ToString();
                     accs.isSiteAdministrator = Convert.ToBoolean(row["isSiteAdministrator"]);
                     accs.account_image_path = row["account_image_path"].ToString();
+                    accs.creatordesc = row["creatordesc"].ToString();
+                    accs.allows_full_name_display = Convert.IsDBNull(row["allows_full_name_display"]) ? false : Convert.ToBoolean(row["allows_full_name_display"]);
+                    accs.allows_email_contact = Convert.IsDBNull(row["allows_email_contact"]) ? false : Convert.ToBoolean(row["allows_email_contact"]);
                 }
             }
             connection.Close();
@@ -189,7 +144,46 @@ namespace Project_Creator {
                         password_salt = row["password_salt"].ToString(),
                         email = row["email"].ToString(),
                         isSiteAdministrator = Convert.ToBoolean(row["isSiteAdministrator"]),
-                        account_image_path = row["account_image_path"].ToString()
+                        account_image_path = row["account_image_path"].ToString(),
+                        creatordesc = row["creatordesc"].ToString(),
+                        allows_full_name_display = Convert.IsDBNull(row["allows_full_name_display"]) ? false : Convert.ToBoolean(row["allows_full_name_display"]),
+                        allows_email_contact = Convert.IsDBNull(row["allows_email_contact"]) ? false : Convert.ToBoolean(row["allows_email_contact"]),
+                    });
+                }
+            }
+            connection.Close();
+            return accs;
+        }
+
+        public List<Account> GetAccountList(string search)
+        {
+            List<Account> accs = new List<Account>();
+            if (!IsConnectionOpen()) return accs;
+
+            var sql = "SELECT * FROM account WHERE CHARINDEX(@search, username) > 0;";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@search", search);
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows)
+                {
+                    accs.Add(new Account()
+                    {
+                        accountID = Convert.ToInt32(row["accountID"]),
+                        account_creation = Convert.ToDateTime(row["account_creation"]),
+                        fullname = row["fullname"].ToString(),
+                        username = row["username"].ToString(),
+                        password = row["password"].ToString(),
+                        password_salt = row["password_salt"].ToString(),
+                        email = row["email"].ToString(),
+                        isSiteAdministrator = Convert.ToBoolean(row["isSiteAdministrator"]),
+                        account_image_path = row["account_image_path"].ToString(),
+                        creatordesc = row["creatordesc"].ToString(),
+                        allows_full_name_display = Convert.IsDBNull(row["allows_full_name_display"]) ? false : Convert.ToBoolean(row["allows_full_name_display"]),
+                        allows_email_contact = Convert.IsDBNull(row["allows_email_contact"]) ? false : Convert.ToBoolean(row["allows_email_contact"]),
                     });
                 }
             }
@@ -267,20 +261,21 @@ namespace Project_Creator {
 
             //Prepares the sql query.
             var sql = "UPDATE account SET " +
-                      "accountID = @accountID " +
-                      "account_creation = @account_creation " +
-                      "fullname = @fullname " +
-                      "username = @username " +
-                      "password = @password " +
-                      "password_salt = @password_salt " +
-                      "email = @email " +
-                      "isSiteAdministrator = @isSiteAdministrator " +
-                      "account_image_path = @account_image_path " +
-                      "WHERE accountID = @oldAccountID ";
+                      "account_creation = @account_creation, " +
+                      "fullname = @fullname, " +
+                      "username = @username, " +
+                      "password = @password, " +
+                      "password_salt = @password_salt, " +
+                      "email = @email, " +
+                      "isSiteAdministrator = @isSiteAdministrator, " +
+                      "account_image_path = @account_image_path, " +
+                      "creatordesc = @creatordesc, " +
+                      "allows_full_name_display = @allows_full_name_display, " +
+                      "allows_email_contact = @allows_email_contact " +
+                      "WHERE accountID = @accountID ";
             using (var cmd = new SqlCommand(sql, connection)) {
                 var salt = Password.Salt();
-                cmd.Parameters.AddWithValue("@oldAccountID", accountID);
-                cmd.Parameters.AddWithValue("@accountID", new_account.accountID);
+                cmd.Parameters.AddWithValue("@accountID", accountID);
                 cmd.Parameters.AddWithValue("@account_creation", new_account.account_creation);
                 cmd.Parameters.AddWithValue("@fullname", new_account.fullname);
                 cmd.Parameters.AddWithValue("@username", new_account.username);
@@ -289,6 +284,9 @@ namespace Project_Creator {
                 cmd.Parameters.AddWithValue("@email", new_account.email);
                 cmd.Parameters.AddWithValue("@isSiteAdministrator", new_account.isSiteAdministrator);
                 cmd.Parameters.AddWithValue("@account_image_path", new_account.account_image_path);
+                cmd.Parameters.AddWithValue("@creatordesc", new_account.creatordesc);
+                cmd.Parameters.AddWithValue("@allows_full_name_display", new_account.allows_full_name_display);
+                cmd.Parameters.AddWithValue("@allows_email_contact", new_account.allows_email_contact);
 
                 //Executes the insert command.
                 try {
@@ -444,34 +442,59 @@ namespace Project_Creator {
             return projects;
         }
 
-        public List<Project> GetProjectList(string search, int visibility, int ascending) // return projects with substring in title
+        public List<Project> GetProjectList(string search, int visibility, int sorting) // return projects with substring in title
         {
+            /*
+             * SORTING:
+             * 1 = DESCENDING
+             * 2 = ASCENDING
+             * 3 = MOST FOLLOWERS
+             * 4 = LEAST FOLLOWERS
+             */
             List<Project> projects = new List<Project>();
             if (!IsConnectionOpen()) return projects;
 
-            var sql = "SELECT * " +
+            var sql = "SELECT project.*, (SELECT COUNT(*) FROM follower_link WHERE follower_link.projectID = project.projectID) AS follower_count " +
                       "FROM project " +
                       "INNER JOIN project_link ON project_link.projectID = project.projectID " +
                       "INNER JOIN account ON account.accountID = project_link.project_owner_accountID " +
                       "WHERE CHARINDEX(@search, project.project_name) > 0 " +
                       "OR CHARINDEX(@search, project.project_desc) > 0 " +
-                      "OR CHARINDEX(@search, account.username) > 0 " +
-                      "AND project.project_visibility = @visibility " +
-                      "ORDER BY project.projectID ";
+                      "OR CHARINDEX(@search, account.username) > 0 ";
             if(search == "")
             {
-                sql = "SELECT * " +
-                      "FROM project " +
-                      "WHERE project_visibility = @visibility " +
-                      "ORDER BY projectID ";
-            }
-            if (ascending == 1)
-            {
-                sql += "ASC;";
+                sql = "SELECT *, (SELECT COUNT(*) FROM follower_link WHERE follower_link.projectID = project.projectID) AS follower_count " +
+                      "FROM project ";
+                if (visibility == 1)
+                {
+                    sql += "WHERE project.project_visibility = @visibility ";
+                }
             }
             else
             {
-                sql += "DESC;";
+                if (visibility == 1)
+                {
+                    sql += "AND project.project_visibility = @visibility ";
+                }
+            }
+            switch (sorting)
+            {
+
+                case 1:
+                    sql += "ORDER BY project.projectID DESC;";
+                    break;
+
+                case 2:
+                    sql += "ORDER BY project.projectID ASC;";
+                    break;
+
+                case 3:
+                    sql += "ORDER BY follower_count DESC;";
+                    break;
+
+                case 4:
+                    sql += "ORDER BY follower_count ASC;";
+                    break;
             }
 
             using (var cmd = new SqlCommand(sql, connection)) {
@@ -484,6 +507,84 @@ namespace Project_Creator {
 
                 foreach (DataRow row in datatable.Rows) {
                     projects.Add(new Project() {
+                        projectID = Convert.ToInt32(row["projectID"]),
+                        project_creation = Convert.ToDateTime(row["project_creation"]),
+                        project_name = row["project_name"].ToString(),
+                        project_desc = row["project_desc"].ToString(),
+                        project_image_path = row["project_image_path"].ToString(),
+                        project_visibility = Convert.ToInt32(row["project_visibility"])
+                    });
+                }
+            }
+            connection.Close();
+            return projects;
+        }
+
+        public List<Project> GetProjectList(int accountID, string search, int visibility, int sorting) // return projects with substring in title
+        {
+            /*
+             * SORTING:
+             * 1 = DESCENDING
+             * 2 = ASCENDING
+             * 3 = MOST FOLLOWERS
+             * 4 = LEAST FOLLOWERS
+             */
+            List<Project> projects = new List<Project>();
+            if (!IsConnectionOpen()) return projects;
+
+            var sql = "SELECT project.*, (SELECT COUNT(*) FROM follower_link WHERE follower_link.projectID = project.projectID) AS follower_count " +
+                      "FROM project " +
+                      "INNER JOIN project_link ON project_link.projectID = project.projectID " +
+                      "INNER JOIN account ON account.accountID = project_link.project_owner_accountID " +
+                      "WHERE CHARINDEX(@search, project.project_name) > 0 " +
+                      "OR CHARINDEX(@search, project.project_desc) > 0 " +
+                      "OR CHARINDEX(@search, account.username) > 0 " +
+                      "AND project_link.project_owner_accountID = @account ";
+            if (search == "")
+            {
+                sql = "SELECT *, (SELECT COUNT(*) FROM follower_link WHERE follower_link.projectID = project.projectID) AS follower_count " +
+                      "FROM project " +
+                      "INNER JOIN project_link ON project_link.projectID = project.projectID " +
+                      "WHERE project_link.project_owner_accountID = @account ";
+            }
+            if (visibility == 1)
+            {
+                sql += "AND project.project_visibility = @visibility ";
+            }
+            switch (sorting)
+            {
+
+                case 1:
+                    sql += "ORDER BY project.projectID DESC;";
+                    break;
+
+                case 2:
+                    sql += "ORDER BY project.projectID ASC;";
+                    break;
+
+                case 3:
+                    sql += "ORDER BY follower_count DESC;";
+                    break;
+
+                case 4:
+                    sql += "ORDER BY follower_count ASC;";
+                    break;
+            }
+
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@search", search);
+                cmd.Parameters.AddWithValue("@visibility", visibility);
+                cmd.Parameters.AddWithValue("@account", accountID);
+
+                var adapter = new SqlDataAdapter(cmd);
+                var datatable = new DataTable();
+                adapter.Fill(datatable);
+
+                foreach (DataRow row in datatable.Rows)
+                {
+                    projects.Add(new Project()
+                    {
                         projectID = Convert.ToInt32(row["projectID"]),
                         project_creation = Convert.ToDateTime(row["project_creation"]),
                         project_name = row["project_name"].ToString(),
@@ -795,7 +896,7 @@ namespace Project_Creator {
                       "WHERE timelineID = @timelineID and project_owner_projectID = @project";
             using (var cmd = new SqlCommand(sql, connection)) {
                 cmd.Parameters.AddWithValue("@timelineID", timelineID);
-
+                cmd.Parameters.AddWithValue("@project", projectID);
                 var adapter = new SqlDataAdapter(cmd);
                 var datatable = new DataTable();
                 adapter.Fill(datatable);
