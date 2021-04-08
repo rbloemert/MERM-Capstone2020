@@ -4,6 +4,12 @@
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+    
+    <div class="centered" style="width: 100%; height: 50%;" id="WelcomeMessage" runat="server">
+        <h1 ID="lblWelcomeMessage">Welcome to Project Creator</h1><br/><br/>
+        <h2 ID="lblPleaseLogin">Please <a href="Login.aspx"><u>Log In</u></a> to view your account</h2>
+    </div>
+
     <div style="width:100%" id="Notifications" runat="server">
         <asp:Table Width="100%" runat="server">
             <asp:TableRow>

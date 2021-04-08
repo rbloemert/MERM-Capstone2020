@@ -15,6 +15,15 @@ namespace Project_Creator
     {
 
         /// <summary>
+        /// WelcomeMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl WelcomeMessage;
+
+        /// <summary>
         /// Notifications control.
         /// </summary>
         /// <remarks>

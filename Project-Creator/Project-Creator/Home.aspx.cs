@@ -24,6 +24,7 @@ namespace Project_Creator
                 {
 
                     //Enables the timeline divider.
+                    WelcomeMessage.Visible = false;
                     Notifications.Visible = true;
 
                     //Gets the user object from the session.
@@ -49,6 +50,8 @@ namespace Project_Creator
 
                     //Disables the timelinder divider.
                     Notifications.Visible = false;
+                    WelcomeMessage.Visible = true;
+
 
                 }
 

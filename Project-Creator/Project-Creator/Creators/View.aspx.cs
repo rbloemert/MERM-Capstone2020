@@ -18,7 +18,6 @@ namespace Project_Creator.Creators
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //int.TryParse(Request.QueryString["c"].ToString(), out creatorAccountID);
             creatorAccountID = Int32.Parse(Request.QueryString["c"]);
             Database db = new Database();
             CreatorAccount = db.GetAccountInfo(creatorAccountID);
