@@ -21,11 +21,11 @@
                             </div>
                         </div>
                         <div class="ProjectColumn" style="width: 100%; max-width: 800px;">
-                            <div class="Basic" style="padding: 16px">
-                                <asp:TextBox Font-Size="X-Large" Width="98%" ID="TextBoxTitle" runat="server" placeholder="Project Title..."></asp:TextBox>
-                                <asp:RequiredFieldValidator ControlToValidate="TextBoxTitle" Display="Static" ErrorMessage="A project title is required." runat="server"></asp:RequiredFieldValidator>
-                                <asp:TextBox Font-Size="Medium" Width="98%" ID="TextBoxDescription" runat="server" placeholder="Project Description..."></asp:TextBox>
-                                <asp:RequiredFieldValidator ControlToValidate="TextBoxDescription" Display="Static" ErrorMessage="A project title is required." runat="server"></asp:RequiredFieldValidator>
+                            <div class="Basic" style="text-align:left;padding: 16px">
+                                <asp:TextBox Font-Size="X-Large" Width="98%" ID="TextBoxTitle" runat="server" placeholder="Project Title..."></asp:TextBox><br />
+                                <asp:RequiredFieldValidator ControlToValidate="TextBoxTitle" Display="Static" ErrorMessage="Project title is required." runat="server" ForeColor="Red"></asp:RequiredFieldValidator>
+                                <asp:TextBox Font-Size="Medium" Width="98%" ID="TextBoxDescription" runat="server" placeholder="Project Description..."></asp:TextBox><br />
+                                <asp:RequiredFieldValidator ControlToValidate="TextBoxDescription" Display="Static" ErrorMessage="Project description is required." runat="server" ForeColor="Red"></asp:RequiredFieldValidator>
                             </div>
                             <div class="Basic" style="height: 16px; margin-top: 4px;">
                                 <table style="margin: 0; width: 100%;">

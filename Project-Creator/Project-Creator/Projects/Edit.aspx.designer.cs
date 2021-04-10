@@ -7,10 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project_Creator.Projects {
+namespace Project_Creator.Projects
+{
 
 
-    public partial class Edit {
+    public partial class Edit
+    {
 
         /// <summary>
         /// TextBoxTitle control.

@@ -12,7 +12,7 @@ namespace Project_Creator.Projects
     {
         public int ProjectID;
         public int TimelineIndex = 0;
-        public Project ProjectObject;
+        public Project ProjectObject = new Project();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,7 +23,6 @@ namespace Project_Creator.Projects
 
                 //Gets the project id from the URL.
                 ProjectID = Convert.ToInt32(Request.QueryString["p"]);
-                ProjectObject = new Project();
 
                 //Gets the database connection.
                 Database db = new Database();
@@ -136,46 +135,58 @@ namespace Project_Creator.Projects
         protected void Save_Click(object sender, EventArgs e)
         {
 
-            //Creates a database connection.
-            Database db = new Database();
+            //Checks if the page has been validated.
+            if (Page.IsValid)
+            {
 
-            //Gets the project id from the URL.
-            ProjectID = Convert.ToInt32(Request.QueryString["p"]);
-            ProjectObject = new Project();
-            ProjectObject = db.GetProject(ProjectID);
-            ProjectObject.project_author = db.GetProjectAuthor(ProjectID);
+                //Creates a database connection.
+                Database db = new Database();
 
-            HttpPostedFile file = Request.Files["ImageUploader"];
+                //Gets the project id from the URL.
+                ProjectID = Convert.ToInt32(Request.QueryString["p"]);
+                ProjectObject = db.GetProject(ProjectID);
+                ProjectObject.project_author = db.GetProjectAuthor(ProjectID);
 
-            //Creates a new project with the project changes.
-            Project proj = new Project();
-            proj.project_name = TextBoxTitle.Text;
-            proj.project_desc = TextBoxDescription.Text;
-            proj.project_author = ProjectObject.project_author;
-            proj.project_creation = ProjectObject.project_creation;
-            if (file != null && file.ContentLength > 0) {
-                try {
-                    switch (file.ContentType) {
-                        case ("image/jpeg"):
-                        case ("image/png"):
-                        case ("image/bmp"):
-                            string filename = ProjectID + Path.GetExtension(file.FileName);
-                            proj.project_image_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.project_image, file.ContentType);
-                            break;
+                HttpPostedFile file = Request.Files["ImageUploader"];
+
+                //Creates a new project with the project changes.
+                Project proj = new Project();
+                proj.project_name = TextBoxTitle.Text;
+                proj.project_desc = TextBoxDescription.Text;
+                proj.project_author = ProjectObject.project_author;
+                proj.project_creation = ProjectObject.project_creation;
+                if (file != null && file.ContentLength > 0)
+                {
+                    try
+                    {
+                        switch (file.ContentType)
+                        {
+                            case ("image/jpeg"):
+                            case ("image/png"):
+                            case ("image/bmp"):
+                                string filename = ProjectID + Path.GetExtension(file.FileName);
+                                proj.project_image_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.project_image, file.ContentType);
+                                break;
+                        }
                     }
-                } catch (Exception ex) {
+                    catch (Exception ex)
+                    {
 
+                    }
                 }
-            } else {
-                proj.project_image_path = ProjectObject.project_image_path;
+                else
+                {
+                    proj.project_image_path = ProjectObject.project_image_path;
+                }
+                proj.project_visibility = Convert.ToInt32(RadioPublic.Checked);
+
+                //Attempts to save and publish project changes.
+                db.ModifyProject(ProjectID, proj);
+
+                //Sends the creator to view their page.
+                Response.Redirect("~/Projects/View?p=" + ProjectID.ToString());
+
             }
-            proj.project_visibility = Convert.ToInt32(RadioPublic.Checked);
-
-            //Attempts to save and publish project changes.
-            db.ModifyProject(ProjectID, proj);
-
-            //Sends the creator to view their page.
-            Response.Redirect("~/Projects/View?p=" + ProjectID.ToString());
 
         }
 
