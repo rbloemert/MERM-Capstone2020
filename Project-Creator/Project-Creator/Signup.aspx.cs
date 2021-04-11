@@ -59,6 +59,7 @@ namespace Project_Creator
                 signupUser.fullname = TextBoxFullName.Text;
                 signupUser.email = TextBoxEmail.Text;
                 signupUser.isSiteAdministrator = false;
+                signupUser.account_image_path = "~/Images/Account_Placeholder.png";
 
                 //Signs the user up in the database.
                 Database db = new Database();

@@ -96,7 +96,7 @@ namespace Project_Creator {
 
         public Account GetAccountInfo(int accountID) {
             Account accs = new Account();
-            if (!IsConnectionOpen()) return accs;
+            if (!IsConnectionOpen()) return null;
 
             var sql = "SELECT * FROM account where accountID = @accountID";
             using (var cmd = new SqlCommand(sql, connection)) {

@@ -93,7 +93,7 @@ namespace Project_Creator.Projects
                         Account user = (Account)Session["User"];
 
                         //Gets a project object.
-                        ProjectObject = new Project("New Project", "", user.username, "NULL", 0);
+                        ProjectObject = new Project("New Project", "", user.username, "~/Images/Project_Placeholder.png", 0);
 
                         //Creates a new project to be editted.
                         ProjectID = db.CreateProject(ProjectObject);
@@ -176,7 +176,10 @@ namespace Project_Creator.Projects
                 }
                 else
                 {
-                    proj.project_image_path = ProjectObject.project_image_path;
+                    if (!String.IsNullOrEmpty(ProjectObject.project_image_path))
+                    {
+                        proj.project_image_path = ProjectObject.project_image_path;
+                    }
                 }
                 proj.project_visibility = Convert.ToInt32(RadioPublic.Checked);
 

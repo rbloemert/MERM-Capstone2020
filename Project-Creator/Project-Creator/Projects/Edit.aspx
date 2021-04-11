@@ -25,9 +25,8 @@
                                 <asp:TextBox Font-Size="X-Large" Width="98%" ID="TextBoxTitle" runat="server" placeholder="Project Title..."></asp:TextBox><br />
                                 <asp:RequiredFieldValidator ControlToValidate="TextBoxTitle" Display="Static" ErrorMessage="Project title is required." runat="server" ForeColor="Red"></asp:RequiredFieldValidator>
                                 <asp:TextBox Font-Size="Medium" Width="98%" ID="TextBoxDescription" runat="server" placeholder="Project Description..."></asp:TextBox><br />
-                                <asp:RequiredFieldValidator ControlToValidate="TextBoxDescription" Display="Static" ErrorMessage="Project description is required." runat="server" ForeColor="Red"></asp:RequiredFieldValidator>
                             </div>
-                            <div class="Basic" style="height: 16px; margin-top: 4px;">
+                            <div class="Basic" style="height: 35px; margin-top: 4px;">
                                 <table style="margin: 0; width: 100%;">
                                     <tr>
                                         <td>

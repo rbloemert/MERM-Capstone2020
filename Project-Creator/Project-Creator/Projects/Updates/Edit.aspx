@@ -26,6 +26,7 @@
                         <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                             <div class="Basic" style="height: 72px; margin-top: 4px; text-align: left">
                                 <asp:TextBox runat="server" Width="100%" ID="TextBoxUpdate" Font-Size="X-Large" placeholder="Title..."></asp:TextBox>
+                                <asp:RequiredFieldValidator ControlToValidate="TextBoxUpdate" ForeColor="Red" runat="server" ErrorMessage="Title is required."></asp:RequiredFieldValidator>
                                 <br />
                                 <br />
                                 <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;">
@@ -44,7 +45,7 @@
                             <div class="Basic" style="margin: 0;">
                                 Timeline Image:
                                 <div class="timeline-image-container" style="margin-top: 5px;">
-                                    <img id="timeline_image" src="<%=TimelineObject.timeline_image_path %>" class="timeline-image" />
+                                    <img id="timeline_image" src="<%=TimelineObject.timeline_image_path.Replace("~", "") %>" class="timeline-image" />
                                 </div>
                                 <div class="Basic" style="margin-top: 5px;">
                                     <input type="file" id="ImageUploader" name="ImageUploader" onchange="previewTimelineImage()" />
@@ -54,6 +55,7 @@
                                 Description:
                                 <p>
                                     <asp:TextBox Height="160px" Width="99%" TextMode="MultiLine" Wrap="true" ID="txtDesc" CssClass="update-edit-textbox" runat="server" MaxLength="600"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ControlToValidate="txtDesc" ForeColor="Red" runat="server" ErrorMessage="Description is required."></asp:RequiredFieldValidator>
                                 </p>
                             </div>
                             <div class="Basic" style="text-align: left; margin-top: 5px;">

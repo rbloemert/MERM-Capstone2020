@@ -71,7 +71,7 @@
                                     <asp:Label ID="lblDesc" runat="server"></asp:Label>
                                 </p>
                             </div>
-                            <div class="Basic" style="margin-top: 5px;">
+                            <div id="divFile" class="Basic" style="margin-top: 5px;" runat="server">
                                 <div id="FileImage" runat="server" style="display: none">
                                     <img src="<%=FileLink %>" class="file-image" />
                                 </div>

@@ -166,6 +166,9 @@ namespace Project_Creator.Posts {
                         case ".zip":
                             FileZip.Style["display"] = "block";
                             break;
+                        default:
+                            divFile.Visible = false;
+                            break;
 
                     }
 

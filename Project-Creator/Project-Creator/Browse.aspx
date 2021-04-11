@@ -39,7 +39,7 @@
                                         <tbody>
                                             <tr>
                                                 <td style="text-align:center">
-                                                    <img src="<%#:Item.account_image_path %>" width="128" height="128" />
+                                                    <img src="<%#:Item.account_image_path.Replace("~", "") %>" width="128" height="128" />
                                                 </td>
                                             </tr>
                                             <tr>
