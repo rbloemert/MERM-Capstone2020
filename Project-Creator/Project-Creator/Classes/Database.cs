@@ -279,8 +279,8 @@ namespace Project_Creator {
                 cmd.Parameters.AddWithValue("@account_creation", new_account.account_creation);
                 cmd.Parameters.AddWithValue("@fullname", new_account.fullname);
                 cmd.Parameters.AddWithValue("@username", new_account.username);
-                cmd.Parameters.AddWithValue("@password", Password.Encrypt(new_account.password, salt));
-                cmd.Parameters.AddWithValue("@password_salt", salt);
+                cmd.Parameters.AddWithValue("@password", new_account.password);
+                cmd.Parameters.AddWithValue("@password_salt", new_account.password_salt);
                 cmd.Parameters.AddWithValue("@email", new_account.email);
                 cmd.Parameters.AddWithValue("@isSiteAdministrator", new_account.isSiteAdministrator);
                 cmd.Parameters.AddWithValue("@account_image_path", new_account.account_image_path);

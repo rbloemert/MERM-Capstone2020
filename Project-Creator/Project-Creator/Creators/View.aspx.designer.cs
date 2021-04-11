@@ -51,6 +51,24 @@ namespace Project_Creator.Creators
         protected global::System.Web.UI.WebControls.Label lblFullname;
 
         /// <summary>
+        /// lblDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDescription;
+
+        /// <summary>
+        /// divEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell divEmail;
+
+        /// <summary>
         /// lblEmail control.
         /// </summary>
         /// <remarks>

@@ -19,35 +19,52 @@ namespace Project_Creator.Creators
         protected void Page_Load(object sender, EventArgs e)
         {
             //Checks if the creator is defined.
-            if (Request.QueryString["c"] != null)
+            if (!String.IsNullOrEmpty(Request.QueryString["c"]))
             {
 
-                creatorAccountID = Int32.Parse(Request.QueryString["c"]);
-                Database db = new Database();
-                CreatorAccount = db.GetAccountInfo(creatorAccountID);
+                creatorAccountID = Convert.ToInt32(Request.QueryString["c"]);
 
-                //Creator 
-                lblUsername.Text = CreatorAccount.username;
-                lblDate.Text = "Created: " + CreatorAccount.account_creation.Value.ToString("yyyy-MM-dd");
-                CreatorIcon.ImageUrl = CreatorAccount.account_image_path;
-
-                int visibility = 1;
-
-                //Checks if the user is logged in.
-                if (Session["User"] != null)
+                //Checks if the account id is valid.
+                if (creatorAccountID != 0)
                 {
 
-                    //Gets the user object.
-                    Account user = (Account)Session["User"];
+                    Database db = new Database();
+                    CreatorAccount = db.GetAccountInfo(creatorAccountID);
 
-                    //Checks if the user is the project owner.
-                    if (user.username == CreatorAccount.username)
+                    //Creator
+                    lblUsername.Text = CreatorAccount.username;
+                    lblDate.Text = CreatorAccount.account_creation.Value.ToString("yyyy-MM-dd");
+                    CreatorIcon.ImageUrl = CreatorAccount.account_image_path;
+                    divEmail.Visible = CreatorAccount.allows_email_contact;
+                    lblEmail.Text = CreatorAccount.email;
+
+                    int visibility = 1;
+
+                    //Checks if the user is logged in.
+                    if (Session["User"] != null)
                     {
 
-                        //Displays an unable to follow message.
-                        ButtonEdit.Visible = true;
-                        ButtonAddProject.Visible = true;
-                        visibility = 0;
+                        //Gets the user object.
+                        Account user = (Account)Session["User"];
+
+                        //Checks if the user is the project owner.
+                        if (user.username == CreatorAccount.username)
+                        {
+
+                            //Displays an unable to follow message.
+                            ButtonEdit.Visible = true;
+                            ButtonAddProject.Visible = true;
+                            visibility = 0;
+
+                        }
+                        else
+                        {
+
+                            //Disables the edit button.
+                            ButtonEdit.Visible = false;
+                            ButtonAddProject.Visible = false;
+
+                        }
 
                     }
                     else
@@ -59,42 +76,41 @@ namespace Project_Creator.Creators
 
                     }
 
-                }
-                else
-                {
+                    //Gets the database connection.
+                    db = new Database();
 
-                    //Disables the edit button.
-                    ButtonEdit.Visible = false;
-                    ButtonAddProject.Visible = false;
+                    //List<Project> projectList = db.GetProjectList(); //AccountID
+                    List<Project> projectList = new List<Project>();
 
-                }
-
-                //Gets the database connection.
-                db = new Database();
-
-                //List<Project> projectList = db.GetProjectList(); //AccountID
-                List<Project> projectList = new List<Project>();
-
-                //Checks if the search is defined.
-                if (Request.QueryString["s"] != null)
-                {
-
-                    //Gets the search string.
-                    string search = Request.QueryString["s"];
-
-                    //Checks if the search option is defined.
-                    if (Request.QueryString["o"] != null)
+                    //Checks if the search is defined.
+                    if (Request.QueryString["s"] != null)
                     {
 
-                        //Gets the search option.
-                        int option = Convert.ToInt32(Request.QueryString["o"]);
+                        //Gets the search string.
+                        string search = Request.QueryString["s"];
 
-                        //Checks if the option is valid.
-                        if (option != 0)
+                        //Checks if the search option is defined.
+                        if (Request.QueryString["o"] != null)
                         {
 
-                            //Gets the project list.
-                            projectList = db.GetProjectList(creatorAccountID, search, visibility, option);
+                            //Gets the search option.
+                            int option = Convert.ToInt32(Request.QueryString["o"]);
+
+                            //Checks if the option is valid.
+                            if (option != 0)
+                            {
+
+                                //Gets the project list.
+                                projectList = db.GetProjectList(creatorAccountID, search, visibility, option);
+
+                            }
+                            else
+                            {
+
+                                //Gets the project list.
+                                projectList = db.GetProjectList(creatorAccountID, search, visibility, 3);
+
+                            }
 
                         }
                         else
@@ -110,22 +126,19 @@ namespace Project_Creator.Creators
                     {
 
                         //Gets the project list.
-                        projectList = db.GetProjectList(creatorAccountID, search, visibility, 3);
+                        projectList = db.GetProjectList(creatorAccountID, "", visibility, 3);
 
                     }
 
-                }
-                else
-                {
-
-                    //Gets the project list.
-                    projectList = db.GetProjectList(creatorAccountID, "", visibility, 3);
+                    RepeaterProject.DataSource = projectList;
+                    RepeaterProject.DataBind();
 
                 }
 
-                RepeaterProject.DataSource = projectList;
-                RepeaterProject.DataBind();
-
+            }
+            else
+            {
+                Response.Redirect("~/Home");
             }
             
         }

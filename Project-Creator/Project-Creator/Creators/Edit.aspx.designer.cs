@@ -15,76 +15,22 @@ namespace Project_Creator.Creators
     {
 
         /// <summary>
-        /// myAccountPanel control.
+        /// editErrorLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel myAccountPanel;
+        protected global::System.Web.UI.WebControls.Label editErrorLabel;
 
         /// <summary>
-        /// MyAccountFullNameLabel control.
+        /// usernameTextbox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MyAccountFullNameLabel;
-
-        /// <summary>
-        /// MyAccountDescLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MyAccountDescLabel;
-
-        /// <summary>
-        /// MyAccountUsernameLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MyAccountUsernameLabel;
-
-        /// <summary>
-        /// MyAccountEmailLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MyAccountEmailLabel;
-
-        /// <summary>
-        /// MyAccountEditButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button MyAccountEditButton;
-
-        /// <summary>
-        /// myAccountEditPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel myAccountEditPanel;
-
-        /// <summary>
-        /// fullNameTextbox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox fullNameTextbox;
+        protected global::System.Web.UI.WebControls.Label usernameTextbox;
 
         /// <summary>
         /// creatorDescTextbox control.
@@ -96,24 +42,6 @@ namespace Project_Creator.Creators
         protected global::System.Web.UI.WebControls.TextBox creatorDescTextbox;
 
         /// <summary>
-        /// emailTextbox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox emailTextbox;
-
-        /// <summary>
-        /// usernameTextbox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox usernameTextbox;
-
-        /// <summary>
         /// passwordTextbox control.
         /// </summary>
         /// <remarks>
@@ -121,6 +49,33 @@ namespace Project_Creator.Creators
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox passwordTextbox;
+
+        /// <summary>
+        /// passwordConfirmTextbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox passwordConfirmTextbox;
+
+        /// <summary>
+        /// fullNameTextbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox fullNameTextbox;
+
+        /// <summary>
+        /// emailTextbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox emailTextbox;
 
         /// <summary>
         /// allowFullnameCheckbox control.
@@ -148,23 +103,5 @@ namespace Project_Creator.Creators
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button editSubmitButton;
-
-        /// <summary>
-        /// editCancelButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button editCancelButton;
-
-        /// <summary>
-        /// editErrorLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label editErrorLabel;
     }
 }

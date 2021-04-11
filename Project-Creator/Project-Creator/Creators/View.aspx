@@ -13,7 +13,7 @@
                             </div>
                         </div>
                         <div class="ProjectColumn" style="width: 100%;max-width: 900px;">
-                            <div class="Basic" style="height:80px;">
+                            <div class="Basic" style="padding-top:12px;height:92px;">
                                 <table style="margin:0;width:100%;">
                                     <tr>
                                         <td>
@@ -27,11 +27,20 @@
                                             <table>
                                                 <tbody>
                                                     <tr>
-                                                        <td>
-                                                            <h1 style="text-align: left"><asp:Label ID="lblUsername" runat="server" /></h1>
-                                                        </td>
-                                                        <td>
-                                                            <h2 style="margin-left:12px;text-align: left"><asp:Label ForeColor="Gray" ID="lblFullname" runat="server" /></h2>
+                                                        <td style="text-align:left;">
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <h1 style="text-align: left"><asp:Label ID="lblUsername" runat="server" /></h1>
+                                                                        </td>
+                                                                        <td>
+                                                                            <h2 style="margin-left:12px;text-align: left"><asp:Label ForeColor="Gray" ID="lblFullname" runat="server" /></h2>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <asp:Label ID="lblDescription" Font-Size="22px" runat="server">Hello</asp:Label>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -43,12 +52,12 @@
                                             <table>
                                                 <tbody>
                                                     <tr>
-                                                        <td>
-                                                            <h2 class="Project" style="text-align: left">Email: <a><span style="color: white;">
+                                                        <td id="divEmail" style="text-align:left;" runat="server">
+                                                            <h2 class="Project" style="text-align:left;margin-right:12px;">Email: <a><span style="color: white;">
                                                             <asp:Label ID="lblEmail" runat="server" /></span></a></h2>
                                                         </td>
-                                                        <td>
-                                                            <h2 class="Project" style="margin-left:12px;text-align: left">Creation Date: <span style="color: white;">
+                                                        <td style="text-align:left;">
+                                                            <h2 class="Project" style="text-align:left">Creation Date: <span style="color: white;">
                                                             <asp:Label ID="lblDate" runat="server" /></span></h2>
                                                         </td>
                                                     </tr>
