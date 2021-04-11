@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,6 +13,7 @@ namespace Project_Creator.Creators
 {
     public partial class Edit : System.Web.UI.Page
     {
+        public string imagePath = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             var salt = Password.Salt();
@@ -29,6 +31,7 @@ namespace Project_Creator.Creators
                     usernameTextbox.Text = ((Account)Session["user"]).username;
                     allowFullnameCheckbox.Checked = ((Account)Session["user"]).allows_full_name_display;
                     allowContactCheckbox.Checked = ((Account)Session["user"]).allows_email_contact;
+                    imagePath = ((Account)Session["user"]).account_image_path;
                 }
                 else
                 {
@@ -59,6 +62,31 @@ namespace Project_Creator.Creators
 
                     Database db = new Database();
                     var salt = Password.Salt();
+                    HttpPostedFile file = Request.Files["ImageUploader"];
+                    if (file != null && file.ContentLength > 0) {
+                        string fileName = Path.GetFileName(imagePath);
+                        if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
+                            try {
+                                StorageService.DeleteFileFromStorage(fileName, StorageService.account_image);
+                            } catch {
+
+                            }
+                        }
+                        try {
+                            switch (file.ContentType) {
+                                case ("image/jpeg"):
+                                case ("image/png"):
+                                case ("image/bmp"):
+                                    string accountID = ((Account)Session["user"]).accountID.ToString();
+                                    string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(accountID)) + Path.GetExtension(file.FileName);
+                                    imagePath = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.account_image, file.ContentType);
+                                    break;
+                            }
+                        } catch (Exception ex) {
+
+                        }
+                    }
+
                     switch (db.ModifyAccount(((Account)Session["user"]).accountID,
                         new Account
                         {
@@ -71,7 +99,7 @@ namespace Project_Creator.Creators
                             password_salt = salt,
                             email = emailTextbox.Text,
                             isSiteAdministrator = ((Account)Session["user"]).isSiteAdministrator,
-                            account_image_path = ((Account)Session["user"]).account_image_path,
+                            account_image_path = imagePath,
                             allows_full_name_display = allowFullnameCheckbox.Checked,
                             allows_email_contact = allowContactCheckbox.Checked,
                         }))
@@ -94,6 +122,30 @@ namespace Project_Creator.Creators
                 {
 
                     Database db = new Database();
+                    HttpPostedFile file = Request.Files["ImageUploader"];
+                    if (file != null && file.ContentLength > 0) {
+                        string fileName = Path.GetFileName(imagePath);
+                        if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
+                            try {
+                                StorageService.DeleteFileFromStorage(fileName, StorageService.account_image);
+                            } catch {
+
+                            }
+                        }
+                        try {
+                            switch (file.ContentType) {
+                                case ("image/jpeg"):
+                                case ("image/png"):
+                                case ("image/bmp"):
+                                    string accountID = ((Account)Session["user"]).accountID.ToString();
+                                    string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(accountID)) + Path.GetExtension(file.FileName);
+                                    imagePath = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.account_image, file.ContentType);
+                                    break;
+                            }
+                        } catch (Exception ex) {
+
+                        }
+                    }
                     switch (db.ModifyAccount(((Account)Session["user"]).accountID,
                         new Account
                         {
@@ -106,7 +158,7 @@ namespace Project_Creator.Creators
                             password_salt = ((Account)Session["user"]).password_salt,
                             email = emailTextbox.Text,
                             isSiteAdministrator = ((Account)Session["user"]).isSiteAdministrator,
-                            account_image_path = ((Account)Session["user"]).account_image_path,
+                            account_image_path = imagePath,
                             allows_full_name_display = allowFullnameCheckbox.Checked,
                             allows_email_contact = allowContactCheckbox.Checked,
                         }))
