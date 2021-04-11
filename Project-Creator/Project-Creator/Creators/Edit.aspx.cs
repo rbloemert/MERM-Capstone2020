@@ -86,25 +86,31 @@ namespace Project_Creator.Creators
 
                         }
                     }
+                    else
+                    {
+                        imagePath = ((Account)Session["user"]).account_image_path;
+                    }
 
-                    switch (db.ModifyAccount(((Account)Session["user"]).accountID,
-                        new Account
-                        {
-                            accountID = ((Account)Session["user"]).accountID,
-                            account_creation = ((Account)Session["user"]).account_creation,
-                            fullname = fullNameTextbox.Text,
-                            creatordesc = creatorDescTextbox.Text,
-                            username = ((Account)Session["user"]).username,
-                            password = Password.Encrypt(passwordTextbox.Text, salt),
-                            password_salt = salt,
-                            email = emailTextbox.Text,
-                            isSiteAdministrator = ((Account)Session["user"]).isSiteAdministrator,
-                            account_image_path = imagePath,
-                            allows_full_name_display = allowFullnameCheckbox.Checked,
-                            allows_email_contact = allowContactCheckbox.Checked,
-                        }))
+                    var user = new Account
+                    {
+                        accountID = ((Account)Session["user"]).accountID,
+                        account_creation = ((Account)Session["user"]).account_creation,
+                        fullname = fullNameTextbox.Text,
+                        creatordesc = creatorDescTextbox.Text,
+                        username = ((Account)Session["user"]).username,
+                        password = Password.Encrypt(passwordTextbox.Text, salt),
+                        password_salt = salt,
+                        email = emailTextbox.Text,
+                        isSiteAdministrator = ((Account)Session["user"]).isSiteAdministrator,
+                        account_image_path = imagePath,
+                        allows_full_name_display = allowFullnameCheckbox.Checked,
+                        allows_email_contact = allowContactCheckbox.Checked,
+                    };
+
+                    switch (db.ModifyAccount(((Account)Session["user"]).accountID, user))
                     {
                         case Database.QueryResult.Successful:
+                            Session["user"] = user;
                             editErrorLabel.Text = "Successfully modified account.";
                             editErrorLabel.ForeColor = Color.Green;
                             editErrorLabel.Visible = true;
@@ -146,24 +152,31 @@ namespace Project_Creator.Creators
 
                         }
                     }
-                    switch (db.ModifyAccount(((Account)Session["user"]).accountID,
-                        new Account
-                        {
-                            accountID = ((Account)Session["user"]).accountID,
-                            account_creation = ((Account)Session["user"]).account_creation,
-                            fullname = fullNameTextbox.Text,
-                            creatordesc = creatorDescTextbox.Text,
-                            username = ((Account)Session["user"]).username,
-                            password = ((Account)Session["user"]).password,
-                            password_salt = ((Account)Session["user"]).password_salt,
-                            email = emailTextbox.Text,
-                            isSiteAdministrator = ((Account)Session["user"]).isSiteAdministrator,
-                            account_image_path = imagePath,
-                            allows_full_name_display = allowFullnameCheckbox.Checked,
-                            allows_email_contact = allowContactCheckbox.Checked,
-                        }))
+                    else
+                    {
+                        imagePath = ((Account)Session["user"]).account_image_path;
+                    }
+
+                    var user = new Account
+                    {
+                        accountID = ((Account)Session["user"]).accountID,
+                        account_creation = ((Account)Session["user"]).account_creation,
+                        fullname = fullNameTextbox.Text,
+                        creatordesc = creatorDescTextbox.Text,
+                        username = ((Account)Session["user"]).username,
+                        password = ((Account)Session["user"]).password,
+                        password_salt = ((Account)Session["user"]).password_salt,
+                        email = emailTextbox.Text,
+                        isSiteAdministrator = ((Account)Session["user"]).isSiteAdministrator,
+                        account_image_path = imagePath,
+                        allows_full_name_display = allowFullnameCheckbox.Checked,
+                        allows_email_contact = allowContactCheckbox.Checked,
+                    };
+
+                    switch (db.ModifyAccount(((Account)Session["user"]).accountID, user))
                     {
                         case Database.QueryResult.Successful:
+                            Session["user"] = user;
                             editErrorLabel.Text = "Successfully modified account.";
                             editErrorLabel.ForeColor = Color.Green;
                             editErrorLabel.Visible = true;

@@ -7,22 +7,19 @@
     <div class="Basic" style="width: 100%; max-width: 1014px;">
         <h1>Account Information</h1>
         <asp:Label ID="editErrorLabel" Visible="False" runat="server" />
-        <div class="Basic" style="float: left">
-            <table>
-                <tr>
-                    <td>
-                        <h3>ProfilePicture</h3>
-                    </td>
-                </tr>
-                <tr>
-                    <div class="imgHolder">
-                        <img id="account_image" src="<%=imagePath %>" class="Project" />
-                        <input type="file" id="ImageUploader" name="ImageUploader" onchange="previewAccountImage()" hidden />
-                        <label for="ImageUploader" class="Project">Upload Image</label>
+        <table style="margin:auto">
+            <tr>
+                <td>
+                    <div class="Basic">
+                        <div class="imgHolder">
+                            <img id="account_image" src="<%=imagePath %>" class="Project" />
+                            <input type="file" id="ImageUploader" name="ImageUploader" onchange="previewAccountImage()" hidden />
+                            <label for="ImageUploader" class="Project">Upload Image</label>
+                        </div>
                     </div>
-                </tr>
-            </table>
-        </div>
+                </td>
+            </tr>
+        </table>
         <br />
         <hr />
         <br />

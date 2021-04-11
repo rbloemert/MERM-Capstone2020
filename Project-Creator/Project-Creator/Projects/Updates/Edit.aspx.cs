@@ -176,33 +176,46 @@ namespace Project_Creator.Projects.Updates {
 
         }
 
-        protected void btnSubmit_Click(object sender, EventArgs e) {
-            //Gets the project id from the URL.
-            ProjectID = Convert.ToInt32(Request.QueryString["p"]);
-            UpdateID = Convert.ToInt32(Request.QueryString["u"]);
-            Database db = new Database();
-            TimelineObject = db.GetTimeline(UpdateID);
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
 
-            HttpPostedFile file = Request.Files["ImageUploader"];
+            if (Page.IsValid)
+            {
 
-            if (file != null && file.ContentLength > 0) {
-                string fileName = Path.GetFileName(TimelineObject.timeline_image_path);
-                if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
-                    try {
-                        StorageService.DeleteFileFromStorage(fileName, StorageService.timeline_image);
-                    } catch {
+                //Gets the project id from the URL.
+                ProjectID = Convert.ToInt32(Request.QueryString["p"]);
+                UpdateID = Convert.ToInt32(Request.QueryString["u"]);
+                Database db = new Database();
+                TimelineObject = db.GetTimeline(UpdateID);
 
+                HttpPostedFile file = Request.Files["ImageUploader"];
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(TimelineObject.timeline_image_path);
+                    if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "")
+                    {
+                        try
+                        {
+                            StorageService.DeleteFileFromStorage(fileName, StorageService.timeline_image);
+                        }
+                        catch
+                        {
+
+                        }
                     }
-                }
-                try {
-                    switch (file.ContentType) {
-                        case ("image/jpeg"):
-                        case ("image/png"):
-                        case ("image/bmp"):
-                            string id = ProjectID + "" + UpdateID;
-                            string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(id)) + Path.GetExtension(file.FileName);
-                            TimelineObject.timeline_image_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.timeline_image, file.ContentType);
-                            break;
+                    try
+                    {
+                        switch (file.ContentType)
+                        {
+                            case ("image/jpeg"):
+                            case ("image/png"):
+                            case ("image/bmp"):
+                                string id = ProjectID + "" + UpdateID;
+                                string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(id)) + Path.GetExtension(file.FileName);
+                                TimelineObject.timeline_image_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.timeline_image, file.ContentType);
+                                break;
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -217,29 +230,37 @@ namespace Project_Creator.Projects.Updates {
                     }
                 }
 
-            file = Request.Files["ContentUploader"];
-            if (file != null && file.ContentLength > 0) {
-                string fileName = Path.GetFileName(TimelineObject.timeline_file_path);
-                if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
-                    try {
-                        StorageService.DeleteFileFromStorage(fileName, StorageService.timeline_file);
-                    } catch {
+                file = Request.Files["ContentUploader"];
+                if (file != null && file.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(TimelineObject.timeline_file_path);
+                    if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "")
+                    {
+                        try
+                        {
+                            StorageService.DeleteFileFromStorage(fileName, StorageService.timeline_file);
+                        }
+                        catch
+                        {
 
+                        }
                     }
-                }
-                try {
-                    switch (file.ContentType) {
-                        case ("image/jpeg"):
-                        case ("image/png"):
-                        case ("image/bmp"):
-                        case ("application/pdf"):
-                        case ("video/mp4"):
-                        case ("text/plain"):
-                        case ("application/x-zip-compressed"):
-                            string id = ProjectID + "" + UpdateID;
-                            string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(id)) + Path.GetExtension(file.FileName);
-                            TimelineObject.timeline_file_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.timeline_file, file.ContentType);
-                            break;
+                    try
+                    {
+                        switch (file.ContentType)
+                        {
+                            case ("image/jpeg"):
+                            case ("image/png"):
+                            case ("image/bmp"):
+                            case ("application/pdf"):
+                            case ("video/mp4"):
+                            case ("text/plain"):
+                            case ("application/x-zip-compressed"):
+                                string id = ProjectID + "" + UpdateID;
+                                string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(id)) + Path.GetExtension(file.FileName);
+                                TimelineObject.timeline_file_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.timeline_file, file.ContentType);
+                                break;
+                        }
                     }
                     catch (Exception ex)
                     {

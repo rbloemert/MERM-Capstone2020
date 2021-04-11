@@ -45,12 +45,14 @@
                                                 <table>
                                                     <tbody>
                                                         <tr>
-                                                            <td>
-                                                                <h2 class="Project" style="text-align: left">Email: <a><span style="color: white;">
-                                                                <asp:Label ID="lblEmail" runat="server" /></span></a></h2>
+                                                            <td id="divEmail" runat="server">
+                                                                <div style="margin-right:12px;">
+                                                                    <h2 class="Project" style="text-align: left">Email: <a><span style="color: white;">
+                                                                    <asp:Label ID="lblEmail" runat="server" /></span></a></h2>
+                                                                </div>
                                                             </td>
                                                             <td>
-                                                                <h2 class="Project" style="margin-left:12px;text-align: left">Creation Date: <span style="color: white;">
+                                                                <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;">
                                                                 <asp:Label ID="lblDate" runat="server" /></span></h2>
                                                             </td>
                                                         </tr>
@@ -72,11 +74,6 @@
                             <div class="ProjectColumn" style="width: 100%; max-width: 1014px;">
                                 <div style="width: 100%; max-width: 1014px;">
                                     <div class="Basic" style="margin-top:0;min-height:474px;">
-                                        <div class="Basic" style="margin:0">
-                                            <h1 style="color:navajowhite">
-                                                New Project Updates:
-                                            </h1>
-                                        </div>
                                         <div class="gallery js-flickity" data-flickity-options='{ "pageDots": false, "initialIndex": <%=TimelineIndex %> }'>
 
                                             <!-- Timeline carousel repeater. -->
