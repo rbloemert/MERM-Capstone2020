@@ -157,6 +157,7 @@
   <ItemGroup>
     <Content Include="Account.aspx" />
     <Content Include="Browse.aspx" />
+    <Content Include="Creators\Creators_JavaScript.js" />
     <Content Include="Creators\Edit.aspx" />
     <Content Include="Creators\View.aspx" />
     <Content Include="Home.aspx" />
