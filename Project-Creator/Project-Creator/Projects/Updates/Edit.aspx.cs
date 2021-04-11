@@ -159,12 +159,21 @@ namespace Project_Creator.Projects.Updates {
             HttpPostedFile file = Request.Files["ImageUploader"];
 
             if (file != null && file.ContentLength > 0) {
+                string fileName = Path.GetFileName(TimelineObject.timeline_image_path);
+                if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
+                    try {
+                        StorageService.DeleteFileFromStorage(fileName, StorageService.timeline_image);
+                    } catch {
+
+                    }
+                }
                 try {
                     switch (file.ContentType) {
                         case ("image/jpeg"):
                         case ("image/png"):
                         case ("image/bmp"):
-                            string filename = ProjectID + "" + UpdateID + Path.GetExtension(file.FileName);
+                            string id = ProjectID + "" + UpdateID;
+                            string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(id)) + Path.GetExtension(file.FileName);
                             TimelineObject.timeline_image_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.timeline_image, file.ContentType);
                             break;
                     }
@@ -175,6 +184,14 @@ namespace Project_Creator.Projects.Updates {
 
             file = Request.Files["ContentUploader"];
             if (file != null && file.ContentLength > 0) {
+                string fileName = Path.GetFileName(TimelineObject.timeline_file_path);
+                if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
+                    try {
+                        StorageService.DeleteFileFromStorage(fileName, StorageService.timeline_file);
+                    } catch {
+
+                    }
+                }
                 try {
                     switch (file.ContentType) {
                         case ("image/jpeg"):
@@ -184,7 +201,8 @@ namespace Project_Creator.Projects.Updates {
                         case ("video/mp4"):
                         case ("text/plain"):
                         case ("application/x-zip-compressed"):
-                            string filename = ProjectID + "" + UpdateID + Path.GetExtension(file.FileName);
+                            string id = ProjectID + "" + UpdateID;
+                            string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(id)) + Path.GetExtension(file.FileName);
                             TimelineObject.timeline_file_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.timeline_file, file.ContentType);
                             break;
                     }
