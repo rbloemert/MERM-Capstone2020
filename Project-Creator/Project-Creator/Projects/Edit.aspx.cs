@@ -157,6 +157,14 @@ namespace Project_Creator.Projects
                 proj.project_creation = ProjectObject.project_creation;
                 if (file != null && file.ContentLength > 0)
                 {
+                    string fileName = Path.GetFileName(proj.project_image_path);
+                    if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
+                        try {
+                            StorageService.DeleteFileFromStorage(fileName, StorageService.project_image);
+                        } catch {
+
+                        }
+                    }
                     try
                     {
                         switch (file.ContentType)
@@ -164,7 +172,8 @@ namespace Project_Creator.Projects
                             case ("image/jpeg"):
                             case ("image/png"):
                             case ("image/bmp"):
-                                string filename = ProjectID + Path.GetExtension(file.FileName);
+                                string id = ProjectID.ToString();
+                                string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(id)) + Path.GetExtension(file.FileName);
                                 proj.project_image_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.project_image, file.ContentType);
                                 break;
                         }
