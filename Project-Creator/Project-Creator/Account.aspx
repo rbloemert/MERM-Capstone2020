@@ -22,6 +22,7 @@
             Allow Contact by Email <asp:CheckBox ID="allowContactCheckbox" runat="server"/><br/>
             <asp:Button ID="editSubmitButton" Text="Submit" OnClick="editSubmitButton_OnClick" runat="server"/>
             <asp:Button ID="editCancelButton" Text="Cancel" OnClick="editCancelButton_OnClick" runat="server"/>
+            <asp:Button ID="deleteAccountButton" Text="Delete Account" OnClick="deleteAccountButton_OnClick" runat="server"/>
             <br/>
             <asp:Label ID="editErrorLabel" Visible="False" runat="server"/>
         </asp:Panel>

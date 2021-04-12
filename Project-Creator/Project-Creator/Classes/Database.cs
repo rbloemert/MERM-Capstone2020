@@ -9,12 +9,12 @@ using System.Linq;
 using System.Security.Cryptography;
 using Project_Creator.Classes;
 
-namespace Project_Creator {
-    // I haven't had a chance to try these out yet
-    // Note: Methods in the DB class are for internal use; I will provide funcs within the individual classes to offer functionality
-
-    public class Database {
-        public enum QueryResult {
+namespace Project_Creator 
+{
+    public class Database 
+    {
+        public enum QueryResult 
+        {
             FailedNotConnected = 0, // Connection not established
             FailedNoChanges,        // Query OK but no changes made
             FailedBadQuery,         // Query not OK
@@ -27,10 +27,15 @@ namespace Project_Creator {
         private SqlConnection connection;
         private string connectionString = "Data Source=tcp:projectcreator.database.windows.net,1433;Initial Catalog=projectcreatordb;User Id=creatoradmin@projectcreator;Password=ProjectCreator1233";
 
-        public Database() {
+        public Database() 
+        {
             connection = new SqlConnection(connectionString);
-            //connection = new SqlConnection("Server=tcp:projectcreator.database.windows.net,1433;Initial Catalog=projectcreatordb;Persist Security Info=False;User ID=creatoradmin;Password=ProjectCreator1233;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             connection.Open();
+        }
+
+        ~Database()
+        {
+            if (IsConnectionOpen()) connection.Close();
         }
 
         public bool TestConnection() // returns true if success
@@ -41,7 +46,7 @@ namespace Project_Creator {
         }
 
         public bool IsConnectionOpen() {
-            return connection != null && connection.State == ConnectionState.Open;
+            return connection != null && !(connection.State == ConnectionState.Broken || connection.State == ConnectionState.Closed);
         }
 
         public string GetLastSQLError() {
@@ -120,7 +125,6 @@ namespace Project_Creator {
                     accs.allows_email_contact = Convert.IsDBNull(row["allows_email_contact"]) ? false : Convert.ToBoolean(row["allows_email_contact"]);
                 }
             }
-            connection.Close();
             return accs;
         }
 
@@ -151,7 +155,6 @@ namespace Project_Creator {
                     });
                 }
             }
-            connection.Close();
             return accs;
         }
 
@@ -187,7 +190,6 @@ namespace Project_Creator {
                     });
                 }
             }
-            connection.Close();
             return accs;
         }
 
@@ -217,7 +219,6 @@ namespace Project_Creator {
                 }
 
             }
-            connection.Close();
 
             //Returns if the insert was successful.
             if (result > 0) {
@@ -245,14 +246,44 @@ namespace Project_Creator {
                     return QueryResult.FailedBadQuery;
                 }
             }
-            connection.Close();
 
-            //Returns if the insert was successful.
+            //Returns if the delete was successful.
             if (result > 0) {
                 return QueryResult.Successful;
             }
 
             return QueryResult.FailedNoChanges;
+        }
+
+        public QueryResult DeleteAccountFull(int accountID)
+        {
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            // GET ALL THE PROJECTS, TIMELINES, COMMENTS, AND NOTIFICATIONS related to this user
+            foreach (Project p in GetProjectList(accountID))
+            {
+                // delete any references of timelines
+                foreach (Timeline t in GetTimelineList(p.projectID))
+                {
+                    foreach (Comment c in GetCommentList(t.timelineID))
+                    {
+                        DeleteCommentLink(c.commentID, t.timelineID, accountID);
+                        DeleteComment(c.commentID);
+                    }
+
+                    DeleteTimelineLink(t.timelineID, p.projectID);
+                    DeleteTimeline(t.timelineID);
+
+                    // delete notifs?
+                    DeleteNotification(accountID, t.timelineID);
+                }
+
+                DeleteProjectLink(p.projectID, accountID);
+                DeleteProject(p.projectID);
+            }
+
+            return DeleteAccount(accountID);
         }
 
         public QueryResult ModifyAccount(int accountID, Account new_account) {
@@ -296,7 +327,6 @@ namespace Project_Creator {
                     return QueryResult.FailedBadQuery;
                 }
             }
-            connection.Close();
 
             //Returns if the insert was successful.
             if (result > 0) {
@@ -407,7 +437,6 @@ namespace Project_Creator {
                     });
                 }
             }
-            connection.Close();
             return projects;
         }
 
@@ -438,7 +467,6 @@ namespace Project_Creator {
                     });
                 }
             }
-            connection.Close();
             return projects;
         }
 
@@ -516,7 +544,6 @@ namespace Project_Creator {
                     });
                 }
             }
-            connection.Close();
             return projects;
         }
 
@@ -594,7 +621,6 @@ namespace Project_Creator {
                     });
                 }
             }
-            connection.Close();
             return projects;
         }
 
@@ -1184,7 +1210,6 @@ namespace Project_Creator {
             return QueryResult.FailedNoChanges;
         }
 
-
         public QueryResult DeleteComment(int commentID) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -1301,6 +1326,7 @@ namespace Project_Creator {
 
             return QueryResult.FailedNoChanges;
         }
+        // COMMENT
 
         // NOTIFICATIONS
         public QueryResult CreateNotifications(int ProjectID, int TimelineID)
@@ -1422,7 +1448,6 @@ namespace Project_Creator {
 
             return QueryResult.FailedNoChanges;
         }
-
-        // COMMENT
+        
     }
 }

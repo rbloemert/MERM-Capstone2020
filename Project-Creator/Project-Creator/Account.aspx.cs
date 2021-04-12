@@ -95,5 +95,24 @@ namespace Project_Creator
             MyAccountEditButton.Visible = true;
             myAccountEditPanel.Visible = false;
         }
+
+        protected void deleteAccountButton_OnClick(object sender, EventArgs e)
+        {
+            Database db = new Database();
+            Database.QueryResult res = db.DeleteAccountFull(((Account) Session["user"]).accountID);
+            switch (res)
+            {
+                case Database.QueryResult.Successful:
+                    Session.Clear(); // logout
+                    Response.Redirect("~/Home");
+                    break;
+
+                default:
+                    editErrorLabel.Text = "Failed to delete account: " + db.GetLastSQLError() + " (" + res + ")";
+                    editErrorLabel.ForeColor = Color.Red;
+                    editErrorLabel.Visible = true;
+                    break;
+            }
+        }
     }
 }

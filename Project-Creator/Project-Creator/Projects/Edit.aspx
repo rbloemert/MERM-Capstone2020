@@ -109,6 +109,7 @@
                                     <tr>
                                         <td style="text-align: right; padding-left: 12px">
                                             <asp:Button runat="server" Text="Save Changes" CausesValidation="true" OnClick="Save_Click" />
+                                            <asp:Button runat="server" Text="Delete Account" CausesValidation="False" OnClick="DeleteAccount_Click" />
                                         </td>
                                         <td style="text-align: left; padding-left: 12px">
                                             <asp:Button runat="server" Text="Delete Project" CausesValidation="true" OnClick="Delete_Click" />
