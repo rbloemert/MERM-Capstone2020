@@ -103,6 +103,7 @@
         <hr />
         <br />
         <asp:Button ID="editSubmitButton" Text="Save Changes" OnClick="editSubmitButton_OnClick" runat="server" />
+        <asp:Button ID="deleteAccountButton" Text="Delete Account"  OnClick="DeleteAccount_Click" runat="server"  />
         <br />
     </div>
 </asp:Content>

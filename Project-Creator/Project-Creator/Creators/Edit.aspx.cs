@@ -199,5 +199,28 @@ namespace Project_Creator.Creators
             }
 
         }
+
+        protected void DeleteAccount_Click(object sender, EventArgs e)
+        {
+            // some form of safeguard goes here?
+
+            Database db = new Database();
+            Database.QueryResult res = db.DeleteAccountFull(((Account)Session["user"]).accountID);
+            switch (res)
+            {
+                case Database.QueryResult.Successful:
+                    Session.Clear(); // logout
+                    Response.Redirect("~/Home");
+                    break;
+
+                default:
+                    // this is what happens if there's an error... I don't know how you'd like to display errors here so
+
+                    //editErrorLabel.Text = "Failed to delete account: " + db.GetLastSQLError() + " (" + res + ")";
+                    //editErrorLabel.ForeColor = Color.Red;
+                    //editErrorLabel.Visible = true;
+                    break;
+            }
+        }
     }
 }
