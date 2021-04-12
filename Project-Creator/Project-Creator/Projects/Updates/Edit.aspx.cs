@@ -172,6 +172,7 @@ namespace Project_Creator.Projects.Updates {
         protected void btnCancel_Click(object sender, EventArgs e) {
 
             //Redirects back to the project editing.
+            ProjectID = Convert.ToInt32(Request.QueryString["p"]);
             Response.Redirect("~/Projects/Edit?p=" + ProjectID);
 
         }
@@ -193,7 +194,7 @@ namespace Project_Creator.Projects.Updates {
                 if (file != null && file.ContentLength > 0)
                 {
                     string fileName = Path.GetFileName(TimelineObject.timeline_image_path);
-                    if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "")
+                    if (fileName != null && fileName.ToUpper() != "NULL" && fileName.ToUpper() != "")
                     {
                         try
                         {
@@ -234,7 +235,7 @@ namespace Project_Creator.Projects.Updates {
                 if (file != null && file.ContentLength > 0)
                 {
                     string fileName = Path.GetFileName(TimelineObject.timeline_file_path);
-                    if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "")
+                    if (fileName != null && fileName.ToUpper() != "NULL" && fileName.ToUpper() != "")
                     {
                         try
                         {
@@ -327,6 +328,7 @@ namespace Project_Creator.Projects.Updates {
                 db.DeleteCommentLink(c.commentID, UpdateID, Int32.Parse(c.comment_owner_accountID));
                 db.DeleteComment(c.commentID);
             }
+            db.DeleteAllNotifications(UpdateID);
             //Deletes the timeline link.
             db.DeleteTimelineLink(UpdateID, ProjectID);
             db.DeleteTimeline(UpdateID);

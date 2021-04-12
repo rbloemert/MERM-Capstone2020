@@ -158,7 +158,7 @@ namespace Project_Creator.Projects
                 if (file != null && file.ContentLength > 0)
                 {
                     string fileName = Path.GetFileName(proj.project_image_path);
-                    if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
+                    if (fileName != null && fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
                         try {
                             StorageService.DeleteFileFromStorage(fileName, StorageService.project_image);
                         } catch {
@@ -223,6 +223,15 @@ namespace Project_Creator.Projects
                 db.DeleteTimelineLink(update.timelineID, ProjectID);
                 db.DeleteTimeline(update.timelineID);
 
+            }
+
+            //Gets the list of project followers.
+            List<int> ProjectFollowers = db.GetFollowers(ProjectID);
+
+            //Loops through each follower of the project.
+            foreach (int follower in ProjectFollowers)
+            {
+                db.RemoveFollower(ProjectID, follower);
             }
 
             //Deletes the project and link.

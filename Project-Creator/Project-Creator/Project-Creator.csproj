@@ -155,7 +155,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Account.aspx" />
     <Content Include="Browse.aspx" />
     <Content Include="Creators\Creators_JavaScript.js" />
     <Content Include="Creators\Edit.aspx" />
@@ -163,11 +162,14 @@
     <Content Include="Home.aspx" />
     <Content Include="Images\Account_Placeholder.png" />
     <Content Include="Images\Add.png" />
+    <Content Include="Images\Icon_Folder.png" />
+    <Content Include="Images\Icon_Project.png" />
+    <Content Include="Images\Icon_Search.png" />
+    <Content Include="Images\Icon_Video.png" />
     <Content Include="Images\Logo.svg" />
-    <Content Include="Images\Project_Placeholder.jpg" />
-    <Content Include="Images\Test.png" />
+    <Content Include="Images\Project_Placeholder.png" />
     <Content Include="Images\Search.png" />
-    <Content Include="Images\Update_placeholder.jpg" />
+    <Content Include="Images\Update_Placeholder.png" />
     <Content Include="Login.aspx" />
     <Content Include="Projects\Edit.aspx" />
     <Content Include="Projects\Projects_JavaScript.js" />
@@ -185,13 +187,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.aspx.cs">
-      <DependentUpon>Account.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account.aspx.designer.cs">
-      <DependentUpon>Account.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Browse.aspx.cs">
       <DependentUpon>Browse.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

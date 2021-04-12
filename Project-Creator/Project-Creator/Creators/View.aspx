@@ -18,7 +18,7 @@
                                     <tr>
                                         <td>
                                             <div style="float:right" id="ButtonEdit" runat="server">
-                                                <a style="display:flex;width:32px;height:32px;align-items:center;justify-content:center" href="/Creators/Edit?p=<%=creatorAccountID %>">
+                                                <a style="display:flex;width:32px;height:32px;align-items:center;justify-content:center" href="/Creators/Edit">
                                                     <i style="color:gray;" class="gg-pen">
 
                                                     </i>

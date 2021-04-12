@@ -206,7 +206,7 @@ namespace Project_Creator {
                 cmd.Parameters.AddWithValue("@password_salt", salt);
                 cmd.Parameters.AddWithValue("@email", account.email);
                 cmd.Parameters.AddWithValue("@isSiteAdministrator", account.isSiteAdministrator);
-                cmd.Parameters.AddWithValue("@account_image_path", "NULL");
+                cmd.Parameters.AddWithValue("@account_image_path", account.account_image_path);
 
                 //Executes the insert command.
                 try {
@@ -774,7 +774,7 @@ namespace Project_Creator {
             return QueryResult.FailedNoChanges;
         }
 
-        public QueryResult RemoveFollower(int projectID, Account account) {
+        public QueryResult RemoveFollower(int projectID, int accountID) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
 
@@ -782,7 +782,7 @@ namespace Project_Creator {
             var sql = "DELETE FROM follower_link WHERE projectID=@projectID AND follower_accountID=@follower_accountID";
             using (var cmd = new SqlCommand(sql, connection)) {
                 cmd.Parameters.AddWithValue("@projectID", projectID);
-                cmd.Parameters.AddWithValue("@follower_accountID", account.accountID);
+                cmd.Parameters.AddWithValue("@follower_accountID", accountID);
 
 
                 //Executes the insert command.
@@ -1399,6 +1399,40 @@ namespace Project_Creator {
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@notify_account_id", AccountID);
+                cmd.Parameters.AddWithValue("@notify_timeline_id", TimelineID);
+
+                //Executes the sql query.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
+            return QueryResult.FailedNoChanges;
+        }
+
+        public QueryResult DeleteAllNotifications(int TimelineID)
+        {
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Replaces the last comma with a semi-colon.
+            string sql = "DELETE FROM notify WHERE notify_timeline_id = @notify_timeline_id;";
+
+            using (var cmd = new SqlCommand(sql, connection))
+            {
                 cmd.Parameters.AddWithValue("@notify_timeline_id", TimelineID);
 
                 //Executes the sql query.

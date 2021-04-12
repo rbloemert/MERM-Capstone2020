@@ -137,7 +137,7 @@ namespace Project_Creator.Projects
 
             //Checks if the user doesn't exist in the followers.
             if (!followers.Contains(user.accountID) && (user.username != author))
-                {
+            {
 
                 //Adds the logged-in account to the project followers.
                 db.AddFollower(ProjectID, user);
@@ -150,7 +150,7 @@ namespace Project_Creator.Projects
             {
 
                 //Removes the logged-in account from the project followers.
-                db.RemoveFollower(ProjectID, user);
+                db.RemoveFollower(ProjectID, user.accountID);
 
                 //Redirects back to the page.
                 Response.Redirect("~/Projects/View?p=" + ProjectID.ToString());

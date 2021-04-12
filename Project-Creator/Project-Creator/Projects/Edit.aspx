@@ -14,7 +14,7 @@
                         <div class="ProjectColumn">
                             <div class="Basic">
                                 <div class="imgHolder">
-                                    <img id="project_image" src="<%=ProjectObject.project_image_path %>" class="Project" />
+                                    <img id="project_image" src="<%=ProjectObject.project_image_path.Replace("~", "") %>" class="Project" />
                                     <input type="file" id="ImageUploader" name="ImageUploader" onchange="previewProjectImage()" hidden />
                                     <label for="ImageUploader" class="Project">Upload Image</label>
                                 </div>

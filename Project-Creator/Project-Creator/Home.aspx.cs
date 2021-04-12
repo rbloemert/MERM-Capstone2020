@@ -41,6 +41,7 @@ namespace Project_Creator
 
                     //Gets all the current notifications for the user.
                     List<Timeline> ProjectTimeline = db.GetNotifications(user.accountID);
+                    msgEmpty.Visible = (ProjectTimeline.Count <= 0);
 
                     //Binds the data to the project timeline.
                     TimelineIndex = ProjectTimeline.Count - 1;

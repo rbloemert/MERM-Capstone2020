@@ -65,7 +65,7 @@ namespace Project_Creator.Creators
                     HttpPostedFile file = Request.Files["ImageUploader"];
                     if (file != null && file.ContentLength > 0) {
                         string fileName = Path.GetFileName(imagePath);
-                        if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
+                        if (fileName != null && fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
                             try {
                                 StorageService.DeleteFileFromStorage(fileName, StorageService.account_image);
                             } catch {
@@ -131,7 +131,7 @@ namespace Project_Creator.Creators
                     HttpPostedFile file = Request.Files["ImageUploader"];
                     if (file != null && file.ContentLength > 0) {
                         string fileName = Path.GetFileName(imagePath);
-                        if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
+                        if (fileName != null && fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
                             try {
                                 StorageService.DeleteFileFromStorage(fileName, StorageService.account_image);
                             } catch {

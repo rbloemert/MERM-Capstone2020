@@ -76,10 +76,10 @@
                                     <img src="<%=FileLink %>" class="file-image" />
                                 </div>
                                 <div id="FileVideo" runat="server" style="display: none">
-                                    <video width="960" height="540" src="<%=FileLink %>" controls autoplay>
+                                    <video width="800" height="450" src="<%=FileLink %>" controls autoplay>
                                         <script>
                                             var video = document.currentScript.parentElement;
-                                            video.volume = 0.3;
+                                            video.volume = 0;
                                         </script>
                                     </video>
                                 </div>
