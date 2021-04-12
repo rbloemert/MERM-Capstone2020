@@ -27,8 +27,6 @@
                             <div class="Basic" style="height: 72px; margin-top: 4px; text-align: left">
                                 <asp:TextBox runat="server" Width="100%" ID="TextBoxUpdate" Font-Size="X-Large" placeholder="Title..."></asp:TextBox>
                                 <asp:RequiredFieldValidator ControlToValidate="TextBoxUpdate" ForeColor="Red" runat="server" ErrorMessage="Title is required."></asp:RequiredFieldValidator>
-                                <br />
-                                <br />
                                 <h2 class="Project" style="text-align: left">Creation Date: <span style="color: white;">
                                     <asp:Label ID="lblDate" runat="server" /></span></h2>
                             </div>
@@ -65,11 +63,11 @@
                                         <img id="image_upload" src="<%=FileLink %>" class="file-image" />
                                     </div>
                                     <div id="FileVideo" ClientIDMode="static" runat="server" style="display: none">
-                                        <video id="video_upload" width="960" height="540" src="<%=FileLink %>" controls autoplay>
+                                        <video id="video_upload" width="800" height="450" src="<%=FileLink %>" controls autoplay>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <script>
                                                 var video = document.currentScript.parentElement;
-                                                video.volume = 0.3;
+                                                video.volume = 0;
                                             </script>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </video>

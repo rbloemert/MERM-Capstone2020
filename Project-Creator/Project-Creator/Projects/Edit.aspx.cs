@@ -158,7 +158,7 @@ namespace Project_Creator.Projects
                 if (file != null && file.ContentLength > 0)
                 {
                     string fileName = Path.GetFileName(proj.project_image_path);
-                    if (fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
+                    if (fileName != null && fileName.ToUpper() != "NULL" && fileName.ToUpper() != "") {
                         try {
                             StorageService.DeleteFileFromStorage(fileName, StorageService.project_image);
                         } catch {
@@ -172,7 +172,12 @@ namespace Project_Creator.Projects
                             case ("image/jpeg"):
                             case ("image/png"):
                             case ("image/bmp"):
-                                string id = ProjectID.ToString();
+                                Random rnd = new Random();
+                                int ID = ProjectID;
+                                if (ID == 0) {
+                                    ID = rnd.Next(int.MinValue, int.MaxValue);
+                                }
+                                string id = ID.ToString();
                                 string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(id)) + Path.GetExtension(file.FileName);
                                 proj.project_image_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.project_image, file.ContentType);
                                 break;
@@ -223,6 +228,15 @@ namespace Project_Creator.Projects
                 db.DeleteTimelineLink(update.timelineID, ProjectID);
                 db.DeleteTimeline(update.timelineID);
 
+            }
+
+            //Gets the list of project followers.
+            List<int> ProjectFollowers = db.GetFollowers(ProjectID);
+
+            //Loops through each follower of the project.
+            foreach (int follower in ProjectFollowers)
+            {
+                db.RemoveFollower(ProjectID, follower);
             }
 
             //Deletes the project and link.

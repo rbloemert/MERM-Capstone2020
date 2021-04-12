@@ -65,6 +65,8 @@ namespace Project_Creator
                 Database db = new Database();
                 db.CreateAccount(signupUser);
 
+                Response.Redirect("~/Login");
+
             }
 
         }

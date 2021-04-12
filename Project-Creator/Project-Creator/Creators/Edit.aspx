@@ -12,7 +12,7 @@
                 <td>
                     <div class="Basic">
                         <div class="imgHolder">
-                            <img id="account_image" src="<%=imagePath %>" class="Project" />
+                            <img id="account_image" src="<%=imagePath.Replace("~", "") %>" class="Project" />
                             <input type="file" id="ImageUploader" name="ImageUploader" onchange="previewAccountImage()" hidden />
                             <label for="ImageUploader" class="Project">Upload Image</label>
                         </div>

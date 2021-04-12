@@ -41,6 +41,12 @@ select {
     padding: 4px;
     background-color: #0f0f0f;
 }
+.popup {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 /* Constant Colors. */
 .Primary {
