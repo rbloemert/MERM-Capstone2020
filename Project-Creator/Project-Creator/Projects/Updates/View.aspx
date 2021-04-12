@@ -12,7 +12,7 @@
             if (fileExtension != "pdf") {
                 fileName = "";
             }
-            document.write('<div><object data="' + fileName + '" id="wrapper" type="application/pdf" width="500" height="678"><iframe src="' + fileName + '" id="viewer" width="500" height="678"><p>This browser does not support PDF!</p></iframe></object></div>');
+            document.write('<div><object data="' + fileName + '" id="wrapper" type="application/pdf" width="900" height="1200"><iframe src="' + fileName + '" id="viewer" width="500" height="678"><p>This browser does not support PDF!</p></iframe></object></div>');
         }
     </script>
 </asp:Content>
@@ -173,23 +173,23 @@
                                 <asp:Repeater ID="RepeaterComment" ItemType="Project_Creator.Comment2" OnItemCommand="RepeaterComment_ItemCommand" runat="server">
                                     <ItemTemplate>
                                         <div class="Basic">
-                                            <table>
+                                            <table style="width:100%;">
                                                 <tr>
                                                     <td class="comment-info">
-                                                        <a href="/Home">
-                                                            <asp:Image CssClass="comment-img" ImageUrl="<%#Item.account_image_path %>" runat="server" />
-                                                        </a>
+                                                        <asp:Image CssClass="comment-img" ImageUrl="<%#Item.account_image_path %>" runat="server" />
                                                         <br />
                                                         <%#Item.comment_account_name %>
                                                         <br />
-                                                        <%# Item.comment_creation %>
+                                                        <%# Item.comment_creation.Value.ToString("yyyy-MM-dd") %>
                                                     </td>
                                                     <td class="comment-content">
                                                         <p><%#Item.comment_text %></p>
-                                                        <asp:Button ClientIDMode="AutoID" ID="btnEditThisItem" CommandName="delete_comment" CssClass="comment-delete-button" CommandArgument='<%# Item.commentID + "," + Item.comment_owner_accountID %>' Text="Delete" runat="server" />
                                                     </td>
                                                 </tr>
                                             </table>
+                                            <div style="float:left;" <%#(((user != null) && (Convert.ToInt32(Item.comment_owner_accountID) == user.accountID)) || ((user != null) && (project.project_author == user.username))) ? "" : "hidden"  %>>
+                                                <asp:Button Width="88px" ClientIDMode="AutoID" ID="btnEditThisItem" CommandName="delete_comment" CssClass="comment-delete-button" CommandArgument='<%# Item.commentID + "," + Item.comment_owner_accountID %>' Text="Delete" runat="server" />
+                                            </div>
                                         </div>
                                     </ItemTemplate>
                                 </asp:Repeater>
@@ -202,7 +202,7 @@
                                             </td>
                                             <td class="comment-content">
                                                 <p>
-                                                    <asp:TextBox ID="txtNewComment" CssClass="comment-textbox" TextMode="MultiLine" runat="server" onKeyUp="TextChanged()" MaxLength="255" ClientIDMode="Static" Style="overflow: hidden;"></asp:TextBox>
+                                                    <asp:TextBox ID="txtNewComment" Width="95%" CssClass="comment-textbox" TextMode="MultiLine" runat="server" onKeyUp="TextChanged()" MaxLength="255" ClientIDMode="Static" Style="overflow: hidden;"></asp:TextBox>
                                                     <script>
                                                         function TextChanged() {
                                                             val = document.getElementById("txtNewComment").value;

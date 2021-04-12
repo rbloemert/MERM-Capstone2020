@@ -166,12 +166,15 @@ td.comment-info {
     width: 15%;
     height: 100px;
     padding-right: 24px;
-    border-right: solid;
+    text-align: left;
 }
 
 td.comment-content {
     padding-left: 24px;
     padding-right: 24px;
+}
+.comment-delete-button{
+    
 }
 
 
@@ -185,7 +188,6 @@ input[type="text"] {
 
 .comment-submit {
     width: 15%;
-    border-left: solid;
 }
 
 div.Browse:hover {
