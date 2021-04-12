@@ -172,7 +172,12 @@ namespace Project_Creator.Projects
                             case ("image/jpeg"):
                             case ("image/png"):
                             case ("image/bmp"):
-                                string id = ProjectID.ToString();
+                                Random rnd = new Random();
+                                int ID = ProjectID;
+                                if (ID == 0) {
+                                    ID = rnd.Next(int.MinValue, int.MaxValue);
+                                }
+                                string id = ID.ToString();
                                 string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(id)) + Path.GetExtension(file.FileName);
                                 proj.project_image_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.project_image, file.ContentType);
                                 break;

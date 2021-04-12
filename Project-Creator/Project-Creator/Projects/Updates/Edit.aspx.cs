@@ -189,7 +189,8 @@ namespace Project_Creator.Projects.Updates {
                 Database db = new Database();
                 TimelineObject = db.GetTimeline(UpdateID);
 
-                HttpPostedFile file = Request.Files["ImageUploader"];
+                HttpPostedFile file = Request.Files["ImageUploader"]; 
+                Random rnd = new Random();
 
                 if (file != null && file.ContentLength > 0)
                 {
@@ -212,7 +213,11 @@ namespace Project_Creator.Projects.Updates {
                             case ("image/jpeg"):
                             case ("image/png"):
                             case ("image/bmp"):
-                                string id = ProjectID + "" + UpdateID;
+                                int ID = UpdateID;
+                                if(ID == 0) {
+                                    ID = rnd.Next(int.MinValue, int.MaxValue);
+                                }
+                                string id = ProjectID + "" + ID;
                                 string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(id)) + Path.GetExtension(file.FileName);
                                 TimelineObject.timeline_image_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.timeline_image, file.ContentType);
                                 break;
@@ -257,7 +262,11 @@ namespace Project_Creator.Projects.Updates {
                             case ("video/mp4"):
                             case ("text/plain"):
                             case ("application/x-zip-compressed"):
-                                string id = ProjectID + "" + UpdateID;
+                                int ID = UpdateID;
+                                if (ID == 0) {
+                                    ID = rnd.Next(int.MinValue, int.MaxValue);
+                                }
+                                string id = ProjectID + "" + ID;
                                 string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(id)) + Path.GetExtension(file.FileName);
                                 TimelineObject.timeline_file_path = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.timeline_file, file.ContentType);
                                 break;
