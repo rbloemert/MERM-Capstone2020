@@ -78,7 +78,12 @@ namespace Project_Creator.Creators
                                 case ("image/png"):
                                 case ("image/bmp"):
                                     string accountID = ((Account)Session["user"]).accountID.ToString();
-                                    string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(accountID)) + Path.GetExtension(file.FileName);
+                                    int ID = int.Parse(accountID);
+                                    Random rnd = new Random();
+                                    if (ID == 0) {
+                                        ID = rnd.Next(int.MinValue, int.MaxValue);
+                                    }
+                                    string filename = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(ID.ToString())) + Path.GetExtension(file.FileName);
                                     imagePath = StorageService.UploadFileToStorage(file.InputStream, filename, StorageService.account_image, file.ContentType);
                                     break;
                             }
