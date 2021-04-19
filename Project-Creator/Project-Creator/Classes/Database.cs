@@ -1484,6 +1484,40 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        public QueryResult DeleteAllAccountNotifications(int AccountID)
+        {
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Replaces the last comma with a semi-colon.
+            string sql = "DELETE FROM notify WHERE notify_account_id = @notify_account_id;";
+
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@notify_timeline_id", AccountID);
+
+                //Executes the sql query.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
+            return QueryResult.FailedNoChanges;
+        }
+
         // COMMENT
     }
 }
