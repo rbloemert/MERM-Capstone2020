@@ -270,20 +270,17 @@ namespace Project_Creator
                 {
                     foreach (Comment c in GetCommentList(t.timelineID))
                     {
-                        DeleteCommentLink(c.commentID, t.timelineID, accountID);
+                        DeleteCommentLink(c.commentID, t.timelineID, Int32.Parse(c.comment_owner_accountID));
                         DeleteComment(c.commentID);
                     }
-
                     DeleteTimelineLink(t.timelineID, p.projectID);
                     DeleteTimeline(t.timelineID);
-
-                    // delete notifs?
-                    DeleteNotification(accountID, t.timelineID);
                 }
-
                 DeleteProjectLink(p.projectID, accountID);
                 DeleteProject(p.projectID);
             }
+            DeleteAllAccountNotifications(accountID);
+            DeleteCommentLinks(accountID);
 
             return DeleteAccount(accountID);
         }
@@ -1137,6 +1134,38 @@ namespace Project_Creator
             return comments;
         }
 
+        public QueryResult DeleteCommentLinks(int accountID)
+        {
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Prepares the sql query.
+            var sql = "DELETE FROM comment_link WHERE comment_owner_accountID = @comment_owner_accountID;";
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@comment_owner_accountID", accountID);
+
+                //Executes the insert command.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
+            return QueryResult.FailedNoChanges;
+        }
+
         public int GetRecentCommentID() {
             int id = 0;
             if (!IsConnectionOpen()) return id;
@@ -1463,6 +1492,40 @@ namespace Project_Creator
             using (var cmd = new SqlCommand(sql, connection))
             {
                 cmd.Parameters.AddWithValue("@notify_timeline_id", TimelineID);
+
+                //Executes the sql query.
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException except)
+                {
+                    lastErr = except.Message;
+                    return QueryResult.FailedBadQuery;
+                }
+
+            }
+
+            //Returns if the insert was successful.
+            if (result > 0)
+            {
+                return QueryResult.Successful;
+            }
+
+            return QueryResult.FailedNoChanges;
+        }
+
+        public QueryResult DeleteAllAccountNotifications(int AccountID)
+        {
+            int result;
+            if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
+
+            //Replaces the last comma with a semi-colon.
+            string sql = "DELETE FROM notify WHERE notify_account_id = @notify_account_id;";
+
+            using (var cmd = new SqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@notify_account_id", AccountID);
 
                 //Executes the sql query.
                 try

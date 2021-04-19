@@ -139,6 +139,11 @@ namespace Project_Creator.Creators
 
                                 }
 
+                                foreach(var project in projectList)
+                                {
+                                    project.project_author = db.GetAccountInfo(creatorAccountID).username;
+                                }
+
                                 RepeaterProject.DataSource = projectList;
                                 RepeaterProject.DataBind();
 
