@@ -23,24 +23,23 @@ namespace Project_Creator
 
         protected void ValidateUsername(object source, ServerValidateEventArgs args)
         {
-
             //Creates the database object.
-            Database db = new Database();
-
-            //Sets the validation value to whether the username exists.
-            args.IsValid = !db.AccountExists(args.Value);
-
+            using (Database db = new Database())
+            {
+                //Sets the validation value to whether the username exists.
+                args.IsValid = !db.AccountExists(args.Value);
+            }
         }
 
         protected void ValidateEmail(object source, ServerValidateEventArgs args)
         {
 
             //Creates the database object.
-            Database db = new Database();
-
-            //Sets the validation value to whether the username exists.
-            args.IsValid = !db.EmailExists(args.Value);
-
+            using (Database db = new Database())
+            {
+                //Sets the validation value to whether the username exists.
+                args.IsValid = !db.EmailExists(args.Value);
+            }
         }
 
         protected void Register(object sender, EventArgs e)
@@ -51,22 +50,23 @@ namespace Project_Creator
             {
 
                 //Defines the signup user object.
-                Account signupUser = new Account();
-
-                //Sets the values of the user from the signup page.
-                signupUser.username = TextBoxUsername.Text;
-                signupUser.password = TextBoxPassword.Text;
-                signupUser.fullname = TextBoxFullName.Text;
-                signupUser.email = TextBoxEmail.Text;
-                signupUser.isSiteAdministrator = false;
-                signupUser.account_image_path = "~/Images/Account_Placeholder.png";
+                Account signupUser = new Account
+                {
+                    //Sets the values of the user from the signup page.
+                    username = TextBoxUsername.Text,
+                    password = TextBoxPassword.Text,
+                    fullname = TextBoxFullName.Text,
+                    email = TextBoxEmail.Text,
+                    isSiteAdministrator = false,
+                    account_image_path = "~/Images/Account_Placeholder.png"
+                };
 
                 //Signs the user up in the database.
-                Database db = new Database();
-                db.CreateAccount(signupUser);
-
-                Response.Redirect("~/Login");
-
+                using (Database db = new Database())
+                {
+                    db.CreateAccount(signupUser);
+                    Response.Redirect("~/Login");
+                }
             }
 
         }

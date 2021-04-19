@@ -11,7 +11,7 @@ using Project_Creator.Classes;
 
 namespace Project_Creator 
 {
-    public class Database 
+    public class Database : IDisposable
     {
         public enum QueryResult 
         {
@@ -32,17 +32,19 @@ namespace Project_Creator
             connection = new SqlConnection(connectionString);
             connection.Open();
         }
-
-        ~Database()
+        
+        protected virtual void Dispose(bool disposing)
         {
-            if (IsConnectionOpen()) connection.Close();
+            if (disposing)
+            {
+                if (IsConnectionOpen()) connection.Close();
+            }
         }
 
-        public bool TestConnection() // returns true if success
+        public void Dispose()
         {
-            Database db = new Database();
-            if (db.IsConnectionOpen()) return true;
-            return false;
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public bool IsConnectionOpen() {

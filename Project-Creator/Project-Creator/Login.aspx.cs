@@ -26,30 +26,26 @@ namespace Project_Creator
 
         protected void ValidatePassword(object source, ServerValidateEventArgs args)
         {
-
             //Creates a database object.
-            Database db = new Database();
-            Account user = db.AuthenticateAccount(TextBoxUsername.Text, args.Value);
-
-            //Checks if the user has been authenticated.
-            if (user != null)
+            using (Database db = new Database())
             {
+                Account user = db.AuthenticateAccount(TextBoxUsername.Text, args.Value);
 
-                //Sets the validator to be valid.
-                args.IsValid = true;
+                //Checks if the user has been authenticated.
+                if (user != null)
+                {
+                    //Sets the validator to be valid.
+                    args.IsValid = true;
 
-                //Login session variables.
-                Session["User"] = user;
-
+                    //Login session variables.
+                    Session["User"] = user;
+                }
+                else
+                {
+                    //Sets the validator to be invalid.
+                    args.IsValid = false;
+                }
             }
-            else
-            {
-
-                //Sets the validator to be invalid.
-                args.IsValid = false;
-
-            }
-
         }
 
         protected void Access(object sender, EventArgs e)
