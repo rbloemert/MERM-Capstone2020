@@ -12,11 +12,13 @@ namespace Project_Creator {
             commentID = comment.commentID;
             comment_creation = comment.comment_creation;
             comment_text = comment.comment_text;
-            Database db = new Database();
-            Account a = db.GetAccountInfo(Int32.Parse(comment.comment_owner_accountID));
-            comment_account_name = a.username;
-            comment_owner_accountID = comment.comment_owner_accountID;
-            account_image_path = a.account_image_path;
+            using (Database db = new Database())
+            {
+                Account a = db.GetAccountInfo(Int32.Parse(comment.comment_owner_accountID));
+                comment_account_name = a.username;
+                comment_owner_accountID = comment.comment_owner_accountID;
+                account_image_path = a.account_image_path;
+            }
         }
     }
 }

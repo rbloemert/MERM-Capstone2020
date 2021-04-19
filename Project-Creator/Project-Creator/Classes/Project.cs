@@ -37,10 +37,12 @@ namespace Project_Creator
         {
             // work in progress
             // TODO: implement proper error handling using QueryResult, handle ID correctly...
-            Database db = new Database();
-            db.CreateProject(new_project);
-            db.CreateProjectLink(new_project.projectID, project_owner.accountID);
-            return Database.QueryResult.Successful;
+            using (Database db = new Database())
+            {
+                db.CreateProject(new_project);
+                db.CreateProjectLink(new_project.projectID, project_owner.accountID);
+                return Database.QueryResult.Successful;
+            }
         }
 
         /*
@@ -54,9 +56,11 @@ namespace Project_Creator
         */
         public List<Timeline> getUpdates()
         {
-            Database d = new Database();
-            List<Timeline> timelines = d.GetTimelineList(projectID);
-            return timelines;
+            using (Database db = new Database())
+            {
+                List<Timeline> timelines = db.GetTimelineList(projectID);
+                return timelines;
+            }
         }
 
         /*
