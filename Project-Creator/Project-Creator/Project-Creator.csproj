@@ -159,6 +159,7 @@
     <Content Include="Creators\Creators_JavaScript.js" />
     <Content Include="Creators\Edit.aspx" />
     <Content Include="Creators\View.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Images\Account_Placeholder.png" />
     <Content Include="Images\Add.png" />
@@ -214,6 +215,13 @@
     </Compile>
     <Compile Include="Creators\View.aspx.designer.cs">
       <DependentUpon>View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
