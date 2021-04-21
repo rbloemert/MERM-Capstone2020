@@ -19,65 +19,31 @@ using System.Web;
 
 namespace Project_Creator
 {
-    // This class is to be merged with the actual Project class at some point
-    // I just didn't want to break any existing components
-
+    //! Project information class.
+    /*!
+     *  Contains all the information about a project correlated with the database.
+     */
     public class Project
     {
-        public int projectID { get; set; }                   /* projectID: Unique ID of this project. */
-        public SqlDateTime project_creation { get; set; }    /* project_creation: When this project was created. */
-        public string project_name { get; set; }             /* project_name: Name of this project. */
-        public string project_desc { get; set; }
-        public string project_author { get; set; }           /* project_author: Author of this project. */
-        public string project_image_path { get; set; }       /* project_image_path: The File path of the project's picture; NULL means none */
-        public int project_visibility { get; set; }
-        public int project_followers = 0;
+        public int projectID { get; set; }                   /*!< Unique ID of this project. */
+        public SqlDateTime project_creation { get; set; }    /*!< When this project was created. */
+        public string project_name { get; set; }             /*!< Name of this project. */
+        public string project_desc { get; set; }             /*!< The description about the project. */
+        public string project_author { get; set; }           /*!< Author of this project. */
+        public string project_image_path { get; set; }       /*!< The File path of the project's picture; NULL means none */
+        public int project_visibility { get; set; }          /*!< The visibility status of the project (0: hidden, 1: visible) */
+        public int project_followers = 0;                    /*!< The number of followers the project has. */
 
-        public static Database.QueryResult RegisterProject(Account project_owner, Project new_project)
-        {
-            // work in progress
-            // TODO: implement proper error handling using QueryResult, handle ID correctly...
-            using (Database db = new Database())
-            {
-                db.CreateProject(new_project);
-                db.CreateProjectLink(new_project.projectID, project_owner.accountID);
-                return Database.QueryResult.Successful;
-            }
-        }
+        /*!
+         *  A constructor.
+         *  Default Project class constructor.
+         */
+        public Project() { }
 
-        /*
-        * METHOD : getUpdates
-        * DESCRIPTION :
-        *	fetch the updates for the project from the database
-        * PARAMETERS :
-        *	none
-        * RETURNS :
-        *	none
-        */
-        public List<Timeline> getUpdates()
-        {
-            using (Database db = new Database())
-            {
-                List<Timeline> timelines = db.GetTimelineList(projectID);
-                return timelines;
-            }
-        }
-
-        /*
-        * METHOD : Project -- Constructor
-        * DESCRIPTION :
-        *	create a new project with no attributes specified
-        * PARAMETERS :
-        *	none
-        * RETURNS :
-        *	none
-        *	A project object is created
-        */
-        public Project() 
-        {
-
-        }
-
+        /*!
+         *  A constructor.
+         *  Creates a new Project object with the specified information.
+         */
         public Project(string project_name, string project_desc, string project_author, string project_image_path, int project_visibility)
         {
             this.project_creation = new SqlDateTime(DateTime.Now);

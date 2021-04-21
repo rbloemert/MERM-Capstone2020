@@ -4,10 +4,19 @@ using System.Linq;
 using System.Web;
 
 namespace Project_Creator {
-    public class Comment2 : Comment {
-        public string comment_account_name { get; set; }
-        public string account_image_path { get; set; }
 
+    //! Comment display class.
+    /*!
+     *  Used for support in displaying Comment objects on web pages.
+     */
+    public class Comment2 : Comment {
+        public string comment_account_name { get; set; } //!< The username of the commentor's account.
+        public string account_image_path { get; set; } //!< The profile picture link accosiated with the commentor's account.
+
+        /*!
+         *  A constructor.
+         *  Creates a new Comment2 object with the information from a Comment object.
+         */
         public Comment2(Comment comment) {
             commentID = comment.commentID;
             comment_creation = comment.comment_creation;

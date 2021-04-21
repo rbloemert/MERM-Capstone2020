@@ -4,6 +4,11 @@ using System.Web.UI.WebControls;
 
 namespace Project_Creator
 {
+
+    //! Signup page.
+    /*!
+     *  Used for creating an account on the website.
+     */
     public partial class Signup : System.Web.UI.Page
     {
 

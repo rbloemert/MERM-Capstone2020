@@ -10,14 +10,19 @@ using System.Web.UI.WebControls;
 using System.Globalization;
 
 namespace Project_Creator.Projects.Updates {
+
+    //! Update edit page.
+    /*!
+     *  Used for editing project updates' information.
+     */
     public partial class Edit : System.Web.UI.Page {
-        public int ProjectID = 0;
-        public int UpdateID = 0;
-        public Project ProjectObject = new Project();
-        public Timeline TimelineObject = new Timeline();
-        public string FileLink = "";
-        public Stream ImageStream;
-        public string FileType = "";
+        public int ProjectID = 0; //!< The project id connected to the update.
+        public int UpdateID = 0; //!< The update id for the update being edited.
+        public Project ProjectObject = new Project(); //!< The project information connected to the update.
+        public Timeline TimelineObject = new Timeline(); //!< The information about the update being edited.
+        public string FileLink = ""; //!< The link to the uploaded file for previewing.
+        public Stream ImageStream; //!< The link to the uploaded image for previewing.
+        public string FileType = ""; //!< The type of file uploaded to the update.
 
         protected void Page_Load(object sender, EventArgs e) {
 

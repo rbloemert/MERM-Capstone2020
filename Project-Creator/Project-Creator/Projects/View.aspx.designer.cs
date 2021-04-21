@@ -19,7 +19,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image ProjectIcon;
 
@@ -28,7 +28,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ButtonEdit;
 
@@ -37,7 +37,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTitle;
 
@@ -46,7 +46,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDescription;
 
@@ -55,7 +55,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonFollow;
 
@@ -64,7 +64,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFollowers;
 
@@ -73,7 +73,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFollowing;
 
@@ -82,7 +82,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAuthor;
 
@@ -91,7 +91,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDate;
 
@@ -100,7 +100,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater RepeaterTimeline;
     }

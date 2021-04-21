@@ -10,16 +10,21 @@ using System.Web.UI.WebControls;
 using System.Globalization;
 
 namespace Project_Creator.Posts {
+
+    //! Update view page.
+    /*!
+     *  Used for viewing an existing update page.
+     */
     public partial class View : System.Web.UI.Page {
-        public int ProjectID = 0;
-        public int UpdateID = 0;
-        public int TimelineIndex = 0;
-        public bool loggedIn = false;
-        public Account user = null;
-        public Project project;
-        List<Comment2> comments;
-        public string FileLink = "";
-        public string FileType = "";
+        public int ProjectID = 0; //!< The project id for the connected project.
+        public int UpdateID = 0; //!< The update id for the update being viewed.
+        public int TimelineIndex = 0; //!< The index of the timeline to set the carrousel, set to the index of the update being viewed.
+        public bool loggedIn = false; //!< Whether the user is currently logged in when viewing the page.
+        public Account user = null; //!< The account object for the user viewing the page.
+        public Project project; //!< The information about the connected project.
+        List<Comment2> comments; //!< A list of comments to display under the update.
+        public string FileLink = ""; //!< The link to the uploaded file on the update.
+        public string FileType = ""; //!< The type of file uploaded to the update.
         protected void Page_Load(object sender, EventArgs e) {
             txtNewComment.Rows = 4;
             TextInfo ti = new CultureInfo("en-US", false).TextInfo;

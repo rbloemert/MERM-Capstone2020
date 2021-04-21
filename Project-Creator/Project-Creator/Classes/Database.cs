@@ -1,38 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
 using Project_Creator.Classes;
 
 namespace Project_Creator 
 {
+    //! Database interface class.
+    /*!
+     *  Contains all the methods used to interface with the SQL server.
+     */
     public class Database : IDisposable
     {
         public enum QueryResult 
         {
-            FailedNotConnected = 0, // Connection not established
-            FailedNoChanges,        // Query OK but no changes made
-            FailedBadQuery,         // Query not OK
-            FailedNotQualified,     // On funcs involving a check (eg IDs), qualifier did not pass
-            Successful              // Success
+            FailedNotConnected = 0, //!< Failed to connect to SQL
+            FailedNoChanges,        //!< Query okay with no changes
+            FailedBadQuery,         //!< Query failed
+            FailedNotQualified,     //!< Qualifier did not pass
+            Successful              //!< Query successful
         }
 
-        //Defines the database connection variables.
-        private string lastErr = "";
-        private SqlConnection connection;
-        private string connectionString = "Data Source=tcp:projectcreator.database.windows.net,1433;Initial Catalog=projectcreatordb;User Id=creatoradmin@projectcreator;Password=ProjectCreator1233";
+        private string lastErr = ""; //!< Last error which was encountered
+        private SqlConnection connection; //!< SQL database connection
+        private string connectionString = "Data Source=tcp:projectcreator.database.windows.net,1433;Initial Catalog=projectcreatordb;User Id=creatoradmin@projectcreator;Password=ProjectCreator1233"; //!< Connection string for the SQL server
 
+        /*!
+         *  A constructor.
+         *  Creates a connection with the SQL database.
+         */
         public Database() 
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
         }
-        
+
+        /*!
+         *  A destructor.
+         *  Closes an opened connection with the SQL database.
+         */
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -47,14 +54,27 @@ namespace Project_Creator
             GC.SuppressFinalize(this);
         }
 
+        /*!
+         *  Checks if the connection with the SQL server is open.
+         *  @return true if the connection is open otherwise false
+         */
         public bool IsConnectionOpen() {
             return connection != null && !(connection.State == ConnectionState.Broken || connection.State == ConnectionState.Closed);
         }
 
+        /*!
+         *  Returns the last error encountered by the Database class.
+         *  @return a string containing the error message
+         */
         public string GetLastSQLError() {
             return lastErr;
         }
-        
+
+        /*!
+         *  Returns whether the account username already exists in the database.
+         *  @param username the string username to search the database for
+         *  @return true if the username exists otherwise false
+         */
         public bool AccountExists(string username) {
 
             //Gets a list of all existing accounts.
@@ -78,6 +98,11 @@ namespace Project_Creator
 
         }
 
+        /*!
+         *  Returns whether the email already exists in the database.
+         *  @param email the email to search the database for
+         *  @return true if the email exists otherwise false
+         */
         public bool EmailExists(string email) {
 
             //Gets a list of all existing accounts.
@@ -101,6 +126,11 @@ namespace Project_Creator
 
         }
 
+        /*!
+         *  Returns an Account object wither the account information from the database.
+         *  @param accountID the account id to query the database with
+         *  @return an Account object filled with user information
+         */
         public Account GetAccountInfo(int accountID) {
             Account accs = new Account();
             if (!IsConnectionOpen()) return null;
@@ -130,6 +160,10 @@ namespace Project_Creator
             return accs;
         }
 
+        /*!
+         *  Returns all the accounts in the database.
+         *  @return a list of all accounts in Account objects
+         */
         public List<Account> GetAccountList() {
             List<Account> accs = new List<Account>();
             if (!IsConnectionOpen()) return accs;
@@ -160,6 +194,11 @@ namespace Project_Creator
             return accs;
         }
 
+        /*!
+         *  Searches the database for all of the account usernames which match the search term.
+         *  @param search the search term to find in each username
+         *  @return a list of Account objects found from the database
+         */
         public List<Account> GetAccountList(string search)
         {
             List<Account> accs = new List<Account>();
@@ -195,6 +234,11 @@ namespace Project_Creator
             return accs;
         }
 
+        /*!
+         *  Creates a new account in the database.
+         *  @param account the Account object filled with information to insert into the database
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult CreateAccount(Account account) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -230,6 +274,11 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Deletes an account from the database.
+         *  @param accountID the id of the account to delete from the database
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult DeleteAccount(int accountID) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -257,6 +306,11 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Deletes all information coresponding to the account from the database.
+         *  @param accountID the id of the account to delete from the database
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult DeleteAccountFull(int accountID)
         {
             int result;
@@ -285,6 +339,11 @@ namespace Project_Creator
             return DeleteAccount(accountID);
         }
 
+        /*!
+         *  Modifys an existing account in the database.
+         *  @param accountID the id of the account to modify in the database
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult ModifyAccount(int accountID, Account new_account) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -335,6 +394,12 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Authenticates a user to an account in the database.
+         *  @param username the username to authenticate
+         *  @param password the password to authenticate
+         *  @return an Account object with user information or null if authentication failed
+         */
         public Account AuthenticateAccount(string username, string password) {
 
             foreach (Account acc in GetAccountList()) {
@@ -347,6 +412,11 @@ namespace Project_Creator
         // ACCOUNTS
 
         // PROJECTS
+        /*!
+         *  Returns the username of the project author.
+         *  @param projectID the id of the project
+         *  @return the username of the project author
+         */
         public string GetProjectAuthor(int projectID) {
             string author = "";
             if (!IsConnectionOpen()) return null;
@@ -367,6 +437,11 @@ namespace Project_Creator
             return author;
         }
 
+        /*!
+         *  Returns the account id of the project author
+         *  @param projectID the id of the project
+         *  @return the account id of the project author
+         */
         public int GetProjectOwner(int projectID)
         {
             int author = 0;
@@ -390,6 +465,11 @@ namespace Project_Creator
             return author;
         }
 
+        /*!
+         *  Returns a Project object with project information.
+         *  @param projectID the id of the project
+         *  @return the Project object which contains the project information
+         */
         public Project GetProject(int projectID) {
             Project project = new Project();
             if (!IsConnectionOpen()) return null;
@@ -415,6 +495,10 @@ namespace Project_Creator
             return project;
         }
 
+        /*!
+         *  Returns a list of Project objects for all projects.
+         *  @return a list of Project objects for all projects
+         */
         public List<Project> GetProjectList() {
             List<Project> projects = new List<Project>();
             if (!IsConnectionOpen()) return projects;
@@ -439,6 +523,11 @@ namespace Project_Creator
             return projects;
         }
 
+        /*!
+         *  Returns a list of Project objects for all projects that are owned by the account.
+         *  @param accountID the id of the account to get all projects from
+         *  @return a list of Project objects for all projects that are owned by the account
+         */
         public List<Project> GetProjectList(int accountID) // return projects belonging to a user
         {
             List<Project> projects = new List<Project>();
@@ -469,6 +558,13 @@ namespace Project_Creator
             return projects;
         }
 
+        /*!
+         *  Returns a list of Project objects for all projects which contain the search keyword in the title, description, or owner of the project info with the set visibility options and what to be sorted by.
+         *  @param search the keyword to search in the project information
+         *  @param visibility the visibility of the project (0: hidden, 1: visible)
+         *  @param sorting the type of value to sort the projects by (1: descending, 2: ascending, 3: most followers, 4: least followers)
+         *  @return a list of Project objects for all projects that match the criteria
+         */
         public List<Project> GetProjectList(string search, int visibility, int sorting) // return projects with substring in title
         {
             /*
@@ -546,6 +642,14 @@ namespace Project_Creator
             return projects;
         }
 
+        /*!
+         *  Returns a list of Project objects for all projects which are owned by the account and contain the search keyword in the title, description, or owner of the project info with the set visibility options and what to be sorted by.
+         *  @param accountID the id of the account to return projects from
+         *  @param search the keyword to search in the project information
+         *  @param visibility the visibility of the project (0: hidden, 1: visible)
+         *  @param sorting the type of value to sort the projects by (1: descending, 2: ascending, 3: most followers, 4: least followers)
+         *  @return a list of Project objects for all projects that match the criteria
+         */
         public List<Project> GetProjectList(int accountID, string search, int visibility, int sorting) // return projects with substring in title
         {
             /*
@@ -623,6 +727,11 @@ namespace Project_Creator
             return projects;
         }
 
+        /*!
+         *  Creates a project in the database and returns
+         *  @param project the information for a project stored in a Project object
+         *  @return the id of the project as an int or zero if failed
+         */
         public int CreateProject(Project project) {
 
             //Prepares the sql query.
@@ -651,6 +760,11 @@ namespace Project_Creator
 
         }
 
+        /*!
+         *  Deletes a project from the database.
+         *  @param projectID the id of the project to delete
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult DeleteProject(int projectID) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -677,6 +791,12 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Modifys a project stored in the database.
+         *  @param projectID the id of the project to modify
+         *  @param new_project a Project object storing the new project information
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult ModifyProject(int projectID, Project new_project) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -715,6 +835,12 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Links a project to an account in the database.
+         *  @param projectID the id of the project to link
+         *  @param accountID the id of the account to link
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult CreateProjectLink(int projectID, int accountID) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -742,6 +868,12 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Deletes a link between a project and an account.
+         *  @param projectID the id of the project to delete link
+         *  @param accountID the id of the account to delete link
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult DeleteProjectLink(int projectID, int accountID) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -770,6 +902,12 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Adds a follower to a project.
+         *  @param projectID the id of the project to add the follower to
+         *  @param account a Account object to follow the project with
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult AddFollower(int projectID, Account account) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -799,6 +937,12 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Removes a follower to a project.
+         *  @param projectID the id of the project to remove the follower from
+         *  @param accountID the id of the account to remove from the project
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult RemoveFollower(int projectID, int accountID) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -826,7 +970,11 @@ namespace Project_Creator
 
             return QueryResult.FailedNoChanges;
         }
-
+        /*!
+         *  Returns a list of account ids following the project.
+         *  @param projectID the id of the project to get all followers from
+         *  @return a list of followers ids as ints or null if the connection fails
+         */
         public List<int> GetFollowers(int projectID)
         {
             List<int> result = new List<int>();
@@ -854,6 +1002,10 @@ namespace Project_Creator
         // PROJECTS
 
         // TIMELINE
+        /*!
+         *  Returns a list of all existing timeline updates.
+         *  @return a list of Timeline objects or an empty list if failed
+         */
         public List<Timeline> GetTimelineList() {
             List<Timeline> timelines = new List<Timeline>();
             if (!IsConnectionOpen()) return timelines;
@@ -879,6 +1031,11 @@ namespace Project_Creator
             return timelines;
         }
 
+        /*!
+         *  Returns all the timeline updates accosiated with a project.
+         *  @param projectID the id of the project to get all updates from
+         *  @return a list of Timeline objects with update information
+         */
         public List<Timeline> GetTimelineList(int projectID) // return timelines belonging to a project
         {
             List<Timeline> timelines = new List<Timeline>();
@@ -911,6 +1068,12 @@ namespace Project_Creator
             return timelines;
         }
 
+        /*!
+         *  Checks if a specific timeline belongs to a project.
+         *  @param projectID the id of the project to check
+         *  @param timelineID the id of the timeline to check
+         *  @return true if the timeline is connected to the project otherwise false
+         */
         public bool CheckTimelineInProject(int projectID, int timelineID) // return a specific timeline
         {
             Timeline timeline = new Timeline();
@@ -935,6 +1098,11 @@ namespace Project_Creator
 
         }
 
+        /*!
+         *  Returns the update information about a timeline entry.
+         *  @param timelineID the id of the update to get information for
+         *  @return a Timeline object which stores the update information
+         */
         public Timeline GetTimeline(int timelineID) // return a specific timeline
         {
             Timeline timeline = new Timeline();
@@ -963,6 +1131,11 @@ namespace Project_Creator
             return timeline;
         }
 
+        /*!
+         *  Creates a new update from the project timeline.
+         *  @param timeline the Timeline object which stores the update information
+         *  @return the id of the update stored in the database as an int otherwise zero
+         */
         public int CreateTimeline(Timeline timeline) {
             int result = 0;
 
@@ -989,6 +1162,11 @@ namespace Project_Creator
             return result;
         }
 
+        /*!
+         *  Deletes an update from the project timeline.
+         *  @param timelineID the id of the update to delete
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult DeleteTimeline(int timelineID) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -1016,6 +1194,11 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Modifys an update from the project timeline.
+         *  @param timelineID the id of the update to modify
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult ModifyTimeline(int timelineID, Timeline new_timeline) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -1054,6 +1237,12 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Creates a link between a project and an update
+         *  @param timelineID the id of the update to link
+         *  @param projectID the id of the project to link
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult CreateTimelineLink(int timelineID, int projectID) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -1081,6 +1270,12 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Deletes a link between an update and a project.
+         *  @param timelineID the id of the update to delete link
+         *  @param projectID the id of the project to delete link
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult DeleteTimelineLink(int timelineID, int projectID) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -1111,7 +1306,10 @@ namespace Project_Creator
         // TIMELINE
 
         // COMMENT
-
+        /*!
+         *  Returns a list of all existing comments in the database.
+         *  @return the list of Comment objects that contain the comment information
+         */
         public List<Comment> GetCommentList() {
             List<Comment> comments = new List<Comment>();
             if (!IsConnectionOpen()) return comments;
@@ -1134,6 +1332,11 @@ namespace Project_Creator
             return comments;
         }
 
+        /*!
+         *  Deletes all links to comments in the database for a specific account.
+         *  @param accountID the id of the account to delete all comment links from
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult DeleteCommentLinks(int accountID)
         {
             int result;
@@ -1166,6 +1369,10 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Returns the id of the most recent comment inserted.
+         *  @return the id of the comment as an int otherwise zero
+         */
         public int GetRecentCommentID() {
             int id = 0;
             if (!IsConnectionOpen()) return id;
@@ -1184,6 +1391,11 @@ namespace Project_Creator
             return id;
         }
 
+        /*!
+         *  Returns all comments on a specific update.
+         *  @param timelineID the id of the update to get comments for
+         *  @return a list of Comment objects with comment information
+         */
         public List<Comment> GetCommentList(int timelineID) // return comments belonging to a timeline
         {
             List<Comment> comments = new List<Comment>();
@@ -1213,6 +1425,11 @@ namespace Project_Creator
             return comments;
         }
 
+        /*!
+         *  Creates a new comment in the database.
+         *  @param comment the Comment object to insert into the database
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult CreateComment(Comment comment) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -1241,6 +1458,11 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Deletes a specific comment from the database.
+         *  @param commentID the id of the comment to delete
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult DeleteComment(int commentID) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -1268,6 +1490,11 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Modify a comment in the database.
+         *  @param commentID the id of the comment to modify
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult ModifyComment(int commentID, Comment new_comment) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -1302,6 +1529,13 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Creates a new comment link between the comment, update, and account.
+         *  @param commentID the id of the comment to link
+         *  @param accountID the id of the update to link
+         *  @param accountID the id of the account to link
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult CreateCommentLink(int commentID, int timelineID, int accountID) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -1330,6 +1564,13 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Deletes a comment link from the database.
+         *  @param commentID the id of the comment to delete link
+         *  @param accountID the id of the update to delete link
+         *  @param accountID the id of the account to delete link
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult DeleteCommentLink(int commentID, int timelineID, int accountID) {
             int result;
             if (!IsConnectionOpen()) return QueryResult.FailedNotConnected;
@@ -1360,6 +1601,12 @@ namespace Project_Creator
         // COMMENT
 
         // NOTIFICATIONS
+        /*!
+         *  Creates a new notification in the database for every follower of a project.
+         *  @param ProjectID the id of the project to get all followers from
+         *  @param TimelineID the id of the update to create a notification for
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult CreateNotifications(int ProjectID, int TimelineID)
         {
             int result;
@@ -1409,6 +1656,11 @@ namespace Project_Creator
 
         }
 
+        /*!
+         *  Gets all notifications for a specific account.
+         *  @param AccountID the id of the account to get notifications for
+         *  @return a list of Timeline objects which contain information about project updates
+         */
         public List<Timeline> GetNotifications(int AccountID)
         {
             List<Timeline> notifications = new List<Timeline>();
@@ -1445,6 +1697,12 @@ namespace Project_Creator
 
         }
 
+        /*!
+         *  Deletes a specific notification for an account.
+         *  @param AccountID the id of the account to delete for
+         *  @param TimelineID the id of the update to delete
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult DeleteNotification(int AccountID, int TimelineID)
         {
             int result;
@@ -1479,8 +1737,12 @@ namespace Project_Creator
 
             return QueryResult.FailedNoChanges;
         }
-        
 
+        /*!
+         *  Deletes all notifications for a specific update.
+         *  @param TimelineID the id of the update to delete for
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult DeleteAllNotifications(int TimelineID)
         {
             int result;
@@ -1515,6 +1777,11 @@ namespace Project_Creator
             return QueryResult.FailedNoChanges;
         }
 
+        /*!
+         *  Deletes all notifications for a specific account.
+         *  @param AccountID the id of the account to delete for
+         *  @return the QueryResult of whether the query was successful
+         */
         public QueryResult DeleteAllAccountNotifications(int AccountID)
         {
             int result;

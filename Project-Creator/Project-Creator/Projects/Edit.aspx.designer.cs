@@ -19,7 +19,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxTitle;
 
@@ -28,7 +28,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxDescription;
 
@@ -37,7 +37,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAuthor;
 
@@ -46,7 +46,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDate;
 
@@ -55,7 +55,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater RepeaterTimeline;
 
@@ -64,7 +64,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton RadioPrivate;
 
@@ -73,7 +73,7 @@ namespace Project_Creator.Projects
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton RadioPublic;
     }

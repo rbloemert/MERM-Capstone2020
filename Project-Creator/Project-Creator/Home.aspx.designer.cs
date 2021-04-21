@@ -19,7 +19,7 @@ namespace Project_Creator
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl WelcomeMessage;
 
@@ -28,7 +28,7 @@ namespace Project_Creator
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Notifications;
 
@@ -37,7 +37,7 @@ namespace Project_Creator
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image AccountIcon;
 
@@ -46,7 +46,7 @@ namespace Project_Creator
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblUsername;
 
@@ -55,7 +55,7 @@ namespace Project_Creator
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFullname;
 
@@ -64,7 +64,7 @@ namespace Project_Creator
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableCell divEmail;
 
@@ -73,7 +73,7 @@ namespace Project_Creator
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEmail;
 
@@ -82,7 +82,7 @@ namespace Project_Creator
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDate;
 
@@ -91,7 +91,7 @@ namespace Project_Creator
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater RepeaterTimeline;
 
@@ -100,7 +100,7 @@ namespace Project_Creator
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl msgEmpty;
     }

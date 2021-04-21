@@ -19,7 +19,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
@@ -28,7 +28,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxUpdate;
 
@@ -37,7 +37,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDate;
 
@@ -46,7 +46,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDesc;
 
@@ -55,7 +55,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl FileImage;
 
@@ -64,7 +64,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl FileVideo;
 
@@ -73,7 +73,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl FilePDF;
 
@@ -82,7 +82,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl FileText;
 
@@ -91,7 +91,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label FileTextContent;
 
@@ -100,7 +100,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl FileZip;
 
@@ -109,7 +109,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSubmit;
 
@@ -118,7 +118,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDelete;
 
@@ -127,7 +127,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
 
@@ -136,7 +136,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton RadioPublic;
 
@@ -145,7 +145,7 @@ namespace Project_Creator.Projects.Updates
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton RadioPrivate;
     }

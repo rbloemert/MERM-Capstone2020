@@ -7,11 +7,16 @@ using System.Web.UI.WebControls;
 
 namespace Project_Creator.Projects
 {
+
+    //! Project view page.
+    /*!
+     *  Used for viewing an existing project and timeline.
+     */
     public partial class View : System.Web.UI.Page
     {
-        public int ProjectID = 0;
-        public int TimelineIndex = 0;
-        public int CreatorID;
+        public int ProjectID = 0; //!< The project id for the project being viewed.
+        public int TimelineIndex = 0; //!< The index of the timeline to set the carrousel, set to the most recent project update.
+        public int CreatorID; //!< The id of the project creator's account.
         protected void Page_Load(object sender, EventArgs e)
         {
 

@@ -9,11 +9,15 @@ using System.Data;
 
 namespace Project_Creator.Creators
 {
+    //! Creator view page.
+    /*!
+     *  Used for viewing and existing creator and their projects.
+     */
     public partial class View : System.Web.UI.Page
     {
         
-        Account CreatorAccount;
-        public int creatorAccountID;
+        Account CreatorAccount; //!< Account information for the creator.
+        public int creatorAccountID; //!< The id of the creator account being viewed.
 
 
         protected void Page_Load(object sender, EventArgs e)

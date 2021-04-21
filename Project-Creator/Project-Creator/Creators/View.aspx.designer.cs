@@ -19,7 +19,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image CreatorIcon;
 
@@ -28,7 +28,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ButtonEdit;
 
@@ -37,7 +37,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblUsername;
 
@@ -46,7 +46,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFullname;
 
@@ -55,7 +55,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDescription;
 
@@ -64,7 +64,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableCell divEmail;
 
@@ -73,7 +73,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEmail;
 
@@ -82,7 +82,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDate;
 
@@ -91,7 +91,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox SearchBox;
 
@@ -100,7 +100,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownSort;
 
@@ -109,7 +109,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ButtonAddProject;
 
@@ -118,7 +118,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater RepeaterProject;
     }

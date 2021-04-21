@@ -7,6 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Project_Creator
 {
+
+    //! Master page.
+    /*!
+     *  Inherited by every page to display navigation bar.
+     */
     public partial class Site : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)

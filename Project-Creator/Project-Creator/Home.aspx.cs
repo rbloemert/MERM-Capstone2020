@@ -7,9 +7,14 @@ using System.Web.UI.WebControls;
 
 namespace Project_Creator
 {
+
+    //! Home page.
+    /*!
+     *  Used for displaying website information and showing logged in users personal update timeline for followed projects.
+     */
     public partial class Home : System.Web.UI.Page
     {
-        public int TimelineIndex = 0;
+        public int TimelineIndex = 0; //!< The index of the personal timeline to set the carrousel, set to the most recent updates.
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

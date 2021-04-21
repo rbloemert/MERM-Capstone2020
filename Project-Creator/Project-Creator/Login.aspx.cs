@@ -7,6 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Project_Creator
 {
+
+    //! Login page.
+    /*!
+     *  Used for logging into an account on the website.
+     */
     public partial class Login : System.Web.UI.Page
     {
 

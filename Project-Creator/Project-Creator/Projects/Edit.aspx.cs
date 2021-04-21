@@ -8,11 +8,16 @@ using System.Web.UI.WebControls;
 
 namespace Project_Creator.Projects
 {
+
+    //! Project edit page.
+    /*!
+     *  Used for editing project information and modifying the project timeline.
+     */
     public partial class Edit : System.Web.UI.Page
     {
-        public int ProjectID;
-        public int TimelineIndex = 0;
-        public Project ProjectObject = new Project();
+        public int ProjectID; //!< The id of the project being edited.
+        public int TimelineIndex = 0; //!< The index of the timeline to set the carrousel, set to the most recent possible update index.
+        public Project ProjectObject = new Project(); //!< Information about the project being edited.
 
         protected void Page_Load(object sender, EventArgs e)
         {

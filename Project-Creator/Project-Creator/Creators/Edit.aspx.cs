@@ -11,9 +11,13 @@ using Project_Creator.Classes;
 
 namespace Project_Creator.Creators
 {
+    //! Creator edit page.
+    /*!
+     *  Used for editing creator account information when logged in.
+     */
     public partial class Edit : System.Web.UI.Page
     {
-        public string imagePath = "";
+        public string imagePath = ""; //!< The path for the preview image for the account profile picture.
         protected void Page_Load(object sender, EventArgs e)
         {
             var salt = Password.Salt();

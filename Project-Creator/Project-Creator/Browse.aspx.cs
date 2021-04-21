@@ -8,6 +8,11 @@ using Project_Creator.Classes;
 
 namespace Project_Creator
 {
+
+    //! Browse page.
+    /*!
+     *  Used for browsing and searching for projects and accounts.
+     */
     public partial class Browse : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)

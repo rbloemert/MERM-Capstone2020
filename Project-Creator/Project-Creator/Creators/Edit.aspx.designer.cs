@@ -19,7 +19,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label editErrorLabel;
 
@@ -28,7 +28,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label usernameTextbox;
 
@@ -37,7 +37,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox creatorDescTextbox;
 
@@ -46,7 +46,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox passwordTextbox;
 
@@ -55,7 +55,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox passwordConfirmTextbox;
 
@@ -64,7 +64,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox fullNameTextbox;
 
@@ -73,7 +73,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox emailTextbox;
 
@@ -82,7 +82,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox allowFullnameCheckbox;
 
@@ -91,7 +91,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox allowContactCheckbox;
 
@@ -100,7 +100,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button editSubmitButton;
 
@@ -109,7 +109,7 @@ namespace Project_Creator.Creators
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
+        /// 
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button deleteAccountButton;
     }
